@@ -7,23 +7,27 @@ class PushToTalk():
 
 	def __init__(self):
 		self.portdefault = "/dev/ttyS0"
+		self.port = None
+
+	def __del__(self):
+		if (self.port):
+			self.port.close()
 
 	def openport(self):
 		try:
 			self.port = serial.Serial(self.portdefault, baudrate=115200, timeout=3.0)
 			self.port.write("\r\nLet's push the PTT")
-			rcv = self.port.read(10)
-			self.port.write("\r\nWere we successful?" + repr(rcv))
-			time.sleep(3)
+			self.port.write("Confirm PTT")
 		except:
 			pass
 
         def closeport(self):
-		try:
-			self.port.close()
-		except:
-			pass
+		self.port.close()
+
+	def message(self, msg):
+		self.openport()
+		status, output = commands.getstatusoutput(msg)
+		self.closeport()
 
 if __name__ == "__main__":
-
 	mytest = PushToTalk()

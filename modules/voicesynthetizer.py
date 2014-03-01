@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import commands
 import logging
 import sys
 import threading
@@ -21,7 +20,7 @@ class VoiceSynthetizer(threading.Thread):
 
 		self.setsynthetizer(self.synthetizer)
 
-		self.ptt = PushToTalk()
+
 
 	def setsynthetizer(self, synthetizer):
 		self.synthetizer = synthetizer
@@ -54,20 +53,15 @@ class VoiceSynthetizer(threading.Thread):
 
 	def speechit(self, text):
 		#text = unicodedata.normalize('NFKD', text)
-		self.lock.acquire()
-		self.ptt.openport()
-		
+		ptt = PushToTalk()
 		text = text.encode('ASCII', 'ignore')
-		time.sleep(1)
 
 		if self.synthetizer == "festival":
 			command = "echo " + text + " | " + self.arguments
 		elif self.synthetizer == "espeak":
 			command = self.arguments + " \"" + text + "\" | aplay"
-		status, output = commands.getstatusoutput(command)
-		
-		self.ptt.closeport()
-		self.lock.release()
+
+		ptt.message(command)
 
 if __name__ == "__main__":
 
