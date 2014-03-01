@@ -79,12 +79,15 @@ class MorseTeacher:
 		print '[Cancun] Morse Teacher Contest'
 		self.message("Concurso Decodificando Texto")
 		self.message("Envia tus resultados a " + "".join(self.phonetic.decode('xe1gyq@gmail.com')))
-		self.message("El primer correo con el texto correcto sera ganador de una tarjeta de 200 pesos para usar en Star Bocs")
+		self.message("El primer correo con el texto correcto sera ganador de una tarjeta de 200 pesos para Star Bucks")
 		self.message("Listo? Comenzamos...")
+		file = open('morsecontest.text')
+		for line in file.readlines():
+			self.morse.generate(''.join(e for e in line if e.isalnum()))
 		return
 
 if __name__ == '__main__':
 
 	mymorse = MorseTeacher()
-	mymorse.golearn()
+	#mymorse.golearn()
 	mymorse.gocompete()
