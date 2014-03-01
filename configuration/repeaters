@@ -1,0 +1,15 @@
+[xe1hax]
+owner = Miguel
+callsign = xe1hax
+frequency = 147.390
+subtone = 88.5
+sign = +
+offset = 600
+
+[xe1gqp]
+owner = Ricardo
+callsign = xe1gqp
+frequency = 147.360
+subtone = 100
+sign = +
+offset = 600
