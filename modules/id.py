@@ -19,6 +19,8 @@ class Identification:
 		self.conf.read(self.path)
 
 	def identify(self):
+		print '[Cancun] Identification'
+		self.morse.generate('cq')
 		message = self.conf.get("general", "radioclub") + ", " + self.conf.get("general", "systemname")
 		message = message + " operado por " + ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
 		self.voicesynthetizer.speechit(message)
