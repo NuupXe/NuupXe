@@ -13,3 +13,11 @@ frequency = 147.360
 subtone = 100
 sign = +
 offset = 600
+
+[xe1fap]
+owner = Jesus
+callsign = xe1fap
+frequency = 433.275
+subtone = 88.5
+sign = +
+offset = 5000
