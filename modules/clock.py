@@ -20,12 +20,14 @@ class Clock():
 		self.voicesynthetizer = voicesynthetizer
 
 	def date(self):
-		date = days[time.strftime("%A")] + ", "  + time.strftime("%d")
+		print '[Cancun] Clock Date'
+		date = days[time.strftime("%A")] + ", "  + time.strftime("%d").lstrip('0')
 		date = date + " de " + months[time.strftime("%B")] + " de " + time.strftime("%Y")
 		self.voicesynthetizer.speechit(date)
 
 	def hour(self):
-		hour = "Son las " + time.strftime("%H") + " horas y " + time.strftime("%M") + " minutos"	
+		print '[Cancun] Clock Hour'
+		hour = "Son las " + time.strftime("%H") + " horas y " + time.strftime("%M") + " minutos"
 		self.voicesynthetizer.speechit(hour)
 
 if __name__ == "__main__":
