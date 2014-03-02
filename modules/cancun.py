@@ -35,10 +35,10 @@ class Cancun():
 
 	def schedule(self):
 		# General Modules
-		self.scheduler.add_interval_job(self.id.identify, minutes=5)
-		self.scheduler.add_interval_job(self.clock.hour, minutes=15)
+		self.scheduler.add_interval_job(self.id.identify, minutes=15)
+		self.scheduler.add_interval_job(self.clock.hour, minutes=60)
 		self.scheduler.add_interval_job(self.clock.date, minutes=60)
-		self.scheduler.add_interval_job(self.weather.report, minutes=60)
+		self.scheduler.add_interval_job(self.weather.report, minutes=120)
 		self.scheduler.add_interval_job(self.messages.repeaters, minutes=120)
 
 		# Learning Modules, Morse
@@ -61,5 +61,5 @@ if __name__ == "__main__":
 	mytest.schedule()
 
 	while True:
-		print 'Cancun Project Alive'
+		print ' [' + time.ctime() + '] ' + 'Cancun Project Alive'
 		time.sleep(60)
