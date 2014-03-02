@@ -25,9 +25,12 @@ class PushToTalk():
 		self.port.close()
 
 	def message(self, msg):
-		self.openport()
-		status, output = commands.getstatusoutput(msg)
-		self.closeport()
+		try:
+			self.openport()
+			status, output = commands.getstatusoutput(msg)
+			self.closeport()
+		except:
+			pass
 
 if __name__ == "__main__":
 	mytest = PushToTalk()
