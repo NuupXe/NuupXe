@@ -46,7 +46,11 @@ class Cancun():
 		self.scheduler.add_cron_job(self.morseteacher.gocompete,month='*',day='*',hour='18',minute ='15',second='0')
 
 		# Learning Modules, FMRE
-		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.1'],month='*',day='*',hour='19',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.1'],month='*',day_of_week='mon',hour='19',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.2'],month='*',day_of_week='tue',hour='19',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.3'],month='*',day_of_week='wed',hour='19',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.4'],month='*',day_of_week='thu',hour='19',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.5'],month='*',day_of_week='fri',hour='19',minute ='00',second='0')
 
 		self.scheduler.print_jobs()
 
