@@ -13,6 +13,7 @@ from weather import Weather
 
 sys.path.append('../learning')
 from morseteacher import MorseTeacher
+from fmre import FmreTeacher
 
 class Cancun():
 
@@ -27,22 +28,25 @@ class Cancun():
 	def modules(self):
 		self.clock = Clock(self.voicesynthetizer)
 		self.id = Identification(self.voicesynthetizer)
+		self.fmreteacher = FmreTeacher()
 		self.messages = Messages()
 		self.morseteacher = MorseTeacher()
 		self.weather = Weather()
 
 	def schedule(self):
-		#self.scheduler.add_cron_job(self.id.identify,month='*',day='*',hour='*',minute ='0',second='0')
-		#self.scheduler.add_cron_job(self.clock.hour,month='*',day='*',hour='*',minute ='0',second='0')
-		#self.scheduler.add_cron_job(self.clock.date,month='*',day='*',hour='*',minute ='0',second='0')
-		#self.scheduler.add_cron_job(self.morseteacher.go,month='*',day='*',hour='*',minute ='0-30',second='0')
-		
+		# General Modules
 		self.scheduler.add_interval_job(self.id.identify, minutes=5)
-		self.scheduler.add_interval_job(self.clock.hour, minutes=5)
-		self.scheduler.add_interval_job(self.clock.date, minutes=10)
-		self.scheduler.add_interval_job(self.weather.report, minutes=10)
-		self.scheduler.add_interval_job(self.messages.repeaters, minutes=10)
-		self.scheduler.add_interval_job(self.morseteacher.golearn, minutes=30)
+		self.scheduler.add_interval_job(self.clock.hour, minutes=15)
+		self.scheduler.add_interval_job(self.clock.date, minutes=60)
+		self.scheduler.add_interval_job(self.weather.report, minutes=60)
+		self.scheduler.add_interval_job(self.messages.repeaters, minutes=120)
+
+		# Learning Modules, Morse
+		self.scheduler.add_cron_job(self.morseteacher.golearn,month='*',day='*',hour='18',minute ='0',second='0')
+		self.scheduler.add_cron_job(self.morseteacher.gocompete,month='*',day='*',hour='18',minute ='15',second='0')
+
+		# Learning Modules, FMRE
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.1'],month='*',day='*',hour='19',minute ='00',second='0')
 
 		self.scheduler.print_jobs()
 

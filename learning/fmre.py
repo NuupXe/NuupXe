@@ -39,7 +39,12 @@ class FmreTeacher:
 		for line in file.readlines():
 			line = unicodedata.normalize('NFKD', line)
 			line = line.encode("ascii", "ignore")
-			self.message(line)
+			if "pausa" in line:
+				self.message("Modulo de Aprendizaje de Reglamentos, Hagamos una Pausa de 1 minuto")
+				time.sleep(60)
+				self.message("Modulo de Aprendizaje de Reglamentos, Continuamos")
+			else:
+				self.message(line)
 		return
 
 if __name__ == '__main__':

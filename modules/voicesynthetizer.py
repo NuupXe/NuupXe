@@ -57,7 +57,7 @@ class VoiceSynthetizer(threading.Thread):
 		text = text.encode('ASCII', 'ignore')
 
 		if self.synthetizer == "festival":
-			command = "echo " + text + " | " + self.arguments
+			command = "echo \"" + text + "\" | " + self.arguments
 		elif self.synthetizer == "espeak":
 			command = self.arguments + " \"" + text + "\" | aplay"
 

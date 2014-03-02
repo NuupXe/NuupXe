@@ -16,7 +16,10 @@ class Weather:
 
 	def parser(self, url):
 
-		data = feedparser.parse(self.url)
+		try:
+			data = feedparser.parse(self.url)
+		except:
+			return
 
 		# {'city': u'Guadalajara', 'region': u'JA', 'country': u'Mexico'}
 		# {'pressure': u'1015.92', 'rising': u'1', 'visibility': u'12.87', 'humidity': u'46'}
