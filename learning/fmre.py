@@ -1,0 +1,49 @@
+# -*- coding: utf-8 -*-
+#!/usr/bin/python
+
+import codecs
+import random
+import string
+import sys
+import time
+import unicodedata
+
+sys.path.append('../modules')
+
+from morse import Morse
+from phonetic import Phonetic
+from random import randint
+from voicesynthetizer import VoiceSynthetizer
+
+class FmreTeacher:
+
+	def __init__(self):
+		
+		self.morse = Morse()
+		self.speaker = VoiceSynthetizer("festival", "spanish")
+		self.phonetic = Phonetic()
+
+	def __del__(self):
+		pass
+
+	def message(self, message):
+		self.speaker.speechit(message)
+
+	def welcome(self):
+		self.message("Modulo de Aprendizaje de Reglamentos, sugerencias escribir a ")
+		self.message("".join(self.phonetic.decode('xe1gyq@gmail.com')))
+
+	def read(self, fmrefile):
+		print '[Cancun] Reglamentos'
+		file = codecs.open(fmrefile, encoding='utf-8')
+		for line in file.readlines():
+			line = unicodedata.normalize('NFKD', line)
+			line = line.encode("ascii", "ignore")
+			self.message(line)
+		return
+
+if __name__ == '__main__':
+
+	myfmre = FmreTeacher()
+	myfmre.read('fmre.reglamento.1')
+
