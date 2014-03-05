@@ -14,10 +14,10 @@ from voicesynthetizer import VoiceSynthetizer
 
 class MorseTeacher:
 
-	def __init__(self):
+	def __init__(self, voicesynthetizer):
 		
 		self.morse = Morse()
-		self.speaker = VoiceSynthetizer("festival", "spanish")
+		self.speaker = voicesynthetizer
 		self.phonetic = Phonetic()
 
 	def __del__(self):

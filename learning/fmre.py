@@ -17,16 +17,17 @@ from voicesynthetizer import VoiceSynthetizer
 
 class FmreTeacher:
 
-	def __init__(self):
+	def __init__(self, voicesynthetizer):
 		
 		self.morse = Morse()
-		self.speaker = VoiceSynthetizer("festival", "spanish")
+		self.speaker = voicesynthetizer
 		self.phonetic = Phonetic()
 
 	def __del__(self):
 		pass
 
 	def message(self, message):
+		message = "\"" + message + "\"" 
 		self.speaker.speechit(message)
 
 	def welcome(self):

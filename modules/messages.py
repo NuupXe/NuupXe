@@ -11,9 +11,9 @@ from voicesynthetizer import VoiceSynthetizer
 
 class Messages():
 
-	def __init__(self):
+	def __init__(self, voicesynthetizer):
 
-		self.speaker = VoiceSynthetizer("festival", "spanish")
+		self.speaker = voicesynthetizer
 		self.phonetic = Phonetic()
 
 	def repeaters(self):
