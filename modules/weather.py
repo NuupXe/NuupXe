@@ -8,10 +8,10 @@ from voicesynthetizer import VoiceSynthetizer
 
 class Weather:
 
-	def __init__(self):
+	def __init__(self, voicesynthetizer):
 		self.url = "http://weather.yahooapis.com/forecastrss?w=124162&u=c"
 
-		self.speaker = VoiceSynthetizer("festival", "spanish")
+		self.speaker = voicesynthetizer
 		self.parser(self.url)
 
 	def parser(self, url):
@@ -44,7 +44,7 @@ class Weather:
 		self.speaker.speechit("Temperatura maxima, " + self.high + " grados centigrados")
 		self.speaker.speechit("Temperatura minima, " + self.low + " grados centigrados")
 		self.speaker.speechit("Humedad, " + self.atmosphere['humidity'] + " por ciento")
-		self.speaker.speechit("El Sol se ocultara a las " + self.astronomy['sunset'].replace(":", " ") + " de la tarde")
+		self.speaker.speechit("El Sol se oculta a las " + self.astronomy['sunset'].replace(":", " ") + " de la tarde")
 		return
 
 if __name__ == '__main__':

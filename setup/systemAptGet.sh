@@ -29,6 +29,8 @@ export packagePyPi="python-pip"
 
 export packagePygame="python-pygame"
 
+export packageMpg123="mpg123"
+
 # =============================================================================
 # Script Functions
 # =============================================================================
@@ -64,5 +66,7 @@ aptgetFunctionInstall $packageFestival
 aptgetFunctionInstall $packagePyPi
 
 aptgetFunctionInstall $packagePygame
+
+aptgetFunctionInstall $packageMpg123
 
 # End of file

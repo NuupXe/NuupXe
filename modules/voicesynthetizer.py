@@ -60,13 +60,16 @@ class VoiceSynthetizer(threading.Thread):
 			command = "echo \"" + text + "\" | " + self.arguments
 		elif self.synthetizer == "espeak":
 			command = self.arguments + " \"" + text + "\" | aplay"
-
+		elif self.synthetizer == "google":
+			command = "./google.tts.sh " + text
 		ptt.message(command)
 
 if __name__ == "__main__":
 
 	mytest = VoiceSynthetizer("festival", "spanish")
-	mytest.speechit("proyecto cancun")
+	mytest.speechit("Proyecto Cancun")
 	mytest = VoiceSynthetizer("espeak", "spanish")
-	mytest.speechit("proyecto cancun")
+	mytest.speechit("Proyecto Cancun")
+	mytest = VoiceSynthetizer("google", "spanish")
+	mytest.speechit("Proyecto Cancun")
 
