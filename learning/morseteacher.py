@@ -47,9 +47,9 @@ class MorseTeacher:
 		for x in str(random):
 			if not help:
 				self.morse.generate(x)
-				self.message("El numero codificado fue, " + x + ", " + "".join(self.phonetic.decode(x)))
+				self.message("El numero codificado fue, " + x + ", " + " ".join(self.phonetic.decode(x)))
 			if help:
-				self.message("El numero, " + x + ", " + "".join(self.phonetic.decode(x)) + "codificado es, ")
+				self.message("El numero, " + x + ", " + " ".join(self.phonetic.decode(x)) + "codificado es, ")
 				self.morse.generate(x)
 			time.sleep(1)
 
@@ -59,9 +59,9 @@ class MorseTeacher:
 		for x in str(random):
 			if not help:
 				self.morse.generate(x)
-				self.message("La letra codificada fue, " + x + ", " + "".join(self.phonetic.decode(x)))
+				self.message("La letra codificada fue, " + x + ", " + " ".join(self.phonetic.decode(x)))
 			if help:
-				self.message("La letra, " + x + ", de " + "".join(self.phonetic.decode(x)) + "codificada es, ")
+				self.message("La letra, " + x + ", de " + " ".join(self.phonetic.decode(x)) + "codificada es, ")
 				self.morse.generate(x)
 			time.sleep(1)
 
@@ -78,7 +78,7 @@ class MorseTeacher:
 	def gocompete(self):
 		print '[Cancun] Morse Teacher Contest'
 		self.message("Concurso Decodificando Texto")
-		self.message("Envia tus resultados a " + "".join(self.phonetic.decode('xe1gyq@gmail.com')))
+		self.message("Envia tus resultados a " + " ".join(self.phonetic.decode('xe1gyq@gmail.com')))
 		self.message("El primer correo con el texto correcto sera ganador de una tarjeta de 200 pesos para Star Bucks")
 		self.message("Listo? Comenzamos...")
 		file = open('morsecontest.text')

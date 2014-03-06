@@ -44,7 +44,7 @@ class Weather:
 		self.speaker.speechit("Temperatura maxima, " + self.high + " grados centigrados")
 		self.speaker.speechit("Temperatura minima, " + self.low + " grados centigrados")
 		self.speaker.speechit("Humedad, " + self.atmosphere['humidity'] + " por ciento")
-		self.speaker.speechit("El Sol se ocultara a las " + self.astronomy['sunset'].replace(":", " ") + " de la tarde")
+		self.speaker.speechit("El Sol se oculta a las " + self.astronomy['sunset'].replace(":", " ") + " de la tarde")
 		return
 
 if __name__ == '__main__':
