@@ -1,3 +1,6 @@
 To Do List
 - Change Google Text to Speech shell script to a Python script
 - Add DTMF support
+- Identification, pause actual job executing and identify
+- apscheduler, identify jobs being executed
+- pylint execution
