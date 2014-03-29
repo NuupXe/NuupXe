@@ -4,3 +4,6 @@ To Do List
 - Identification, pause actual job executing and identify
 - apscheduler, identify jobs being executed
 - pylint execution
+- implement setup.py, an example is
+  http://learnpythonthehardway.org/book/ex46.html
+
