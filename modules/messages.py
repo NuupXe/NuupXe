@@ -6,6 +6,7 @@ import sys
 
 from apscheduler.scheduler import Scheduler
 from datetime import date
+from morse import Morse
 from phonetic import Phonetic
 from voicesynthetizer import VoiceSynthetizer
 
@@ -13,11 +14,12 @@ class Messages():
 
 	def __init__(self, voicesynthetizer):
 
+		self.morse = Morse()
 		self.speaker = voicesynthetizer
 		self.phonetic = Phonetic()
 
 	def repeaters(self):
-		
+
 		self.conf = ConfigParser.ConfigParser()
 		self.path = "../configuration/repeaters"
 		self.conf.read(self.path)
@@ -35,6 +37,7 @@ class Messages():
 			offset = self.conf.get(section, 'offset')
 
 			self.speaker.speechit("Repetidor, " + ' '.join(self.phonetic.decode(callsign)))
+			self.morse.generate(callsign)
 			self.speaker.speechit("Propietario, " + owner)
 			self.speaker.speechit("Frecuencia, " +  ', '.join(frequency.split('.')))
 			self.speaker.speechit("Subtono, " +  ' '.join(self.phonetic.decode(subtone)))
@@ -46,4 +49,3 @@ if __name__ == "__main__":
 
 	mytest = Messages()
 	mytest.repeaters()
-
