@@ -15,7 +15,7 @@ from phonetic import Phonetic
 from random import randint
 from voicesynthetizer import VoiceSynthetizer
 
-class FmreTeacher:
+class Reglamentos:
 
 	def __init__(self, voicesynthetizer):
 		
@@ -50,6 +50,5 @@ class FmreTeacher:
 
 if __name__ == '__main__':
 
-	myfmre = FmreTeacher()
-	myfmre.read('fmre.reglamento.1')
-
+	myfmre = Reglamentos()
+	myfmre.read('reglamentos.1')
