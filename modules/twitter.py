@@ -25,11 +25,11 @@ class Twitter:
 		self.authenticate.set_access_token(self.access_token, self.access_token_secret)
 		self.twitterapi = tweepy.API(self.authenticate)
 
-	def post(self):
+	def post(self, message):
 		print 'Welcome ' + self.twitterapi.me().name
-		self.twitterapi.update_status('xe1gyq bot alive!')
+		self.twitterapi.update_status(message)
 
 if __name__ == '__main__':
 
 	mytest = Twitter()
-	mytest.post()
+	mytest.post("Hi There!")
