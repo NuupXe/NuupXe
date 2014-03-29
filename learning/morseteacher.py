@@ -28,7 +28,7 @@ class MorseTeacher:
 
 	def welcome(self):
 		self.message("Modulo de Aprendizaje de Codigo Morse, sugerencias escribir a ")
-		self.message("".join(self.phonetic.decode('xe1gyq@gmail.com')))
+		self.message(" ".join(self.phonetic.decode('xe1gyq@gmail.com')))
 
 	def randomnumber(self, n):
 		range_start = 10**(n-1)
@@ -81,7 +81,7 @@ class MorseTeacher:
 		self.message("Envia tus resultados a " + " ".join(self.phonetic.decode('xe1gyq@gmail.com')))
 		self.message("El primer correo con el texto correcto sera ganador de una tarjeta de 200 pesos para Star Bucks")
 		self.message("Listo? Comenzamos...")
-		file = open('morsecontest.text')
+		file = open('../learning/morsecontest.text')
 		for line in file.readlines():
 			self.morse.generate(''.join(e for e in line if e.isalnum()))
 		return
@@ -89,5 +89,5 @@ class MorseTeacher:
 if __name__ == '__main__':
 
 	mymorse = MorseTeacher()
-	#mymorse.golearn()
+	mymorse.golearn()
 	mymorse.gocompete()

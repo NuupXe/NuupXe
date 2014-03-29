@@ -33,6 +33,9 @@ class Cancun():
 		self.morseteacher = MorseTeacher(self.voicesynthetizer)
 		self.weather = Weather(self.voicesynthetizer)
 
+	def show(self):
+		self.scheduler.print_jobs()
+
 	def schedule(self):
 		# General Modules
 		self.scheduler.add_interval_job(self.id.identify, minutes=15)
@@ -42,17 +45,15 @@ class Cancun():
 		self.scheduler.add_interval_job(self.messages.repeaters, minutes=120)
 
 		# Learning Modules, Morse
-		self.scheduler.add_cron_job(self.morseteacher.golearn,month='*',day='*',hour='8,18',minute ='0',second='0')
-		self.scheduler.add_cron_job(self.morseteacher.gocompete,month='*',day='*',hour='8,18',minute ='15',second='0')
+		self.scheduler.add_cron_job(self.morseteacher.golearn,month='*',day='*',hour='7,12,18',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.morseteacher.gocompete,month='*',day='*',hour='7,12,18',minute ='43',second='0')
 
 		# Learning Modules, FMRE
-		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.1'],month='*',day_of_week='mon',hour='9,19',minute ='00',second='0')
-		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.2'],month='*',day_of_week='tue',hour='9,19',minute ='00',second='0')
-		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.3'],month='*',day_of_week='wed',hour='9,19',minute ='00',second='0')
-		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.4'],month='*',day_of_week='thu',hour='9,19',minute ='00',second='0')
-		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.5'],month='*',day_of_week='fri',hour='9,19',minute ='00',second='0')
-
-		self.scheduler.print_jobs()
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.1'],month='*',day_of_week='mon',hour='8,13,19',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.2'],month='*',day_of_week='tue',hour='8,13,19',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.3'],month='*',day_of_week='wed',hour='8,13,19',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.4'],month='*',day_of_week='thu',hour='8,13,19',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.fmreteacher.read,args=['../learning/fmre.reglamento.5'],month='*',day_of_week='fri',hour='8,13,19',minute ='00',second='0')
 
 if __name__ == "__main__":
 
@@ -62,4 +63,5 @@ if __name__ == "__main__":
 
 	while True:
 		print ' [' + time.ctime() + '] ' + 'Cancun Project Alive'
+		mytest.show()
 		time.sleep(60)
