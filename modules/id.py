@@ -26,7 +26,7 @@ class Identification:
 		message = " operado por " + ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
 		message = "\"" + message + "\""
 		self.voicesynthetizer.speechit(message)
-		self.morse.generate('xe1gyq')
+		self.morse.generate(self.conf.get("general", "callsign"))
 
 if __name__ == '__main__':
 
