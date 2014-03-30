@@ -1,0 +1,47 @@
+[general]
+city = Guadalajara y Zona Metropolitana
+
+[xe1hax]
+type = repetidor
+owner = Miguel
+callsign = xe1hax
+frequency = 147.390
+subtone = 88.5
+sign = +
+offset = 600
+
+[xe1gqp]
+type = repetidor
+owner = Ricardo
+callsign = xe1gqp
+frequency = 147.360
+subtone = 100
+sign = +
+offset = 600
+
+[xe1fap]
+type = repetidor
+owner = Jesus
+callsign = xe1fap
+frequency = 433.275
+subtone = 88.5
+sign = +
+offset = 5000
+
+[xe1gyz]
+type = estacion
+owner = Jorge
+callsign = xe1gyz
+frequency = 146.460
+subtone = 88.5
+sign = simplex
+offset = 0
+
+[xe1gyh]
+type = estacion
+owner = Luis
+callsign = xe1gyh
+frequency = 147.420
+subtone = 88.5
+sign = simplex
+offset = 0

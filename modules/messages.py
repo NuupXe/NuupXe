@@ -18,32 +18,44 @@ class Messages():
 		self.speaker = voicesynthetizer
 		self.phonetic = Phonetic()
 
-	def repeaters(self):
+	def stations(self):
 
 		self.conf = ConfigParser.ConfigParser()
-		self.path = "../configuration/repeaters"
+		self.path = "../configuration/stations"
 		self.conf.read(self.path)
 
-		self.speaker.speechit("Lista de Repetidores en la Ciudad de Guadalajara y Area Metropolitana")
+		city = self.conf.get('general', 'city')
+		self.speaker.speechit("Lista de Repetidores y Estaciones en la ciudad de " + city)
 
 		self.sections = self.conf.sections()
 		for section in self.sections:
 
-			owner = self.conf.get(section, 'owner')
-			callsign = self.conf.get(section, 'callsign')
-			frequency = self.conf.get(section, 'frequency')
-			subtone = self.conf.get(section, 'subtone')
-			sign = self.conf.get(section, 'sign')
-			offset = self.conf.get(section, 'offset')
+			try:
+				type = self.conf.get(section, 'type')			
+				owner = self.conf.get(section, 'owner')
+				callsign = self.conf.get(section, 'callsign')
+				frequency = self.conf.get(section, 'frequency')
+				subtone = self.conf.get(section, 'subtone')
 
-			self.speaker.speechit("Repetidor, " + ' '.join(self.phonetic.decode(callsign)))
-			self.morse.generate(callsign)
-			self.speaker.speechit("Propietario, " + owner)
-			self.speaker.speechit("Frecuencia, " +  ', '.join(frequency.split('.')))
-			self.speaker.speechit("Subtono, " +  ' '.join(self.phonetic.decode(subtone)))
-			self.speaker.speechit("Offset, " + ' '.join(self.phonetic.decode(sign)) + " " + offset)
+				self.speaker.speechit(type + ", " + ' '.join(self.phonetic.decode(callsign)))
+				self.morse.generate(callsign)
+				self.speaker.speechit("Propietario, " + owner)
+				self.speaker.speechit("Frecuencia, " +  ', '.join(frequency.split('.')))
+				self.speaker.speechit("Subtono, " +  ' '.join(self.phonetic.decode(subtone)))
 
-			time.sleep(2)
+				sign = self.conf.get(section, 'sign')
+				offset = self.conf.get(section, 'offset')
+				
+				if sign == 'simplex':
+					self.speaker.speechit("Offset, " + sign)
+				else:
+					self.speaker.speechit("Offset, " + ' '.join(self.phonetic.decode(sign)) + " " + offset)	
+
+				time.sleep(2)
+
+			except:
+
+				None
 
 if __name__ == "__main__":
 

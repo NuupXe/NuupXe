@@ -42,7 +42,7 @@ class Cancun():
 		self.scheduler.add_interval_job(self.clock.date, minutes=60)
 		self.scheduler.add_interval_job(self.clock.hour, minutes=60)
 		self.scheduler.add_interval_job(self.weather.report, minutes=120)
-		self.scheduler.add_interval_job(self.messages.repeaters, minutes=120)
+		self.scheduler.add_interval_job(self.messages.stations, minutes=120)
 
 		# Learning Modules, Morse
 		self.scheduler.add_cron_job(self.morseteacher.golearn,month='*',day='*',hour='7,12,18',minute ='00',second='0')
