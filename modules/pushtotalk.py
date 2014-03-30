@@ -1,4 +1,5 @@
 import commands
+import ConfigParser
 import serial
 import sys
 import time
@@ -6,8 +7,12 @@ import time
 class PushToTalk():
 
 	def __init__(self):
-		self.portdefault = "/dev/ttyS0"
-		self.port = None
+		self.portdefault = None
+
+		self.conf = ConfigParser.ConfigParser()
+		self.path = "../configuration/general.configuration"
+		self.conf.read(self.path)
+		self.portdefault = self.conf.get("general", "serialport")
 
 	def __del__(self):
 		if (self.port):

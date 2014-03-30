@@ -2,3 +2,4 @@
 radioclub = asociacion de radioexperimentadores de jalisco
 systemname = proyecto cancun, estacion experimental de texto a voz
 callsign = xe1gyq
+serialport = /dev/ttyS0
