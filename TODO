@@ -6,4 +6,6 @@ To Do List
 - pylint execution
 - implement setup.py, an example is
   http://learnpythonthehardway.org/book/ex46.html
-
+- twitterc, allow status update
+- twitterc, inform of new earthquakes as soon as it is reported on twitter
+- Remove harcoded city in weather module, move to general configuration file
