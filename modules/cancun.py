@@ -8,6 +8,7 @@ from apscheduler.threadpool import ThreadPool
 from clock import Clock
 from id import Identification
 from messages import Messages
+from twitterc import TwitterC
 from voicesynthetizer import VoiceSynthetizer
 from weather import Weather
 
@@ -31,6 +32,7 @@ class Cancun():
 		self.reglamentos = Reglamentos(self.voicesynthetizer)
 		self.messages = Messages(self.voicesynthetizer)
 		self.morseteacher = MorseTeacher(self.voicesynthetizer)
+		self.twitterc = TwitterC(self.voicesynthetizer)
 		self.weather = Weather(self.voicesynthetizer)
 
 	def show(self):
@@ -41,6 +43,7 @@ class Cancun():
 		self.scheduler.add_interval_job(self.id.identify, minutes=15)
 		self.scheduler.add_interval_job(self.clock.date, minutes=60)
 		self.scheduler.add_interval_job(self.clock.hour, minutes=60)
+		self.scheduler.add_interval_job(self.twitterc.sismologicomx, minutes=60)
 		self.scheduler.add_interval_job(self.weather.report, minutes=120)
 		self.scheduler.add_interval_job(self.messages.stations, minutes=120)
 
