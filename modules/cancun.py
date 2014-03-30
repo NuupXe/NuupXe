@@ -20,7 +20,7 @@ class Cancun():
 
 	def __init__(self):
 		self.voicesynthetizer = VoiceSynthetizer("google", "spanish")
-		self.scheduler = Scheduler(misfire_grace_time=120, coalesce=True, threadpool=ThreadPool(max_threads=1))
+		self.scheduler = Scheduler(misfire_grace_time=240, coalesce=True, threadpool=ThreadPool(max_threads=1))
 		self.scheduler.start()
 
 	def __del__(self):
