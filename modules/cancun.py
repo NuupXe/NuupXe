@@ -52,7 +52,7 @@ class Cancun():
 		self.scheduler.add_cron_job(self.morseteacher.gocompete,month='*',day='*',hour='7,12,18',minute ='15',second='0')
 
 		# Learning Modules, Reglamentos
-		self.scheduler.add_cron_job(self.reglamentos.read,args=['../learning/reglamentos.1'],month='*',day_of_week='*',hour='6,13,19',minute ='00',second='0')
+		self.scheduler.add_cron_job(self.reglamentos.read,args=['../learning/reglamentos.1'],month='*',day_of_week='mon',hour='8,13,19',minute ='00',second='0')
 		self.scheduler.add_cron_job(self.reglamentos.read,args=['../learning/reglamentos.2'],month='*',day_of_week='tue',hour='8,13,19',minute ='00',second='0')
 		self.scheduler.add_cron_job(self.reglamentos.read,args=['../learning/reglamentos.3'],month='*',day_of_week='wed',hour='8,13,19',minute ='00',second='0')
 		self.scheduler.add_cron_job(self.reglamentos.read,args=['../learning/reglamentos.4'],month='*',day_of_week='thu',hour='8,13,19',minute ='00',second='0')
