@@ -17,18 +17,20 @@ export packageFeedparser=feedparser
 export packagePywws=pywws
 export packageTweepy=tweepy
 export packageApscheduler=apscheduler
+export packagePyserial=pyserial
+export packageWolframalpha=wolframalpha
 
 # =============================================================================
 # Script Functions
 # =============================================================================
 
 pipFunctionUpgrade() {
-	sudo $pipName $pipCommandUpgrade
+	$pipName $pipCommandUpgrade
 }
 
 pipFunctionInstall() {
 	packageName=$@
-	sudo $pipName $pipCommandInstall $packageName
+	$pipName $pipCommandInstall $packageName
 }
 
 # =============================================================================
@@ -40,5 +42,7 @@ pipFunctionInstall $packageFeedparser
 pipFunctionInstall $packagePywws
 pipFunctionInstall $packageTweepy
 pipFunctionInstall $packageApscheduler
+pipFunctionInstall $packagePyserial
+pipFunctionInstall $packageWolframalpha
 
 # End of file

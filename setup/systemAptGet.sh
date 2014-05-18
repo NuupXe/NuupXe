@@ -31,17 +31,19 @@ export packagePygame="python-pygame"
 
 export packageMpg123="mpg123"
 
+export packagerSeveral="ffmpeg flac"
+
 # =============================================================================
 # Script Functions
 # =============================================================================
 
 aptgetFunctionUpdate() {
-	sudo $aptgetName $aptgetCommandUpdate
+	$aptgetName $aptgetCommandUpdate
 }
 
 aptgetFunctionInstall() {
 	packageName=$@
-	sudo $aptgetName $aptgetCommandInstall $packageName
+	$aptgetName $aptgetCommandInstall $packageName
 }
 
 # =============================================================================
