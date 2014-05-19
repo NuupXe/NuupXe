@@ -8,6 +8,7 @@ class PushToTalk(object):
 
     def __init__(self):
         self.portdefault = None
+        self.port = None
 
         self.conf = ConfigParser.ConfigParser()
         self.path = "../configuration/general.configuration"

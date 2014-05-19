@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import ConfigParser
 import time
 import feedparser
 import os
@@ -9,12 +10,17 @@ from voicesynthetizer import VoiceSynthetizer
 class Weather(object):
 
     def __init__(self, voicesynthetizer):
-        self.url = "http://weather.yahooapis.com/forecastrss?w=124162&u=c"
+
+        self.conf = ConfigParser.ConfigParser()
+        self.path = "../configuration/general.configuration"
+        self.conf.read(self.path)
 
         self.speaker = voicesynthetizer
-        self.parser(self.url)
 
-    def parser(self, url):
+    def parser(self):
+
+        cityid = self.conf.get("weather", "cityid")
+        self.url = "http://weather.yahooapis.com/forecastrss?w=" + cityid  + "&u=c"
 
         try:
             data = feedparser.parse(self.url)
@@ -40,6 +46,7 @@ class Weather(object):
         return
 
     def report(self):
+	self.parser()
         self.speaker.speechit("Reporte del clima en la ciudad de " + self.location['city'] + ", " + self.location['country'])
         self.speaker.speechit("Temperatura maxima, " + self.high + " grados centigrados")
         self.speaker.speechit("Temperatura minima, " + self.low + " grados centigrados")

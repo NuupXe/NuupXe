@@ -31,7 +31,9 @@ export packagePygame="python-pygame"
 
 export packageMpg123="mpg123"
 
-export packagerSeveral="ffmpeg flac"
+export packageSeveral="ffmpeg flac"
+
+export packageText2Speech="festival espeak"
 
 # =============================================================================
 # Script Functions
@@ -70,5 +72,8 @@ aptgetFunctionInstall $packagePyPi
 aptgetFunctionInstall $packagePygame
 
 aptgetFunctionInstall $packageMpg123
+
+aptgetFunctionInstall $packageSeveral
+aptgetFunctionInstall $packageText2Speech
 
 # End of file
