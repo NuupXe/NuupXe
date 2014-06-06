@@ -57,7 +57,7 @@ class Morse(object):
                 pygame.mixer.music.play()
                 time.sleep(self.threeunits)
 
-        #self.ptt.closeport()
+        self.ptt.closeport()
 
 if __name__ == '__main__':
 

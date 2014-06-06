@@ -24,6 +24,7 @@ class PushToTalk(object):
             self.port = serial.Serial(self.portdefault, baudrate=115200, timeout=3.0)
             self.port.write("\r\nLet's push the PTT")
             self.port.write("Confirm PTT")
+            self.port.flush()
         except:
             pass
 
