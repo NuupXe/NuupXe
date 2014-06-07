@@ -22,10 +22,7 @@ class Weather(object):
         cityid = self.conf.get("weather", "cityid")
         self.url = "http://weather.yahooapis.com/forecastrss?w=" + cityid  + "&u=c"
 
-        try:
-            data = feedparser.parse(self.url)
-        except:
-            return
+        data = feedparser.parse(self.url)
 
         # {'city': u'Guadalajara', 'region': u'JA', 'country': u'Mexico'}
         # {'pressure': u'1015.92', 'rising': u'1', 'visibility': u'12.87', 'humidity': u'46'}
@@ -46,13 +43,15 @@ class Weather(object):
         return
 
     def report(self):
-	self.parser()
-        self.speaker.speechit("Reporte del clima en la ciudad de " + self.location['city'] + ", " + self.location['country'])
-        self.speaker.speechit("Temperatura maxima, " + self.high + " grados centigrados")
-        self.speaker.speechit("Temperatura minima, " + self.low + " grados centigrados")
-        self.speaker.speechit("Humedad, " + self.atmosphere['humidity'] + " por ciento")
-        self.speaker.speechit("El Sol se oculta a las " + self.astronomy['sunset'].replace(":", " ") + " de la tarde")
-        return
+	try:
+                self.parser()
+                self.speaker.speechit("Reporte del clima en la ciudad de " + self.location['city'] + ", " + self.location['country'])
+                self.speaker.speechit("Temperatura maxima, " + self.high + " grados centigrados")
+                self.speaker.speechit("Temperatura minima, " + self.low + " grados centigrados")
+                self.speaker.speechit("Humedad, " + self.atmosphere['humidity'] + " por ciento")
+                self.speaker.speechit("El Sol se oculta a las " + self.astronomy['sunset'].replace(":", " ") + " de la tarde")
+	except:
+                return
 
 if __name__ == '__main__':
 
