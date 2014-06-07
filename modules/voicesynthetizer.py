@@ -27,8 +27,8 @@ class VoiceSynthetizer(threading.Thread):
         self.setlanguage(self.language)
         self.setarguments()
 
-        def getsynthetizer(self, synthetizer):
-                return self.synthetizer
+    def getsynthetizer(self):
+        return self.synthetizer
 
     def setlanguage(self, language):
         self.language = language
@@ -40,7 +40,7 @@ class VoiceSynthetizer(threading.Thread):
             elif self.language == "spanish":
                 self.languageargument = "-v es-la"
 
-    def getlanguage(self, language):
+    def getlanguage(self):
         return self.language
 
     def setarguments(self):
