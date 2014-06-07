@@ -27,7 +27,8 @@ class Reglamentos(object):
         pass
 
     def message(self, message):
-        message = "\"" + message + "\"" 
+        if self.speaker.getsynthetizer() == "google":
+                message = "\"" + message + "\""
         self.speaker.speechit(message)
 
     def welcome(self):
