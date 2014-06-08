@@ -11,7 +11,7 @@ from core.voicesynthetizer import VoiceSynthetizer
 from modules.clock import Clock
 from modules.id import Identification
 from modules.messages import Messages
-from modules.twitterc import TwitterC
+#from modules.twitterc import TwitterC
 from modules.weather import Weather
 
 from learning.morseteacher import MorseTeacher
@@ -40,7 +40,7 @@ class CancunIrlp(object):
         self.reglamentos = Reglamentos(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
-        self.twitterc = TwitterC(self.voicesynthetizer)
+        #self.twitterc = TwitterC(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
 
     def run(self):
@@ -50,7 +50,7 @@ class CancunIrlp(object):
 	elif self.sysargv[1] == 'date':
 		self.clock.date()
 	elif self.sysargv[1] == 'hour':
-		self.clock.date()
+		self.clock.hour()
 	else:
 		print 'No Cancun module found by that name'
 
