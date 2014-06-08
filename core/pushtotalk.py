@@ -29,15 +29,16 @@ class PushToTalk(object):
             pass
 
     def closeport(self):
-        self.port.close()
+        try:
+            self.port.close()
+        except:
+            pass
 
     def message(self, msg):
-        try:
-            self.openport()
-            status, output = commands.getstatusoutput(msg)
-            self.closeport()
-        except:
-            self.closeport()
+
+        self.openport()
+        status, output = commands.getstatusoutput(msg)
+        self.closeport()
 
 if __name__ == "__main__":
     mytest = PushToTalk()
