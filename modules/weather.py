@@ -24,11 +24,13 @@ class Weather(object):
 
         data = feedparser.parse(self.url)
 
-        # {'city': u'Guadalajara', 'region': u'JA', 'country': u'Mexico'}
-        # {'pressure': u'1015.92', 'rising': u'1', 'visibility': u'12.87', 'humidity': u'46'}
-        # {'sunset': u'6:57 pm', 'sunrise': u'7:11 am'}
+	# {'city': u'Guadalajara', 'region': u'JA', 'country': u'Mexico'}
+	# {'direction': u'0', 'speed': u'0', 'chill': u'22'}
+	# {'pressure': u'1008.2', 'rising': u'1', 'visibility': u'12.87', 'humidity': u'73'}
+	# {'sunset': u'8:32 pm', 'sunrise': u'7:12 am'}
         
         self.location = data.feed.yweather_location
+        self.wind = data.feed.yweather_wind
         self.atmosphere = data.feed.yweather_atmosphere
         self.astronomy = data.feed.yweather_astronomy
 
@@ -48,8 +50,10 @@ class Weather(object):
                 self.speaker.speechit("Reporte del clima en la ciudad de " + self.location['city'] + ", " + self.location['country'])
                 self.speaker.speechit("Temperatura maxima, " + self.high + " grados centigrados")
                 self.speaker.speechit("Temperatura minima, " + self.low + " grados centigrados")
+		self.speaker.speechit("Presion Atmosferica, " + self.atmosphere['pressure'] + " milibares")
+		self.speaker.speechit("Visibilidad, " + self.atmosphere['visibility'] + " kilometros")
                 self.speaker.speechit("Humedad, " + self.atmosphere['humidity'] + " por ciento")
-                self.speaker.speechit("El Sol se oculta a las " + self.astronomy['sunset'].replace(":", " ") + " de la tarde")
+                self.speaker.speechit("El Sol se oculta a las " + self.astronomy['sunset'].replace(":", " "))
 	except:
                 return
 
