@@ -5,4 +5,10 @@ callsign = xe1gyq
 serialport = /dev/ttyS0
 
 [weather]
-cityid = 124162
+# Ir a https://weather.yahoo.com, buscar tu ciudad y copiar el
+# numero que aparece en la barra de direccion, este es nuestro cityid
+# Ejemplos:
+# Guadalajara es 124162
+# San Luis de la Paz, Guanajuato es 144253
+cityid = 144253
+
