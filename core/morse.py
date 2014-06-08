@@ -29,7 +29,7 @@ class Morse(object):
         self.oneunit = 0.5
         self.threeunits = 3 * self.oneunit
         self.sevenunits = 7 * self.oneunit
-        self.morsefiles = '../morsefiles/'
+        self.morsefiles = 'morsefiles/'
 
         pygame.init()
         self.ptt = PushToTalk()

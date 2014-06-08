@@ -5,12 +5,12 @@ import string
 import sys
 import time
 
-sys.path.append('../modules')
 
-from morse import Morse
-from phonetic import Phonetic
 from random import randint
-from voicesynthetizer import VoiceSynthetizer
+
+from core.morse import Morse
+from core.phonetic import Phonetic
+from core.voicesynthetizer import VoiceSynthetizer
 
 class MorseTeacher(object):
 
@@ -68,12 +68,12 @@ class MorseTeacher(object):
     def golearn(self):
         print '[Cancun] Morse Teacher Learning'
         self.welcome()
-        self.randomnumberplay(True, 10)
-        self.randomnumberplay(False, 10)
+        self.randomnumberplay(True, 1)
+        self.randomnumberplay(False, 1)
         self.message("Hagamos una pausa de 10 segundos")
         time.sleep(10)
-        self.randomletterplay(True, 10)
-        self.randomletterplay(False, 10)
+        self.randomletterplay(True, 1)
+        self.randomletterplay(False, 1)
 
     def gocompete(self):
         print '[Cancun] Morse Teacher Contest'

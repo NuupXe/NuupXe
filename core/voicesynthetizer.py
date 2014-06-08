@@ -61,7 +61,7 @@ class VoiceSynthetizer(threading.Thread):
         elif self.synthetizer == "espeak":
             command = self.arguments + " \"" + text + "\" | aplay"
         elif self.synthetizer == "google":
-            command = "./google.tts.sh " + text
+            command = "core/google.sh " + text
         ptt.message(command)
 
 if __name__ == "__main__":

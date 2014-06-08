@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import time
-from voicesynthetizer import VoiceSynthetizer
+from core.voicesynthetizer import VoiceSynthetizer
 
 days = {'Monday': 'Lunes',  'Tuesday': 'Martes',    'Wednesday': 'Miercoles',
     'Thursday': 'Jueves',   'Friday': 'Viernes',    'Saturday': 'Sabado',

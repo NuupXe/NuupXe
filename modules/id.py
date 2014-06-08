@@ -2,9 +2,9 @@
 
 import ConfigParser
 
-from morse import Morse
-from phonetic import Phonetic
-from voicesynthetizer import VoiceSynthetizer
+from core.morse import Morse
+from core.phonetic import Phonetic
+from core.voicesynthetizer import VoiceSynthetizer
 
 class Identification(object):
 
@@ -15,7 +15,7 @@ class Identification(object):
         self.voicesynthetizer = voicesynthetizer
         
         self.conf = ConfigParser.ConfigParser()
-        self.path = "../configuration/general.configuration"
+        self.path = "configuration/general.configuration"
         self.conf.read(self.path)
 
     def identify(self):

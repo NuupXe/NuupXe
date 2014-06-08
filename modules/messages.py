@@ -6,9 +6,10 @@ import sys
 
 from apscheduler.scheduler import Scheduler
 from datetime import date
-from morse import Morse
-from phonetic import Phonetic
-from voicesynthetizer import VoiceSynthetizer
+
+from core.morse import Morse
+from core.phonetic import Phonetic
+from core.voicesynthetizer import VoiceSynthetizer
 
 class Messages(object):
 
@@ -20,8 +21,10 @@ class Messages(object):
 
     def stations(self):
 
+	print '[Cancun] Stations'
+
         self.conf = ConfigParser.ConfigParser()
-        self.path = "../configuration/stations"
+        self.path = "configuration/stations"
         self.conf.read(self.path)
 
         city = self.conf.get('general', 'city')

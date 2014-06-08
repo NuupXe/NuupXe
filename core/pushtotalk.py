@@ -11,7 +11,7 @@ class PushToTalk(object):
         self.port = None
 
         self.conf = ConfigParser.ConfigParser()
-        self.path = "../configuration/general.configuration"
+        self.path = "configuration/general.configuration"
         self.conf.read(self.path)
         self.portdefault = self.conf.get("general", "serialport")
 

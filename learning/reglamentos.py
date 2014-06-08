@@ -8,12 +8,11 @@ import sys
 import time
 import unicodedata
 
-sys.path.append('../modules')
-
-from morse import Morse
-from phonetic import Phonetic
 from random import randint
-from voicesynthetizer import VoiceSynthetizer
+
+from core.morse import Morse
+from core.phonetic import Phonetic
+from core.voicesynthetizer import VoiceSynthetizer
 
 class Reglamentos(object):
 

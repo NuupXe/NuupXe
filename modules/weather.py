@@ -5,14 +5,14 @@ import time
 import feedparser
 import os
 
-from voicesynthetizer import VoiceSynthetizer
+from core.voicesynthetizer import VoiceSynthetizer
 
 class Weather(object):
 
     def __init__(self, voicesynthetizer):
 
         self.conf = ConfigParser.ConfigParser()
-        self.path = "../configuration/general.configuration"
+        self.path = "configuration/general.configuration"
         self.conf.read(self.path)
 
         self.speaker = voicesynthetizer

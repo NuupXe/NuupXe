@@ -9,3 +9,6 @@ To Do List
 - twitterc, allow status update
 - twitterc, inform of new earthquakes as soon as it is reported on twitter
 - Remove harcoded city in weather module, move to general configuration file
+- cwpcm
+- localization
+- OpenWeatherMap
