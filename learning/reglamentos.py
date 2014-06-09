@@ -29,6 +29,7 @@ class Reglamentos(object):
         if self.speaker.getsynthetizer() == "google":
                 message = "\"" + message + "\""
         self.speaker.speechit(message)
+        time.sleep(1)
 
     def welcome(self):
         self.message("Modulo de Aprendizaje de Reglamentos, sugerencias escribir a ")

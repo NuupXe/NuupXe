@@ -49,23 +49,23 @@ class Cancun(object):
         # tbi
 
         # General Modules
-        self.scheduler.add_interval_job(self.id.identify, minutes=1)
-        self.scheduler.add_interval_job(self.clock.date, minutes=1)
-        self.scheduler.add_interval_job(self.clock.hour, minutes=1)
-        #self.scheduler.add_interval_job(self.twitterc.sismologicomx, minutes=60)
-        #self.scheduler.add_interval_job(self.weather.report, minutes=120)
-        self.scheduler.add_interval_job(self.messages.stations, minutes=1)
+        self.scheduler.add_interval_job(self.id.identify, minutes=10)
+        self.scheduler.add_interval_job(self.clock.date, minutes=30)
+        self.scheduler.add_interval_job(self.clock.hour, minutes=30)
+        self.scheduler.add_interval_job(self.twitterc.sismologicomx, minutes=60)
+        self.scheduler.add_interval_job(self.weather.report, minutes=60)
+        self.scheduler.add_interval_job(self.messages.stations, minutes=150)
 
         # Learning Modules, Morse
-        #self.scheduler.add_cron_job(self.morseteacher.golearn,month='*',day='*',hour='7,12,18',minute ='00',second='0')
-        #self.scheduler.add_cron_job(self.morseteacher.gocompete,month='*',day='*',hour='7,12,18',minute ='15',second='0')
+        self.scheduler.add_cron_job(self.morseteacher.golearn,month='*',day='*',hour='7,12,18',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.morseteacher.gocompete,month='*',day='*',hour='7,12,18',minute ='15',second='0')
 
         # Learning Modules, Reglamentos
-        #self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.1'],month='*',day_of_week='mon,sat,sun',hour='8,13,19',minute ='00',second='0')
-        #self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.2'],month='*',day_of_week='tue,sat,sun',hour='8,13,19',minute ='00',second='0')
-        #self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.3'],month='*',day_of_week='wed,sat,sun',hour='8,13,19',minute ='00',second='0')
-        #self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.4'],month='*',day_of_week='thu,sat,sun',hour='8,13,19',minute ='00',second='0')
-        #self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.5'],month='*',day_of_week='fri,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.1'],month='*',day_of_week='mon,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.2'],month='*',day_of_week='tue,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.3'],month='*',day_of_week='wed,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.4'],month='*',day_of_week='thu,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.5'],month='*',day_of_week='fri,sat,sun',hour='8,13,19',minute ='00',second='0')
 
 if __name__ == "__main__":
 

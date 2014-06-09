@@ -10,5 +10,5 @@ serialport = /dev/ttyS0
 # Ejemplos:
 # Guadalajara es 124162
 # San Luis de la Paz, Guanajuato es 144253
-cityid = 144253
+cityid = 124162
 

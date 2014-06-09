@@ -35,14 +35,19 @@ class TwitterC(object):
         self.voicesynthetizer.speechit('Servicio Sismologico Nacional, Universidad Nacional Autonoma de Mexico')
 
         user = self.twitterapi.get_user('SismologicoMX')
-        for status in tweepy.Cursor(self.twitterapi.user_timeline, id='SismologicoMX').items(2):
+        sismo = 'False'
+        for status in tweepy.Cursor(self.twitterapi.user_timeline, id='SismologicoMX').items(5):
             # self.twitterapi.update_status(status.text)
-            status.text = status.text.replace("Loc", "Localizacion")
-            status.text = status.text.replace("CD", "Ciudad")
-            status.text = status.text.replace("Lat", "Latitud")
-            status.text = status.text.replace("Lon", "Longitud")
-            status.text = status.text.replace("Pf", "Profundidad")
-            self.voicesynthetizer.speechit(status.text)
+            if status.text.partition(' ')[0] == 'SISMO':
+                    status.text = status.text.replace("Loc", "Localizacion")
+                    status.text = status.text.replace("CD", "Ciudad")
+                    status.text = status.text.replace("Lat", "Latitud")
+                    status.text = status.text.replace("Lon", "Longitud")
+                    status.text = status.text.replace("Pf", "Profundidad")
+                    self.voicesynthetizer.speechit(status.text)
+                    sismo = 'True'
+        if sismo == 'False':
+                    self.voicesynthetizer.speechit("No se encontraron sismos en las ultimas horas")
 
 if __name__ == '__main__':
 

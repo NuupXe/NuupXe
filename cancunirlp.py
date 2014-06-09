@@ -11,7 +11,7 @@ from core.voicesynthetizer import VoiceSynthetizer
 from modules.clock import Clock
 from modules.id import Identification
 from modules.messages import Messages
-#from modules.twitterc import TwitterC
+from modules.twitterc import TwitterC
 from modules.weather import Weather
 
 from learning.morseteacher import MorseTeacher
@@ -40,7 +40,7 @@ class CancunIrlp(object):
         self.reglamentos = Reglamentos(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
-        #self.twitterc = TwitterC(self.voicesynthetizer)
+        self.twitterc = TwitterC(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
 
     def run(self):
@@ -56,31 +56,31 @@ class CancunIrlp(object):
 
 	#while True:
 		#self.id.identify()
-		#time.sleep(1)
+		#time.sleep(5)
 		#self.clock.date()
-		#time.sleep(1)
+		#time.sleep(5)
 		#self.clock.hour()
-		#time.sleep(1)
+		#time.sleep(5)
 		#self.weather.report()
-		#time.sleep(15)
+		#time.sleep(5)
 		#self.twitterc.sismologicomx()
 		#time.sleep(2)
 		#self.morseteacher.golearn()
-		#time.sleep(60)
+		#time.sleep(5)
 		#self.morseteacher.gocompete()
-		#time.sleep(60)
+		#time.sleep(5)
 		#self.messages.stations()
-		#time.sleep(1)
+		#time.sleep(5)
 		#self.reglamentos.read("learning/reglamentos.1")
-		#time.sleep(120)
+		#time.sleep(5)
 		#self.reglamentos.read("learning/reglamentos.2")
-		#time.sleep(120)
+		#time.sleep(5)
 		#self.reglamentos.read("learning/reglamentos.3")
-		#time.sleep(120)
+		#time.sleep(5)
 		#self.reglamentos.read("learning/reglamentos.4")
-		#time.sleep(120)
+		#time.sleep(5)
 		#self.reglamentos.read("learning/reglamentos.5")
-		#time.sleep(120)
+		#time.sleep(5)
 
 if __name__ == "__main__":
 

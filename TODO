@@ -12,3 +12,5 @@ To Do List
 - cwpcm
 - localization
 - OpenWeatherMap
+- Morse contest, breakout by line to avoid timeout
+- Fix google tts by passing spanish text without removing accents

@@ -45,7 +45,10 @@ class Weather(object):
         return
 
     def report(self):
-	try:
+
+        print '[Cancun] Weather'
+
+        try:
                 self.parser()
                 self.speaker.speechit("Reporte del clima en la ciudad de " + self.location['city'] + ", " + self.location['country'])
                 self.speaker.speechit("Temperatura maxima, " + self.high + " grados centigrados")
