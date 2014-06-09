@@ -11,16 +11,20 @@ class Weather(object):
 
     def __init__(self, voicesynthetizer):
 
+        print '[Cancun] Weather'
+
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/general.configuration"
         self.conf.read(self.path)
 
+        self.agent = self.conf.get("weather", "agent")
+
         self.speaker = voicesynthetizer
 
-    def parser(self):
+    def yahoo(self):
 
-        cityid = self.conf.get("weather", "cityid")
-        self.url = "http://weather.yahooapis.com/forecastrss?w=" + cityid  + "&u=c"
+        yahoocityid = self.conf.get("weather", "yahoocityid")
+        self.url = "http://weather.yahooapis.com/forecastrss?w=" + yahoocityid  + "&u=c"
 
         data = feedparser.parse(self.url)
 
@@ -42,23 +46,21 @@ class Weather(object):
         temp=temp[1].split(" Low: ")
         self.high=temp[0]
         self.low=temp[1].split("<br />")[0]
-        return
+
+        self.speaker.speechit("Reporte del clima en la ciudad de " + self.location['city'] + ", " + self.location['country'])
+        self.speaker.speechit("Temperatura maxima, " + self.high + " grados centigrados")
+        self.speaker.speechit("Temperatura minima, " + self.low + " grados centigrados")
+        self.speaker.speechit("Presion Atmosferica, " + self.atmosphere['pressure'] + " milibares")
+        self.speaker.speechit("Visibilidad, " + self.atmosphere['visibility'] + " kilometros")
+        self.speaker.speechit("Humedad, " + self.atmosphere['humidity'] + " por ciento")
+        self.speaker.speechit("El Sol se oculta a las " + self.astronomy['sunset'].replace(":", " "))
 
     def report(self):
 
-        print '[Cancun] Weather'
+        if self.agent == "yahoo":
+                self.yahoo()
 
-        try:
-                self.parser()
-                self.speaker.speechit("Reporte del clima en la ciudad de " + self.location['city'] + ", " + self.location['country'])
-                self.speaker.speechit("Temperatura maxima, " + self.high + " grados centigrados")
-                self.speaker.speechit("Temperatura minima, " + self.low + " grados centigrados")
-		self.speaker.speechit("Presion Atmosferica, " + self.atmosphere['pressure'] + " milibares")
-		self.speaker.speechit("Visibilidad, " + self.atmosphere['visibility'] + " kilometros")
-                self.speaker.speechit("Humedad, " + self.atmosphere['humidity'] + " por ciento")
-                self.speaker.speechit("El Sol se oculta a las " + self.astronomy['sunset'].replace(":", " "))
-	except:
-                return
+        return
 
 if __name__ == '__main__':
 
