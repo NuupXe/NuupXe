@@ -62,15 +62,16 @@ class Weather(object):
         #pp = pprint.PrettyPrinter(indent=4)
         noaa_result = pywapi.get_weather_from_noaa('MMGL')
         #pp.pprint(noaa_result)
-        noaa_text = "Los resultados NOAA son: " + string.lower(noaa_result['weather']) + " y " + noaa_result['temp_c'] + "C ahora en Guadalajara.\n"
+        noaa_text = "Los resultados NOAA son: " + string.lower(noaa_result['weather']) + " y " + noaa_result['temp_c'] + "C ahora en Guadalajara"
+        print noaa_text
 	self.speaker.speechit(noaa_text)
         
     def report(self):
 
-        self.noaa()
-        return
         if self.agent == "yahoo":
                 self.yahoo()
+        elif self.agent == "noaa":
+                self.noaa()
 
         return
 
