@@ -19,6 +19,7 @@ export packageTweepy=tweepy
 export packageApscheduler=apscheduler
 export packagePyserial=pyserial
 export packageWolframalpha=wolframalpha
+export packagePywapi=pywapi
 
 # =============================================================================
 # Script Functions
@@ -44,5 +45,6 @@ pipFunctionInstall $packageTweepy
 pipFunctionInstall $packageApscheduler
 pipFunctionInstall $packagePyserial
 pipFunctionInstall $packageWolframalpha
+pipFunctionInstall $packagePywapi
 
 # End of file
