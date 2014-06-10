@@ -8,6 +8,7 @@ from apscheduler.threadpool import ThreadPool
 
 from core.voicesynthetizer import VoiceSynthetizer
 
+from modules.caudio import Caudio
 from modules.clock import Clock
 from modules.id import Identification
 from modules.messages import Messages
@@ -21,7 +22,7 @@ class CancunIrlp(object):
 
     def __init__(self):
 
-        self.voicesynthetizer = VoiceSynthetizer("festival", "spanish")
+        self.voicesynthetizer = VoiceSynthetizer("google", "spanish")
 	self.sysargv = sys.argv
 
 	print 'Number of arguments:', len(sys.argv), 'arguments.'
@@ -35,6 +36,8 @@ class CancunIrlp(object):
         pass
 
     def modules(self):
+
+        self.caudio = Caudio(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
         self.id = Identification(self.voicesynthetizer)
         self.reglamentos = Reglamentos(self.voicesynthetizer)
@@ -51,6 +54,9 @@ class CancunIrlp(object):
 		self.clock.date()
 	elif self.sysargv[1] == 'hour':
 		self.clock.hour()
+	elif self.sysargv[1] == 'caudio':
+		self.caudio.record()
+		self.caudio.play()
 	else:
 		print 'No Cancun module found by that name'
 
