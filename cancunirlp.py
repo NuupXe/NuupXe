@@ -21,7 +21,7 @@ class CancunIrlp(object):
 
     def __init__(self):
 
-        self.voicesynthetizer = VoiceSynthetizer("google", "spanish")
+        self.voicesynthetizer = VoiceSynthetizer("festival", "spanish")
 	self.sysargv = sys.argv
 
 	print 'Number of arguments:', len(sys.argv), 'arguments.'

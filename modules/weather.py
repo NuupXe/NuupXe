@@ -4,6 +4,8 @@ import ConfigParser
 import time
 import feedparser
 import os
+import pywapi
+import string
 
 from core.voicesynthetizer import VoiceSynthetizer
 
@@ -55,8 +57,18 @@ class Weather(object):
         self.speaker.speechit("Humedad, " + self.atmosphere['humidity'] + " por ciento")
         self.speaker.speechit("El Sol se oculta a las " + self.astronomy['sunset'].replace(":", " "))
 
+    def noaa(self):
+
+        #pp = pprint.PrettyPrinter(indent=4)
+        noaa_result = pywapi.get_weather_from_noaa('MMGL')
+        #pp.pprint(noaa_result)
+        noaa_text = "Los resultados NOAA son: " + string.lower(noaa_result['weather']) + " y " + noaa_result['temp_c'] + "C ahora en Guadalajara.\n"
+	self.speaker.speechit(noaa_text)
+        
     def report(self):
 
+        self.noaa()
+        return
         if self.agent == "yahoo":
                 self.yahoo()
 
