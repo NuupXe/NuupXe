@@ -4,6 +4,7 @@
 # Nexiwave Canada PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 
 import sys, os, json, urllib2, urllib, time
+import commands
 
 # You will need python-requests package. It makes things much easier.
 import requests
@@ -15,6 +16,11 @@ class VoiceToSpeech(object):
     def __init__(self):
 
         self.ptt = PushToTalk()
+
+    def google(self, audiofile):
+        command = "curl -X POST --data-binary @'" + audiofile + "' --header 'Content-Type: audio/l16; rate=16000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=es-es&key=AIzaSyAeHcShFQBeXvyffeFCcIWpcYry25Mmkz'"
+        status, output = commands.getstatusoutput(command)
+        return output
 
     def nexiwave(self, audiofile):
         # Change these:
@@ -36,7 +42,7 @@ class VoiceToSpeech(object):
         transcript = data['text']
 
         # Perform your magic here:
-        print "Transcript for "+filename+"=" + transcript
+        print "Transcript for " + filename + "=" + transcript
 
 if __name__ == '__main__':
 

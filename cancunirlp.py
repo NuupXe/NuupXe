@@ -56,8 +56,8 @@ class CancunIrlp(object):
 	elif self.sysargv[1] == 'hour':
 		self.clock.hour()
 	elif self.sysargv[1] == 'caudio':
-		self.caudio.record()
-		self.caudio.play()
+		self.caudio.record('google')
+		self.caudio.play('google')
 	elif self.sysargv[1] == 'vts':
 		self.voicecommands.sample()
 	else:
