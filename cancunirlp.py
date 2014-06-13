@@ -13,6 +13,7 @@ from modules.clock import Clock
 from modules.id import Identification
 from modules.messages import Messages
 from modules.twitterc import TwitterC
+from modules.voicecommands import VoiceCommands
 from modules.weather import Weather
 
 from learning.morseteacher import MorseTeacher
@@ -30,7 +31,6 @@ class CancunIrlp(object):
 	if len(sys.argv) == 1:
 		print 'Please specify 1 Cancun module to run'
 		sys.exit(1)
-	
 
     def __del__(self):
         pass
@@ -44,6 +44,7 @@ class CancunIrlp(object):
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.twitterc = TwitterC(self.voicesynthetizer)
+        self.voicecommands =  VoiceCommands(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
 
     def run(self):
@@ -57,6 +58,8 @@ class CancunIrlp(object):
 	elif self.sysargv[1] == 'caudio':
 		self.caudio.record()
 		self.caudio.play()
+	elif self.sysargv[1] == 'vts':
+		self.voicecommands.sample()
 	else:
 		print 'No Cancun module found by that name'
 
