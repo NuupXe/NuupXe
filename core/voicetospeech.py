@@ -18,7 +18,8 @@ class VoiceToSpeech(object):
         self.ptt = PushToTalk()
 
     def google(self, audiofile):
-        command = "curl -X POST --data-binary @'" + audiofile + "' --header 'Content-Type: audio/l16; rate=16000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=es-es&key=AIzaSyAeHcShFQBeXvyffeFCcIWpcYry25Mmkz'"
+        #command = "curl -X POST --data-binary @'" + audiofile + "' --header 'Content-Type: audio/l16; rate=16000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=es-es&key=AIzaSyAeHcShFQBeXvyffeFCcIWpcYry25MmkzU'"
+        command = "curl -X POST --data-binary @'" + audiofile + "' --header 'Content-Type: audio/x-flac; rate=48000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=es-es&key=AIzaSyAeHcShFQBeXvyffeFCcIWpcYry25MmkzU'"
         status, output = commands.getstatusoutput(command)
         return output
 
