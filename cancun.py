@@ -10,7 +10,7 @@ from apscheduler.threadpool import ThreadPool
 from core.voicesynthetizer import VoiceSynthetizer
 
 from modules.clock import Clock
-from modules.id import Identification
+from modules.identification import Identification
 from modules.messages import Messages
 from modules.twitterc import TwitterC
 from modules.weather import Weather
@@ -33,7 +33,7 @@ class Cancun(object):
 
     def modules(self):
         self.clock = Clock(self.voicesynthetizer)
-        self.id = Identification(self.voicesynthetizer)
+        self.identification = Identification(self.voicesynthetizer)
         self.reglamentos = Reglamentos(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
@@ -49,7 +49,7 @@ class Cancun(object):
         # tbi
 
         # General Modules
-        self.scheduler.add_interval_job(self.id.identify, minutes=10)
+        self.scheduler.add_interval_job(self.identification.identify, minutes=10)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
         self.scheduler.add_interval_job(self.twitterc.sismologicomx, minutes=60)

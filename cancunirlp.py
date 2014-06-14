@@ -10,10 +10,9 @@ from core.voicesynthetizer import VoiceSynthetizer
 
 from modules.caudio import Caudio
 from modules.clock import Clock
-from modules.id import Identification
+from modules.identification import Identification
 from modules.messages import Messages
 from modules.twitterc import TwitterC
-from modules.voicecommands import VoiceCommands
 from modules.weather import Weather
 
 from learning.morseteacher import MorseTeacher
@@ -23,7 +22,7 @@ class CancunIrlp(object):
 
     def __init__(self):
 
-        self.voicesynthetizer = VoiceSynthetizer("google", "spanish")
+        self.voicesynthetizer = VoiceSynthetizer("espeak", "spanish")
 	self.sysargv = sys.argv
 
 	print 'Number of arguments:', len(sys.argv), 'arguments.'
@@ -39,17 +38,18 @@ class CancunIrlp(object):
 
         self.caudio = Caudio(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
-        self.id = Identification(self.voicesynthetizer)
+        self.identification = Identification(self.voicesynthetizer)
         self.reglamentos = Reglamentos(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.twitterc = TwitterC(self.voicesynthetizer)
-        self.voicecommands =  VoiceCommands(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
 
     def run(self):
 	
-        if self.sysargv[1] == 'weather':
+        if self.sysargv[1] == 'identification':
+                self.identification.identify()
+        elif self.sysargv[1] == 'weather':
 		self.weather.report()
 	elif self.sysargv[1] == 'date':
 		self.clock.date()
@@ -64,7 +64,7 @@ class CancunIrlp(object):
 		print 'No Cancun module found by that name'
 
 	#while True:
-		#self.id.identify()
+		#self.identification.identify()
 		#time.sleep(5)
 		#self.clock.date()
 		#time.sleep(5)
