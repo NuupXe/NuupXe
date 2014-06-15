@@ -36,7 +36,7 @@ class TwitterC(object):
 
         user = self.twitterapi.get_user('SismologicoMX')
         sismo = 'False'
-        for status in tweepy.Cursor(self.twitterapi.user_timeline, id='SismologicoMX').items(5):
+        for status in tweepy.Cursor(self.twitterapi.user_timeline, id='SismologicoMX').items(2):
             # self.twitterapi.update_status(status.text)
             if status.text.partition(' ')[0] == 'SISMO':
                     status.text = status.text.replace("Loc", "Localizacion")

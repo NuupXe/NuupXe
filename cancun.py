@@ -9,6 +9,7 @@ from apscheduler.threadpool import ThreadPool
 
 from core.voicesynthetizer import VoiceSynthetizer
 
+from modules.command import Command
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.messages import Messages
@@ -32,6 +33,7 @@ class Cancun(object):
         print 'Cancun timeout function'
 
     def modules(self):
+        self.command = Command(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
         self.identification = Identification(self.voicesynthetizer)
         self.reglamentos = Reglamentos(self.voicesynthetizer)
@@ -45,11 +47,10 @@ class Cancun(object):
 
     def schedule(self):
 
-        # Core
-        # tbi
-
         # General Modules
-        self.scheduler.add_interval_job(self.identification.identify, minutes=10)
+        self.scheduler.add_interval_job(self.command.execute, minutes=1)
+        self.scheduler.add_interval_job(self.morseteacher.goask, minutes=1)
+        self.scheduler.add_interval_job(self.identification.identify, minutes=15)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
         self.scheduler.add_interval_job(self.twitterc.sismologicomx, minutes=60)

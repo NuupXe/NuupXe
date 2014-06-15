@@ -13,8 +13,6 @@ class Weather(object):
 
     def __init__(self, voicesynthetizer):
 
-        print '[Cancun] Weather'
-
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/general.configuration"
         self.conf.read(self.path)
@@ -24,6 +22,8 @@ class Weather(object):
         self.speaker = voicesynthetizer
 
     def yahoo(self):
+
+        print '[Cancun] Weather Yahoo'
 
         yahoocityid = self.conf.get("weather", "yahoocityid")
         self.url = "http://weather.yahooapis.com/forecastrss?w=" + yahoocityid  + "&u=c"
@@ -58,6 +58,8 @@ class Weather(object):
         self.speaker.speechit("El Sol se oculta a las " + self.astronomy['sunset'].replace(":", " "))
 
     def noaa(self):
+
+        print '[Cancun] Weather NOAA'
 
         #pp = pprint.PrettyPrinter(indent=4)
         noaa_result = pywapi.get_weather_from_noaa('MMGL')

@@ -8,7 +8,7 @@ from apscheduler.threadpool import ThreadPool
 
 from core.voicesynthetizer import VoiceSynthetizer
 
-from modules.caudio import Caudio
+from modules.command import Command
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.messages import Messages
@@ -36,7 +36,7 @@ class CancunIrlp(object):
 
     def modules(self):
 
-        self.caudio = Caudio(self.voicesynthetizer)
+        self.command = Command(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
         self.identification = Identification(self.voicesynthetizer)
         self.reglamentos = Reglamentos(self.voicesynthetizer)
@@ -47,19 +47,22 @@ class CancunIrlp(object):
 
     def run(self):
 	
-        if self.sysargv[1] == 'identification':
+	if self.sysargv[1] == 'identificacion':
                 self.identification.identify()
-        elif self.sysargv[1] == 'weather':
+	elif self.sysargv[1] == 'clima':
 		self.weather.report()
-	elif self.sysargv[1] == 'date':
+	elif self.sysargv[1] == 'fecha':
 		self.clock.date()
-	elif self.sysargv[1] == 'hour':
+	elif self.sysargv[1] == 'hora':
 		self.clock.hour()
-	elif self.sysargv[1] == 'caudio':
-		self.caudio.record('google')
-		self.caudio.play('google')
-	elif self.sysargv[1] == 'vts':
-		self.voicecommands.sample()
+	elif self.sysargv[1] == 'comandos':
+		self.command.execute()
+	elif self.sysargv[1] == 'sismologico':
+                self.twitterc.sismologicomx()
+	elif self.sysargv[1] == 'estaciones':
+		self.messages.stations()
+	elif self.sysargv[1] == 'morse':
+		self.morseteacher.goask()
 	else:
 		print 'No Cancun module found by that name'
 

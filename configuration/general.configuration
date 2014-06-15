@@ -1,7 +1,7 @@
 [general]
-radioclub = asociacion de radioexperimentadores de jalisco
+radioclub = club de radio amateur del estado de guanajuato
 systemname = proyecto cancun, estacion experimental de texto a voz
-callsign = xe1gyq
+callsign = xe1crg
 serialport = /dev/ttyS0
 
 [weather]
@@ -11,6 +11,7 @@ agent = yahoo
 # Ejemplos:
 # Guadalajara es 124162
 # San Luis de la Paz, Guanajuato es 144253
-yahoocityid = 124162
+# Silao, Guanajuato es 147582
+yahoocityid = 147582
 
 

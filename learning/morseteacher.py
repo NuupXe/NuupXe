@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import random
+import re
 import string
 import sys
 import time
@@ -12,6 +13,8 @@ from core.morse import Morse
 from core.phonetic import Phonetic
 from core.voicesynthetizer import VoiceSynthetizer
 
+from modules.command import Command
+
 class MorseTeacher(object):
 
     def __init__(self, voicesynthetizer):
@@ -19,6 +22,7 @@ class MorseTeacher(object):
         self.morse = Morse()
         self.speaker = voicesynthetizer
         self.phonetic = Phonetic()
+        self.command = Command(voicesynthetizer)
 
     def __del__(self):
         pass
@@ -85,6 +89,26 @@ class MorseTeacher(object):
         for line in file.readlines():
             self.morse.generate(''.join(e for e in line if e.isalnum()))
         return
+
+    def goask(self):
+        print '[Cancun] Morse Teacher Ask'
+        self.message("Aprendizaje de Codigo Morse")
+        self.message("Quieres escuchar 2 letras para que las decodifiques?")
+        self.message("Responde con las palabras afirmativo o negativo en los proximos 5 segundos")
+
+        self.command.record("google")
+        output = self.command.decode("google")
+
+        if re.search(r'afirma', output, re.M|re.I):
+                print 'afirma'
+                self.message("Tu respuesta fue afirmativa")
+                self.randomletterplay(True, 2)
+        elif re.search(r'nega', output, re.M|re.I):
+                print 'nel pastel'
+                self.message("Tu respuesta fue negativa ")
+        else:
+                self.message("No entendimos tu respuesta")
+        self.message("Hasta Pronto")
 
 if __name__ == '__main__':
 

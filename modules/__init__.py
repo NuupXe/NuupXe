@@ -1,1 +1,1 @@
-__all__ = ['caudio', 'clock', 'id', 'messages', 'twitterc', 'voicecommands', 'weather', 'wolfram']
+__all__ = ['clock', 'commands', 'id', 'messages', 'twitterc', 'voicecommands', 'weather', 'wolfram']
