@@ -11,9 +11,8 @@ from random import randint
 
 from core.morse import Morse
 from core.phonetic import Phonetic
+from core.voicecommand import VoiceCommand
 from core.voicesynthetizer import VoiceSynthetizer
-
-from modules.command import Command
 
 class MorseTeacher(object):
 
@@ -22,7 +21,7 @@ class MorseTeacher(object):
         self.morse = Morse()
         self.speaker = voicesynthetizer
         self.phonetic = Phonetic()
-        self.command = Command(voicesynthetizer)
+        self.voicecommand = VoiceCommand(voicesynthetizer)
 
     def __del__(self):
         pass
@@ -96,19 +95,17 @@ class MorseTeacher(object):
         self.message("Quieres escuchar 2 letras para que las decodifiques?")
         self.message("Responde con las palabras afirmativo o negativo en los proximos 5 segundos")
 
-        self.command.record("google")
-        output = self.command.decode("google")
+        self.voicecommand.record()
+        output = self.voicecommand.decode()
 
         if re.search(r'afirma', output, re.M|re.I):
-                print 'afirma'
                 self.message("Tu respuesta fue afirmativa")
                 self.randomletterplay(True, 2)
         elif re.search(r'nega', output, re.M|re.I):
-                print 'nel pastel'
                 self.message("Tu respuesta fue negativa ")
         else:
                 self.message("No entendimos tu respuesta")
-        self.message("Hasta Pronto")
+        self.message("Hasta Pronto!")
 
 if __name__ == '__main__':
 
