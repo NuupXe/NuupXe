@@ -48,8 +48,8 @@ class Cancun(object):
     def schedule(self):
 
         # General Modules
-        self.scheduler.add_interval_job(self.command.execute, minutes=1)
-        self.scheduler.add_interval_job(self.morseteacher.goask, minutes=1)
+        self.scheduler.add_interval_job(self.command.execute, minutes=5)
+        self.scheduler.add_interval_job(self.morseteacher.goask, minutes=10)
         self.scheduler.add_interval_job(self.identification.identify, minutes=15)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
