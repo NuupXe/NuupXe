@@ -63,6 +63,8 @@ class CancunIrlp(object):
 		self.messages.stations()
 	elif self.sysargv[1] == 'morse':
 		self.morseteacher.goask()
+	elif self.sysargv[1] == 'bc':
+		self.command.background()
 	else:
 		print 'No Cancun module found by that name'
 

@@ -71,9 +71,19 @@ class Command(object):
 
     def execute(self):
         self.presentation()
-        self.voicecommand.record()
-        output = self.voicecommand.decode()
+        self.voicecommand.record('5')
+        output = self.voicecommand.decode('True')
         self.parse(output)
+
+    def background(self):
+        print '[Cancun] Background Started'
+        self.voicecommand.record('5')
+        output = self.voicecommand.decode('False')
+        if re.search(r'hola', output, re.M|re.I):
+             self.voicesynthetizer.speechit("Hola!, soy el proyecto Cancun")
+        else:
+             print 'Negativo'
+        print '[Cancun] Background Stopped'
 
 if __name__ == '__main__':
 

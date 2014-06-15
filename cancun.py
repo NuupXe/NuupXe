@@ -48,8 +48,8 @@ class Cancun(object):
     def schedule(self):
 
         # General Modules
-        self.scheduler.add_interval_job(self.command.execute, minutes=5)
-        self.scheduler.add_interval_job(self.morseteacher.goask, minutes=10)
+        #self.scheduler.add_interval_job(self.command.execute, minutes=5)
+        #self.scheduler.add_interval_job(self.morseteacher.goask, minutes=10)
         self.scheduler.add_interval_job(self.identification.identify, minutes=15)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
@@ -70,12 +70,12 @@ class Cancun(object):
 
 if __name__ == "__main__":
 
-    mytest = Cancun()
-    mytest.modules()
-    mytest.schedule()
+    experimental = Cancun()
+    experimental.modules()
+    #experimental.schedule()
 
     while True:
         print ' [' + time.ctime() + '] ' + 'Cancun Project Alive'
-        mytest.show()
-        time.sleep(1)
-        signal.pause()
+        experimental.command.background()
+        time.sleep(5)
+
