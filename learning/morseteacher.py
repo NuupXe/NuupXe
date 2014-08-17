@@ -95,8 +95,8 @@ class MorseTeacher(object):
         self.message("Quieres escuchar 2 letras para que las decodifiques?")
         self.message("Responde con las palabras afirmativo o negativo en los proximos 5 segundos")
 
-        self.voicecommand.record()
-        output = self.voicecommand.decode()
+        self.voicecommand.record('5')
+        output = self.voicecommand.decode('True')
 
         if re.search(r'afirma', output, re.M|re.I):
                 self.message("Tu respuesta fue afirmativa")
