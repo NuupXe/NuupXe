@@ -1,56 +1,75 @@
 [general]
-city = Leon, Irapuato y Salamanca
+#city = Leon, Irapuato y Salamanca
+city = Guadalajara y Zona Metropolitana
 
-[xe1crg]
-type = repetidor
-owner = club de radio amateur del estado de guanajuato
-callsign = xe1crg
-frequency = 147.330
-subtone = 100
-sign = +
-offset = 600
-
-#[xe1hax]
+#[xe1crg]
 #type = repetidor
-#owner = Miguel
-#callsign = xe1hax
-#frequency = 147.390
-#subtone = 88.5
-#sign = +
-#offset = 600
-
-#[xe1gqp]
-#type = repetidor
-#owner = Ricardo
-#callsign = xe1gqp
-#frequency = 147.360
+#owner = club de radio amateur del estado de guanajuato
+#callsign = xe1crg
+#frequency = 147.330
 #subtone = 100
 #sign = +
 #offset = 600
 
-#[xe1fap]
-#type = repetidor
-#owner = Jesus
-#callsign = xe1fap
-#frequency = 433.275
-#subtone = 88.5
-#sign = +
-#offset = 5000
+[xe1hax]
+type = repetidor, temporalmente fuera de linea
+owner = Miguel
+callsign = xe1hax
+frequency = 147.390
+subtone = 88.5
+sign = +
+offset = 600
 
-#[xe1gyz]
-#type = estacion
-#owner = Jorge
-#callsign = xe1gyz
-#frequency = 146.460
-#subtone = 88.5
-#sign = simplex
-#offset = 0
+[xe1gqp]
+type = repetidor
+owner = Ricardo
+callsign = xe1gqp
+frequency = 147.360
+subtone = 100
+sign = +
+offset = 600
 
-#[xe1gyh]
-#type = estacion
-#owner = Luis
-#callsign = xe1gyh
-#frequency = 147.420
-#subtone = 88.5
-#sign = simplex
-#offset = 0
+[xe1fap]
+type = repetidor
+owner = Jesus
+callsign = xe1fap
+frequency = 433.275
+subtone = 88.5
+sign = +
+offset = 5000
+
+[xe1gyz]
+type = estacion
+owner = Jorge
+callsign = xe1gyz
+frequency = 146.460
+subtone = 88.5
+sign = simplex
+offset = 0
+
+[xe1gyh]
+type = estacion
+owner = Luis
+callsign = xe1gyh
+frequency = 147.420
+subtone = 88.5
+sign = simplex
+offset = 0
+
+[xe1gnz]
+type = repetidor
+owner = Jorge
+callsign = xe1gnz
+frequency = 147.090
+subtone = 123
+sign = +
+offset = 600
+
+[xe1gqp]
+type = repetidor
+owner = Ricardo
+callsign = xe1gqp
+frequency = 438.200
+subtone = 100
+sign = -
+offset = 5000

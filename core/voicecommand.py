@@ -35,7 +35,7 @@ class VoiceCommand(object):
                 status, output = commands.getstatusoutput("sox " + self.audiofilewav + " " + self.audiofilewavcompand + " compand 0.02,0.20 5:-60,-40,-10 -5 -90 0.1")
                 status, output = commands.getstatusoutput("sox " + self.audiofilewav + " -n remix 1 trim 0 1 noiseprof noise.prof")
                 status, output = commands.getstatusoutput("sox " + self.audiofilewav + " " + self.audiofilewavnoise + " remix 1 noisered noise.prof")
-                status, output = commands.getstatusoutput("flac -f -o " + self.audiofileflac + " --channels=1 --sample-rate=48000 " + self.audiofilewavnoise)
+                status, output = commands.getstatusoutput("flac -f -o " + self.audiofileflac + " --channels=1 --sample-rate=48000 " + self.audiofilewav)
 
     def decode(self, speech):
 
@@ -45,12 +45,9 @@ class VoiceCommand(object):
                 self.voicesynthetizer.speechit("Estamos procesando tu respuesta")
                 self.pushtotalk.openport()
                 status, output = commands.getstatusoutput("aplay " + self.audiofilewav)
-                status, output = commands.getstatusoutput("aplay " + self.audiofilewavcompand)
-                status, output = commands.getstatusoutput("aplay " + self.audiofilewavnoise)
+                #status, output = commands.getstatusoutput("aplay " + self.audiofilewavcompand)
+                #status, output = commands.getstatusoutput("aplay " + self.audiofilewavnoise)
                 self.pushtotalk.closeport()
-
-        status, output = commands.getstatusoutput("aplay " + self.audiofilewavnoise)
-        print output
 
         if self.agent == 'nexiwave':
                 self.voicetospeech.nexiwave(self.audiofile)
