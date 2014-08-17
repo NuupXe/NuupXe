@@ -23,7 +23,7 @@ class Cancun(object):
 
     def __init__(self):
         self.voicesynthetizer = VoiceSynthetizer("google", "spanish")
-        self.scheduler = Scheduler(misfire_grace_time=240, coalesce=True, threadpool=ThreadPool(max_threads=1))
+        self.scheduler = Scheduler(misfire_grace_time=600, coalesce=True, threadpool=ThreadPool(max_threads=1))
         self.scheduler.start()
 
     def __del__(self):
@@ -48,14 +48,14 @@ class Cancun(object):
     def schedule(self):
 
         # General Modules
-        #self.scheduler.add_interval_job(self.command.execute, minutes=5)
-        #self.scheduler.add_interval_job(self.morseteacher.goask, minutes=10)
-        self.scheduler.add_interval_job(self.identification.identify, minutes=15)
-        self.scheduler.add_interval_job(self.clock.date, minutes=30)
-        self.scheduler.add_interval_job(self.clock.hour, minutes=30)
+        # self.scheduler.add_interval_job(self.command.execute, minutes=15)
+        # self.scheduler.add_interval_job(self.morseteacher.goask, minutes=20)
+        self.scheduler.add_interval_job(self.identification.identify, minutes=30)
+        self.scheduler.add_interval_job(self.clock.date, minutes=5)
+        self.scheduler.add_interval_job(self.clock.hour, minutes=5)
         self.scheduler.add_interval_job(self.twitterc.sismologicomx, minutes=60)
         self.scheduler.add_interval_job(self.weather.report, minutes=60)
-        self.scheduler.add_interval_job(self.messages.stations, minutes=150)
+        self.scheduler.add_interval_job(self.messages.stations, minutes=120)
 
         # Learning Modules, Morse
         self.scheduler.add_cron_job(self.morseteacher.golearn,month='*',day='*',hour='7,12,18',minute ='00',second='0')
@@ -72,10 +72,10 @@ if __name__ == "__main__":
 
     experimental = Cancun()
     experimental.modules()
-    #experimental.schedule()
+    experimental.schedule()
 
     while True:
         print ' [' + time.ctime() + '] ' + 'Cancun Project Alive'
-        experimental.command.background()
-        time.sleep(5)
+        #experimental.command.background()
+        time.sleep(15)
 

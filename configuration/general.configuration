@@ -1,7 +1,7 @@
 [general]
-radioclub = club de radio amateur del estado de guanajuato
-systemname = proyecto cancun, estacion experimental de texto a voz
-callsign = xe1crg
+radioclub = club de radio experimentadores de jalisco
+systemname = proyecto cancun, sintetizador y reconocimiento de voz para repetidores
+callsign = xe1gyq
 serialport = /dev/ttyS0
 
 [weather]
