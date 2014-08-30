@@ -3,6 +3,7 @@
 import time
 import signal
 import sys
+import thread
 
 from apscheduler.scheduler import Scheduler
 from apscheduler.threadpool import ThreadPool
@@ -13,7 +14,7 @@ from modules.command import Command
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.messages import Messages
-from modules.twitterc import TwitterC
+from modules.seismology import Seismology
 from modules.weather import Weather
 
 from learning.morseteacher import MorseTeacher
@@ -39,7 +40,7 @@ class Cancun(object):
         self.reglamentos = Reglamentos(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
-        self.twitterc = TwitterC(self.voicesynthetizer)
+        self.seismology = Seismology(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
 
     def show(self):
@@ -53,7 +54,7 @@ class Cancun(object):
         self.scheduler.add_interval_job(self.identification.identify, minutes=30)
         self.scheduler.add_interval_job(self.clock.date, minutes=5)
         self.scheduler.add_interval_job(self.clock.hour, minutes=5)
-        self.scheduler.add_interval_job(self.twitterc.sismologicomx, minutes=60)
+        self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
         self.scheduler.add_interval_job(self.weather.report, minutes=60)
         self.scheduler.add_interval_job(self.messages.stations, minutes=120)
 
@@ -78,4 +79,5 @@ if __name__ == "__main__":
         print ' [' + time.ctime() + '] ' + 'Cancun Project Alive'
         #experimental.command.background()
         time.sleep(15)
+	pass
 

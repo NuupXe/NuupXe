@@ -13,7 +13,7 @@ from modules.clock import Clock
 from modules.identification import Identification
 from modules.weather import Weather
 from modules.messages import Messages
-from modules.twitterc import TwitterC
+from modules.seismology import Seismology
 
 class Command(object):
 
@@ -27,7 +27,7 @@ class Command(object):
         self.identification = Identification(voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
-        self.twitterc = TwitterC(self.voicesynthetizer)
+        self.seismology = Seismology(self.voicesynthetizer)
 
     def presentation(self):
         print '[Cancun] Command Presentation'
@@ -62,9 +62,9 @@ class Command(object):
             self.voicesynthetizer.speechit("Nos has pedido las estaciones en el area")
             self.messages.stations()
         elif re.search(r'sismo', output, re.M|re.I):
-            print '[Cancun] Command Sismic'
+            print '[Cancun] Command Seismic'
             self.voicesynthetizer.speechit("Nos has pedido el reporte sismologico")
-            self.twitterc.sismologicomx()
+            self.seismology.SismologicoMX()
         else:
             print '[Cancun] Command? Unknown!'
             self.voicesynthetizer.speechit("Como que no entendimos tu comando!")

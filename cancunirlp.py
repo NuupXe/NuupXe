@@ -12,7 +12,7 @@ from modules.command import Command
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.messages import Messages
-from modules.twitterc import TwitterC
+from modules.seismology import Seismology
 from modules.weather import Weather
 
 from learning.morseteacher import MorseTeacher
@@ -42,7 +42,7 @@ class CancunIrlp(object):
         self.reglamentos = Reglamentos(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
-        self.twitterc = TwitterC(self.voicesynthetizer)
+        self.seismology = Seismology(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
 
     def run(self):
@@ -58,7 +58,7 @@ class CancunIrlp(object):
 	elif self.sysargv[1] == 'comandos':
 		self.command.execute()
 	elif self.sysargv[1] == 'sismologico':
-                self.twitterc.sismologicomx()
+                self.seismology.SismologicoMX()
 	elif self.sysargv[1] == 'estaciones':
 		self.messages.stations()
 	elif self.sysargv[1] == 'morse':
