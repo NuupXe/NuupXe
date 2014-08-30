@@ -1,5 +1,5 @@
 [general]
-radioclub = club de radio experimentadores de jalisco
+radioclub = asociacion de radio experimentadores de jalisco
 systemname = proyecto cancun, sintetizador y reconocimiento de voz para repetidores
 callsign = xe1gyq
 serialport = /dev/ttyS0
