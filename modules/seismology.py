@@ -1,8 +1,10 @@
 #!/usr/bin/python
 
+import re
+
 from core.twitterc import TwitterC
 
-city = {'CHIS': 'Chiapas', 'NL': 'Nuevo Leon', 'VER': 'Veracurz',
+state = {'CHIS': 'Chiapas', 'NL': 'Nuevo Leon', 'VER': 'Veracruz',
 	'JAL': 'Jalisco', 'OAX': 'Oaxaca'}
 
 class Seismology(object):
@@ -13,7 +15,6 @@ class Seismology(object):
 
         self.voicesynthetizer = voicesynthetizer
 
-
     def SismologicoMX(self):
         print '[Cancun] Seismology'
         self.voicesynthetizer.speechit('Servicio Sismologico Nacional, Universidad Nacional Autonoma de Mexico')
@@ -22,15 +23,17 @@ class Seismology(object):
         sismo = 'False'
         for status in tstatus:
             if status.text.partition(' ')[0] == 'SISMO':
-                    status.text = status.text.replace("Loc", "Localizacion")
-                    status.text = status.text.replace("CD", "Ciudad")
-                    status.text = status.text.replace("Lat", "Latitud")
-                    status.text = status.text.replace("Lon", "Longitud")
-                    status.text = status.text.replace("Pf", "Profundidad")
-                    self.voicesynthetizer.speechit(status.text)
-                    sismo = 'True'
+                status.text = status.text.replace("Loc", "Localizacion")
+                status.text = status.text.replace("CD", "Ciudad")
+                status.text = status.text.replace("Lat", "Latitud")
+                status.text = status.text.replace("Lon", "Longitud")
+                status.text = status.text.replace("Pf", "Profundidad")
+                pattern = re.compile(r'\b(' + '|'.join(state.keys()) + r')\b')
+                status.text = pattern.sub(lambda x: state[x.group()], status.text)
+                self.voicesynthetizer.speechit(status.text)
+                sismo = 'True'
         if sismo == 'False':
-                    self.voicesynthetizer.speechit("No se encontraron sismos en las ultimas horas")
+            self.voicesynthetizer.speechit("No se encontraron sismos en las ultimas horas")
 
 if __name__ == '__main__':
 
