@@ -21,12 +21,15 @@ class Wolfram(object):
     def identify(self):
         print '[Cancun] Wolfram'
         appid=self.conf.get("wolfram", "appid")
-        client = wolframalpha.Client(appid)
+        self.client = wolframalpha.Client(appid)
+
+    def question(self, question):
+	self.identify()
         question = 'how many grams in kilograms'
-        res = client.query(question)
+        res = self.client.query(question)
         self.voicesynthetizer.speechit(question)
         print(next(res.results).text)
-        self.voicesynthetizer.speechit(next(res.results).text)
+        #self.voicesynthetizer.speechit(next(res.results).text)
 
 if __name__ == '__main__':
 
