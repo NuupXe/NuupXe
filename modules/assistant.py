@@ -28,7 +28,7 @@ def main(voicesynthetizer):
         print "If only daemonic threads are left, terminate whole program."
 
 
-class Assistante(object):
+class Assistant(object):
     def __init__(self, voicesynthetizer):
         self.running = True
 	self.introduced = False
