@@ -7,7 +7,9 @@ from apscheduler.scheduler import Scheduler
 from apscheduler.threadpool import ThreadPool
 
 from core.voicesynthetizer import VoiceSynthetizer
+from core.wolfram import Wolfram
 
+from modules.assistant import Assistant
 from modules.command import Command
 from modules.clock import Clock
 from modules.identification import Identification
@@ -36,6 +38,7 @@ class CancunIrlp(object):
 
     def modules(self):
 
+        self.assistant = Assistant(self.voicesynthetizer)
         self.command = Command(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
         self.identification = Identification(self.voicesynthetizer)
@@ -44,20 +47,23 @@ class CancunIrlp(object):
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
+        self.wolfram = Wolfram(self.voicesynthetizer)
 
     def run(self):
-	
-	if self.sysargv[1] == 'identificacion':
-                self.identification.identify()
-	elif self.sysargv[1] == 'clima':
+
+	if self.sysargv[1] == "assistant":
+		self.assistant.main(self.voicesynthetizer)
+	elif self.sysargv[1] == 'identification':
+		self.identification.identify()
+	elif self.sysargv[1] == 'weather':
 		self.weather.report()
-	elif self.sysargv[1] == 'fecha':
+	elif self.sysargv[1] == 'date':
 		self.clock.date()
-	elif self.sysargv[1] == 'hora':
+	elif self.sysargv[1] == 'hour':
 		self.clock.hour()
-	elif self.sysargv[1] == 'comandos':
+	elif self.sysargv[1] == 'commands':
 		self.command.execute()
-	elif self.sysargv[1] == 'sismologico':
+	elif self.sysargv[1] == 'seismology':
                 self.seismology.SismologicoMX()
 	elif self.sysargv[1] == 'estaciones':
 		self.messages.stations()
@@ -65,36 +71,10 @@ class CancunIrlp(object):
 		self.morseteacher.goask()
 	elif self.sysargv[1] == 'bc':
 		self.command.background()
+	elif self.sysargv[1] == 'wolfram':
+		self.wolfram.question('how many grams in kilograms')
 	else:
 		print 'No Cancun module found by that name'
-
-	#while True:
-		#self.identification.identify()
-		#time.sleep(5)
-		#self.clock.date()
-		#time.sleep(5)
-		#self.clock.hour()
-		#time.sleep(5)
-		#self.weather.report()
-		#time.sleep(5)
-		#self.twitterc.sismologicomx()
-		#time.sleep(2)
-		#self.morseteacher.golearn()
-		#time.sleep(5)
-		#self.morseteacher.gocompete()
-		#time.sleep(5)
-		#self.messages.stations()
-		#time.sleep(5)
-		#self.reglamentos.read("learning/reglamentos.1")
-		#time.sleep(5)
-		#self.reglamentos.read("learning/reglamentos.2")
-		#time.sleep(5)
-		#self.reglamentos.read("learning/reglamentos.3")
-		#time.sleep(5)
-		#self.reglamentos.read("learning/reglamentos.4")
-		#time.sleep(5)
-		#self.reglamentos.read("learning/reglamentos.5")
-		#time.sleep(5)
 
 if __name__ == "__main__":
 
