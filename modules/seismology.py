@@ -19,7 +19,7 @@ class Seismology(object):
         print '[Cancun] Seismology'
         self.voicesynthetizer.speechit('Servicio Sismologico Nacional, Universidad Nacional Autonoma de Mexico')
 
-        tstatus = self.twitterc.user('SismologicoMX')
+        tstatus = self.twitterc.timeline('SismologicoMX', 3)
         sismo = 'False'
         for status in tstatus:
             if status.text.partition(' ')[0] == 'SISMO':
