@@ -66,7 +66,7 @@ class Assistant(object):
 
     def command(self):
 	while self.introduced:
-		self.voicecommand.record('4')
+		self.voicecommand.record('5')
 	        output = self.voicecommand.decode('False')
  	        if re.search(r'identif', output, re.M|re.I):
 		    print '[Cancun] Assistant Identification'
