@@ -52,7 +52,7 @@ class CancunIrlp(object):
     def run(self):
 
 	if self.sysargv[1] == "assistant":
-		self.assistant.main(self.voicesynthetizer)
+		self.assistant.demo1()
 	elif self.sysargv[1] == 'identification':
 		self.identification.identify()
 	elif self.sysargv[1] == 'weather':
@@ -65,7 +65,7 @@ class CancunIrlp(object):
 		self.command.execute()
 	elif self.sysargv[1] == 'seismology':
                 self.seismology.SismologicoMX()
-	elif self.sysargv[1] == 'estaciones':
+	elif self.sysargv[1] == 'stations':
 		self.messages.stations()
 	elif self.sysargv[1] == 'morse':
 		self.morseteacher.goask()
