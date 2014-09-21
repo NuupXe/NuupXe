@@ -14,7 +14,7 @@ class Weather(object):
     def __init__(self, voicesynthetizer):
 
         self.conf = ConfigParser.ConfigParser()
-        self.path = "configuration/general.configuration"
+        self.path = "configuration/general.config"
         self.conf.read(self.path)
 
         self.agent = self.conf.get("weather", "agent")

@@ -15,7 +15,7 @@ class Identification(object):
         self.voicesynthetizer = voicesynthetizer
         
         self.conf = ConfigParser.ConfigParser()
-        self.path = "configuration/general.configuration"
+        self.path = "configuration/general.config"
         self.conf.read(self.path)
 
     def identify(self):
