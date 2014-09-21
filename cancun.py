@@ -22,8 +22,8 @@ from learning.reglamentos import Reglamentos
 
 class Cancun(object):
 
-    def __init__(self):
-        self.voicesynthetizer = VoiceSynthetizer("google", "spanish")
+    def __init__(self, voicesynthetizer):
+        self.voicesynthetizer = voicesynthetizer
         self.scheduler = Scheduler(misfire_grace_time=600, coalesce=True, threadpool=ThreadPool(max_threads=1))
         self.scheduler.start()
 
@@ -71,13 +71,23 @@ class Cancun(object):
 
 if __name__ == "__main__":
 
-    experimental = Cancun()
+    voicesynthetizer = VoiceSynthetizer("google", "spanish")
+
+    experimental = Cancun(voicesynthetizer)
     experimental.modules()
     experimental.schedule()
+    experimental.show()
 
     while True:
-        print ' [' + time.ctime() + '] ' + 'Cancun Project Alive'
-        #experimental.command.background()
-        time.sleep(15)
+        print "\n [" + time.ctime() + "] Cancun Project, Repeater Voice Services"
+        print " Type 'jobs' to see the list of running modules"
+        print " Type any text to make use of Text to Speech infraestructure"
+        x = raw_input(" Type 'e' for exit: ")
+        if x.lower() == 'jobs':
+            experimental.show()
+        elif x.lower() == 'e':
+            break;
+        else:
+            voicesynthetizer.speechit(x)
 	pass
 
