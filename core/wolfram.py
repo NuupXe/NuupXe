@@ -15,7 +15,7 @@ class Wolfram(object):
         self.voicesynthetizer = voicesynthetizer
         
         self.conf = ConfigParser.ConfigParser()
-        self.path = "configuration/wolfram.config"
+        self.path = "configuration/services.config"
         self.conf.read(self.path)
 
     def identify(self):

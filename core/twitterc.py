@@ -13,7 +13,7 @@ class TwitterC(object):
 
     def configuration(self):
         self.configuration = ConfigParser.ConfigParser()
-        self.configuration.read('configuration/twitter.config')
+        self.configuration.read('configuration/services.config')
         self.consumer_key = self.configuration.get('twitter','consumer_key')
         self.consumer_secret = self.configuration.get('twitter','consumer_secret')
         self.access_token = self.configuration.get('twitter','access_token')
