@@ -20,8 +20,6 @@ class VoiceSynthetizer(threading.Thread):
 
         self.setsynthetizer(self.synthetizer)
 
-
-
     def setsynthetizer(self, synthetizer):
         self.synthetizer = synthetizer
         self.setlanguage(self.language)
@@ -39,6 +37,11 @@ class VoiceSynthetizer(threading.Thread):
                 self.languageargument = "-v en"
             elif self.language == "spanish":
                 self.languageargument = "-v es-la"
+        elif self.synthetizer == "google":
+            if self.language == "english":
+                self.languageargument = "en"
+            elif self.language == "spanish":
+                self.languageargument = "es"
 
     def getlanguage(self):
         return self.language
@@ -50,9 +53,12 @@ class VoiceSynthetizer(threading.Thread):
         elif self.synthetizer == "espeak":
             self.text2speechargument = "--stdout"
             self.arguments = self.synthetizer + " " + self.languageargument + " " + self.text2speechargument
+        elif self.synthetizer == "google":
+            self.arguments = self.languageargument
 
     def speechit(self, text):
         #text = unicodedata.normalize('NFKD', text)
+        self.setarguments()
         self.pushtotalk = PushToTalk()
         text = text.encode('ASCII', 'ignore')
 
@@ -61,7 +67,7 @@ class VoiceSynthetizer(threading.Thread):
         elif self.synthetizer == "espeak":
             command = self.arguments + " \"" + text + "\" | aplay"
         elif self.synthetizer == "google":
-            command = "core/google.sh " + text
+            command = "core/google.sh " + " " + self.arguments + " " + text
         self.pushtotalk.message(command)
 
 if __name__ == "__main__":
