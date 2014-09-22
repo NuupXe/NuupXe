@@ -29,7 +29,7 @@ class VoiceCommand(object):
         print '[Cancun] Voice Command Record'
 
         if self.agent == 'nexiwave':
-                status, output = commands.getstatusoutput("arecord -vv -f cd -d " + seconds + " " + self.audiofile)
+                status, output = commands.getstatusoutput("arecord -vv -f cd -d " + seconds + " " + self.audiofilewav)
         elif self.agent == 'google':
                 status, output = commands.getstatusoutput("arecord -d " + seconds + " -f dat -t wav -r 48000 -c 2 " + self.audiofilewav)
                 #status, output = commands.getstatusoutput("sox " + self.audiofilewav + " " + self.audiofilewavcompand + " compand 0.02,0.20 5:-60,-40,-10 -5 -90 0.1")
@@ -50,7 +50,8 @@ class VoiceCommand(object):
                 self.pushtotalk.closeport()
 
         if self.agent == 'nexiwave':
-                self.speechrecognition.nexiwave(self.audiofile)
+                self.output = self.speechrecognition.nexiwave(self.audiofilewav)
+                print self.output
         elif self.agent == 'google':
                 self.output = self.speechrecognition.google(self.audiofileflac)
                 print self.output

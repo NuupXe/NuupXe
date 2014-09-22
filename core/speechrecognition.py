@@ -44,7 +44,8 @@ class SpeechRecognition(object):
         transcript = data['text']
 
         # Perform your magic here:
-        print "Transcript for " + filename + "=" + transcript
+        print "Transcript for " + filename + " = " + transcript
+        return transcript
 
 if __name__ == '__main__':
 
