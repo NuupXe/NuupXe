@@ -32,7 +32,7 @@ class Morse(object):
         self.morsefiles = 'morsefiles/'
 
         pygame.init()
-        self.ptt = PushToTalk()
+        self.pushtotalk = PushToTalk()
 
     def verify(self, string):
         keys = code.keys()
@@ -42,7 +42,7 @@ class Morse(object):
 
     def generate(self, message):
 
-        self.ptt.openport()
+        self.pushtotalk.openport()
         self.message = message
         self.verify(message)
 
@@ -57,7 +57,7 @@ class Morse(object):
                 pygame.mixer.music.play()
                 time.sleep(self.threeunits)
 
-        self.ptt.closeport()
+        self.pushtotalk.closeport()
 
 if __name__ == '__main__':
 

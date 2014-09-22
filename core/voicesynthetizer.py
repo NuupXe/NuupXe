@@ -53,7 +53,7 @@ class VoiceSynthetizer(threading.Thread):
 
     def speechit(self, text):
         #text = unicodedata.normalize('NFKD', text)
-        ptt = PushToTalk()
+        self.pushtotalk = PushToTalk()
         text = text.encode('ASCII', 'ignore')
 
         if self.synthetizer == "festival":
@@ -62,7 +62,7 @@ class VoiceSynthetizer(threading.Thread):
             command = self.arguments + " \"" + text + "\" | aplay"
         elif self.synthetizer == "google":
             command = "core/google.sh " + text
-        ptt.message(command)
+        self.pushtotalk.message(command)
 
 if __name__ == "__main__":
 
