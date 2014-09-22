@@ -6,7 +6,6 @@ import re
 
 from core.voicecommand import VoiceCommand
 from core.voicesynthetizer import VoiceSynthetizer
-from core.voicetospeech import VoiceToSpeech
 from core.pushtotalk import PushToTalk
 
 from modules.clock import Clock

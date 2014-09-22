@@ -2,7 +2,6 @@
 
 import commands
 
-from core.voicetospeech import VoiceToSpeech
 from core.pushtotalk import PushToTalk
 
 class VoiceServices(object):
@@ -13,7 +12,6 @@ class VoiceServices(object):
         self.audiofilewav = "voiceservices.wav"
         self.voicesynthetizer = voicesynthetizer
         self.pushtotalk = PushToTalk()
-        self.voicetospeech = VoiceToSpeech()
 
     def __del__(self):
         status, output = commands.getstatusoutput("rm " + self.audiofilewav)

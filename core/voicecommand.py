@@ -2,7 +2,7 @@
 
 import commands
 
-from core.voicetospeech import VoiceToSpeech
+from core.speechrecognition import SpeechRecognition
 from core.pushtotalk import PushToTalk
 
 class VoiceCommand(object):
@@ -17,7 +17,7 @@ class VoiceCommand(object):
         self.audiofileflac = "voicecommand.flac"
         self.voicesynthetizer = voicesynthetizer
         self.pushtotalk = PushToTalk()
-        self.voicetospeech = VoiceToSpeech()
+        self.speechrecognition = SpeechRecognition()
 
     def __del__(self):
 
@@ -50,9 +50,9 @@ class VoiceCommand(object):
                 self.pushtotalk.closeport()
 
         if self.agent == 'nexiwave':
-                self.voicetospeech.nexiwave(self.audiofile)
+                self.speechrecognition.nexiwave(self.audiofile)
         elif self.agent == 'google':
-                self.output = self.voicetospeech.google(self.audiofileflac)
+                self.output = self.speechrecognition.google(self.audiofileflac)
                 print self.output
 
         return self.output
