@@ -17,3 +17,5 @@ To Do List
 - callsign identification experimental module
 - console, type any text and speech it
 - Conagua twitter
+- Remove /home/irlp/, use configuration file instead
+- Common pause time irlp to allow cancellation of jobs
