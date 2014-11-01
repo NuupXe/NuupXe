@@ -38,7 +38,7 @@ class Morse(object):
         keys = code.keys()
         for char in string:
             if char.upper() not in keys and char != ' ':
-                sys.exit('Error the charcter ' + char + ' cannot be translated to Morse Code')
+                sys.exit('Error the character ' + char + ' cannot be translated to Morse Code')
 
     def generate(self, message):
 
