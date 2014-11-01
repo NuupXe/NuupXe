@@ -71,19 +71,22 @@ class MorseTeacher(object):
     def golearn(self):
         print '[Cancun] Morse Teacher Learning'
         self.welcome()
-        self.randomnumberplay(True, 5)
-        self.randomnumberplay(False, 5)
-        self.message("Hagamos una pausa de 10 segundos")
-        time.sleep(10)
-        self.randomletterplay(True, 5)
-        self.randomletterplay(False, 5)
+        time.sleep(5)
+        self.randomnumberplay(True, 20)
+        time.sleep(2)
+        self.randomnumberplay(False, 20)
+        self.message("Hagamos una pausa de 5 segundos")
+        time.sleep(5)
+        self.randomletterplay(True, 20)
+        time.sleep(2) 
+        self.randomletterplay(False, 20)
 
     def gocompete(self):
         print '[Cancun] Morse Teacher Contest'
         self.message("Concurso Decodificando Texto")
         self.message("Envia tus resultados a " + " ".join(self.phonetic.decode('xe1gyq@gmail.com')))
         self.message("El primer correo con el texto correcto sera ganador de una tarjeta de 200 pesos para Star Bucks")
-        self.message("Listo? Comenzamos...")
+        self.message("Listos? Comenzamos...")
         file = open('learning/morsecontest.text')
         for line in file.readlines():
             self.morse.generate(''.join(e for e in line if e.isalnum()))
