@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# This is the custom decode file. Make sure all valid codes exit with "exit 1".
+# To enable the codes below, the "#" must be removed from the start.
+# This would allow the node to be disabled with the code 12001
+# This would allow the node to be enabled with the code 12002
+
+#if [ "$1" = "12001" ] ; then "$SCRIPT"/disable ; exit 1 ; fi
+#if [ "$1" = "12002" ] ; then "$SCRIPT"/enable ; exit 1 ; fi
+
+if [ "$1" = "P00" ] ; then cd "$CUSTOM"/cancun; python cancunirlp.py help ; exit 1 ; fi
+if [ "$1" = "P01" ] ; then cd "$CUSTOM"/cancun; python cancunirlp.py identification ; exit 1 ; fi
+if [ "$1" = "P02" ] ; then cd "$CUSTOM"/cancun; python cancunirlp.py date ; exit 1 ; fi
+if [ "$1" = "P03" ] ; then cd "$CUSTOM"/cancun; python cancunirlp.py hour ; exit 1 ; fi
+if [ "$1" = "P04" ] ; then cd "$CUSTOM"/cancun; python cancunirlp.py weather ; exit 1 ; fi
+if [ "$1" = "P05" ] ; then cd "$CUSTOM"/cancun; python cancunirlp.py seismology ; exit 1 ; fi
+if [ "$1" = "P06" ] ; then cd "$CUSTOM"/cancun; python cancunirlp.py stations ; exit 1 ; fi
+if [ "$1" = "P07" ] ; then cd "$CUSTOM"/cancun; python cancunirlp.py commands ; exit 1 ; fi
+if [ "$1" = "P08" ] ; then cd "$CUSTOM"/cancun; python cancunirlp.py assistant ; exit 1 ; fi
+
+exit 0
