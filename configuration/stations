@@ -12,7 +12,7 @@ city = Guadalajara y Zona Metropolitana
 #offset = 600
 
 [xe1hax]
-type = repetidor, temporalmente fuera de linea
+type = repetidor
 owner = Miguel
 callsign = xe1hax
 frequency = 147.390
