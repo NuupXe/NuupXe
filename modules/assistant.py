@@ -7,8 +7,8 @@ import re
 from core.twitterc import TwitterC
 from core.voicecommand import VoiceCommand
 from core.voicesynthetizer import VoiceSynthetizer
-from core.voiceservices import VoiceServices
 
+from modules.voicemail import VoiceMail
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.weather import Weather
@@ -36,7 +36,7 @@ class Assistant(object):
 	self.voicesynthetizer = voicesynthetizer
 
 	self.voicecommand = VoiceCommand(self.voicesynthetizer)
-	self.voiceservices = VoiceServices(self.voicesynthetizer)
+	self.voicemail = VoiceMail(self.voicesynthetizer)
         self.clock = Clock(voicesynthetizer)
         self.identification = Identification(voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
@@ -88,7 +88,7 @@ class Assistant(object):
 	            self.seismology.SismologicoMX()
 	        elif re.search(r'mensaje', output, re.M|re.I) or re.search(r'avis', output, re.M|re.I):
 	            print '[Cancun] Assistant Message'
-		    if self.voiceservices.status:
+		    if self.voicemail.status:
 			    self.voicesynthetizer.speechit("Mensaje existente!")
 			    while True:
 				    self.voicesynthetizer.speechit("Quieres escucharlo, borrarlo o salir de esta opcion")
@@ -96,17 +96,17 @@ class Assistant(object):
 		        	    output = self.voicecommand.decode('False')
 				    if re.search(r'escuchar', output, re.M|re.I):
 					    print '[Cancun] Assistant Message Play'
-					    self.voiceservices.play()
+					    self.voicemail.play()
 				    elif re.search(r'borrar', output, re.M|re.I):
 					    print '[Cancun] Assistant Message Erase'
-					    self.voiceservices.erase()
+					    self.voicemail.erase()
 				    elif re.search(r'salir', output, re.M|re.I):
 					    print '[Cancun] Assistant Message Quit'
 					    self.voicesynthetizer.speechit("Saliendo de Opcion Mensaje")
 					    break
 		    else:
-		            self.voiceservices.record('5')
-		            self.voiceservices.play()
+		            self.voicemail.record('5')
+		            self.voicemail.play()
 	        elif re.search(r'dormir', output, re.M|re.I):
 	            print '[Cancun] Assistant Sleep'
 		    self.voicesynthetizer.speechit("Perfecto! Gracias! Dormire por los proximos 30 segundos")
