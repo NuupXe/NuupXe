@@ -1,2 +1,2 @@
-#from core import *
-from core.voicesynthetizer import VoiceSynthetizer
+from core import *
+from module import *
