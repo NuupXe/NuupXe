@@ -2,6 +2,7 @@
 
 import commands
 import getopt
+import os
 import signal
 import sys
 import thread
@@ -10,6 +11,7 @@ import time
 from apscheduler.scheduler import Scheduler
 from apscheduler.threadpool import ThreadPool
 
+from core.irlp import Irlp
 from core.voicesynthetizer import VoiceSynthetizer
 from core.wolfram import Wolfram
 
@@ -91,7 +93,7 @@ class Cancun(object):
         # General Modules
         self.scheduler.add_interval_job(self.identification.identify, minutes=30)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
-        self.scheduler.add_interval_job(self.clock.hour, minutes=30)
+        self.scheduler.add_interval_job(self.clock.hour, minutes=1)
         self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
         self.scheduler.add_interval_job(self.messages.stations, minutes=240)
@@ -112,8 +114,19 @@ class Cancun(object):
         self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.4'],month='*',day_of_week='thu,sat,sun',hour='8,13,19',minute ='00',second='0')
         self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.5'],month='*',day_of_week='fri,sat,sun',hour='8,13,19',minute ='00',second='0')
 
+def set_exit_handler(func):
+    signal.signal(signal.SIGTERM, func)
+
+def on_exit(sig, func=None):
+    print "exit handler triggered"
+    sys.exit(1)
+
+def usage():
+   print '\nProyecto Cancun Options: help, module <name>, scheduler\n'
+
 def main(argv):
 
+    irlp = Irlp()
     voicesynthetizer = VoiceSynthetizer("google", "spanish")
 
     try:
@@ -122,8 +135,12 @@ def main(argv):
         usage()
         sys.exit(2)
 
+    irlp.idle()
     experimental = Cancun(voicesynthetizer)
     experimental.setup()
+
+    print "[" + time.ctime() + "] Cancun Project, Repeater Voice Services"
+    voicesynthetizer.speechit("Proyecto Cancun")
 
     for opt, arg in opts:
 
@@ -132,18 +149,26 @@ def main(argv):
 
         elif opt in ("-m", "--module"):
 
-            print "\n [" + time.ctime() + "] Cancun Project, Repeater Voice Services, Module Mode\n"
+            print "[" + time.ctime() + "] Module Mode"
             experimental.module(arg)
 
         elif opt in ("-s", "--scheduler"):
 
+            print "[" + time.ctime() + "] Scheduler Mode\n"
+            voicesynthetizer.speechit("Modo Planificador Habilitado")
             experimental.schedule()
             experimental.schedulejobs()
 
-            # ToDo Someone speaking? Stop scheduler
+            while True:
+                  time.sleep(5)
+                  pass
+
+        elif opt in ("-l", "live"):
+
+            print "[" + time.ctime() + "] Live Mode"
+            voicesynthetizer.speechit("Modo Escritura Habilitado")
 
             while True:
-                print "\n [" + time.ctime() + "] Cancun Project, Repeater Voice Services, Scheduler Mode"
                 print " Type 'jobs' to see the list of running modules"
                 print " Type any text to make use of Text to Speech infraestructure"
                 x = raw_input(" Type 'e' for exit: ")
@@ -153,6 +178,7 @@ def main(argv):
                     break;
                 else:
                     voicesynthetizer.speechit(x)
+                time.sleep(1)
                 pass
         else:
             assert False, "unhandled option"
