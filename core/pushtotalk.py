@@ -21,6 +21,9 @@ class PushToTalk(object):
 
     def openport(self):
         try:
+            commands.getstatusoutput("/home/irlp/bin/coscheck")
+            commands.getstatusoutput("/home/irlp/scripts/off")
+            commands.getstatusoutput("/home/irlp/bin/forcekey")
             self.port = serial.Serial(self.portdefault, baudrate=115200, timeout=3.0)
             self.port.write("\r\nLet's push the PTT")
             self.port.write("Confirm PTT")
@@ -30,6 +33,7 @@ class PushToTalk(object):
 
     def closeport(self):
         try:
+            commands.getstatusoutput("/home/irlp/bin/forceunkey")
             self.port.close()
         except:
             pass
