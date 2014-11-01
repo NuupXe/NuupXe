@@ -37,10 +37,8 @@ class Reglamentos(object):
 
     def read(self, fmrefile):
         print '[Cancun] Reglamentos'
-        file = codecs.open(fmrefile, encoding='utf-8')
+        file = codecs.open(fmrefile)
         for line in file.readlines():
-            line = unicodedata.normalize('NFKD', line)
-            line = line.encode("ascii", "ignore")
             if "pausa" in line:
                 self.message("Modulo de Aprendizaje de Reglamentos, Hagamos una Pausa de 1 minuto")
                 time.sleep(60)

@@ -33,8 +33,8 @@ done
 
 for key in "${!SHORT[@]}"
 do
-	#echo "line: $key is: ${SHORT[$key]}"
+	echo "line: $key is: ${SHORT[$key]}"
 	echo ${SHORT[$key]}
 	echo "Playing line: $(($key+1)) of $(($STRINGNUM+1))"
-	mpg123 -q "http://translate.google.com/translate_tts?tl=${LANGUAGE}&q=${SHORT[$key]}"
+	mpg123 -q "http://translate.google.com/translate_tts?tl=${LANGUAGE}&ie=UTF-8&q=${SHORT[$key]}"
 done

@@ -57,10 +57,8 @@ class VoiceSynthetizer(threading.Thread):
             self.arguments = self.languageargument
 
     def speechit(self, text):
-        #text = unicodedata.normalize('NFKD', text)
         self.setarguments()
         self.pushtotalk = PushToTalk()
-        text = text.encode('ASCII', 'ignore')
 
         if self.synthetizer == "festival":
             command = "echo \"" + text + "\" | " + self.arguments
