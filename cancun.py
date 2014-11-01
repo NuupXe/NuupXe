@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import commands
 import time
 import signal
 import sys
@@ -23,6 +24,9 @@ from learning.reglamentos import Reglamentos
 class Cancun(object):
 
     def __init__(self, voicesynthetizer):
+
+        commands.getstatusoutput("/home/irlp/scripts/off")
+
         self.voicesynthetizer = voicesynthetizer
         self.scheduler = Scheduler(misfire_grace_time=600, coalesce=True, threadpool=ThreadPool(max_threads=1))
         self.scheduler.start()
@@ -52,15 +56,18 @@ class Cancun(object):
         # self.scheduler.add_interval_job(self.command.execute, minutes=15)
         # self.scheduler.add_interval_job(self.morseteacher.goask, minutes=20)
         self.scheduler.add_interval_job(self.identification.identify, minutes=30)
-        self.scheduler.add_interval_job(self.clock.date, minutes=5)
-        self.scheduler.add_interval_job(self.clock.hour, minutes=5)
+        self.scheduler.add_interval_job(self.clock.date, minutes=30)
+        self.scheduler.add_interval_job(self.clock.hour, minutes=30)
         self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
-        self.scheduler.add_interval_job(self.weather.report, minutes=60)
-        self.scheduler.add_interval_job(self.messages.stations, minutes=120)
+        self.scheduler.add_interval_job(self.weather.report, minutes=120)
+        self.scheduler.add_interval_job(self.messages.stations, minutes=240)
+
+	# Learning Modules, AREJ
+        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,11,17',minute ='00',second='0')
 
         # Learning Modules, Morse
-        self.scheduler.add_cron_job(self.morseteacher.golearn,month='*',day='*',hour='7,12,18',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.morseteacher.gocompete,month='*',day='*',hour='7,12,18',minute ='15',second='0')
+        self.scheduler.add_cron_job(self.morseteacher.golearn,month='*',day='*',hour='7,12,18',minute ='30',second='0')
+        self.scheduler.add_cron_job(self.morseteacher.gocompete,month='*',day='*',hour='7,12,18',minute ='45',second='0')
 
         # Learning Modules, Reglamentos
         self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.1'],month='*',day_of_week='mon,sat,sun',hour='8,13,19',minute ='00',second='0')
