@@ -11,6 +11,7 @@ stop() {
     kill $pid
     sleep 2
     echo "Cancun Project | Scheduler mode killed!"
+    rm -f /tmp/cancun.pid
 }
  
 case "$1" in

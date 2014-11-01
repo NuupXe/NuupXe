@@ -93,7 +93,7 @@ class Cancun(object):
         # General Modules
         self.scheduler.add_interval_job(self.identification.identify, minutes=30)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
-        self.scheduler.add_interval_job(self.clock.hour, minutes=1)
+        self.scheduler.add_interval_job(self.clock.hour, minutes=30)
         self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
         self.scheduler.add_interval_job(self.messages.stations, minutes=240)
@@ -125,6 +125,15 @@ def usage():
    print '\nProyecto Cancun Options: help, module <name>, scheduler\n'
 
 def main(argv):
+
+    pid = str(os.getpid())
+    pidfile = "/tmp/cancun.pid"
+
+    if os.path.isfile(pidfile):
+        print "%s already exists, exiting" % pidfile
+        sys.exit()
+    else:
+        file(pidfile, 'w').write(pid)
 
     irlp = Irlp()
     voicesynthetizer = VoiceSynthetizer("google", "spanish")
@@ -160,7 +169,8 @@ def main(argv):
             experimental.schedulejobs()
 
             while True:
-                  time.sleep(5)
+                  time.sleep(30)
+                  experimental.schedulejobs()
                   pass
 
         elif opt in ("-l", "live"):
@@ -169,12 +179,9 @@ def main(argv):
             voicesynthetizer.speechit("Modo Escritura Habilitado")
 
             while True:
-                print " Type 'jobs' to see the list of running modules"
                 print " Type any text to make use of Text to Speech infraestructure"
                 x = raw_input(" Type 'e' for exit: ")
-                if x.lower() == 'jobs':
-                    experimental.schedulejobs()
-                elif x.lower() == 'e':
+                if x.lower() == 'e':
                     break;
                 else:
                     voicesynthetizer.speechit(x)
@@ -182,6 +189,8 @@ def main(argv):
                 pass
         else:
             assert False, "unhandled option"
+
+    os.unlink(pidfile)
 
 if __name__ == "__main__":
 
