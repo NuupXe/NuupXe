@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import commands
 import time
 import sys
 
@@ -27,6 +28,8 @@ class CancunIrlp(object):
         self.voicesynthetizer = VoiceSynthetizer("google", "spanish")
 	self.sysargv = sys.argv
 
+	commands.getstatusoutput("/home/irlp/scripts/off")
+
 	print 'Number of arguments:', len(sys.argv), 'arguments.'
 	print 'Argument List:', str(sys.argv)
 	if len(sys.argv) == 1:
@@ -51,7 +54,7 @@ class CancunIrlp(object):
 
     def run(self):
 
-	if self.sysargv[1] == "assistant":
+	if self.sysargv[1] == "assistant":	
 		self.assistant.demo1()
 	elif self.sysargv[1] == 'identification':
 		self.identification.identify()
@@ -67,11 +70,17 @@ class CancunIrlp(object):
                 self.seismology.SismologicoMX()
 	elif self.sysargv[1] == 'stations':
 		self.messages.stations()
-	elif self.sysargv[1] == 'morse':
-		self.morseteacher.goask()
+	elif self.sysargv[1] == 'morsel':
+		self.morseteacher.golearn()
+	elif self.sysargv[1] == 'morsec':
+		self.morseteacher.gocompete()
 	elif self.sysargv[1] == 'bc':
 		self.command.background()
-	elif self.sysargv[1] == 'wolfram':
+	elif self.sysargv[1] == 'dx':
+		self.reglamentos.read('learning/dx')
+	elif self.sysargv[1] == 'policies':
+		self.reglamentos.read('learning/reglamentos.0')
+	elif self.sysargv[1] == 'experimental':
 		self.wolfram.question('how many grams in kilograms')
 	else:
 		print 'No Cancun module found by that name'
