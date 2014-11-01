@@ -4,6 +4,8 @@ import serial
 import sys
 import time
 
+from core.irlp import Irlp
+
 class PushToTalk(object):
 
     def __init__(self):
@@ -15,15 +17,16 @@ class PushToTalk(object):
         self.conf.read(self.path)
         self.portdefault = self.conf.get("general", "serialport")
 
+        self.irlp = Irlp()
+
     def __del__(self):
         if (self.port):
             self.port.close()
 
     def openport(self):
         try:
-            commands.getstatusoutput("/home/irlp/bin/coscheck")
-            commands.getstatusoutput("/home/irlp/scripts/off")
-            commands.getstatusoutput("/home/irlp/bin/forcekey")
+            self.irlp.idle()
+            self.irlp.forceptt()
             self.port = serial.Serial(self.portdefault, baudrate=115200, timeout=3.0)
             self.port.write("\r\nLet's push the PTT")
             self.port.write("Confirm PTT")
@@ -33,7 +36,7 @@ class PushToTalk(object):
 
     def closeport(self):
         try:
-            commands.getstatusoutput("/home/irlp/bin/forceunkey")
+            self.irlp.forceunptt()
             self.port.close()
         except:
             pass

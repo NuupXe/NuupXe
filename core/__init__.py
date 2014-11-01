@@ -1,1 +1,1 @@
-__all__ = ['morse', 'phonetic', 'pushtotalk', 'voicetospeech', 'voicesynthetizer']
+__all__ = ['morse', 'phonetic', 'pushtotalk', 'voicetospeech', 'voicesynthetizer', 'irlp']
