@@ -42,6 +42,18 @@ class Cancun(object):
     def timeout(self):
         print 'Cancun Timeout Function'
 
+    def check(self):
+        pid = str(os.getpid())
+        pidfile = "/tmp/cancun.pid"
+
+        if os.path.isfile(pidfile):
+            self.voicesynthetizer.speechit("Proyecto Cancun ya habilitado, no podemos iniciar otra instancia")
+            self.voicesynthetizer.speechit("Deshabilita o intenta mas tarde")
+            sys.exit()
+        else:
+            file(pidfile, 'w').write(pid)
+        return pidfile
+
     def setup(self):
         self.assistant = Assistant(self.voicesynthetizer)
         self.command = Command(self.voicesynthetizer)
@@ -126,17 +138,7 @@ def usage():
 
 def main(argv):
 
-    pid = str(os.getpid())
-    pidfile = "/tmp/cancun.pid"
-
-    if os.path.isfile(pidfile):
-        print "%s already exists, exiting" % pidfile
-        sys.exit()
-    else:
-        file(pidfile, 'w').write(pid)
-
     irlp = Irlp()
-    voicesynthetizer = VoiceSynthetizer("google", "spanish")
 
     try:
         opts, args = getopt.getopt(argv, "h:m:s", ["help", "module=", "scheduler"])
@@ -145,7 +147,10 @@ def main(argv):
         sys.exit(2)
 
     irlp.idle()
+
+    voicesynthetizer = VoiceSynthetizer("google", "spanish")
     experimental = Cancun(voicesynthetizer)
+    pidfile = experimental.check()
     experimental.setup()
 
     print "[" + time.ctime() + "] Cancun Project, Repeater Voice Services"
