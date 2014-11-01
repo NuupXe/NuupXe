@@ -68,7 +68,7 @@ class MorseTeacher(object):
                 self.morse.generate(x)
             time.sleep(1)
 
-    def golearn(self):
+    def learn(self):
         print '[Cancun] Morse Teacher Learning'
         self.welcome()
         time.sleep(5)
@@ -81,7 +81,7 @@ class MorseTeacher(object):
         time.sleep(2) 
         self.randomletterplay(False, 20)
 
-    def gocompete(self):
+    def contest(self):
         print '[Cancun] Morse Teacher Contest'
         self.message("Concurso Decodificando Texto")
         self.message("Envia tus resultados a " + " ".join(self.phonetic.decode('xe1gyq@gmail.com')))
@@ -92,7 +92,7 @@ class MorseTeacher(object):
             self.morse.generate(''.join(e for e in line if e.isalnum()))
         return
 
-    def goask(self):
+    def ask(self):
         print '[Cancun] Morse Teacher Ask'
         self.message("Aprendizaje de Codigo Morse")
         self.message("Quieres escuchar 2 letras para que las decodifiques?")

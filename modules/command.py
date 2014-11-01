@@ -56,14 +56,14 @@ class Command(object):
             print '[Cancun] Command Weather'
             self.voicesynthetizer.speechit("Nos has pedido el reporte del clima")
             self.weather.report()
-        elif re.search(r'estaciones', output, re.M|re.I):
-            print '[Cancun] Command Stations'
-            self.voicesynthetizer.speechit("Nos has pedido las estaciones en el area")
-            self.messages.stations()
         elif re.search(r'sismo', output, re.M|re.I):
             print '[Cancun] Command Seismic'
             self.voicesynthetizer.speechit("Nos has pedido el reporte sismologico")
             self.seismology.SismologicoMX()
+        elif re.search(r'estaciones', output, re.M|re.I):
+            print '[Cancun] Command Stations'
+            self.voicesynthetizer.speechit("Nos has pedido las estaciones en el area")
+            self.messages.stations()
         else:
             print '[Cancun] Command? Unknown!'
             self.voicesynthetizer.speechit("Como que no entendimos tu comando!")
