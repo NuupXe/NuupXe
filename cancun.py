@@ -163,7 +163,10 @@ def main(argv):
         elif opt in ("-m", "--module"):
 
             print "[" + time.ctime() + "] Module Mode"
-            experimental.module(arg)
+            try:
+                experimental.module(arg)
+            except:
+                pass
 
         elif opt in ("-s", "--scheduler"):
 
@@ -173,8 +176,12 @@ def main(argv):
             experimental.schedulejobs()
 
             while True:
-                  time.sleep(30)
                   experimental.schedulejobs()
+                  time.sleep(5)
+                  if irlp.active():
+                       irlp.idle()
+                       voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
+                       break
                   pass
 
         elif opt in ("-l", "live"):

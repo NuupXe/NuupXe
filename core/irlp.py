@@ -3,6 +3,7 @@
 import ConfigParser
 import commands
 import time
+import os
 
 class Irlp(object):
 
@@ -19,6 +20,10 @@ class Irlp(object):
         self.off=self.irlppath + 'scripts/off'
         self.forcekey=self.irlppath + 'bin/forcekey'
         self.forceunkey=self.irlppath + 'bin/forceunkey'
+        self.activeflag=self.irlppath + 'local/active'
+
+    def active(self):
+        return os.path.isfile(self.activeflag)
 
     def idle(self):
         status, output = commands.getstatusoutput(self.cosstate)
