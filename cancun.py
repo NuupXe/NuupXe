@@ -24,7 +24,6 @@ from modules.seismology import Seismology
 from modules.weather import Weather
 
 from learning.morseteacher import MorseTeacher
-from learning.reglamentos import Reglamentos
 
 class Cancun(object):
 
@@ -59,7 +58,6 @@ class Cancun(object):
         self.command = Command(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
         self.identification = Identification(self.voicesynthetizer)
-        self.reglamentos = Reglamentos(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
@@ -88,14 +86,15 @@ class Cancun(object):
         elif module == 'morsecontest':
             self.morseteacher.contest()
 	elif module == 'regulations':
-            self.reglamentos.read('learning/reglamentos.1')
+            self.messages.readfile('learning/reglamentos.1')
+	elif module == 'radioclub':
+            self.messages.readfile('learning/arej.radioclubs')
         elif module == 'assistant':
             self.assistant.demo1()
         elif module == 'wolfram':
             self.wolfram.question('how many grams in kilograms')
         else:
             print 'Module not found! Please check its name...'
-            sys.exit(1)
 
     def schedulejobs(self):
         self.scheduler.print_jobs()
@@ -112,7 +111,7 @@ class Cancun(object):
         # self.scheduler.add_interval_job(self.command.execute, minutes=15)
 
 	# Learning Modules, AREJ
-        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,11,17',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,11,17',minute ='00',second='0')
 
         # Learning Modules, Morse
         self.scheduler.add_cron_job(self.morseteacher.learn,month='*',day='*',hour='7,12,18',minute ='30',second='0')
@@ -120,11 +119,11 @@ class Cancun(object):
         # self.scheduler.add_interval_job(self.morseteacher.goask, minutes=20)
 
         # Learning Modules, Reglamentos
-        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.1'],month='*',day_of_week='mon,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.2'],month='*',day_of_week='tue,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.3'],month='*',day_of_week='wed,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.4'],month='*',day_of_week='thu,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.reglamentos.read,args=['learning/reglamentos.5'],month='*',day_of_week='fri,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'],month='*',day_of_week='mon,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.2'],month='*',day_of_week='tue,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.3'],month='*',day_of_week='wed,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.4'],month='*',day_of_week='thu,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.5'],month='*',day_of_week='fri,sat,sun',hour='8,13,19',minute ='00',second='0')
 
 def set_exit_handler(func):
     signal.signal(signal.SIGTERM, func)

@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import codecs
 import ConfigParser
 import time
 import sys
@@ -19,9 +20,29 @@ class Messages(object):
         self.speaker = voicesynthetizer
         self.phonetic = Phonetic()
 
+    def message(self, message):
+        if self.speaker.getsynthetizer() == "google":
+            message = "\"" + message + "\""
+        self.speaker.speechit(message)
+        time.sleep(1)
+
+    def readfile(self, textfile):
+
+        print '[Cancun] Messages: Voice to Speech Text File'
+
+        file = codecs.open(textfile)
+        for line in file.readlines():
+            if "pausa" in line:
+                self.message("Hagamos una Pausa de 1 minuto")
+                time.sleep(60)
+                self.message("Continuamos")
+            else:
+                self.message(line)
+        return
+
     def stations(self):
 
-	print '[Cancun] Stations'
+	print '[Cancun] Messages: Stations'
 
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/stations"
