@@ -22,5 +22,6 @@ if [ "$1" = "P08" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m morsecontest
 if [ "$1" = "P09" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m regulations ; exit 1 ; fi
 if [ "$1" = "P10" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m assistant ; exit 1 ; fi
 if [ "$1" = "P11" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m wolfram ; exit 1 ; fi
+if [ "$1" = "P12" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m news ; exit 1 ; fi
 
 exit 0

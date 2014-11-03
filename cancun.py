@@ -20,6 +20,7 @@ from modules.command import Command
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.messages import Messages
+from modules.news import News
 from modules.seismology import Seismology
 from modules.weather import Weather
 
@@ -60,6 +61,7 @@ class Cancun(object):
         self.identification = Identification(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
+        self.news = News(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
 
@@ -93,6 +95,8 @@ class Cancun(object):
             self.assistant.demo1()
         elif module == 'wolfram':
             self.wolfram.question('how many grams in kilograms')
+        elif module == 'news':
+            self.news.getitems()
         else:
             print 'Module not found! Please check its name...'
 
@@ -106,6 +110,7 @@ class Cancun(object):
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
         self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
+        self.scheduler.add_interval_job(self.news.getitems, minutes=1)
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
         self.scheduler.add_interval_job(self.messages.stations, minutes=240)
         # self.scheduler.add_interval_job(self.command.execute, minutes=15)
