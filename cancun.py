@@ -110,7 +110,7 @@ class Cancun(object):
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
         self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
-        self.scheduler.add_interval_job(self.news.getitems, minutes=1)
+        self.scheduler.add_interval_job(self.news.getitems, minutes=60)
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
         self.scheduler.add_interval_job(self.messages.stations, minutes=240)
         # self.scheduler.add_interval_job(self.command.execute, minutes=15)
