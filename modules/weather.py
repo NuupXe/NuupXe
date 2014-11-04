@@ -6,20 +6,45 @@ import feedparser
 import os
 import pywapi
 import string
+import json
+import urllib2
 
 from core.voicesynthetizer import VoiceSynthetizer
+from core.phonetic import Phonetic
 
 class Weather(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.phonetic = Phonetic()
         self.conf = ConfigParser.ConfigParser()
+        self.confs = ConfigParser.ConfigParser()
         self.path = "configuration/general.config"
+        self.services = "configuration/services.config"
         self.conf.read(self.path)
+        self.confs.read(self.services)
 
         self.agent = self.conf.get("weather", "agent")
 
         self.speaker = voicesynthetizer
+
+    def aprsfi(self):
+
+        print '[Cancun] Weather aprs.fi'
+        callsign = self.conf.get("weather", "aprsficallsign")
+        api_key = self.confs.get("aprsfi", "api_key")
+        url = 'http://api.aprs.fi/api/get?name=' + callsign + '&what=wx&apikey=' + api_key + '&format=json'
+        data = json.loads(urllib2.urlopen(url).read())
+        for entry in data['entries']:
+            #self.speaker.speechit("Reporte del clima en la ciudad de " + self.location)
+            self.speaker.speechit("Estacion meteorologica, " + ' '.join(self.phonetic.decode(callsign)))
+            self.speaker.speechit("Temperatura, " + entry['temp'] + " grados centigrados")
+            self.speaker.speechit("Humedad relativa, " + entry['humidity'] + " por ciento")
+            self.speaker.speechit("Presion Atmosferica, " + entry['pressure'] + " milibares")
+            self.speaker.speechit("Direccion del viento, " + entry['wind_direction'] + " grados")
+            self.speaker.speechit("Velocidad del viento, " + entry['wind_speed'] + " metros por segundo")
+            self.speaker.speechit("Rafagas de " + entry['wind_gust'] + " metros por segundo")
+            self.speaker.speechit("Precipitacion pluvial, " + entry['rain_1h'] + " milimetros")
 
     def yahoo(self):
 
@@ -70,6 +95,8 @@ class Weather(object):
         
     def report(self):
 
+        if self.agent == "aprsfi":
+                self.aprsfi()
         if self.agent == "yahoo":
                 self.yahoo()
         elif self.agent == "noaa":
