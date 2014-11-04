@@ -4,7 +4,7 @@ start() {
     python cancun.py -s &
     echo "Cancun Project | Started in Scheduler mode..."
 }
- 
+
 stop() {
     pid=`ps -ef | grep 'cancun.py' | awk '{ print $2 }'`
     echo $pid
@@ -12,8 +12,9 @@ stop() {
     sleep 2
     echo "Cancun Project | Scheduler mode killed!"
     rm -f /tmp/cancun.pid
+    /home/irlp/bin/forceunkey
 }
- 
+
 case "$1" in
   start)
     start
