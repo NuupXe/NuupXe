@@ -20,6 +20,7 @@ from modules.command import Command
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.messages import Messages
+from modules.meteorology import Meteorology
 from modules.news import News
 from modules.seismology import Seismology
 from modules.weather import Weather
@@ -60,6 +61,7 @@ class Cancun(object):
         self.clock = Clock(self.voicesynthetizer)
         self.identification = Identification(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
+        self.meteorology = Meteorology(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.news = News(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
@@ -81,6 +83,8 @@ class Cancun(object):
             self.seismology.SismologicoMX()
         elif module == 'stations':
             self.messages.stations()
+        elif module == 'meteorology':
+            self.meteorology.conagua_clima()
         elif module == 'command':
             self.command.execute()
         elif module == 'morselearn':
