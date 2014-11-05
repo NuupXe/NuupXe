@@ -37,7 +37,6 @@ class News(threading.Thread):
 
 	def seturl(self, url):
 		self.url = url
-		print "url? " + self.url
 
 	def geturl(self):
 		return self.url
@@ -47,17 +46,15 @@ class News(threading.Thread):
 
 	def setchannel(self, channelname):
 		self.channelname = channelname
-		print "channel name? " + self.channelname
 
 	def getchannel(self):
 		return self.channelname
 
 	def setitemsnumber(self, itemsnumber):
 		self.itemsnumber = itemsnumber
-		print "items number? " + self.itemsnumber
 
 	def channels(self):
-		print "channels"
+		pass
 
 	def getitemsnumber(self):
 		return self.itemsnumber
