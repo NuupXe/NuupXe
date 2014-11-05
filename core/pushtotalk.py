@@ -25,6 +25,7 @@ class PushToTalk(object):
 
     def openport(self):
         try:
+            self.irlp.busy()
             self.irlp.forceptt()
             self.port = serial.Serial(self.portdefault, baudrate=115200, timeout=3.0)
             self.port.write("\r\nLet's push the PTT")

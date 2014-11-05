@@ -25,12 +25,16 @@ class Irlp(object):
     def active(self):
         return os.path.isfile(self.activeflag)
 
-    def idle(self):
+
+    def busy(self):
         status, output = commands.getstatusoutput(self.cosstate)
         while status is 256:
             status, output = commands.getstatusoutput(self.coscheck)
             time.sleep(int(self.irlpcostimer))
             status, output = commands.getstatusoutput(self.cosstate)
+
+    def idle(self):
+        self.busy()
         commands.getstatusoutput(self.off)
 
     def forceptt(self):
