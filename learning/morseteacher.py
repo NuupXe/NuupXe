@@ -90,6 +90,7 @@ class MorseTeacher(object):
         file = open('learning/morsecontest.text')
         for line in file.readlines():
             self.morse.generate(''.join(e for e in line if e.isalnum()))
+            time.sleep(5)
         return
 
     def ask(self):
