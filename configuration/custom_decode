@@ -8,20 +8,27 @@
 #if [ "$1" = "12001" ] ; then "$SCRIPT"/disable ; exit 1 ; fi
 #if [ "$1" = "12002" ] ; then "$SCRIPT"/enable ; exit 1 ; fi
 
+# Cancun Project, Scheduler Mode
 if [ "$1" = "S0" ] ; then cd "$CUSTOM"/cancun; ./cancun.sh stop ; exit 1 ; fi
 if [ "$1" = "S1" ] ; then cd "$CUSTOM"/cancun; ./cancun.sh start ; exit 1 ; fi
-if [ "$1" = "P00" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m identification ; exit 1 ; fi
-if [ "$1" = "P01" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m hour ; exit 1 ; fi
-if [ "$1" = "P02" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m date ; exit 1 ; fi
-if [ "$1" = "P03" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m weather ; exit 1 ; fi
-if [ "$1" = "P04" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m seismology ; exit 1 ; fi
-if [ "$1" = "P05" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m stations ; exit 1 ; fi
-if [ "$1" = "P06" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m command ; exit 1 ; fi
-if [ "$1" = "P07" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m morselearn ; exit 1 ; fi
-if [ "$1" = "P08" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m morsecontest ; exit 1 ; fi
-if [ "$1" = "P09" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m regulations ; exit 1 ; fi
-if [ "$1" = "P10" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m assistant ; exit 1 ; fi
-if [ "$1" = "P11" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m wolfram ; exit 1 ; fi
-if [ "$1" = "P12" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m news ; exit 1 ; fi
+
+# Cancun Project, Module Mode, General
+if [ "$1" = "P01" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m identification ; exit 1 ; fi
+if [ "$1" = "P02" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m hour ; exit 1 ; fi
+if [ "$1" = "P03" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m date ; exit 1 ; fi
+if [ "$1" = "P04" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m weather ; exit 1 ; fi
+if [ "$1" = "P05" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m seismology ; exit 1 ; fi
+if [ "$1" = "P06" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m stations ; exit 1 ; fi
+
+# Cancun Project, Module Mode, Learning
+if [ "$1" = "P21" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m morselearn ; exit 1 ; fi
+if [ "$1" = "P22" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m morsecontest ; exit 1 ; fi
+if [ "$1" = "P23" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m regulations ; exit 1 ; fi
+
+# Cancun Project, Module Mode, Experimental
+if [ "$1" = "P81" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m command ; exit 1 ; fi
+if [ "$1" = "P82" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m assistant ; exit 1 ; fi
+if [ "$1" = "P83" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m wolfram ; exit 1 ; fi
+if [ "$1" = "P84" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m news ; exit 1 ; fi
 
 exit 0
