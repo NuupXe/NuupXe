@@ -31,8 +31,6 @@ class Cancun(object):
 
     def __init__(self, voicesynthetizer):
 
-        commands.getstatusoutput("/home/irlp/scripts/off")
-
         self.voicesynthetizer = voicesynthetizer
         self.scheduler = Scheduler(misfire_grace_time=600, coalesce=True, threadpool=ThreadPool(max_threads=1))
         self.scheduler.start()
@@ -154,9 +152,12 @@ def main(argv):
         usage()
         sys.exit(2)
 
-    irlp.idle()
-
     voicesynthetizer = VoiceSynthetizer("google", "spanish")
+
+    if irlp.active():
+        voicesynthetizer.speechit("Nodo activo, no podemos iniciar Proyecto Cancun")
+        sys.exit(2)
+
     experimental = Cancun(voicesynthetizer)
     pidfile = experimental.check()
     experimental.setup()
