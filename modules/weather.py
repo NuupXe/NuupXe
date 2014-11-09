@@ -32,11 +32,13 @@ class Weather(object):
 
         print '[Cancun] Weather aprs.fi'
         callsign = self.conf.get("weather", "aprsficallsign")
+        location = self.conf.get("weather", "aprsfilocation")
         api_key = self.confs.get("aprsfi", "api_key")
         url = 'http://api.aprs.fi/api/get?name=' + callsign + '&what=wx&apikey=' + api_key + '&format=json'
         data = json.loads(urllib2.urlopen(url).read())
         for entry in data['entries']:
-            #self.speaker.speechit("Reporte del clima en la ciudad de " + self.location)
+            self.speaker.speechit("Reporte del clima en la ciudad de " + location)
+            self.speaker.speechit("Datos de a p r s punto fi")
             self.speaker.speechit("Estacion meteorologica, " + ' '.join(self.phonetic.decode(callsign)))
             self.speaker.speechit("Temperatura, " + entry['temp'] + " grados centigrados")
             self.speaker.speechit("Humedad relativa, " + entry['humidity'] + " por ciento")
