@@ -27,6 +27,7 @@ class Wolfram(object):
     def question(self, question):
         self.identify()
         self.voicesynthetizer.setlanguage("english")
+        self.voicesynthetizer.speechit("Wolfram Alpha Experimental Module, Computational Knowledge Engine")
         for question in self.questions:
                 res = self.client.query(question)
                 self.voicesynthetizer.speechit(question)
