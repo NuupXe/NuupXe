@@ -31,7 +31,7 @@ class VoiceCommand(object):
         if self.agent == 'nexiwave':
                 status, output = commands.getstatusoutput("arecord -vv -f cd -d " + seconds + " " + self.audiofilewav)
         elif self.agent == 'google':
-                status, output = commands.getstatusoutput("arecord -d " + seconds + " -f dat -t wav -r 48000 -c 2 " + self.audiofilewav)
+                status, output = commands.getstatusoutput("arecord -d " + seconds + " -t wav -f S16_LE -r48000 " + self.audiofilewav)
                 #status, output = commands.getstatusoutput("sox " + self.audiofilewav + " " + self.audiofilewavcompand + " compand 0.02,0.20 5:-60,-40,-10 -5 -90 0.1")
                 #status, output = commands.getstatusoutput("sox " + self.audiofilewav + " -n remix 1 trim 0 1 noiseprof noise.prof")
                 #status, output = commands.getstatusoutput("sox " + self.audiofilewav + " " + self.audiofilewavnoise + " remix 1 noisered noise.prof")
