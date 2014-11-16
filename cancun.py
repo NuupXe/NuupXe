@@ -15,6 +15,8 @@ from core.irlp import Irlp
 from core.voicesynthetizer import VoiceSynthetizer
 from core.wolfram import Wolfram
 
+from modules.voicemail import VoiceMail
+
 from modules.assistant import Assistant
 from modules.command import Command
 from modules.clock import Clock
@@ -67,6 +69,8 @@ class Cancun(object):
 
         self.wolfram = Wolfram(self.voicesynthetizer)
 
+        self.voicemail = VoiceMail(self.voicesynthetizer)
+
     def module(self, module):
 
         if module == 'identification':
@@ -99,6 +103,8 @@ class Cancun(object):
             self.wolfram.question('how many grams in kilograms')
         elif module == 'news':
             self.news.getitems()
+        elif module == 'vm':
+            self.voicemail.run()
         else:
             print 'Module not found! Please check its name...'
 
