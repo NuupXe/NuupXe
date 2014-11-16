@@ -15,29 +15,23 @@ class VoiceMail(object):
         self.pushtotalk = PushToTalk()
         self.voice = Voice()
 
-	self.status = False
-        self.audiofilewav = "voicemail.wav"
         self.voicesynthetizer = voicesynthetizer
 
     def __del__(self):
         pass
         #status, output = commands.getstatusoutput("rm " + self.audiofilewav)
 
-    def status(self):
-	return self.status
-
     def record(self):
         print '[Cancun] Voice Mail Record'
-	self.voicesynthetizer.speechit("Graba el mensaje")
         time.sleep(1)
         while self.irlp.cosenabled() is 256:
             pass
         while self.irlp.cosenabled() is 0:
             pass
-        proc = self.voice.recordstart()
+        proc = self.voice.record_start()
         while self.irlp.cosenabled() is 256:
             pass
-        self.voice.recordstop(proc)
+        self.voice.record_stop(proc)
 
     def play(self):
         print '[Cancun] Voice Mail Play'
@@ -47,14 +41,28 @@ class VoiceMail(object):
 
     def erase(self):
         print '[Cancun] Voice Mail Erase'
-	self.voicesynthetizer.speechit("Borrando el mensaje")
         self.voice.erase()
 
-    def run(self):
+    def run(self, dtmf):
         print '[Cancun] Voice Mail Run'
+
+        self.voicesynthetizer.speechit("Codigo recibido " + dtmf)
+        self.voicesynthetizer.speechit("Identificate por favor")
+        self.voice.record_filename('user.wav')
         self.record()
+
+        self.voicesynthetizer.speechit("Deja tu mensaje")
+        self.voice.record_filename('message.wav')
+        self.record()
+
+        self.voicesynthetizer.speechit("Mensaje de")
+        self.voice.record_filename('user.wav')
         self.play()
-        self.erase()
+        self.voice.record_filename('message.wav')
+        self.play()
+        
+        #self.voicesynthetizer.speechit("Borrando el mensaje")
+        #self.erase()
 
 if __name__ == '__main__':
 
