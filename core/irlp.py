@@ -25,6 +25,9 @@ class Irlp(object):
     def active(self):
         return os.path.isfile(self.activeflag)
 
+    def cosenabled(self):
+        status, output = commands.getstatusoutput(self.cosstate)
+        return status
 
     def busy(self):
         status, output = commands.getstatusoutput(self.cosstate)
@@ -46,4 +49,4 @@ class Irlp(object):
 if __name__ == '__main__':
 
     mytest = Irlp()
-    mytest.idle()
+    mytest.cosenabled()
