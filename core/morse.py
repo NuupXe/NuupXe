@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import ConfigParser
+import commands
 import pygame
 import sys
 import time
@@ -31,7 +33,14 @@ class Morse(object):
         self.sevenunits = 7 * self.oneunit
         self.morsefiles = 'morsefiles/'
 
-        pygame.init()
+        self.conf = ConfigParser.ConfigParser()
+        self.path = "configuration/general.config"
+        self.conf.read(self.path)
+        self.morseagent = self.conf.get("general", "morseagent")
+
+        if self.morseagent is 'pygame':
+            pygame.init()
+
         self.pushtotalk = PushToTalk()
 
     def verify(self, string):
@@ -44,18 +53,25 @@ class Morse(object):
 
         self.pushtotalk.openport()
         self.message = message
-        self.verify(message)
 
-        for char in self.message:
-            if char == ' ':
-                print ' '*7,
-                time.sleep(self.sevenunits)
-            else:
-                print code[char.upper()],
-                print
-                pygame.mixer.music.load(self.morsefiles + char.upper() + '_morse_code.ogg')
-                pygame.mixer.music.play()
-                time.sleep(self.threeunits)
+        if self.morseagent is 'pygame':
+
+            self.verify(message)
+            for char in self.message:
+                if char == ' ':
+                    print ' '*7,
+                    time.sleep(self.sevenunits)
+                else:
+                    print code[char.upper()],
+                    print
+                    pygame.mixer.music.load(self.morsefiles + char.upper() + '_morse_code.ogg')
+                    pygame.mixer.music.play()
+                    time.sleep(self.threeunits)
+
+        else:
+
+            self.message = 'echo ' + self.message + ' | ' + self.morseagent + ' -sf -l 007 -p 1000 > /dev/dsp'
+            status, output = commands.getstatusoutput(self.message)
 
         self.pushtotalk.closeport()
 
