@@ -4,26 +4,22 @@ import commands
 import subprocess
 import time
 
-from core.irlp import Irlp
-
 class Voice(object):
 
     def __init__(self):
         self.filename = "voice.wav"
         self.proc = None
 
-        self.irlp = Irlp()
+    def record_filename(self, name):
+        self.filename = name
 
-    def filename(self, filename):
-        self.filename = filename
-
-    def recordstart(self):
+    def record_start(self):
         args = ['arecord','-t', 'wav', '-f', 'S16_LE', '-r', '48000', self.filename]
         proc = subprocess.Popen(args)
         print "PID:", proc.pid
         return proc
 
-    def recordstop(self, proc):
+    def record_stop(self, proc):
         proc.kill()
 
     def play(self):
@@ -35,7 +31,4 @@ class Voice(object):
 if __name__ == '__main__':
 
     mytest = Voice()
-    mytest.record()
-    mytest.play()
-    mytest.erase()
 
