@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
+import argparse
 import commands
-import getopt
 import os
 import signal
 import sys
@@ -71,7 +71,9 @@ class Cancun(object):
 
         self.voicemail = VoiceMail(self.voicesynthetizer)
 
-    def module(self, module):
+    def module(self, module, dtmf):
+
+        print dtmf
 
         if module == 'identification':
             self.identification.identify()
@@ -104,7 +106,7 @@ class Cancun(object):
         elif module == 'news':
             self.news.getitems()
         elif module == 'vm':
-            self.voicemail.run()
+            self.voicemail.run(dtmf)
         else:
             print 'Module not found! Please check its name...'
 
@@ -152,11 +154,12 @@ def main(argv):
 
     irlp = Irlp()
 
-    try:
-        opts, args = getopt.getopt(argv, "h:m:s", ["help", "module=", "scheduler"])
-    except getopt.GetoptError:
-        usage()
-        sys.exit(2)
+    parser = argparse.ArgumentParser(description='Cancun Project, Voice Services Experiemental Project')
+    parser.add_argument('-m', '--module', help='Module Mode')
+    parser.add_argument('-s', '--scheduler', help='Scheduler mode')
+    parser.add_argument('-l', '--live', help='Live Mode')
+    parser.add_argument('-d', '--dtmf', help='DMTF Code')
+    args = parser.parse_args()
 
     voicesynthetizer = VoiceSynthetizer("google", "spanish")
 
@@ -171,51 +174,41 @@ def main(argv):
     print "[" + time.ctime() + "] Cancun Project, Repeater Voice Services"
     voicesynthetizer.speechit("Proyecto Cancun")
 
-    for opt, arg in opts:
+    if args.module:
 
-        if opt in ("-h", "--help"):
-            sys.exit()
+        print "[" + time.ctime() + "] Module Mode"
+        experimental.module(args.module, args.dtmf)
 
-        elif opt in ("-m", "--module"):
+    if args.scheduler:
 
-            print "[" + time.ctime() + "] Module Mode"
-            try:
-                experimental.module(arg)
-            except:
-                pass
+        print "[" + time.ctime() + "] Scheduler Mode\n"
+        voicesynthetizer.speechit("Modo Planificador Habilitado")
+        experimental.schedule()
+        experimental.schedulejobs()
 
-        elif opt in ("-s", "--scheduler"):
+        while True:
+             experimental.schedulejobs()
+             time.sleep(5)
+             if irlp.active():
+                  irlp.idle()
+                  voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
+                  break
+             pass
 
-            print "[" + time.ctime() + "] Scheduler Mode\n"
-            voicesynthetizer.speechit("Modo Planificador Habilitado")
-            experimental.schedule()
-            experimental.schedulejobs()
+    if args.live:
 
-            while True:
-                  experimental.schedulejobs()
-                  time.sleep(5)
-                  if irlp.active():
-                       irlp.idle()
-                       voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
-                       break
-                  pass
+        print "[" + time.ctime() + "] Live Mode"
+        voicesynthetizer.speechit("Modo Escritura Habilitado")
 
-        elif opt in ("-l", "live"):
-
-            print "[" + time.ctime() + "] Live Mode"
-            voicesynthetizer.speechit("Modo Escritura Habilitado")
-
-            while True:
-                print " Type any text to make use of Text to Speech infraestructure"
-                x = raw_input(" Type 'e' for exit: ")
-                if x.lower() == 'e':
-                    break;
-                else:
-                    voicesynthetizer.speechit(x)
-                time.sleep(1)
-                pass
-        else:
-            assert False, "unhandled option"
+        while True:
+            print " Type any text to make use of Text to Speech infraestructure"
+            x = raw_input(" Type 'e' for exit: ")
+            if x.lower() == 'e':
+                break;
+            else:
+                voicesynthetizer.speechit(x)
+            time.sleep(1)
+            pass
 
     os.unlink(pidfile)
 
