@@ -3,6 +3,7 @@
 import argparse
 import commands
 import os
+import random
 import signal
 import sys
 import thread
@@ -15,7 +16,7 @@ from core.irlp import Irlp
 from core.voicesynthetizer import VoiceSynthetizer
 from core.wolfram import Wolfram
 
-from modules.voicemail import VoiceMail
+from learning.morseteacher import MorseTeacher
 
 from modules.assistant import Assistant
 from modules.command import Command
@@ -25,38 +26,22 @@ from modules.messages import Messages
 from modules.meteorology import Meteorology
 from modules.news import News
 from modules.seismology import Seismology
-from modules.weather import Weather
 from modules.tracker import Tracker
-
-from learning.morseteacher import MorseTeacher
+from modules.voicemail import VoiceMail
+from modules.weather import Weather
 
 class Cancun(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthetizer, irlp):
 
+        self.irlp = irlp
         self.voicesynthetizer = voicesynthetizer
-        self.scheduler = Scheduler(misfire_grace_time=600, coalesce=True, threadpool=ThreadPool(max_threads=1))
-        self.scheduler.start()
         self.pidfile = None
-
-    def __del__(self):
-        self.scheduler.shutdown()
-        os.unlink(self.pidfile)
-
-    def enabled(self):
-        pid = str(os.getpid())
-        pidfile = "/tmp/cancun.pid"
-        self.pidfile = pidfile
-
-        if os.path.isfile(pidfile):
-            self.voicesynthetizer.speechit("Proyecto Cancun ya habilitado, no podemos iniciar otra instancia")
-            self.voicesynthetizer.speechit("Deshabilita o intenta mas tarde")
-            sys.exit()
-        else:
-            file(pidfile, 'w').write(pid)
-        return pidfile
+        self.scheduler_status = False
+        self.pidfile = "/tmp/cancun.pid"
 
     def setup(self):
+
         self.assistant = Assistant(self.voicesynthetizer)
         self.command = Command(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
@@ -65,58 +50,132 @@ class Cancun(object):
         self.meteorology = Meteorology(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.news = News(self.voicesynthetizer)
-        self.seismology = Seismology(self.voicesynthetizer)
-        self.weather = Weather(self.voicesynthetizer)
-
-        self.wolfram = Wolfram(self.voicesynthetizer)
-        self.voicemail = VoiceMail(self.voicesynthetizer)
         self.tracker = Tracker(self.voicesynthetizer)
+        self.seismology = Seismology(self.voicesynthetizer)
+        self.voicemail = VoiceMail(self.voicesynthetizer)
+        self.weather = Weather(self.voicesynthetizer)
+        self.wolfram = Wolfram(self.voicesynthetizer)
 
-    def module(self, module, dtmf):
+    def enabled(self):
+        return os.path.isfile(self.pidfile)
 
-        if module == 'identification':
-            self.identification.identify()
-        elif module == 'hour':
-            self.clock.hour()
-        elif module == 'date':
-            self.clock.date()
-        elif module == 'weather':
-            self.weather.report()
-        elif module == 'seismology':
-            self.seismology.SismologicoMX()
-        elif module == 'stations':
-            self.messages.stations()
-        elif module == 'meteorology':
-            self.meteorology.conagua_clima()
+    def enable(self):
+
+        pid = str(os.getpid())
+        file(self.pidfile, 'w').write(pid)
+
+    def disable(self):
+
+        if self.enabled():
+            os.unlink(self.pidfile)
+        if self.scheduler_status:
+            self.scheduler.shutdown()
+
+    def scheduler_mode(self):
+
+        print "[" + time.ctime() + "] Scheduler Mode\n"
+        self.voicesynthetizer.speechit("Modo Planificador")
+
+        self.scheduler = Scheduler(misfire_grace_time=600, coalesce=True, threadpool=ThreadPool(max_threads=1))
+        self.scheduler.start()
+        self.schedule_print()
+        self.schedule()
+        self.scheduler_status = True
+
+        while True:
+             self.schedule_print()
+             time.sleep(5)
+             if self.irlp.active():
+                  self.irlp.busy()
+                  self.voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
+                  break
+
+        self.disable()
+
+    def writing_mode(self):
+
+        print "[" + time.ctime() + "] Writing Mode\n"
+        self.voicesynthetizer.speechit("Modo Escritura")
+
+        while True:
+            print " Type any text to make use of Text to Speech infraestructure"
+            x = raw_input(" Type 'e' for exit: ")
+            if x.lower() == 'e':
+                self.disable()
+                break;
+            else:
+                self.voicesynthetizer.speechit(x)
+            time.sleep(1)
+
+    def module_mode(self, module, dtmf):
+
+        print "[" + time.ctime() + "] Module Mode\n"
+
+        if module == 'assistant':
+            self.assistant.demo1()
         elif module == 'command':
             self.command.execute()
+        elif module == 'date':
+            self.clock.date()
+        elif module == 'hour':
+            self.clock.hour()
+        elif module == 'identification':
+            self.identification.identify()
+        elif module == 'meteorology':
+            self.meteorology.conagua_clima()
         elif module == 'morselearn':
             self.morseteacher.learn()
         elif module == 'morsecontest':
             self.morseteacher.contest()
+        elif module == 'news':
+            self.news.getitems()
 	elif module == 'regulations':
             self.messages.readfile('learning/reglamentos.1')
 	elif module == 'radioclub':
             self.messages.readfile('learning/arej.radioclubs')
-        elif module == 'assistant':
-            self.assistant.demo1()
-        elif module == 'wolfram':
-            self.wolfram.question('how many grams in kilograms')
-        elif module == 'news':
-            self.news.getitems()
-        elif module == 'vm':
-            self.voicemail.run(dtmf)
+        elif module == 'seismology':
+            self.seismology.SismologicoMX()
+        elif module == 'stations':
+            self.messages.stations()
         elif module == 'tracker':
             self.tracker.query()
+        elif module == 'vm':
+            self.voicemail.run(dtmf)
+        elif module == 'weather':
+            self.weather.report()
+        elif module == 'wolfram':
+            self.wolfram.question('how many grams in kilograms')
         else:
-            print 'Module not found! Please check its name...'
+            print 'Module not found! Please check its name...\n'
 
-    def schedulejobs(self):
+        self.disable()
+
+    def random_mode(self):
+
+        print "[" + time.ctime() + "] Random Mode\n"
+        self.voicesynthetizer.speechit("Modo Aleatorio")
+
+        while True:
+            modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'meteorology', 'morselearn']
+            random_module = modules[int(random.random() * len(modules))]
+            random_time = random.randint(10,20)
+            time.sleep(random_time)
+
+            if self.irlp.active():
+                self.irlp.busy()
+                self.voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
+                break
+
+            self.module_mode(random_module, 'None')
+
+        self.disabled()
+
+    def schedule_print(self):
         self.scheduler.print_jobs()
 
     def schedule(self):
 
-        # General Modules
+        # Production Modules
         self.scheduler.add_interval_job(self.identification.identify, minutes=30)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
@@ -151,61 +210,56 @@ def on_exit(sig, func=None):
 def main(argv):
 
     irlp = Irlp()
+    voicesynthetizer = VoiceSynthetizer("google", "spanish")
+    experimental = Cancun(voicesynthetizer, irlp)
 
-    parser = argparse.ArgumentParser(description='Cancun Project, Voice Services Experiemental Project')
+    voicesynthetizer.speechit("Aqui")
+
+    parser = argparse.ArgumentParser(description='Cancun Project, Voice Services Experimental Project')
     parser.add_argument('-m', '--module', help='Module Mode')
     parser.add_argument('-s', '--scheduler', help='Scheduler mode')
-    parser.add_argument('-l', '--live', help='Live Mode')
+    parser.add_argument('-w', '--writing', help='Writing Mode')
+    parser.add_argument('-r', '--random', help='Random Mode')
     parser.add_argument('-d', '--dtmf', help='DMTF Code')
     args = parser.parse_args()
 
-    voicesynthetizer = VoiceSynthetizer("google", "spanish")
-
     if irlp.active():
         voicesynthetizer.speechit("Nodo activo, no podemos iniciar Proyecto Cancun")
-        sys.exit(2)
+        sys.exit(1)
 
-    experimental = Cancun(voicesynthetizer)
-    pidfile = experimental.enabled()
+    if experimental.enabled():
+        voicesynthetizer.speechit("Proyecto Cancun ya habilitado, no podemos iniciar otra instancia")
+        sys.exit(1)
+
+    if args.scheduler == 'stop' or args.random == 'stop' and not experimental.enabled():
+        voicesynthetizer.speechit("Proyecto Cancun deshabilitado")
+        sys.exit(1)
+
+    if args.scheduler == 'stop' or args.random == 'stop' and experimental.enabled():
+        voicesynthetizer.speechit("Deshabilitando Proyecto Cancun, hasta pronto!")
+        status, output = commands.getstatusoutput('./cancun.sh stop')
+        sys.exit(1)
+
+    experimental.enable()
     experimental.setup()
 
     print "[" + time.ctime() + "] Cancun Project, Repeater Voice Services"
 
     if args.module:
 
-        print "[" + time.ctime() + "] Module Mode"
-        experimental.module(args.module, args.dtmf)
+        experimental.module_mode(args.module, args.dtmf)
 
     if args.scheduler:
 
-        print "[" + time.ctime() + "] Scheduler Mode\n"
-        voicesynthetizer.speechit("Modo Planificador Habilitado")
-        experimental.schedule()
-        experimental.schedulejobs()
+        experimental.scheduler_mode()
 
-        while True:
-             experimental.schedulejobs()
-             time.sleep(5)
-             if irlp.active():
-                  irlp.idle()
-                  voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
-                  break
-             pass
+    if args.writing:
 
-    if args.live:
+        experimental.writing_mode()
 
-        print "[" + time.ctime() + "] Live Mode"
-        voicesynthetizer.speechit("Modo Escritura Habilitado")
+    if args.random:
 
-        while True:
-            print " Type any text to make use of Text to Speech infraestructure"
-            x = raw_input(" Type 'e' for exit: ")
-            if x.lower() == 'e':
-                break;
-            else:
-                voicesynthetizer.speechit(x)
-            time.sleep(1)
-            pass
+        experimental.random_mode()
 
 if __name__ == "__main__":
 
