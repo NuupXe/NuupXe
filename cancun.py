@@ -26,6 +26,7 @@ from modules.meteorology import Meteorology
 from modules.news import News
 from modules.seismology import Seismology
 from modules.weather import Weather
+from modules.tracker import Tracker
 
 from learning.morseteacher import MorseTeacher
 
@@ -68,8 +69,8 @@ class Cancun(object):
         self.weather = Weather(self.voicesynthetizer)
 
         self.wolfram = Wolfram(self.voicesynthetizer)
-
         self.voicemail = VoiceMail(self.voicesynthetizer)
+        self.tracker = Tracker(self.voicesynthetizer)
 
     def module(self, module, dtmf):
 
@@ -105,6 +106,8 @@ class Cancun(object):
             self.news.getitems()
         elif module == 'vm':
             self.voicemail.run(dtmf)
+        elif module == 'tracker':
+            self.tracker.query()
         else:
             print 'Module not found! Please check its name...'
 
