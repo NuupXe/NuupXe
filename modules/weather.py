@@ -9,6 +9,7 @@ import string
 import json
 import urllib2
 
+from core.aprsfi import AprsFi
 from core.voicesynthetizer import VoiceSynthetizer
 from core.phonetic import Phonetic
 
@@ -17,25 +18,26 @@ class Weather(object):
     def __init__(self, voicesynthetizer):
 
         self.phonetic = Phonetic()
+        self.aprsfi = AprsFi()
+
         self.conf = ConfigParser.ConfigParser()
-        self.confs = ConfigParser.ConfigParser()
         self.path = "configuration/general.config"
-        self.services = "configuration/services.config"
         self.conf.read(self.path)
-        self.confs.read(self.services)
 
         self.agent = self.conf.get("weather", "agent")
 
         self.speaker = voicesynthetizer
 
-    def aprsfi(self):
+    def aprsfi_service(self):
 
         print '[Cancun] Weather aprs.fi'
         callsign = self.conf.get("weather", "aprsficallsign")
         location = self.conf.get("weather", "aprsfilocation")
-        api_key = self.confs.get("aprsfi", "api_key")
-        url = 'http://api.aprs.fi/api/get?name=' + callsign + '&what=wx&apikey=' + api_key + '&format=json'
-        data = json.loads(urllib2.urlopen(url).read())
+
+        self.aprsfi.callsign_set(callsign)
+        self.aprsfi.data_set('wx')
+        data = self.aprsfi.query()
+
         for entry in data['entries']:
             self.speaker.speechit("Reporte del clima en la ciudad de " + location)
             self.speaker.speechit("Datos de a p r s punto fi")
@@ -98,7 +100,7 @@ class Weather(object):
     def report(self):
 
         if self.agent == "aprsfi":
-                self.aprsfi()
+                self.aprsfi_service()
         if self.agent == "yahoo":
                 self.yahoo()
         elif self.agent == "noaa":
