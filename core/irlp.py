@@ -15,12 +15,13 @@ class Irlp(object):
         self.irlppath=self.conf.get("irlp", "path")
         self.irlpcostimer=self.conf.get("irlp", "costimer")
 
-        self.coscheck=self.irlppath + 'bin/coscheck'
-        self.cosstate=self.irlppath + 'bin/cosstate'
-        self.off=self.irlppath + 'scripts/off'
-        self.forcekey=self.irlppath + 'bin/forcekey'
-        self.forceunkey=self.irlppath + 'bin/forceunkey'
-        self.activeflag=self.irlppath + 'local/active'
+        self.coscheck = self.irlppath + 'bin/coscheck'
+        self.cosstate = self.irlppath + 'bin/cosstate'
+        self.pttstate = self.irlppath + 'bin/pttstate'
+        self.off = self.irlppath + 'scripts/off'
+        self.forcekey = self.irlppath + 'bin/forcekey'
+        self.forceunkey = self.irlppath + 'bin/forceunkey'
+        self.activeflag = self.irlppath + 'local/active'
 
     def active(self):
         return os.path.isfile(self.activeflag)
@@ -49,4 +50,3 @@ class Irlp(object):
 if __name__ == '__main__':
 
     mytest = Irlp()
-    mytest.cosenabled()

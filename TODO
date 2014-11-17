@@ -27,3 +27,4 @@ To Do List
 - Cancun sending information to APRS.IS
 - https://github.com/ampledata/aprs
 - Simplify dictionaries for Day and Month in Clock and Tracker
+- Review machine state of Irlp and rewrite core/irlp.py
