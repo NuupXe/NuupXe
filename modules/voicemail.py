@@ -46,7 +46,8 @@ class VoiceMail(object):
     def run(self, dtmf):
         print '[Cancun] Voice Mail Run'
 
-        self.voicesynthetizer.speechit("Codigo recibido " + dtmf)
+	if dtmf:
+            self.voicesynthetizer.speechit("Codigo recibido " + dtmf)
         self.voicesynthetizer.speechit("Identificate por favor")
         self.voice.record_filename('user.wav')
         self.record()
