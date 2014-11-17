@@ -36,16 +36,16 @@ class Cancun(object):
         self.voicesynthetizer = voicesynthetizer
         self.scheduler = Scheduler(misfire_grace_time=600, coalesce=True, threadpool=ThreadPool(max_threads=1))
         self.scheduler.start()
+        self.pidfile = None
 
     def __del__(self):
         self.scheduler.shutdown()
+        os.unlink(self.pidfile)
 
-    def timeout(self):
-        print 'Cancun Timeout Function'
-
-    def check(self):
+    def enabled(self):
         pid = str(os.getpid())
         pidfile = "/tmp/cancun.pid"
+        self.pidfile = pidfile
 
         if os.path.isfile(pidfile):
             self.voicesynthetizer.speechit("Proyecto Cancun ya habilitado, no podemos iniciar otra instancia")
@@ -72,8 +72,6 @@ class Cancun(object):
         self.voicemail = VoiceMail(self.voicesynthetizer)
 
     def module(self, module, dtmf):
-
-        print dtmf
 
         if module == 'identification':
             self.identification.identify()
@@ -147,9 +145,6 @@ def on_exit(sig, func=None):
     print "exit handler triggered"
     sys.exit(1)
 
-def usage():
-   print '\nProyecto Cancun Options: help, module <name>, scheduler\n'
-
 def main(argv):
 
     irlp = Irlp()
@@ -168,11 +163,10 @@ def main(argv):
         sys.exit(2)
 
     experimental = Cancun(voicesynthetizer)
-    pidfile = experimental.check()
+    pidfile = experimental.enabled()
     experimental.setup()
 
     print "[" + time.ctime() + "] Cancun Project, Repeater Voice Services"
-    voicesynthetizer.speechit("Proyecto Cancun")
 
     if args.module:
 
@@ -209,8 +203,6 @@ def main(argv):
                 voicesynthetizer.speechit(x)
             time.sleep(1)
             pass
-
-    os.unlink(pidfile)
 
 if __name__ == "__main__":
 
