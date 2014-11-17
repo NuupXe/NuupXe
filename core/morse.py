@@ -70,7 +70,7 @@ class Morse(object):
 
         else:
 
-            self.message = 'echo ' + self.message + ' | ' + self.morseagent + ' -sf -l 007 -p 1000 > /dev/dsp'
+            self.message = 'echo ' + self.message + ' | ' + self.morseagent + ' -ss -l 007 -p 1000 > /dev/dsp'
             status, output = commands.getstatusoutput(self.message)
 
         self.pushtotalk.closeport()
