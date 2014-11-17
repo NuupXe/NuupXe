@@ -21,6 +21,7 @@ export packagePyserial=pyserial
 export packageWolframalpha=wolframalpha
 export packagePywapi=pywapi
 export packageRequests=requests
+export packagePygeocoder=pygeocoder
 
 # =============================================================================
 # Script Functions
@@ -48,5 +49,6 @@ pipFunctionInstall $packagePyserial
 pipFunctionInstall $packageWolframalpha
 pipFunctionInstall $packagePywapi
 pipFunctionInstall $packageRequests
+pipFunctionInstall $packagePygeocoder
 
 # End of file
