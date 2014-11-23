@@ -67,7 +67,7 @@ class Aprstt(object):
         return datafields.get(keytype)
 
     def keytype_translate(self, keytype):
-        keytypes = {'callsign': 'indicativo', 'position': 'posicion', 'status': 'estado', 'message': 'mensaje'}
+        keytypes = {'callsign': 'Indicativo', 'position': 'Posicion', 'status': 'Estado', 'message': 'Mensaje'}
         return keytypes.get(keytype)
 
     def user_get(self, string):
@@ -119,12 +119,11 @@ class Aprstt(object):
         else:
             user = callsign
 
+        messagetype = self.keytype_translate(self.keytype_get(command[0:2]))
         messagenumber = command[2:4]
-        messagetype = self.keytype_get(command[0:2])
-        messagetype = self.keytype_translate(messagetype)
         message = messagetype + ' ' + messagenumber
-        self.speaker.speechit(message)
-        message = self.conf.get(user, command)
+        message_file = self.conf.get(user, command)
+        message = message + ' ' + message_file
         self.speaker.speechit(message)
         aprs_message = callsign.upper() + " " + message
         self.aprs.send_packet(aprs_message)
