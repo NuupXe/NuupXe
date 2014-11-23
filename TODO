@@ -32,3 +32,4 @@ To Do List
 - APRStt, lot of functionality that can be adopted
 - user system
 - D is not recognized by Irlp DTMF module
+- *, # is S, P in Irlp so we are not expecting a Sierra, Papa
