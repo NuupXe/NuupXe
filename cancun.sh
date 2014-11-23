@@ -4,9 +4,10 @@ stop() {
     pid=`ps -ef | grep 'cancun.py' | awk '{ print $2 }'`
     echo $pid
     kill $pid
-    sleep 2
+    #sleep 2
     echo "Cancun Project Killed!"
-    test -f /tmp/cancun.pid && rm -f /tmp/cancun.pid
+    #test -f /tmp/cancun.pid && rm -f /tmp/cancun.pid
+    rm -f /tmp/cancun.pid
     /home/irlp/bin/forceunkey
 }
 

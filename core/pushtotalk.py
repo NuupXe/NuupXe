@@ -42,7 +42,6 @@ class PushToTalk(object):
             pass
 
     def message(self, msg):
-
         self.openport()
         status, output = commands.getstatusoutput(msg)
         self.closeport()

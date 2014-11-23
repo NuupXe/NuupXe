@@ -19,6 +19,7 @@ from core.wolfram import Wolfram
 from learning.morseteacher import MorseTeacher
 
 from modules.assistant import Assistant
+from modules.aprstt import Aprstt
 from modules.command import Command
 from modules.clock import Clock
 from modules.identification import Identification
@@ -40,8 +41,12 @@ class Cancun(object):
         self.scheduler_status = False
         self.pidfile = "/tmp/cancun.pid"
 
+    def __del__(self):
+        pass
+
     def setup(self):
 
+        self.aprstt = Aprstt(self.voicesynthetizer)
         self.assistant = Assistant(self.voicesynthetizer)
         self.command = Command(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
@@ -71,24 +76,24 @@ class Cancun(object):
         if self.scheduler_status:
             self.scheduler.shutdown()
 
-    def scheduler_mode(self):
+    def scheduler_mode(self, action):
 
         print "[" + time.ctime() + "] Scheduler Mode\n"
         self.voicesynthetizer.speechit("Modo Planificador")
 
         self.scheduler = Scheduler(misfire_grace_time=600, coalesce=True, threadpool=ThreadPool(max_threads=1))
+        self.schedule()
         self.scheduler.start()
         self.schedule_print()
-        self.schedule()
         self.scheduler_status = True
 
         while True:
-             self.schedule_print()
-             time.sleep(5)
-             if self.irlp.active():
-                  self.irlp.busy()
-                  self.voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
-                  break
+            time.sleep(5)
+            if self.irlp.active():
+                time.sleep(5)
+                self.irlp.busy()
+                self.voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
+                break
 
         self.disable()
 
@@ -145,6 +150,8 @@ class Cancun(object):
             self.weather.report()
         elif module == 'wolfram':
             self.wolfram.question('how many grams in kilograms')
+        elif module == 'aprstt':
+            self.aprstt.query(dtmf)
         else:
             print 'Module not found! Please check its name...\n'
 
@@ -156,19 +163,20 @@ class Cancun(object):
         self.voicesynthetizer.speechit("Modo Aleatorio")
 
         while True:
-            modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'meteorology', 'morselearn']
+            modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'morselearn', 'morsecontest', 'tracker', 'wolfram']
             random_module = modules[int(random.random() * len(modules))]
-            random_time = random.randint(10,20)
+            random_time = random.randint(300,600)
             time.sleep(random_time)
 
             if self.irlp.active():
+                time.sleep(5)
                 self.irlp.busy()
                 self.voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
                 break
 
             self.module_mode(random_module, 'None')
 
-        self.disabled()
+        self.disable()
 
     def schedule_print(self):
         self.scheduler.print_jobs()
@@ -211,9 +219,6 @@ def main(argv):
 
     irlp = Irlp()
     voicesynthetizer = VoiceSynthetizer("google", "spanish")
-    experimental = Cancun(voicesynthetizer, irlp)
-
-    voicesynthetizer.speechit("Aqui")
 
     parser = argparse.ArgumentParser(description='Cancun Project, Voice Services Experimental Project')
     parser.add_argument('-m', '--module', help='Module Mode')
@@ -227,12 +232,15 @@ def main(argv):
         voicesynthetizer.speechit("Nodo activo, no podemos iniciar Proyecto Cancun")
         sys.exit(1)
 
-    if experimental.enabled():
+    experimental = Cancun(voicesynthetizer, irlp)
+
+    if (args.module or (args.scheduler == 'start' or args.random == 'start')) and experimental.enabled():
         voicesynthetizer.speechit("Proyecto Cancun ya habilitado, no podemos iniciar otra instancia")
         sys.exit(1)
 
     if args.scheduler == 'stop' or args.random == 'stop' and not experimental.enabled():
         voicesynthetizer.speechit("Proyecto Cancun deshabilitado")
+        status, output = commands.getstatusoutput('./cancun.sh stop')
         sys.exit(1)
 
     if args.scheduler == 'stop' or args.random == 'stop' and experimental.enabled():
@@ -246,20 +254,22 @@ def main(argv):
     print "[" + time.ctime() + "] Cancun Project, Repeater Voice Services"
 
     if args.module:
-
         experimental.module_mode(args.module, args.dtmf)
 
     if args.scheduler:
-
         experimental.scheduler_mode()
 
     if args.writing:
-
         experimental.writing_mode()
 
     if args.random:
-
         experimental.random_mode()
+
+    if args.dtmf:
+        voicesynthetizer.speechit("Modulo Experimental")
+        experimental.module_mode('aprstt', args.dtmf)
+
+    experimental.disable()
 
 if __name__ == "__main__":
 
