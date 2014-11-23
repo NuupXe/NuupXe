@@ -3,6 +3,7 @@
 import ConfigParser
 import os
 import string
+import sys
 
 from core.aprsnet import AprsNet
 from core.voicesynthetizer import VoiceSynthetizer
@@ -68,10 +69,15 @@ class Aprstt(object):
 
     def callsign_decode(self, string):
         string = string[1:-1:]
-        if len(string) > 5:
-            self.callsign_decoded = self.conf.get("long", string)
-        else:
-            self.callsign_decoded = self.conf.get("short", string)
+        try:
+            if len(string) > 5:
+                self.callsign_decoded = self.conf.get("long", string)
+            else:
+                self.callsign_decoded = self.conf.get("short", string)
+        except:
+            self.speaker.speechit("Indicativo no valido")
+            sys.exit(1)
+
         return self.callsign_decoded
 
     def position_decode(self, string):
@@ -83,26 +89,30 @@ class Aprstt(object):
     def query(self, string):
 
         print '[Cancun] APRS TT | ' + string
-        #self.speaker.speechit("Trama, " + ' '.join(self.phonetic.decode(string)))
-        #self.speaker.speechit("Resultado, " + ' '.join(self.phonetic.decode(self.key_type(string))))
+        self.speaker.speechit("Trama, " + ' '.join(self.phonetic.decode(string)))
+        self.speaker.speechit("Resultado, " + ' '.join(self.phonetic.decode(self.key_type(string))))
 
         if self.key_type(string) is 'callsign':
             callsign_decoded = self.callsign_decode(string.upper())
             self.speaker.speechit("Bienvenida Estacion, " + ' '.join(self.phonetic.decode(callsign_decoded)))
             self.aprs.send_packet(callsign_decoded)
-        elif self.key_type(string) is 'position':
+        if self.key_type(string) is 'position':
             message, callsign = self.key_composition(string)
             if callsign:
                 callsign_decoded = self.callsign_decode(callsign.upper())
                 self.speaker.speechit("Bienvenida Estacion, " + ' '.join(self.phonetic.decode(callsign_decoded)))
+            else:
+                message = string[1:-1:]
             message_decoded = self.position_decode(message)
             self.speaker.speechit("Mensaje, " + ' '.join(self.phonetic.decode(message_decoded)))
             self.aprs.send_packet(message_decoded)
-        elif self.key_type(string) is 'status':
+        if self.key_type(string) is 'status':
             message, callsign = self.key_composition(string)
             if callsign:
                 callsign_decoded = self.callsign_decode(callsign.upper())
                 self.speaker.speechit("Bienvenida Estacion, " + ' '.join(self.phonetic.decode(callsign_decoded)))
+            else:
+                message = string[1:-1:]
             message_decoded = self.status_decode(message)
             self.speaker.speechit("Mensaje, " + ' '.join(self.phonetic.decode(message_decoded)))
             self.aprs.send_packet(message_decoded)

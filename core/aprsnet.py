@@ -7,7 +7,7 @@ class AprsNet(object):
 
         self.serverHost = '205.233.35.52'
         self.serverPort = 14580
-        self.password = ''
+        self.password = '17329'
         self.address = 'XE1GYQ-11>APRS,TCPIP*:'
         self.position = '=2036.92N/10324.72W-'
 
