@@ -61,11 +61,29 @@ class Aprstt(object):
             callsign = string[1]
         return message, callsign
 
-    def key_type(self, string):
-        # A Callsign, B Position Data, C Comment Text or Status, D Message Text
-        typekey = string.split()[0][0]
-        datafields = {'A': 'callsign', 'B': 'position', 'C': 'status', 'D': 'message'}
-        return datafields.get(typekey)
+    def keytype_get(self, string):
+        datafields = {'PP': 'callsign', 'PS': 'position', 'SP': 'status', 'SS': 'message'}
+        keytype = string[:2]
+        return datafields.get(keytype)
+
+    def keytype_translate(self, keytype):
+        keytypes = {'callsign': 'indicativo', 'position': 'posicion', 'status': 'estado', 'message': 'mensaje'}
+        return keytypes.get(keytype)
+
+    def user_get(self, string):
+        user = string[2:4]
+        if string[4:5] == '0':
+            generic = True
+        else:
+            generic = False
+        return user, generic
+
+    def command_get(self, generic, string):
+        if generic:
+             request = string[5:]
+        else:
+             request = string[4:]
+        return request
 
     def callsign_decode(self, string):
         string = string[1:-1:]
@@ -88,34 +106,29 @@ class Aprstt(object):
 
     def query(self, string):
 
-        print '[Cancun] APRS TT | ' + string
-        self.speaker.speechit("Trama, " + ' '.join(self.phonetic.decode(string)))
-        self.speaker.speechit("Resultado, " + ' '.join(self.phonetic.decode(self.key_type(string))))
+        print '[Cancun] APRS Touch Tone | ' + string
 
-        if self.key_type(string) is 'callsign':
-            callsign_decoded = self.callsign_decode(string.upper())
-            self.speaker.speechit("Bienvenida Estacion, " + ' '.join(self.phonetic.decode(callsign_decoded)))
-            self.aprs.send_packet(callsign_decoded)
-        if self.key_type(string) is 'position':
-            message, callsign = self.key_composition(string)
-            if callsign:
-                callsign_decoded = self.callsign_decode(callsign.upper())
-                self.speaker.speechit("Bienvenida Estacion, " + ' '.join(self.phonetic.decode(callsign_decoded)))
-            else:
-                message = string[1:-1:]
-            message_decoded = self.position_decode(message)
-            self.speaker.speechit("Mensaje, " + ' '.join(self.phonetic.decode(message_decoded)))
-            self.aprs.send_packet(message_decoded)
-        if self.key_type(string) is 'status':
-            message, callsign = self.key_composition(string)
-            if callsign:
-                callsign_decoded = self.callsign_decode(callsign.upper())
-                self.speaker.speechit("Bienvenida Estacion, " + ' '.join(self.phonetic.decode(callsign_decoded)))
-            else:
-                message = string[1:-1:]
-            message_decoded = self.status_decode(message)
-            self.speaker.speechit("Mensaje, " + ' '.join(self.phonetic.decode(message_decoded)))
-            self.aprs.send_packet(message_decoded)
+        if self.keytype_get(string) is 'callsign':
+            user, generic = self.user_get(string)
+            callsign = self.conf.get("users", user)
+            self.speaker.speechit("Estacion " + ' '.join(self.phonetic.decode(callsign)))
+
+        command = self.command_get(generic, string)
+        if generic:
+            user = 'generic'
+        else:
+            user = callsign
+
+        messagenumber = command[2:4]
+        messagetype = self.keytype_get(command[0:2])
+        messagetype = self.keytype_translate(messagetype)
+        message = messagetype + ' ' + messagenumber
+        self.speaker.speechit(message)
+        message = self.conf.get(user, command)
+        self.speaker.speechit(message)
+        aprs_message = callsign.upper() + " " + message
+        self.aprs.send_packet(aprs_message)
+
         return
 
 if __name__ == '__main__':

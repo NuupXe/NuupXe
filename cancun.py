@@ -44,7 +44,7 @@ class Cancun(object):
     def __del__(self):
         pass
 
-    def setup(self):
+    def modules_setup(self):
 
         self.aprstt = Aprstt(self.voicesynthetizer)
         self.assistant = Assistant(self.voicesynthetizer)
@@ -60,6 +60,17 @@ class Cancun(object):
         self.voicemail = VoiceMail(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
         self.wolfram = Wolfram(self.voicesynthetizer)
+
+    def dtmf_setup(self,dtmf):
+        dtmf_codes = {
+        'P1': 'identification',
+        'P2': 'date',
+        'P3': 'hour',
+        'P4': 'weather',
+        'P5': 'seismology',
+        'P6': 'stations'
+        }
+        return dtmf_codes.get(dtmf)
 
     def enabled(self):
         return os.path.isfile(self.pidfile)
@@ -249,7 +260,7 @@ def main(argv):
         sys.exit(1)
 
     experimental.enable()
-    experimental.setup()
+    experimental.modules_setup()
 
     print "[" + time.ctime() + "] Cancun Project, Repeater Voice Services"
 
@@ -266,8 +277,12 @@ def main(argv):
         experimental.random_mode()
 
     if args.dtmf:
-        voicesynthetizer.speechit("Modulo Experimental")
-        experimental.module_mode('aprstt', args.dtmf)
+        #voicesynthetizer.speechit("Modulo Experimental")
+        if len(args.dtmf) == 2:
+            module = experimental.dtmf_setup(args.dtmf)
+            experimental.module_mode(module, args.dtmf)
+        else:
+            experimental.module_mode('aprstt', args.dtmf)
 
     experimental.disable()
 
