@@ -174,9 +174,9 @@ class Cancun(object):
         self.voicesynthetizer.speechit("Modo Aleatorio")
 
         while True:
-            modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'morselearn', 'morsecontest', 'tracker', 'wolfram']
+            modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'tracker', 'wolfram']
             random_module = modules[int(random.random() * len(modules))]
-            random_time = random.randint(300,600)
+            random_time = random.randint(15,30)
             time.sleep(random_time)
 
             if self.irlp.active():
