@@ -22,7 +22,7 @@ class Aprstt(object):
 
         self.speaker = voicesynthetizer
 
-    def dtmf_replace(pair):
+    def dtmf_replace(self, pair):
         d = {}
         d["2A"] = "A"
         d["2B"] = "B"
@@ -52,6 +52,32 @@ class Aprstt(object):
         d["9D"] = "Z"
         return d[pair]
 
+    def process_number(self, number):
+        
+        def is_number(s):
+            try:
+                int(s)
+                return True
+            except ValueError:
+                return False
+        #Loop through pairs and if repeating digit, return digit, otherwise translate.
+        translated_number = ""
+        if number[0] == "A": # This is a callsign, so decode it.
+            pairstart = True
+            for p in range(1,(len(number) - 3)):
+                nextchar = number[p+1]
+                if ( is_number(number[p]) and not is_number(nextchar)): # Valid number letter pair
+                    newpair = number[p] + nextchar
+                    print newpair
+                    translated_number = translated_number + self.dtmf_replace(newpair)
+                elif (is_number(number[p]) and is_number(nextchar)): # Valid number.
+                    translated_number = translated_number + number[p] # This is for the callsign number
+                else:
+                    print("Mid Pair!")
+            return translated_number
+        else:
+            return False
+
     def key_composition(self, string):
         message = None
         callsign = None
@@ -60,6 +86,9 @@ class Aprstt(object):
             message = string[0]
             callsign = string[1]
         return message, callsign
+
+    def keytype_get_aprstt(self, string):
+        return self.process_number(string)
 
     def keytype_get(self, string):
         datafields = {'PP': 'callsign', 'PS': 'position', 'SP': 'status', 'SS': 'message'}
@@ -107,6 +136,12 @@ class Aprstt(object):
     def query(self, string):
 
         print '[Cancun] APRS Touch Tone | ' + string
+
+        callsign = self.keytype_get_aprstt(string)
+        if callsign:
+            self.speaker.speechit("Bienvenido " + ' '.join(self.phonetic.decode(callsign)))
+            self.aprs.send_packet("Cancun Project APRS Touch Tone Basic Implementation")
+            sys.exit(0)
 
         if self.keytype_get(string) is 'callsign':
             user, generic = self.user_get(string)
