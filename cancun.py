@@ -21,6 +21,7 @@ from learning.morseteacher import MorseTeacher
 from modules.assistant import Assistant
 from modules.aprstt import Aprstt
 from modules.command import Command
+from modules.commandtop import CommandTop
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.messages import Messages
@@ -49,6 +50,7 @@ class Cancun(object):
         self.aprstt = Aprstt(self.voicesynthetizer)
         self.assistant = Assistant(self.voicesynthetizer)
         self.command = Command(self.voicesynthetizer)
+        self.commandtop = CommandTop(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
         self.identification = Identification(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
@@ -163,6 +165,8 @@ class Cancun(object):
             self.wolfram.question('how many grams in kilograms')
         elif module == 'aprstt':
             self.aprstt.query(dtmf)
+        elif module == 'top':
+            self.commandtop.execute()
         else:
             print 'Module not found! Please check its name...\n'
 
@@ -174,7 +178,7 @@ class Cancun(object):
         self.voicesynthetizer.speechit("Modo Aleatorio")
 
         while True:
-            modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'tracker', 'wolfram']
+            modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'tracker', 'wolfram', 'top']
             random_module = modules[int(random.random() * len(modules))]
             random_time = random.randint(15,30)
             time.sleep(random_time)
@@ -195,11 +199,12 @@ class Cancun(object):
     def schedule(self):
 
         # Production Modules
+        self.scheduler.add_interval_job(self.commandtop.execute, minutes=15)
         self.scheduler.add_interval_job(self.identification.identify, minutes=30)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
         self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
-        self.scheduler.add_interval_job(self.news.getitems, minutes=60)
+        #self.scheduler.add_interval_job(self.news.getitems, minutes=60)
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
         self.scheduler.add_interval_job(self.messages.stations, minutes=240)
         # self.scheduler.add_interval_job(self.command.execute, minutes=15)
