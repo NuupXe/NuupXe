@@ -10,6 +10,7 @@ import json
 import urllib2
 
 from core.aprsfi import AprsFi
+from core.aprsnet import AprsNet
 from core.voicesynthetizer import VoiceSynthetizer
 from core.phonetic import Phonetic
 
@@ -19,6 +20,7 @@ class Weather(object):
 
         self.phonetic = Phonetic()
         self.aprsfi = AprsFi()
+        self.aprsnet = AprsNet()
 
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/general.config"
@@ -39,6 +41,7 @@ class Weather(object):
         data = self.aprsfi.query()
 
         for entry in data['entries']:
+
             self.speaker.speechit("Reporte del clima en la ciudad de " + location)
             self.speaker.speechit("Datos de a p r s punto fi")
             self.speaker.speechit("Estacion meteorologica, " + ' '.join(self.phonetic.decode(callsign)))
@@ -49,6 +52,8 @@ class Weather(object):
             self.speaker.speechit("Velocidad del viento, " + entry['wind_speed'] + " metros por segundo")
             self.speaker.speechit("Rafagas de " + entry['wind_gust'] + " metros por segundo")
             self.speaker.speechit("Precipitacion pluvial, " + entry['rain_1h'] + " milimetros")
+
+        self.aprsnet.send_packet_raw("XE1GYQ-13>APRS,TCPIP*,qAS,XE1GYQ-10:@232353z2036.80N/10324.50W_000/000g000t000r000p000P000h00b00000Cancun Project Experimental Weather Station")
 
     def yahoo(self):
 
