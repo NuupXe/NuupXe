@@ -180,7 +180,7 @@ class Cancun(object):
         while True:
             modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'tracker', 'wolfram', 'top']
             random_module = modules[int(random.random() * len(modules))]
-            random_time = random.randint(15,30)
+            random_time = random.randint(900,1200)
             time.sleep(random_time)
 
             if self.irlp.active():

@@ -10,7 +10,7 @@ class AprsNet(object):
         self.password = '17329'
         self.address = 'XE1GYQ-12'
         self.path = '>APRS,TCPIP*:'
-        self.position = '=2036.92N/10324.72W-'
+        self.position = '=2036.96N/10324.84W-'
 
         self.packet = ''
 

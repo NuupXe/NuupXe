@@ -20,7 +20,7 @@ class CommandTop(object):
         callsign = 'XE1GYQ-1'
 
         self.aprs.address_set(callsign)
-        self.aprs.position_set('=2037.10N/10324.66W-')
+        self.aprs.position_set('=2036.96N/10324.46W-')
 
         status, output = commands.getstatusoutput("top -b -n 1 | grep Cpu")
         self.aprs.send_packet(output)
@@ -32,7 +32,7 @@ class CommandTop(object):
         callsign = 'XE1GYQ-2'
 
         self.aprs.address_set(callsign)
-        self.aprs.position_set('=2037.10N/10324.50W-')
+        self.aprs.position_set('=2036.96N/10324.34W-')
 
         status, output = commands.getstatusoutput("top -b -n 1 | grep Mem")
         self.aprs.send_packet(output)
