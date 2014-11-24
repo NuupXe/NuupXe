@@ -21,3 +21,12 @@ class AprsNet(object):
         print("packet sent: " + time.ctime() )
         sSock.shutdown(0)
         sSock.close()
+
+    def send_packet_raw(self, message):
+        sSock = socket(AF_INET, SOCK_STREAM)
+        sSock.connect((self.serverHost, self.serverPort))
+        sSock.send('user XE1GYQ pass ' + self.password + ' vers "XE1GYQ Cancun Project" \n')
+        sSock.send(message +'\n')
+        print("packet sent: " + time.ctime() )
+        sSock.shutdown(0)
+        sSock.close()
