@@ -21,7 +21,7 @@ from learning.morseteacher import MorseTeacher
 from modules.assistant import Assistant
 from modules.aprstt import Aprstt
 from modules.command import Command
-from modules.commandtop import CommandTop
+from modules.commandterminal import CommandTerminal
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.messages import Messages
@@ -50,7 +50,7 @@ class Cancun(object):
         self.aprstt = Aprstt(self.voicesynthetizer)
         self.assistant = Assistant(self.voicesynthetizer)
         self.command = Command(self.voicesynthetizer)
-        self.commandtop = CommandTop(self.voicesynthetizer)
+        self.commandterminal = CommandTerminal(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
         self.identification = Identification(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
@@ -166,7 +166,7 @@ class Cancun(object):
         elif module == 'aprstt':
             self.aprstt.query(dtmf)
         elif module == 'top':
-            self.commandtop.execute()
+            self.commandterminal.execute()
         else:
             print 'Module not found! Please check its name...\n'
 
@@ -178,9 +178,10 @@ class Cancun(object):
         self.voicesynthetizer.speechit("Modo Aleatorio")
 
         while True:
-            modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'tracker', 'wolfram', 'top']
+            #modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'wolfram', 'top', 'radioclub', 'tracker']
+            modules = ['identification','date','hour', 'weather', 'sismology', 'top']
             random_module = modules[int(random.random() * len(modules))]
-            random_time = random.randint(900,1200)
+            random_time = random.randint(150,300)
             time.sleep(random_time)
 
             if self.irlp.active():
@@ -199,7 +200,7 @@ class Cancun(object):
     def schedule(self):
 
         # Production Modules
-        self.scheduler.add_interval_job(self.commandtop.execute, minutes=15)
+        self.scheduler.add_interval_job(self.commandterminal.execute, minutes=15)
         self.scheduler.add_interval_job(self.identification.identify, minutes=30)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
