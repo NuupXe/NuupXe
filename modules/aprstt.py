@@ -140,7 +140,7 @@ class Aprstt(object):
         callsign = self.keytype_get_aprstt(string)
         if callsign:
             self.speaker.speechit("Bienvenido " + ' '.join(self.phonetic.decode(callsign)))
-            self.aprs.send_packet("Cancun Project APRS Touch Tone Basic Implementation")
+            self.aprs.send_message("Cancun Project APRS Touch Tone Basic Implementation")
             sys.exit(0)
 
         if self.keytype_get(string) is 'callsign':
@@ -161,7 +161,7 @@ class Aprstt(object):
         message = message + ' ' + message_file
         self.speaker.speechit(message)
         aprs_message = callsign.upper() + " " + message
-        self.aprs.send_packet(aprs_message)
+        self.aprs.send_message(aprs_message)
 
         return
 

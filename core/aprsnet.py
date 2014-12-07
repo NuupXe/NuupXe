@@ -1,39 +1,50 @@
-import sys, time
+import ConfigParser
+import time
+import sys
 from socket import *
 
 class AprsNet(object):
 
     def __init__(self):
 
-        self.serverHost = '205.233.35.52'
-        self.serverPort = 14580
-        self.password = '17329'
-        self.address = 'XE1GYQ-12'
-        self.path = '>APRS,TCPIP*:'
-        self.position = '=2036.96N/10324.84W-'
+        self.configuration()
 
-        self.packet = ''
+    def configuration(self):
+        self.conf = ConfigParser.ConfigParser()
+        self.services = "configuration/services.config"
+        self.conf.read(self.services)
+        self.server = self.conf.get("aprsnet", "server")
+        self.port = self.conf.get("aprsnet", "port")
+        self.user = self.conf.get("aprsnet", "user")
+        self.password = self.conf.get("aprsnet", "password")
+        self.address = self.conf.get("aprsnet", "address")
+        self.path = self.conf.get("aprsnet", "path")
+        self.position = self.conf.get("aprsnet", "position")
+        self.position_set(self.position)
+
+    def server_open(self):
+        self.socketid = socket(AF_INET, SOCK_STREAM)
+        self.socketid.connect((self.server, int(self.port)))
+        self.socketid.send('user ' + self.user + ' pass ' + self.password + ' vers "XE1GYQ Cancun Project" \n')
+
+    def server_close(self):
+        self.socketid.shutdown(0)
+        self.socketid.close()
 
     def address_set(self, address):
         self.address = address
 
     def position_set(self, position):
-        self.position = position
+        self.position = '=' + position + '-'
 
-    def send_packet(self, message):
-        sSock = socket(AF_INET, SOCK_STREAM)
-        sSock.connect((self.serverHost, self.serverPort))
-        sSock.send('user XE1GYQ pass ' + self.password + ' vers "XE1GYQ Cancun Project" \n')
-        sSock.send(self.address + self.path + self.position + message +'\n')
+    def send_message(self, message):
+        self.server_open()
+        self.socketid.send(self.address + self.path + self.position + message +'\n')
         print("packet sent: " + time.ctime() )
-        sSock.shutdown(0)
-        sSock.close()
+        self.server_close()
 
-    def send_packet_raw(self, message):
-        sSock = socket(AF_INET, SOCK_STREAM)
-        sSock.connect((self.serverHost, self.serverPort))
-        sSock.send('user XE1GYQ pass ' + self.password + ' vers "XE1GYQ Cancun Project" \n')
-        sSock.send(message +'\n')
+    def send_packet(self, packet):
+        self.server_open()
+        self.socketid.send(packet +'\n')
         print("packet sent: " + time.ctime() )
-        sSock.shutdown(0)
-        sSock.close()
+        self.server_close()

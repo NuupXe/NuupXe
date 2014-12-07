@@ -20,10 +20,10 @@ class CommandTerminal(object):
         callsign = 'XE1GYQ-1'
 
         self.aprs.address_set(callsign)
-        self.aprs.position_set('=2036.96N/10324.46W-')
+        self.aprs.position_set('2036.96N/10324.46W')
 
         status, output = commands.getstatusoutput("top -b -n 1 | grep Cpu")
-        self.aprs.send_packet(output)
+        self.aprs.send_message(output)
         data = ' '.join(self.phonetic.decode('aprs.fi/')) + ' '.join(self.phonetic.decode(callsign))
         self.voicesynthetizer.speechit("Datos de Uso de nuestro Procesador en la direccion " + data)
         
@@ -32,10 +32,10 @@ class CommandTerminal(object):
         callsign = 'XE1GYQ-2'
 
         self.aprs.address_set(callsign)
-        self.aprs.position_set('=2036.96N/10324.34W-')
+        self.aprs.position_set('2036.96N/10324.34W')
 
         status, output = commands.getstatusoutput("top -b -n 1 | grep Mem")
-        self.aprs.send_packet(output)
+        self.aprs.send_message(output)
         data = ' '.join(self.phonetic.decode('aprs.fi/')) + ' '.join(self.phonetic.decode(callsign))
         self.voicesynthetizer.speechit("Datos de Uso de nuestra Memoria en la direccion " + data)
 
@@ -44,30 +44,30 @@ class CommandTerminal(object):
         callsign = 'XE1GYQ-1'
 
         self.aprs.address_set(callsign)
-        self.aprs.position_set('=2036.96N/10324.46W-')
+        self.aprs.position_set('2036.96N/10324.46W')
 
         status, output = commands.getstatusoutput("top -b -n 1 | grep Tasks")
-        self.aprs.send_packet(output)
+        self.aprs.send_message(output)
         data = ' '.join(self.phonetic.decode('aprs.fi/')) + ' '.join(self.phonetic.decode(callsign))
         self.voicesynthetizer.speechit("Datos de Uso de Tareas en la direccion " + data)
 
-    def toptasks(self):
+    def uname(self):
         print '[Cancun] Command Uname Info'
         callsign = 'XE1GYQ-2'
 
         self.aprs.address_set(callsign)
-        self.aprs.position_set('=2036.96N/10324.34W-')
+        self.aprs.position_set('2036.96N/10324.34W')
 
         status, output = commands.getstatusoutput("uname -a")
-        self.aprs.send_packet(output)
+        self.aprs.send_message(output)
         data = ' '.join(self.phonetic.decode('aprs.fi/')) + ' '.join(self.phonetic.decode(callsign))
         self.voicesynthetizer.speechit("Datos de Version del Kernel en la direccion " + data)
 
     def execute(self):
-        # self.topcpu()
-        # self.topmem()
-        self.toptasks()
-        self.uname()
+        self.topcpu()
+        self.topmem()
+        #self.toptasks()
+        #self.uname()
 
 if __name__ == '__main__':
 
