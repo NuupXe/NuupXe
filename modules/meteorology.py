@@ -30,7 +30,7 @@ class Meteorology(object):
         print '[Cancun] Meteorology'
         #self.voicesynthetizer.speechit('Servicio Meteorologico Nacional, Comision Nacional del Agua')
 
-        tstatus = self.twitterc.timeline('conagua_clima', 10)
+        tstatus = self.twitterc.timeline_get('conagua_clima', 1)
         #sismo = 'False'
         for status in tstatus:
             #print status

@@ -10,6 +10,7 @@ class TwitterC(object):
     def __init__(self):
 
         self.configuration()
+        self.authentication()
 
     def configuration(self):
         self.configuration = ConfigParser.ConfigParser()
@@ -23,18 +24,16 @@ class TwitterC(object):
         self.authenticate = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
         self.authenticate.set_access_token(self.access_token, self.access_token_secret)
         self.twitterapi = tweepy.API(self.authenticate)
-	print '[Cancun] Twitter | Welcome ' + self.twitterapi.me().name
 
-    def timeline(self, user, items):
-
+    def timeline_get(self, user, items):
 	try:
-		self.authentication()
-		# self.twitterapi.update_status(status.text)
-        	self.twitterapi.get_user(user)
-		return tweepy.Cursor(self.twitterapi.user_timeline, id=user).items(items)
+            self.twitterapi.get_user(user)
+	    return tweepy.Cursor(self.twitterapi.user_timeline, id=user).items(items)
 	except:
-		print '[Cancun] Twitter | Error ...'
+	    print '[Cancun] Twitter | Timeline Get Error ...'
 
-if __name__ == '__main__':
-
-    mytest = TwitterC()
+    def timeline_set(self, status):
+        try:
+	    self.twitterapi.update_status(status)
+        except:
+            print '[Cancun] Twitter | Timeline Set Error'

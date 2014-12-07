@@ -150,7 +150,7 @@ class Assistant(object):
 	while (self.running):
             print '[Cancun] Assistante | Twitter Hello'
 	    #self.voicesynthetizer.speechit("Veamos")
-	    tstatus = self.twitterc.timeline('xe1gyq', 1)
+	    tstatus = self.twitterc.timeline_get('xe1gyq', 1)
 	    for status in tstatus:
 	        self.newstatus = status.text
 		if self.newstatus != self.oldstatus:

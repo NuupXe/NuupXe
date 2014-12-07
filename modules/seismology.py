@@ -19,10 +19,10 @@ class Seismology(object):
         print '[Cancun] Seismology'
         self.voicesynthetizer.speechit('Servicio Sismologico Nacional, Universidad Nacional Autonoma de Mexico')
 
-        tstatus = self.twitterc.timeline('SismologicoMX', 3)
+        tstatus = self.twitterc.timeline_get('SismologicoMX', 1)
         sismo = 'False'
         for status in tstatus:
-            if status.text.partition(' ')[0] == 'SISMO':
+            if status.text.partition(' ')[0] == 'SISMO' or status.text.partition(' ')[0] == 'Preliminar:':
                 status.text = status.text.replace("Loc", "Localizacion")
                 status.text = status.text.replace("CD", "Ciudad")
                 status.text = status.text.replace("Lat", "Latitud")
