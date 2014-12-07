@@ -30,6 +30,10 @@ class Weather(object):
 
         self.speaker = voicesynthetizer
 
+    def personal(self):
+
+        self.aprsnet.send_packet("XE1GYQ-13>APRS,TCPIP*,qAS,XE1GYQ-10:@232353z2036.96N/10324.58W_000/000g000t000r000p000P000h00b00000Cancun Project Experimental Weather Station")
+
     def aprsfi_service(self):
 
         print '[Cancun] Weather aprs.fi'
@@ -52,8 +56,6 @@ class Weather(object):
             self.speaker.speechit("Velocidad del viento, " + entry['wind_speed'] + " metros por segundo")
             self.speaker.speechit("Rafagas de " + entry['wind_gust'] + " metros por segundo")
             self.speaker.speechit("Precipitacion pluvial, " + entry['rain_1h'] + " milimetros")
-
-        self.aprsnet.send_packet_raw("XE1GYQ-13>APRS,TCPIP*,qAS,XE1GYQ-10:@232353z2036.96N/10324.58W_000/000g000t000r000p000P000h00b00000Cancun Project Experimental Weather Station")
 
     def yahoo(self):
 
@@ -106,10 +108,12 @@ class Weather(object):
 
         if self.agent == "aprsfi":
                 self.aprsfi_service()
-        if self.agent == "yahoo":
+        elif self.agent == "yahoo":
                 self.yahoo()
         elif self.agent == "noaa":
                 self.noaa()
+
+        self.personal()
 
         return
 
