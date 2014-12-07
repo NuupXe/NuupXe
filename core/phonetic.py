@@ -21,7 +21,8 @@ phoneticalphabet = {'A': 'alfa',    'B': 'bravo',   'C': 'charli',
     'S': 'sierra',  'T': 'tango',   'U': 'union',
     'V': 'victor',  'W': 'wiski',   'X': 'exrey',
     'Y': 'yanqui',  'Z': 'zulu',    '@': 'arroba',
-    '.': 'punto',   '+': 'positivo','-': 'negativo'
+    '.': 'punto',   '+': 'positivo','-': 'negativo',
+    '#': 'gato',    '*': 'asterisco', '/': 'diagonal'
     }
 
 class Phonetic(object):

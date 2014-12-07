@@ -28,3 +28,22 @@ To Do List
 - https://github.com/ampledata/aprs
 - Simplify dictionaries for Day and Month in Clock and Tracker
 - Review machine state of Irlp and rewrite core/irlp.py
+- Stop a second instance of pushtotalk to avoid mixing sound
+- APRStt, lot of functionality that can be adopted
+- user system
+- D is not recognized by Irlp DTMF module
+- *, # is S, P in Irlp so we are not expecting a Sierra, Papa
+- Read http://www.aprs-is.net/q.aspx
+- Error in Tracker
+- Cancun] Tracker aprs.fi
+{u'found': 1, u'what': u'loc', u'command': u'get', u'result': u'ok', u'entries': [{u'comment': u'www.xe1gqp.org', u'mice_msg': u'101', u'name': u'XE1GQP-9', u'speed': 9.2599999999999998, u'altitude': 1584, u'path': u'XE1AU-1*,WIDE1*,WIDE2-1,qAR,XE1AO-10', u'dstcall': u'R0SUTV', u'symbol': u'/>', u'course': 0, u'time': u'1416807112', u'lat': u'20.59100', u'srccall': u'XE1GQP-9', u'lng': u'-103.39167', u'lasttime': u'1416807112', u'type': u'l', u'class': u'a'}]}
+Cond. Bambú, Jardines de Miraflores, 45601 JAL, Mexico
+- Fail
+repeater@stn8261:~/custom/cancun$ python cancun.py -s start
+[Mon Nov 24 22:08:26 2014] Cancun Project, Repeater Voice Services
+Traceback (most recent call last):
+  File "cancun.py", line 297, in <module>
+    main(sys.argv[1:])
+  File "cancun.py", line 277, in main
+    experimental.scheduler_mode()
+

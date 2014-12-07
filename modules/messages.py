@@ -45,7 +45,7 @@ class Messages(object):
 	print '[Cancun] Messages: Stations'
 
         self.conf = ConfigParser.ConfigParser()
-        self.path = "configuration/stations"
+        self.path = "configuration/stations.config"
         self.conf.read(self.path)
 
         city = self.conf.get('general', 'city')
