@@ -89,7 +89,7 @@ class Cancun(object):
         if self.scheduler_status:
             self.scheduler.shutdown()
 
-    def scheduler_mode(self, action):
+    def scheduler_mode(self):
 
         print "[" + time.ctime() + "] Scheduler Mode\n"
         self.voicesynthetizer.speechit("Modo Planificador")
@@ -165,7 +165,7 @@ class Cancun(object):
             self.wolfram.question('how many grams in kilograms')
         elif module == 'aprstt':
             self.aprstt.query(dtmf)
-        elif module == 'top':
+        elif module == 'terminal':
             self.commandterminal.execute()
         else:
             print 'Module not found! Please check its name...\n'
@@ -178,11 +178,14 @@ class Cancun(object):
         self.voicesynthetizer.speechit("Modo Aleatorio")
 
         while True:
-            #modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'wolfram', 'top', 'radioclub', 'tracker']
-            modules = ['identification','date','hour', 'weather', 'sismology', 'top']
+            #modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'wolfram', 'terminal', 'radioclub', 'tracker']
+            modules = ['identification','date','hour', 'weather', 'sismology', 'terminal']
             random_module = modules[int(random.random() * len(modules))]
-            random_time = random.randint(150,300)
-            time.sleep(random_time)
+            random_time = random.randint(240,300)
+
+            for i in range(random_time, 0, -1):
+                print i
+                time.sleep(1)
 
             if self.irlp.active():
                 time.sleep(5)
@@ -268,8 +271,6 @@ def main(argv):
     experimental.enable()
     experimental.modules_setup()
 
-    print "[" + time.ctime() + "] Cancun Project, Repeater Voice Services"
-
     if args.module:
         experimental.module_mode(args.module, args.dtmf)
 
@@ -283,7 +284,6 @@ def main(argv):
         experimental.random_mode()
 
     if args.dtmf:
-        #voicesynthetizer.speechit("Modulo Experimental")
         if len(args.dtmf) == 2:
             module = experimental.dtmf_setup(args.dtmf)
             experimental.module_mode(module, args.dtmf)
