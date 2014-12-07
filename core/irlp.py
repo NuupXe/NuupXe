@@ -2,13 +2,15 @@
 
 import ConfigParser
 import commands
-import time
 import os
 
 class Irlp(object):
 
     def __init__(self):
 
+        self.configuration()
+
+    def configuration(self):
         self.conf = ConfigParser.ConfigParser()
         self.filepath = "configuration/general.config"
         self.conf.read(self.filepath)
@@ -46,7 +48,3 @@ class Irlp(object):
 
     def forceunptt(self):
         commands.getstatusoutput(self.forceunkey)
-
-if __name__ == '__main__':
-
-    mytest = Irlp()
