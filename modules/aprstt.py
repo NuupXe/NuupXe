@@ -2,6 +2,7 @@
 
 import ConfigParser
 import os
+import random
 import string
 import sys
 
@@ -133,6 +134,23 @@ class Aprstt(object):
     def status_decode(self, string):
         return string[1::].upper()
 
+    def city_randomposition(self):
+        city = self.conf.get("general", "city")
+        # Position Format 2036.96N/10324.46W
+        randomxn = random.randint(00,99)
+        randomxw = random.randint(00,99)
+
+        if city == 'guadalajara':
+            # Coordinates 204200N 2034.00N 10326.00N 10314.00N
+            randomn = random.randint(34,42)
+            randomw = random.randint(14,26)
+            return '20' + str(randomn) + '.' + str(randomxn).zfill(2) + 'N/103' + str(randomw) + '.' + str(randomxw).zfill(2) + 'W'
+        if city == 'leon':
+            # Coordinates 211000N 216.00N 10144.00N 10138.00N
+            randomn = random.randint(06,10)
+            randomw = random.randint(38,44)
+            return '21' + str(randomn).zfill(2) + '.' + str(randomxn).zfill(2) + 'N/101' + str(randomw) + '.' + str(randomxw).zfill(2) + 'W'
+
     def query(self, string):
 
         print '[Cancun] APRS Touch Tone | ' + string
@@ -140,7 +158,9 @@ class Aprstt(object):
         callsign = self.keytype_get_aprstt(string)
         if callsign:
             self.speaker.speechit("Bienvenido " + ' '.join(self.phonetic.decode(callsign)))
-            self.aprs.send_message("Cancun Project APRS Touch Tone Basic Implementation")
+            self.aprs.address_set(callsign)
+            self.aprs.position_set(self.city_randomposition())
+            self.aprs.send_message("Cancun Project APRS Touch Tone Basic Implementation, Random Position")
             sys.exit(0)
 
         if self.keytype_get(string) is 'callsign':
