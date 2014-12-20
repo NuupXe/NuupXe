@@ -5,7 +5,6 @@ import ConfigParser
 import time
 import sys
 
-from apscheduler.scheduler import Scheduler
 from datetime import date
 
 from core.morse import Morse
