@@ -66,7 +66,7 @@ class Assistant(object):
 
     def command(self):
 	while self.introduced:
-		self.voicecommand.record('5')
+		self.voicecommand.record()
 	        output = self.voicecommand.decode('False')
  	        if re.search(r'identif', output, re.M|re.I):
 		    print '[Cancun] Assistant Identification'
@@ -92,7 +92,7 @@ class Assistant(object):
 			    self.voicesynthetizer.speechit("Mensaje existente!")
 			    while True:
 				    self.voicesynthetizer.speechit("Quieres escucharlo, borrarlo o salir de esta opcion")
-			            self.voicecommand.record('4')
+			            self.voicecommand.record()
 		        	    output = self.voicecommand.decode('False')
 				    if re.search(r'escuchar', output, re.M|re.I):
 					    print '[Cancun] Assistant Message Play'
@@ -105,7 +105,7 @@ class Assistant(object):
 					    self.voicesynthetizer.speechit("Saliendo de Opcion Mensaje")
 					    break
 		    else:
-		            self.voicemail.record('5')
+		            self.voicemail.record()
 		            self.voicemail.play()
 	        elif re.search(r'dormir', output, re.M|re.I):
 	            print '[Cancun] Assistant Sleep'
