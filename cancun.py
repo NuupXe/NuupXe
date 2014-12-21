@@ -129,16 +129,16 @@ class Cancun(object):
 
         print "[" + time.ctime() + "] Module Mode\n"
 
-        if module == 'assistant':
-            self.assistant.demo1()
-        elif module == 'command':
-            self.command.execute()
-        elif module == 'date':
-            self.clock.date()
+        if module == 'identification':
+            self.identification.identify()
         elif module == 'hour':
             self.clock.hour()
-        elif module == 'identification':
-            self.identification.identify()
+        elif module == 'date':
+            self.clock.date()
+        elif module == 'weather':
+            self.weather.report()
+        elif module == 'seismology':
+            self.seismology.SismologicoMX()
         elif module == 'meteorology':
             self.meteorology.conagua_clima()
         elif module == 'morselearn':
@@ -151,22 +151,24 @@ class Cancun(object):
             self.messages.readfile('learning/reglamentos.1')
 	elif module == 'radioclub':
             self.messages.readfile('learning/arej.radioclubs')
-        elif module == 'seismology':
-            self.seismology.SismologicoMX()
         elif module == 'stations':
             self.messages.stations()
         elif module == 'tracker':
             self.tracker.query()
         elif module == 'vm':
             self.voicemail.run(dtmf)
-        elif module == 'weather':
-            self.weather.report()
         elif module == 'wolfram':
             self.wolfram.question('how many grams in kilograms')
         elif module == 'aprstt':
             self.aprstt.query(dtmf)
         elif module == 'terminal':
             self.commandterminal.execute()
+        elif module == 'assistant':
+            self.assistant.demo1()
+        elif module == 'command':
+            self.command.execute()
+        elif module == 'bc':
+            self.command.background()
         else:
             print 'Module not found! Please check its name...\n'
 
