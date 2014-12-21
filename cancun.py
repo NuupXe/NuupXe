@@ -242,9 +242,7 @@ def main(argv):
 
     parser = argparse.ArgumentParser(description='Cancun Project, Voice Services Experimental Project')
     parser.add_argument('-m', '--module', help='Module Mode')
-    parser.add_argument('-s', '--scheduler', help='Scheduler mode')
-    parser.add_argument('-w', '--writing', help='Writing Mode')
-    parser.add_argument('-r', '--random', help='Random Mode')
+    parser.add_argument('-s', '--server', help='Server mode')
     parser.add_argument('-d', '--dtmf', help='DMTF Code')
     args = parser.parse_args()
 
@@ -254,16 +252,16 @@ def main(argv):
 
     experimental = Cancun(voicesynthetizer, irlp)
 
-    if (args.module or (args.scheduler == 'start' or args.random == 'start')) and experimental.enabled():
+    if (args.module or args.server) and experimental.enabled():
         voicesynthetizer.speechit("Proyecto Cancun ya habilitado, no podemos iniciar otra instancia")
         sys.exit(1)
 
-    if args.scheduler == 'stop' or args.random == 'stop' and not experimental.enabled():
+    if args.server == 'stop' and not experimental.enabled():
         voicesynthetizer.speechit("Proyecto Cancun deshabilitado")
         status, output = commands.getstatusoutput('./cancun.sh stop')
         sys.exit(1)
 
-    if args.scheduler == 'stop' or args.random == 'stop' and experimental.enabled():
+    if args.server == 'stop' and experimental.enabled():
         voicesynthetizer.speechit("Deshabilitando Proyecto Cancun, hasta pronto!")
         status, output = commands.getstatusoutput('./cancun.sh stop')
         sys.exit(1)
@@ -274,14 +272,14 @@ def main(argv):
     if args.module:
         experimental.module_mode(args.module, args.dtmf)
 
-    if args.scheduler:
+    if args.server == 'scheduler':
         experimental.scheduler_mode()
 
-    if args.writing:
-        experimental.writing_mode()
-
-    if args.random:
+    elif args.server == 'random':
         experimental.random_mode()
+
+    elif args.server == 'writing':
+        experimental.writing_mode()
 
     if args.dtmf:
         if len(args.dtmf) == 2:
