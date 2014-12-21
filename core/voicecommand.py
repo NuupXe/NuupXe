@@ -1,9 +1,13 @@
 #!/usr/bin/python
 
 import commands
+import time
 
-from core.speechrecognition import SpeechRecognition
+from core.irlp import Irlp
 from core.pushtotalk import PushToTalk
+from core.speechrecognition import SpeechRecognition
+from core.speechrecognition import SpeechRecognition
+from core.voice import Voice
 
 class VoiceCommand(object):
 
@@ -12,54 +16,55 @@ class VoiceCommand(object):
 	self.output = ""
         self.agent = "google"
         self.audiofilewav = "voicecommand.wav"
-        self.audiofilewavcompand = "voicecommandc.wav"
-        self.audiofilewavnoise = "voicecommandn.wav"
         self.audiofileflac = "voicecommand.flac"
         self.voicesynthetizer = voicesynthetizer
+
+        self.irlp = Irlp()
         self.pushtotalk = PushToTalk()
         self.speechrecognition = SpeechRecognition()
+        self.voice = Voice()
+
+        self.voice.record_filename(self.audiofilewav)
 
     def __del__(self):
 
         status, output = commands.getstatusoutput("rm " + self.audiofilewav)
         status, output = commands.getstatusoutput("rm " + self.audiofileflac)
 
-    def record(self, seconds):
+    def record(self):
 
         print '[Cancun] Voice Command Record'
 
         if self.agent == 'nexiwave':
-                status, output = commands.getstatusoutput("arecord -vv -f cd -d " + seconds + " " + self.audiofilewav)
+            status, output = commands.getstatusoutput("arecord -vv -f cd -d 5 " + self.audiofilewav)
         elif self.agent == 'google':
-                status, output = commands.getstatusoutput("arecord -d " + seconds + " -t wav -f S16_LE -r48000 " + self.audiofilewav)
-                #status, output = commands.getstatusoutput("sox " + self.audiofilewav + " " + self.audiofilewavcompand + " compand 0.02,0.20 5:-60,-40,-10 -5 -90 0.1")
-                #status, output = commands.getstatusoutput("sox " + self.audiofilewav + " -n remix 1 trim 0 1 noiseprof noise.prof")
-                #status, output = commands.getstatusoutput("sox " + self.audiofilewav + " " + self.audiofilewavnoise + " remix 1 noisered noise.prof")
-                status, output = commands.getstatusoutput("flac -f -o " + self.audiofileflac + " --channels=1 --sample-rate=48000 " + self.audiofilewav)
+            print 'In voice command'
+            time.sleep(1)
+            while self.irlp.cosenabled() is 256:
+                pass
+            while self.irlp.cosenabled() is 0:
+                pass
+            proc = self.voice.record_start()
+            while self.irlp.cosenabled() is 256:
+                pass
+            self.voice.record_stop(proc)
+            commands.getstatusoutput("flac -f -o " + self.audiofileflac + " --channels=1 --sample-rate=48000 " + self.audiofilewav)
 
     def decode(self, speech):
 
         print '[Cancun] Voice Command Decode'
 
 	if speech == 'True':
-                self.voicesynthetizer.speechit("Estamos procesando tu respuesta")
-                self.pushtotalk.openport()
-                status, output = commands.getstatusoutput("aplay " + self.audiofilewav)
-                #status, output = commands.getstatusoutput("aplay " + self.audiofilewavcompand)
-                #status, output = commands.getstatusoutput("aplay " + self.audiofilewavnoise)
-                self.pushtotalk.closeport()
+            self.voicesynthetizer.speechit("Estamos procesando tu respuesta")
+            self.pushtotalk.openport()
+            self.voice.play()
+            self.pushtotalk.closeport()
 
         if self.agent == 'nexiwave':
-                self.output = self.speechrecognition.nexiwave(self.audiofilewav)
-                print self.output
+            self.output = self.speechrecognition.nexiwave(self.audiofilewav)
         elif self.agent == 'google':
-                self.output = self.speechrecognition.google(self.audiofileflac)
-                print self.output
+            self.output = self.speechrecognition.google(self.audiofileflac)
 
         return self.output
 
-if __name__ == '__main__':
-
-    mytest = Command()
-    mytest.record()
-    mytest.play()
+# End of file
