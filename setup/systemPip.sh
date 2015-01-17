@@ -49,7 +49,7 @@ pipFunctionInstall $packageTweepy
 pipFunctionInstall $packageApscheduler
 pipFunctionInstall $packagePyserial
 pipFunctionInstall $packageWolframalpha
-pipFunctionInstall $packagePywapi
+$pipName install --allow-all-external $packagePywapi --allow-unverified $packagePywapi
 pipFunctionInstall $packageRequests
 pipFunctionInstall $packagePygeocoder
 
