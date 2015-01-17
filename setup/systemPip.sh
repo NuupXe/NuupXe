@@ -40,6 +40,8 @@ pipFunctionInstall() {
 # Script Main
 # =============================================================================
 
+$pipName install -U pip
+
 pipFunctionInstall $packageDistribute
 pipFunctionInstall $packageFeedparser
 pipFunctionInstall $packagePywws
