@@ -70,7 +70,7 @@ class Command(object):
 	while True:
 	        self.voicecommand.record()
         	output = self.voicecommand.decode('False')
-                if re.search(r'cancun', output, re.M|re.I):
+                if re.search(r'canc', output, re.M|re.I):
                     self.voicesynthetizer.speechit("Alguien me hablo?. Soy el proyecto Cancun... Hasta pronto!")
                     break
                 print output

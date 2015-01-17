@@ -35,6 +35,8 @@ export packageSeveral="ffmpeg flac"
 
 export packageText2Speech="festival espeak"
 
+export packageCurl="curl"
+
 # =============================================================================
 # Script Functions
 # =============================================================================
@@ -75,5 +77,6 @@ aptgetFunctionInstall $packageMpg123
 
 aptgetFunctionInstall $packageSeveral
 aptgetFunctionInstall $packageText2Speech
+aptgetFunctionInstall $packageCurl
 
 # End of file
