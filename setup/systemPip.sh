@@ -22,6 +22,7 @@ export packageWolframalpha=wolframalpha
 export packagePywapi=pywapi
 export packageRequests=requests
 export packagePygeocoder=pygeocoder
+export packageDropbox=dropbox
 
 # =============================================================================
 # Script Functions
@@ -52,5 +53,6 @@ pipFunctionInstall $packageWolframalpha
 $pipName install --allow-all-external $packagePywapi --allow-unverified $packagePywapi
 pipFunctionInstall $packageRequests
 pipFunctionInstall $packagePygeocoder
+pipFunctionInstall $packageDropbox
 
 # End of file
