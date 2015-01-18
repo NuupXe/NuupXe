@@ -37,6 +37,8 @@ export packageText2Speech="festival espeak"
 
 export packageCurl="curl"
 
+export packageFswebcam="fswebcam"
+
 # =============================================================================
 # Script Functions
 # =============================================================================
@@ -78,5 +80,7 @@ aptgetFunctionInstall $packageMpg123
 aptgetFunctionInstall $packageSeveral
 aptgetFunctionInstall $packageText2Speech
 aptgetFunctionInstall $packageCurl
+
+aptgetFunctionInstall $packageFswebcam
 
 # End of file
