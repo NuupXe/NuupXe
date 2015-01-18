@@ -47,3 +47,5 @@ Traceback (most recent call last):
   File "cancun.py", line 277, in main
     experimental.scheduler_mode()
 - Add Twithon library to allow posting images
+- DropBox, what can we do?
+- Movement Sensor?
