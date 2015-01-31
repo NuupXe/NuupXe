@@ -9,9 +9,11 @@ import sys
 import thread
 import time
 
-from apscheduler.scheduler import Scheduler
-from apscheduler.threadpool import ThreadPool
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 
+from core.camera import Camera
 from core.irlp import Irlp
 from core.voicesynthetizer import VoiceSynthetizer
 from core.wolfram import Wolfram
@@ -27,6 +29,7 @@ from modules.identification import Identification
 from modules.messages import Messages
 from modules.meteorology import Meteorology
 from modules.news import News
+from modules.poctwitter import PoCTwitter
 from modules.seismology import Seismology
 from modules.tracker import Tracker
 from modules.voicemail import VoiceMail
@@ -49,6 +52,7 @@ class Cancun(object):
 
         self.aprstt = Aprstt(self.voicesynthetizer)
         self.assistant = Assistant(self.voicesynthetizer)
+        self.camera = Camera(self.voicesynthetizer)
         self.command = Command(self.voicesynthetizer)
         self.commandterminal = CommandTerminal(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
@@ -57,6 +61,7 @@ class Cancun(object):
         self.meteorology = Meteorology(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.news = News(self.voicesynthetizer)
+        self.poctwitter = PoCTwitter(self.voicesynthetizer)
         self.tracker = Tracker(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
@@ -94,11 +99,23 @@ class Cancun(object):
         print "[" + time.ctime() + "] Scheduler Mode\n"
         self.voicesynthetizer.speechit("Modo Planificador")
 
-        self.scheduler = Scheduler(misfire_grace_time=600, coalesce=True, threadpool=ThreadPool(max_threads=1))
+        executors = {
+            'default': ThreadPoolExecutor(1),
+            'processpool': ProcessPoolExecutor(5)
+        }
+
+        job_defaults = {
+            'coalesce': False,
+            'max_instances': 20
+        }
+
+        #self.scheduler = BlockingScheduler()
+        self.scheduler = BackgroundScheduler(executors=executors, job_defaults=job_defaults)
+        #self.scheduler.add_executor('processpool')
         self.schedule()
+        #self.schedule_print()
         self.scheduler.start()
-        self.schedule_print()
-        self.scheduler_status = True
+        #self.scheduler_status = True
 
         while True:
             time.sleep(5)
@@ -169,6 +186,10 @@ class Cancun(object):
             self.command.execute()
         elif module == 'bc':
             self.command.background()
+        elif module == 'camera':
+            self.camera.execute()
+        elif module == 'poctwitter':
+            self.poctwitter.execute()
         else:
             print 'Module not found! Please check its name...\n'
 
@@ -181,7 +202,7 @@ class Cancun(object):
 
         while True:
             #modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'wolfram', 'terminal', 'radioclub', 'tracker']
-            modules = ['identification','date','hour', 'weather', 'sismology', 'terminal']
+            modules = ['identification','date','hour', 'weather', 'stations', 'radioclub', 'terminal', 'poctwitter']
             random_module = modules[int(random.random() * len(modules))]
             random_time = random.randint(240,300)
 
@@ -205,30 +226,31 @@ class Cancun(object):
     def schedule(self):
 
         # Production Modules
-        self.scheduler.add_interval_job(self.commandterminal.execute, minutes=15)
-        self.scheduler.add_interval_job(self.identification.identify, minutes=30)
-        self.scheduler.add_interval_job(self.clock.date, minutes=30)
-        self.scheduler.add_interval_job(self.clock.hour, minutes=30)
-        self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
-        #self.scheduler.add_interval_job(self.news.getitems, minutes=60)
-        self.scheduler.add_interval_job(self.weather.report, minutes=120)
-        self.scheduler.add_interval_job(self.messages.stations, minutes=240)
-        # self.scheduler.add_interval_job(self.command.execute, minutes=15)
+        #self.scheduler.add_job(self.commandterminal.execute, 'interval', seconds=15)
+        #self.scheduler.add_job(self.identification.identify, 'interval', minutes=30)
+        #self.scheduler.add_job(self.clock.date, 'interval', seconds=15)
+        self.scheduler.add_job(self.clock.hour, 'interval', max_instances=5, seconds=10)
+        self.scheduler.add_job(self.clock.date, 'interval', max_instances=5, seconds=10)
+        #self.scheduler.add_job(self.seismology.SismologicoMX, 'interval', minutes=60)
+        #self.scheduler.add_job(self.news.getitems, 'interval', minutes=60)
+        #self.scheduler.add_job(self.weather.report, 'interval', minutes=120)
+        #self.scheduler.add_job(self.messages.stations, 'interval', minutes=240)
+        # self.scheduler.add_job(self.command.execute, 'interval', minutes=15)
 
 	# Learning Modules, AREJ
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,11,17',minute ='00',second='0')
+        #self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,11,17',minute ='00',second='0')
 
         # Learning Modules, Morse
-        self.scheduler.add_cron_job(self.morseteacher.learn,month='*',day='*',hour='7,12,18',minute ='30',second='0')
-        self.scheduler.add_cron_job(self.morseteacher.contest,month='*',day='*',hour='7,12,18',minute ='45',second='0')
+        #self.scheduler.add_cron_job(self.morseteacher.learn,month='*',day='*',hour='7,12,18',minute ='30',second='0')
+        #self.scheduler.add_cron_job(self.morseteacher.contest,month='*',day='*',hour='7,12,18',minute ='45',second='0')
         # self.scheduler.add_interval_job(self.morseteacher.goask, minutes=20)
 
         # Learning Modules, Reglamentos
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'],month='*',day_of_week='mon,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.2'],month='*',day_of_week='tue,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.3'],month='*',day_of_week='wed,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.4'],month='*',day_of_week='thu,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.5'],month='*',day_of_week='fri,sat,sun',hour='8,13,19',minute ='00',second='0')
+        #self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'],month='*',day_of_week='mon,sat,sun',hour='8,13,19',minute ='00',second='0')
+        #self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.2'],month='*',day_of_week='tue,sat,sun',hour='8,13,19',minute ='00',second='0')
+        #self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.3'],month='*',day_of_week='wed,sat,sun',hour='8,13,19',minute ='00',second='0')
+        #self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.4'],month='*',day_of_week='thu,sat,sun',hour='8,13,19',minute ='00',second='0')
+        #self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.5'],month='*',day_of_week='fri,sat,sun',hour='8,13,19',minute ='00',second='0')
 
 def set_exit_handler(func):
     signal.signal(signal.SIGTERM, func)
