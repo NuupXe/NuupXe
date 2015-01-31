@@ -16,7 +16,7 @@ export packageDistribute=distribute
 export packageFeedparser=feedparser
 export packagePywws=pywws
 export packageTweepy=tweepy
-export packageApscheduler=apscheduler
+export packageApscheduler=apscheduler==2.1.0
 export packagePyserial=pyserial
 export packageWolframalpha=wolframalpha
 export packagePywapi=pywapi
