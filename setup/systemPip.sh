@@ -23,6 +23,7 @@ export packagePywapi=pywapi
 export packageRequests=requests
 export packagePygeocoder=pygeocoder
 export packageDropbox=dropbox
+export packageTwython=twython
 
 # =============================================================================
 # Script Functions
@@ -54,5 +55,6 @@ $pipName install --allow-all-external $packagePywapi --allow-unverified $package
 pipFunctionInstall $packageRequests
 pipFunctionInstall $packagePygeocoder
 pipFunctionInstall $packageDropbox
+pipFunctionInstall $packageTwython
 
 # End of file
