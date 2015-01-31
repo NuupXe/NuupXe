@@ -36,7 +36,6 @@ class Camera(object):
 
     def post(self):
         print '[Cancun] Camera Post'
-        self.voicesynthetizer.speechit("Foto Tomada")
 
     def execute(self):
         self.setup()
