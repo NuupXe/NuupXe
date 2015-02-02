@@ -213,16 +213,17 @@ class Cancun(object):
     def schedule(self):
 
         # Production Modules
-        self.scheduler.add_interval_job(self.commandterminal.execute, minutes=15)
         self.scheduler.add_interval_job(self.identification.identify, minutes=30)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
         self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
         self.scheduler.add_interval_job(self.news.getitems, minutes=60)
         self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=60)
+        self.scheduler.add_interval_job(self.commandterminal.execute, minutes=120)
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
         self.scheduler.add_interval_job(self.messages.stations, minutes=240)
 
+        self.scheduler.add_cron_job(self.alive.report,month='*',day_of_week='*',hour='8,20',minute ='00',second='0')
         self.scheduler.add_cron_job(self.poctwitter.execute,month='*',day_of_week='*',hour='8,20',minute ='00',second='0')
 
 	# Learning Modules, AREJ
