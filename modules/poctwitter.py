@@ -4,6 +4,7 @@ import random
 
 from core.camera import Camera
 from core.phonetic import Phonetic
+from core.randomizer import randomize
 from core.twitterc import TwitterC
 
 class PoCTwitter(object):
@@ -17,7 +18,7 @@ class PoCTwitter(object):
 
     def execute(self):
         self.camera.execute()
-        message = 'Proyecto Cancun id ' + str(random.random())
+        message = randomize(6) + ' #ProyectoCancun '
         media='output/camerapygame.jpg'
         self.twitterc.timeline_set(message, media)
         message = "Foto en twitter.com/ " + ' arjac cancun'
