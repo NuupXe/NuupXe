@@ -8,15 +8,12 @@ import time
 
 from pushtotalk import PushToTalk
 
-class VoiceSynthetizer(threading.Thread):
+class VoiceSynthetizer(logging.Handler):
 
     def __init__(self, synthetizer, language):
         self.synthetizer = synthetizer
         self.language = language
         self.arguments = ""
-
-        threading.Thread.__init__(self)
-        self.lock = threading.Lock()
 
         self.setsynthetizer(self.synthetizer)
 
@@ -59,6 +56,7 @@ class VoiceSynthetizer(threading.Thread):
     def speechit(self, text):
         self.setarguments()
         self.pushtotalk = PushToTalk()
+        logging.info(text)
 
         if self.synthetizer == "festival":
             command = "echo \"" + text + "\" | " + self.arguments
@@ -67,13 +65,3 @@ class VoiceSynthetizer(threading.Thread):
         elif self.synthetizer == "google":
             command = "core/google.sh " + " " + self.arguments + " " + text
         self.pushtotalk.message(command)
-
-if __name__ == "__main__":
-
-    mytest = VoiceSynthetizer("festival", "spanish")
-    mytest.speechit("Proyecto Cancun")
-    mytest = VoiceSynthetizer("espeak", "spanish")
-    mytest.speechit("Proyecto Cancun")
-    mytest = VoiceSynthetizer("google", "spanish")
-    mytest.speechit("Proyecto Cancun")
-

@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import logging
 import ConfigParser
 
 from core.morse import Morse
@@ -19,7 +20,7 @@ class Identification(object):
         self.conf.read(self.path)
 
     def identify(self):
-        print '[Cancun] Identification'
+        logging.info('Identification')
         self.morse.generate('cq')
         self.voicesynthetizer.speechit(self.conf.get("general", "radioclub"))
         self.voicesynthetizer.speechit(self.conf.get("general", "systemname"))

@@ -12,7 +12,7 @@ class PoCTwitter(object):
 
 	self.camera = Camera(voicesynthetizer)
         self.phonetic = Phonetic()
-	self.twitterc = TwitterC()
+	self.twitterc = TwitterC('twython')
         self.voicesynthetizer = voicesynthetizer
 
     def execute(self):

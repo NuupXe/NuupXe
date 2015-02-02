@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import logging
 import time
 from core.voicesynthetizer import VoiceSynthetizer
 
@@ -20,18 +21,12 @@ class Clock(object):
         self.voicesynthetizer = voicesynthetizer
 
     def date(self):
-        print '[Cancun] Clock Date'
+        logging.info('Clock Date')
         date = days[time.strftime("%A")] + ", "  + time.strftime("%d").lstrip('0')
         date = date + " de " + months[time.strftime("%B")] + " de " + time.strftime("%Y")
         self.voicesynthetizer.speechit(date)
 
     def hour(self):
-        print '[Cancun] Clock Hour'
+        logging.info('Clock Hour')
         hour = "Son las " + time.strftime("%H") + " horas y " + time.strftime("%M") + " minutos"
         self.voicesynthetizer.speechit(hour)
-
-if __name__ == "__main__":
-
-    mytest = Clock()
-    mytest.date()
-    mytest.hour()

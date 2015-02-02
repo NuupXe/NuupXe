@@ -3,19 +3,18 @@
 import tweepy
 import twython
 import ConfigParser
+from twython import Twython
 
 from tweepy import OAuthHandler
 from twython import Twython
 
 class TwitterC(object):
 
-    def __init__(self):
+    def __init__(self, agent):
 
-        self.agent = 'twython'
-
+        self.agent = agent
         self.configuration()
         self.authentication()
-
 
     def configuration(self):
         self.configuration = ConfigParser.ConfigParser()
@@ -35,8 +34,11 @@ class TwitterC(object):
 
     def timeline_get(self, user, items):
 	try:
-            self.twitter.get_user(user)
-	    return tweepy.Cursor(self.twitterapi.user_timeline, id=user).items(items)
+            if self.agent == 'tweepy':
+                self.twitter.get_user(user)
+                return tweepy.Cursor(self.twitterapi.user_timeline, id=user).items(items)
+            elif self.agent == 'twython':
+                return self.twitter.get_user_timeline(screen_name=user, include_rts=True, count=items)
 	except:
 	    print '[Cancun] Twitter | Timeline Get Error ...'
 
@@ -44,5 +46,8 @@ class TwitterC(object):
         if self.agent == 'tweepy':
             self.twitter.update_status(status)
         elif self.agent == 'twython':
-            photo = open(media,'rb')
-            self.twitter.update_status_with_media(media=photo, status=status)
+            if media:
+                photo = open(media,'rb')
+                self.twitter.update_status_with_media(media=photo, status=status)
+            else:
+                self.twitter.update_status(status=status)

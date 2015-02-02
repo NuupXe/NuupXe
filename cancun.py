@@ -2,6 +2,7 @@
 
 import argparse
 import commands
+import logging
 import os
 import random
 import signal
@@ -18,6 +19,7 @@ from core.wolfram import Wolfram
 
 from learning.morseteacher import MorseTeacher
 
+from modules.alive import Alive
 from modules.assistant import Assistant
 from modules.aprstt import Aprstt
 from modules.command import Command
@@ -27,6 +29,7 @@ from modules.identification import Identification
 from modules.messages import Messages
 from modules.meteorology import Meteorology
 from modules.news import News
+from modules.poctwitter import PoCTwitter
 from modules.seismology import Seismology
 from modules.tracker import Tracker
 from modules.voicemail import VoiceMail
@@ -47,6 +50,7 @@ class Cancun(object):
 
     def modules_setup(self):
 
+        self.alive = Alive()
         self.aprstt = Aprstt(self.voicesynthetizer)
         self.assistant = Assistant(self.voicesynthetizer)
         self.command = Command(self.voicesynthetizer)
@@ -58,6 +62,7 @@ class Cancun(object):
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.news = News(self.voicesynthetizer)
         self.tracker = Tracker(self.voicesynthetizer)
+        self.poctwitter = PoCTwitter(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
@@ -94,7 +99,7 @@ class Cancun(object):
         print "[" + time.ctime() + "] Scheduler Mode\n"
         self.voicesynthetizer.speechit("Modo Planificador")
 
-        self.scheduler = Scheduler(misfire_grace_time=600, coalesce=True, threadpool=ThreadPool(max_threads=1))
+        self.scheduler = Scheduler(misfire_grace_time=900, coalesce=True, threadpool=ThreadPool(max_threads=1))
         self.schedule()
         self.scheduler.start()
         self.schedule_print()
@@ -129,7 +134,9 @@ class Cancun(object):
 
         print "[" + time.ctime() + "] Module Mode\n"
 
-        if module == 'identification':
+        if module == 'alive':
+            self.alive.report()
+        elif module == 'identification':
             self.identification.identify()
         elif module == 'hour':
             self.clock.hour()
@@ -143,7 +150,7 @@ class Cancun(object):
             self.meteorology.conagua_clima()
         elif module == 'morselearn':
             self.morseteacher.learn()
-        elif module == 'morsecontest':
+        elif module == 'morsecontest'	:
             self.morseteacher.contest()
         elif module == 'news':
             self.news.getitems()
@@ -169,6 +176,8 @@ class Cancun(object):
             self.command.execute()
         elif module == 'bc':
             self.command.background()
+        elif module == 'poctwitter':
+            self.poctwitter.execute()
         else:
             print 'Module not found! Please check its name...\n'
 
@@ -180,7 +189,6 @@ class Cancun(object):
         self.voicesynthetizer.speechit("Modo Aleatorio")
 
         while True:
-            #modules = ['identification','date','hour', 'weather', 'sismology', 'stations', 'wolfram', 'terminal', 'radioclub', 'tracker']
             modules = ['identification','date','hour', 'weather', 'sismology', 'terminal']
             random_module = modules[int(random.random() * len(modules))]
             random_time = random.randint(240,300)
@@ -210,10 +218,12 @@ class Cancun(object):
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
         self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
-        #self.scheduler.add_interval_job(self.news.getitems, minutes=60)
+        self.scheduler.add_interval_job(self.news.getitems, minutes=60)
+        self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=60)
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
         self.scheduler.add_interval_job(self.messages.stations, minutes=240)
-        # self.scheduler.add_interval_job(self.command.execute, minutes=15)
+
+        self.scheduler.add_cron_job(self.poctwitter.execute,month='*',day_of_week='*',hour='8,20',minute ='00',second='0')
 
 	# Learning Modules, AREJ
         self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,11,17',minute ='00',second='0')
@@ -221,7 +231,6 @@ class Cancun(object):
         # Learning Modules, Morse
         self.scheduler.add_cron_job(self.morseteacher.learn,month='*',day='*',hour='7,12,18',minute ='30',second='0')
         self.scheduler.add_cron_job(self.morseteacher.contest,month='*',day='*',hour='7,12,18',minute ='45',second='0')
-        # self.scheduler.add_interval_job(self.morseteacher.goask, minutes=20)
 
         # Learning Modules, Reglamentos
         self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'],month='*',day_of_week='mon,sat,sun',hour='8,13,19',minute ='00',second='0')
@@ -238,6 +247,8 @@ def on_exit(sig, func=None):
     sys.exit(1)
 
 def main(argv):
+
+    logging.basicConfig(filename='output/cancun.log', level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
     irlp = Irlp()
     voicesynthetizer = VoiceSynthetizer("google", "spanish")

@@ -143,7 +143,7 @@ class Assistant(object):
 
     def twitter(self):
 	return
-	self.twitterc = TwitterC()
+	self.twitterc = TwitterC('twython')
 	self.oldstatus = ''
 	self.newstatus = ''
 	
@@ -152,7 +152,7 @@ class Assistant(object):
 	    #self.voicesynthetizer.speechit("Veamos")
 	    tstatus = self.twitterc.timeline_get('xe1gyq', 1)
 	    for status in tstatus:
-	        self.newstatus = status.text
+	        self.newstatus = status['text']
 		if self.newstatus != self.oldstatus:
 			self.oldstatus = self.newstatus
 			self.voicesynthetizer.speechit("Nuevo mensaje en cuenta de Twitter!")
