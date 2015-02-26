@@ -213,6 +213,7 @@ class Cancun(object):
     def schedule(self):
 
         # Production Modules
+        self.scheduler.add_interval_job(self.commandterminal.execute, minutes=30)
         self.scheduler.add_interval_job(self.identification.identify, minutes=30)
         self.scheduler.add_interval_job(self.clock.date, minutes=30)
         self.scheduler.add_interval_job(self.clock.hour, minutes=30)
@@ -261,7 +262,7 @@ def main(argv):
     args = parser.parse_args()
 
     if irlp.active():
-        voicesynthetizer.speechit("Nodo activo, no podemos iniciar Proyecto Cancun")
+        print "Nodo activo, no podemos iniciar Proyecto Cancun"
         sys.exit(1)
 
     experimental = Cancun(voicesynthetizer, irlp)
