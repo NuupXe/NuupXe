@@ -44,7 +44,10 @@ class Meteorology(object):
             pattern = re.compile(r'\b(' + '|'.join(state.keys()) + r')\b')
             status['text'] = pattern.sub(lambda x: state[x.group()], status['text'])
             print status['text']
-            self.voicesynthetizer.speechit(status['text'])
+            try:
+                self.voicesynthetizer.speechit(status['text'])
+            except:
+                print 'Meteorology Error'
 
 if __name__ == '__main__':
 

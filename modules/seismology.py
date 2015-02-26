@@ -31,7 +31,10 @@ class Seismology(object):
                 status['text'] = status['text'].replace("Pf", "Profundidad")
                 pattern = re.compile(r'\b(' + '|'.join(state.keys()) + r')\b')
                 status['text'] = pattern.sub(lambda x: state[x.group()], status['text'])
-                self.voicesynthetizer.speechit(status['text'])
+                try:
+                    self.voicesynthetizer.speechit(status['text'])
+                except:
+                    print 'Seismology Error'
                 sismo = 'True'
         if sismo == 'False':
             self.voicesynthetizer.speechit("No se encontraron sismos en las ultimas horas")
