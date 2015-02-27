@@ -181,30 +181,6 @@ class Cancun(object):
 
         self.disable()
 
-    def random_mode(self):
-
-        print "[" + time.ctime() + "] Random Mode\n"
-        self.voicesynthetizer.speechit("Modo Aleatorio")
-
-        while True:
-            modules = ['identification','date','hour', 'weather', 'sismology', 'terminal']
-            random_module = modules[int(random.random() * len(modules))]
-            random_time = random.randint(240,300)
-
-            for i in range(random_time, 0, -1):
-                print i
-                time.sleep(1)
-
-            if self.irlp.active():
-                time.sleep(5)
-                self.irlp.busy()
-                self.voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
-                break
-
-            self.module_mode(random_module, 'None')
-
-        self.disable()
-
     def schedule_print(self):
         self.scheduler.print_jobs()
 
@@ -287,9 +263,6 @@ def main(argv):
 
     if args.server == 'scheduler':
         experimental.scheduler_mode()
-
-    elif args.server == 'random':
-        experimental.random_mode()
 
     elif args.server == 'writing':
         experimental.writing_mode()
