@@ -50,13 +50,17 @@ class Cancun(object):
 
     def modules_setup(self):
 
+        # Production
+        self.identification = Identification(self.voicesynthetizer)
+        self.clock = Clock(self.voicesynthetizer)
+        self.weather = Weather(self.voicesynthetizer)
+
+        # Experimental
         self.alive = Alive()
         self.aprstt = Aprstt(self.voicesynthetizer)
         self.assistant = Assistant(self.voicesynthetizer)
         self.command = Command(self.voicesynthetizer)
         self.commandterminal = CommandTerminal(self.voicesynthetizer)
-        self.clock = Clock(self.voicesynthetizer)
-        self.identification = Identification(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.meteorology = Meteorology(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
@@ -65,17 +69,15 @@ class Cancun(object):
         self.poctwitter = PoCTwitter(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
-        self.weather = Weather(self.voicesynthetizer)
         self.wolfram = Wolfram(self.voicesynthetizer)
 
     def dtmf_setup(self,dtmf):
         dtmf_codes = {
-        'P1': 'identification',
-        'P2': 'date',
-        'P3': 'hour',
-        'P4': 'weather',
-        'P5': 'seismology',
-        'P6': 'stations'
+        'S00': 'alive',
+        'S01': 'identification',
+        'S02': 'hour',
+        'S03': 'date',
+        'S04': 'weather',
         }
         return dtmf_codes.get(dtmf)
 
@@ -297,10 +299,11 @@ def main(argv):
         experimental.writing_mode()
 
     if args.dtmf:
-        if len(args.dtmf) == 2:
+        logging.info(args.dtmf)
+        if len(args.dtmf) == 3:
             module = experimental.dtmf_setup(args.dtmf)
             experimental.module_mode(module, args.dtmf)
-        else:
+        elif len(args.dtmf) > 10:
             experimental.module_mode('aprstt', args.dtmf)
 
     experimental.disable()
