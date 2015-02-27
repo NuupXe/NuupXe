@@ -17,6 +17,7 @@ class Alive(object):
 
     def report(self):
         message = randomize(6) + ' #ProyectoCancun '
+        message = message + self.conf.get("general", "twitter") + ' '
         message = message + self.conf.get("general", "radioclub") + ' @ ' + self.conf.get("general", "frequency")
         logging.info(message)
         self.twitterc.timeline_set(message, media=None)
