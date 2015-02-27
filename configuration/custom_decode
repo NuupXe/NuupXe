@@ -9,7 +9,7 @@ if [ "$1" = "P3" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m date ; exit 1
 if [ "$1" = "P4" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m weather ; exit 1 ; fi
 
 # Cancun Project, Module Mode, Experimental
-if [[ "$1" == S* ]] ; then cd "$CUSTOM"/cancun; python cancun.py -d $1 ; exit 1 ; fi
+if [[ "$1" == PS* ]] ; then cd "$CUSTOM"/cancun; python cancun.py -d $1 ; exit 1 ; fi
 if [[ "$1" == A* ]] ; then cd "$CUSTOM"/cancun; python cancun.py -d $1 ; exit 1 ; fi
 
 exit 0

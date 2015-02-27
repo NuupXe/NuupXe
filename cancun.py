@@ -73,11 +73,7 @@ class Cancun(object):
 
     def dtmf_setup(self,dtmf):
         dtmf_codes = {
-        'S00': 'alive',
-        'S01': 'identification',
-        'S02': 'hour',
-        'S03': 'date',
-        'S04': 'weather',
+        'PS0': 'alive',
         }
         return dtmf_codes.get(dtmf)
 
