@@ -1,5 +1,6 @@
 import ConfigParser
-import time
+import logging
+import string
 import sys
 from socket import *
 
@@ -32,21 +33,22 @@ class AprsNet(object):
         self.socketid.close()
 
     def address_set(self, address):
-        self.address = address
+        self.address = address.upper()
 
     def position_set(self, position):
         self.position = '=' + position + '-'
 
     def send_message(self, message):
         self.server_open()
-        self.socketid.send(self.address + self.path + self.position + message +'\n')
-        print("packet sent: " + time.ctime() )
+        packet = self.address + self.path + self.position + message +'\n'
+        self.socketid.send(packet)
+        logging.info(packet)
         self.server_close()
 
     def send_packet(self, packet):
         self.server_open()
         self.socketid.send(packet +'\n')
-        print("packet sent: " + time.ctime() )
+        logging.info(packet)
         self.server_close()
 
 # End of File
