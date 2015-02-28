@@ -64,10 +64,10 @@ class Weather(object):
 
         print '[Cancun] Weather Yahoo'
 
-        yahoocityid = self.conf.get("weather", "yahoocityid")
-        result = pywapi.get_weather_from_yahoo(yahoocityid, 'metric')
+        location = self.conf.get("weather", "location")
+        result = pywapi.get_weather_from_yahoo(location, 'metric')
 
-        self.speaker.speechit("Reporte del clima en la ciudad de " + result['location']['city'])
+        self.speaker.speechit("Reporte del Clima en " + result['location']['city'])
         self.speaker.speechit("Temperatura, " + result['condition']['temp'] + " grados centigrados")
         self.speaker.speechit("Presion Atmosferica, " + result['atmosphere']['pressure'] + " milibares")
         self.speaker.speechit("Visibilidad, " + result['atmosphere']['visibility'] + " kilometros")
@@ -78,13 +78,13 @@ class Weather(object):
 
         print '[Cancun] Weather NOAA'
 
-        #pp = pprint.PrettyPrinter(indent=4)
-        noaa_result = pywapi.get_weather_from_noaa('MMGL')
-        #pp.pprint(noaa_result)
-        noaa_text = "Los resultados NOAA son: " + string.lower(noaa_result['weather']) + " y " + noaa_result['temp_c'] + "C ahora en Guadalajara"
-        print noaa_text
-	self.speaker.speechit(noaa_text)
-        
+        location = self.conf.get("weather", "location")
+        result = pywapi.get_weather_from_noaa('MMGL')
+
+        self.speaker.speechit("Reporte del Clima")
+        self.speaker.speechit("Temperatura, " + result['temp_c'] + " grados centigrados")
+        self.speaker.speechit("Humedad, " + result['relative_humidity'] + " por ciento")
+  
     def report(self):
 
         if self.agent == "aprsfi":
