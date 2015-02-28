@@ -31,15 +31,14 @@ class Weather(object):
 
         self.speaker = voicesynthetizer
 
-	self.pp = pprint.PrettyPrinter(indent=4)
-
-    def personal(self):
+    def aprspacket(self):
 
         self.aprsnet.send_packet("XE1GYQ-13>APRS,TCPIP*,qAS,XE1GYQ-10:@232353z2036.96N/10324.58W_000/000g000t000r000p000P000h00b00000Cancun Project Experimental Weather Station")
 
-    def aprsfi_service(self):
+    def aprsfi(self):
 
         print '[Cancun] Weather aprs.fi'
+
         callsign = self.conf.get("weather", "aprsficallsign")
         location = self.conf.get("weather", "aprsfilocation")
 
@@ -88,17 +87,12 @@ class Weather(object):
     def report(self):
 
         if self.agent == "aprsfi":
-                self.aprsfi_service()
+                self.aprsfi()
         elif self.agent == "yahoo":
                 self.yahoo()
         elif self.agent == "noaa":
                 self.noaa()
 
-        self.personal()
+        self.aprspacket()
 
-        return
-
-if __name__ == '__main__':
-
-    test = Weather("temp")
-    test.report()
+# End of File

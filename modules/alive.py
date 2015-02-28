@@ -23,3 +23,4 @@ class Alive(object):
         self.twitterc.timeline_set(message, media=None)
         self.twitterc.timeline_get('arjaccancun', 1)
 
+# End of File

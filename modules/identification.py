@@ -28,7 +28,4 @@ class Identification(object):
         self.voicesynthetizer.speechit(message)
         self.morse.generate(self.conf.get("general", "callsign"))
 
-if __name__ == '__main__':
-
-    mytest = Identification()
-    mytest.identify()
+# End of File

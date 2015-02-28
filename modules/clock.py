@@ -30,3 +30,5 @@ class Clock(object):
         logging.info('Clock Hour')
         hour = "Son las " + time.strftime("%H") + " horas y " + time.strftime("%M") + " minutos"
         self.voicesynthetizer.speechit(hour)
+
+# End of File
