@@ -21,10 +21,9 @@ class Identification(object):
 
     def identify(self):
         logging.info('Identification')
-        self.morse.generate('cq')
+        self.morse.generate('cq cq')
         self.voicesynthetizer.speechit(self.conf.get("general", "radioclub"))
-        self.voicesynthetizer.speechit(self.conf.get("general", "systemname"))
-        message = " operado por " + ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
+        message = ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
         message = "\"" + message + "\""
         self.voicesynthetizer.speechit(message)
         self.morse.generate(self.conf.get("general", "callsign"))
