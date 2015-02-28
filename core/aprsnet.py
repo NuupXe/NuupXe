@@ -25,7 +25,7 @@ class AprsNet(object):
     def server_open(self):
         self.socketid = socket(AF_INET, SOCK_STREAM)
         self.socketid.connect((self.server, int(self.port)))
-        self.socketid.send('user ' + self.user + ' pass ' + self.password + ' vers "XE1GYQ Cancun Project" \n')
+        self.socketid.send('user ' + self.user + ' pass ' + self.password + ' vers "Experimental Project" \n')
 
     def server_close(self):
         self.socketid.shutdown(0)
