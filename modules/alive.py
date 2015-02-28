@@ -16,7 +16,7 @@ class Alive(object):
         self.conf.read(self.path)
 
     def report(self):
-        message = randomize(6) + ' #ProyectoCancun '
+        message = randomize(6) + ' ' + self.conf.get("system", "name") + ' '
         message = message + self.conf.get("general", "twitter") + ' '
         message = message + self.conf.get("general", "radioclub") + ' @ ' + self.conf.get("general", "frequency")
         logging.info(message)
