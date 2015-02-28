@@ -32,3 +32,5 @@ class AprsFi(object):
             return data
         except:
             print '[Cancun] AprsFi | Query Error'
+
+# End of File

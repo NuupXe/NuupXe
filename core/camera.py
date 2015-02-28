@@ -40,4 +40,4 @@ class Camera(object):
         self.setup()
         self.capture()
 
-# End of file
+# End of File

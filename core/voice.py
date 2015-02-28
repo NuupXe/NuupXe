@@ -28,7 +28,4 @@ class Voice(object):
     def erase(self):
         status, output = commands.getstatusoutput("rm " + self.filename)
 
-if __name__ == '__main__':
-
-    mytest = Voice()
-
+# End of File

@@ -46,5 +46,4 @@ class PushToTalk(object):
         status, output = commands.getstatusoutput(msg)
         self.closeport()
 
-if __name__ == "__main__":
-    mytest = PushToTalk()
+# End of File

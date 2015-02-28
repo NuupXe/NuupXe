@@ -38,3 +38,5 @@ do
 	echo "Playing line: $(($key+1)) of $(($STRINGNUM+1))"
 	mpg123 -q "http://translate.google.com/translate_tts?tl=${LANGUAGE}&ie=UTF-8&q=${SHORT[$key]}"
 done
+
+# End of File

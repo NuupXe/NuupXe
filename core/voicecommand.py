@@ -6,7 +6,6 @@ import time
 from core.irlp import Irlp
 from core.pushtotalk import PushToTalk
 from core.speechrecognition import SpeechRecognition
-from core.speechrecognition import SpeechRecognition
 from core.voice import Voice
 
 class VoiceCommand(object):
@@ -67,4 +66,4 @@ class VoiceCommand(object):
 
         return self.output
 
-# End of file
+# End of File

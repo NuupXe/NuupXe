@@ -49,7 +49,4 @@ class Phonetic(object):
                 self.list.append(self.decodephoneticalphabet(character.upper()))
         return self.list
 
-if __name__ == '__main__':
-
-    mytest = Phonetic()
-    print mytest.decode("hola xe1gyq")
+# End of File

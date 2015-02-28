@@ -47,7 +47,4 @@ class SpeechRecognition(object):
         print "Transcript for " + filename + " = " + transcript
         return transcript
 
-if __name__ == '__main__':
-
-    mytest = SpeechRecognition()
-    mytest.google("hola")
+# End of File

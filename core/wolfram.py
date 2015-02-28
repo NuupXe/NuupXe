@@ -37,7 +37,4 @@ class Wolfram(object):
                 self.voicesynthetizer.speechit(string)
         self.voicesynthetizer.setlanguage("spanish")
 
-if __name__ == '__main__':
-
-    mytest = Wolfram()
-    mytest.identify()
+# End of File

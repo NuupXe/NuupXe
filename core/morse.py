@@ -74,3 +74,5 @@ class Morse(object):
             status, output = commands.getstatusoutput(message)
 
         self.pushtotalk.closeport()
+
+# End of File

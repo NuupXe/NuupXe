@@ -65,3 +65,5 @@ class VoiceSynthetizer(logging.Handler):
         elif self.synthetizer == "google":
             command = "core/google.sh " + " " + self.arguments + " " + text
         self.pushtotalk.message(command)
+
+# End of File

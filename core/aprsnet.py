@@ -48,3 +48,5 @@ class AprsNet(object):
         self.socketid.send(packet +'\n')
         print("packet sent: " + time.ctime() )
         self.server_close()
+
+# End of File

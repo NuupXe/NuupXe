@@ -7,3 +7,5 @@ def randomize(length=10):
     random = random.upper()
     random = random.replace('-',"")
     return random[0:length]
+
+# End of File
