@@ -57,6 +57,6 @@ pipFunctionInstall $packageRequests
 pipFunctionInstall $packagePygeocoder
 pipFunctionInstall $packageDropbox
 pipFunctionInstall $packageTwython
-pipFunctionInstall $packageYowsup2
+#pipFunctionInstall $packageYowsup2
 
 # End of file
