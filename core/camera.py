@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import commands
+import logging
 import pygame
 import pygame.camera
 
@@ -9,7 +10,6 @@ class Camera(object):
     def __init__(self, voicesynthetizer):
 
         self.mycamera = None
-
         self.voicesynthetizer = voicesynthetizer
         self.picturepygame = 'output/camerapygame.jpg'
         self.picturefswebcam = 'output/camerafswebcam.jpg'
@@ -18,8 +18,7 @@ class Camera(object):
         pass
 
     def setup(self):
-        print '[Cancun] Camera Setup'
-
+        logging.info('Camera Setup')
         pygame.camera.init()
         self.mycamera = pygame.camera.Camera("/dev/video0",(640,480))
         self.mycamera.start()
@@ -29,8 +28,7 @@ class Camera(object):
         self.fswebcamcommand = self.fswebcam + self.fswebcamarguments + self.picturefswebcam
 
     def capture(self):
-        print '[Cancun] Camera Capture'
-
+        logging.info('Camera Capture')
         image = self.mycamera.get_image()
         pygame.image.save(image, self.picturepygame)
         self.mycamera.stop()
