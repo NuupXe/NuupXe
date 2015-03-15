@@ -39,6 +39,8 @@ export packageCurl="curl"
 
 export packageFswebcam="fswebcam"
 
+export packagePythonDev="python-dev"
+
 # =============================================================================
 # Script Functions
 # =============================================================================
@@ -82,5 +84,7 @@ aptgetFunctionInstall $packageText2Speech
 aptgetFunctionInstall $packageCurl
 
 aptgetFunctionInstall $packageFswebcam
+
+aptgetFunctionInstall $packagePythonDev
 
 # End of file
