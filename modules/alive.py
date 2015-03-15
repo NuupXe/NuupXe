@@ -4,9 +4,9 @@ import logging
 import ConfigParser
 
 from core.aprsnet import AprsNet
-from core.randomizer import randomize
 from core.system import System
 from core.twitterc import TwitterC
+from core.utilities import Randomizer
 
 class Alive(object):
 
@@ -31,7 +31,7 @@ class Alive(object):
         self.setup()
 
         system = self.system.execute()
-        message = randomize(2) + ' ' + self.conf.get("system", "hashtag") + ' '
+        message = Randomizer(2) + ' ' + self.conf.get("system", "hashtag") + ' '
         message = message + self.conf.get("general", "twitter") + ' Frequency ' + self.conf.get("general", "frequency")
         message = message + ' .. ' + system
 
