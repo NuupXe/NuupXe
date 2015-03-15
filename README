@@ -20,9 +20,7 @@ Pre-Alpha Release, Codename "Volta"
 - Core Features
 
   * Identification
-  * Date / Time
-  * Messages
-  * Twitter
-  * Weather (Yahoo APIs)
+  * Clock (Date & Time)
+  * Weather (Yahoo, NOAA, APRS)
 
 Copyright 2014, Released under Apache License
