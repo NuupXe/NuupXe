@@ -74,6 +74,7 @@ class Cancun(object):
     def dtmf_setup(self,dtmf):
         dtmf_codes = {
         'PS0': 'alive',
+        'PS1': 'selfie',
         }
         return dtmf_codes.get(dtmf)
 
