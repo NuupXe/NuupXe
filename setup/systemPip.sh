@@ -26,6 +26,7 @@ export packageDropbox=dropbox
 export packageTwython=twython
 export packageYowsup2=yowsup2
 export packagePsutil=psutil
+export packageGitPython=gitpython
 
 # =============================================================================
 # Script Functions
@@ -60,5 +61,6 @@ pipFunctionInstall $packageDropbox
 pipFunctionInstall $packageTwython
 #pipFunctionInstall $packageYowsup2
 pipFunctionInstall $packagePsutil
+pipFunctionInstall $packageGitPython
 
 # End of file
