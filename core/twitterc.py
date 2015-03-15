@@ -3,7 +3,6 @@
 import tweepy
 import twython
 import ConfigParser
-from twython import Twython
 
 from tweepy import OAuthHandler
 from twython import Twython
