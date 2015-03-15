@@ -24,20 +24,14 @@ export packageAx25Apps=ax25-apps
 export packageLibAx25Dev=libax25-dev
 
 export packageFestival="festival festlex-cmu festlex-poslex festvox-kallpc16k libestools1.2 festvox-ellpc11k"
-
 export packagePyPi="python-pip"
-
 export packagePygame="python-pygame"
-
 export packageMpg123="mpg123"
-
 export packageSeveral="ffmpeg flac"
-
 export packageText2Speech="festival espeak"
-
 export packageCurl="curl"
-
 export packageFswebcam="fswebcam"
+export packagePythonDev="python-dev"
 
 # =============================================================================
 # Script Functions
@@ -70,17 +64,13 @@ aptgetFunctionInstall $packageAx25Apps
 aptgetFunctionInstall $packageLibAx25Dev
 
 aptgetFunctionInstall $packageFestival
-
 aptgetFunctionInstall $packagePyPi
-
 aptgetFunctionInstall $packagePygame
-
 aptgetFunctionInstall $packageMpg123
-
 aptgetFunctionInstall $packageSeveral
 aptgetFunctionInstall $packageText2Speech
 aptgetFunctionInstall $packageCurl
-
 aptgetFunctionInstall $packageFswebcam
+aptgetFunctionInstall $packagePythonDev
 
 # End of file

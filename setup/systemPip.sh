@@ -25,6 +25,7 @@ export packagePygeocoder=pygeocoder
 export packageDropbox=dropbox
 export packageTwython=twython
 export packageYowsup2=yowsup2
+export packagePsutil=psutil
 
 # =============================================================================
 # Script Functions
@@ -58,5 +59,6 @@ pipFunctionInstall $packagePygeocoder
 pipFunctionInstall $packageDropbox
 pipFunctionInstall $packageTwython
 #pipFunctionInstall $packageYowsup2
+pipFunctionInstall $packagePsutil
 
 # End of file
