@@ -29,7 +29,7 @@ from modules.identification import Identification
 from modules.messages import Messages
 from modules.meteorology import Meteorology
 from modules.news import News
-from modules.poctwitter import PoCTwitter
+from modules.selfie import Selfie
 from modules.seismology import Seismology
 from modules.tracker import Tracker
 from modules.voicemail import VoiceMail
@@ -66,7 +66,7 @@ class Cancun(object):
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.news = News(self.voicesynthetizer)
         self.tracker = Tracker(self.voicesynthetizer)
-        self.poctwitter = PoCTwitter(self.voicesynthetizer)
+        self.selfie = Selfie(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
         self.wolfram = Wolfram(self.voicesynthetizer)
@@ -174,8 +174,8 @@ class Cancun(object):
             self.command.execute()
         elif module == 'bc':
             self.command.background()
-        elif module == 'poctwitter':
-            self.poctwitter.execute()
+        elif module == 'selfie':
+            self.selfie.get()
         else:
             print 'Module not found! Please check its name...\n'
 
@@ -199,7 +199,7 @@ class Cancun(object):
         self.scheduler.add_interval_job(self.messages.stations, minutes=240)
 
         self.scheduler.add_cron_job(self.alive.report,month='*',day_of_week='*',hour='8,20',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.poctwitter.execute,month='*',day_of_week='*',hour='8,20',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.selfie.get,month='*',day_of_week='*',hour='8,20',minute ='00',second='0')
 
 	# Learning Modules, AREJ
         self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,11,17',minute ='00',second='0')
