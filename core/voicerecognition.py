@@ -48,10 +48,10 @@ class VoiceRecognition(object):
                 pass
             while self.irlp.cosenabled() is 0:
                 pass
-            proc = self.voice.record_start()
+            proc = self.voice.recordstart()
             while self.irlp.cosenabled() is 256:
                 pass
-            self.voice.record_stop(proc)
+            self.voice.recordstop(proc)
             commands.getstatusoutput("flac -f -o " + self.audiofileflac + " --channels=1 --sample-rate=48000 " + self.audiofilewav)
 
     def recognize(self, speech):

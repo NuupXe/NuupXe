@@ -30,10 +30,10 @@ class VoiceMail(object):
             pass
         while self.irlp.cosenabled() is 0:
             pass
-        proc = self.voice.record_start()
+        proc = self.voice.recordstart()
         while self.irlp.cosenabled() is 256:
             pass
-        self.voice.record_stop(proc)
+        self.voice.recordstop(proc)
 
     def play(self):
         print '[Cancun] Voice Mail Play'

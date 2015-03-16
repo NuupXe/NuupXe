@@ -13,13 +13,13 @@ class Voice(object):
     def filenameset(self, name):
         self.filename = name
 
-    def record_start(self):
+    def recordstart(self):
         args = ['arecord','-t', 'wav', '-f', 'S16_LE', '-r', '48000', self.filename]
         proc = subprocess.Popen(args)
         print "PID:", proc.pid
         return proc
 
-    def record_stop(self, proc):
+    def recordstop(self, proc):
         proc.kill()
 
     def play(self):
