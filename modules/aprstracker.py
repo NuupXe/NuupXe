@@ -64,8 +64,11 @@ class AprsTracker(object):
             weekday, day, month, year = self.clock(entry['lasttime'])
             lasttimeseen = "Ultima vez visto " + weekday + ' ' + day + ' de ' + month + ' del ' + year
             self.speaker.speechit(lasttimeseen)
-            self.speaker.speechit("Velocidad " + str(entry['speed']) + " Km/h")
-            self.speaker.speechit("Altitud " + str(entry['altitude']) + " metros" )
+            try:
+                self.speaker.speechit("Velocidad " + str(entry['speed']) + " Km/h")
+                self.speaker.speechit("Altitud " + str(entry['altitude']) + " metros" )
+            except:
+                pass
             results = Geocoder.reverse_geocode(float(entry['lat']), float(entry['lng']))
             logging.info(results)
             try:
@@ -75,8 +78,8 @@ class AprsTracker(object):
                     self.speaker.speechit("Municipip " + results[0].administrative_area_level_2)
                 elif results[0].locality:
                     self.speaker.speechit("Municipio " + results[0].locality)
-                self.speaker.speechit("Estado " + results[0].administrative_area_level_1)
-                self.speaker.speechit("Pais " + results[0].country)
+                self.speaker.speechit(" " + results[0].administrative_area_level_1)
+                self.speaker.speechit(" " + results[0].country)
             except:
                 pass
 
