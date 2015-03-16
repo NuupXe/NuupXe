@@ -33,7 +33,7 @@ class VoiceCommand(object):
 
         if re.search(r'coman', output, re.M|re.I) or re.search(r'disponi', output, re.M|re.I):
             logging.info('Voice Command Decode Available Commands')
-            self.voicesynthetizer.speechit("Identificacion, Hora, Fecha, Clima")
+            self.voicesynthetizer.speechit("Comandos Disponibles? Identificacion, Hora, Fecha, Clima")
         elif re.search(r'identif', output, re.M|re.I):
             logging.info('Voice Command Decode Identification')
             self.identification.identify()
