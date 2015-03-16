@@ -5,7 +5,7 @@ from time import sleep
 import re
 
 from core.twitterc import TwitterC
-from core.voicecommand import VoiceCommand
+from core.voicerecognition import VoiceRecognition
 from core.voicesynthetizer import VoiceSynthetizer
 
 from modules.voicemail import VoiceMail
@@ -27,7 +27,6 @@ def main(voicesynthetizer):
         print "Terminate main thread."
         print "If only daemonic threads are left, terminate whole program."
 
-
 class Assistant(object):
     def __init__(self, voicesynthetizer):
         self.running = True
@@ -35,7 +34,7 @@ class Assistant(object):
         self.threads = []
 	self.voicesynthetizer = voicesynthetizer
 
-	self.voicecommand = VoiceCommand(self.voicesynthetizer)
+	self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
 	self.voicemail = VoiceMail(self.voicesynthetizer)
         self.clock = Clock(voicesynthetizer)
         self.identification = Identification(voicesynthetizer)
@@ -57,8 +56,8 @@ class Assistant(object):
 
     def introduction2(self):
 	while True:
-	        self.voicecommand.record('5')
-	        output = self.voicecommand.decode('False')
+	        self.voicerecognition.record('5')
+	        output = self.voicerecognition.recognize('False')
 	        if re.search(r'hola', output, re.M|re.I) or re.search(r'cancun', output, re.M|re.I):
 	            self.voicesynthetizer.speechit("Hola! Dime como puedo ayudarte?")
 		    self.introduced = True
@@ -66,8 +65,8 @@ class Assistant(object):
 
     def command(self):
 	while self.introduced:
-		self.voicecommand.record()
-	        output = self.voicecommand.decode('False')
+		self.voicerecognition.record()
+	        output = self.voicerecognition.recognize('False')
  	        if re.search(r'identif', output, re.M|re.I):
 		    print '[Cancun] Assistant Identification'
 	            self.identification.identify()
@@ -92,8 +91,8 @@ class Assistant(object):
 			    self.voicesynthetizer.speechit("Mensaje existente!")
 			    while True:
 				    self.voicesynthetizer.speechit("Quieres escucharlo, borrarlo o salir de esta opcion")
-			            self.voicecommand.record()
-		        	    output = self.voicecommand.decode('False')
+			            self.voicerecognition.record()
+		        	    output = self.voicerecognition.recognize('False')
 				    if re.search(r'escuchar', output, re.M|re.I):
 					    print '[Cancun] Assistant Message Play'
 					    self.voicemail.play()
@@ -189,6 +188,4 @@ def join_threads(threads):
         while t.isAlive():
             t.join(5)
 
-
-if __name__ == "__main__":
-    main()
+# Enf of File

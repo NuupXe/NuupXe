@@ -3,7 +3,7 @@
 import json
 import logging
 
-from core.voicecommand import VoiceCommand
+from core.voicerecognition import VoiceRecognition
 from core.wolfram import Wolfram
 
 class WolframAlpha(object):
@@ -11,20 +11,20 @@ class WolframAlpha(object):
     def __init__(self, voicesynthetizer):
 
         self.voicesynthetizer = voicesynthetizer
-        self.voicecommand = VoiceCommand(self.voicesynthetizer)
+        self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
         self.wolfram = Wolfram()
 
     def setup(self):
 
         logging.info('Wolfram Alpha Setup')
-        self.voicecommand.languageset('english')
+        self.voicerecognition.languageset('english')
         self.voicesynthetizer.setlanguage("english")
 
     def cleanup(self):
 
         logging.info('Wolfram Alpha Cleanup')
-        self.voicecommand.languageset('spanish')
-        self.voicecommand.languageset('spanish')
+        self.voicerecognition.languageset('spanish')
+        self.voicerecognition.languageset('spanish')
         self.voicesynthetizer.setlanguage("spanish")
 
     def ask(self):
@@ -32,8 +32,8 @@ class WolframAlpha(object):
         logging.info('Wolfram Alpha Ask')
         self.setup()
         self.voicesynthetizer.speechit('Yes! What is your question for Wolfram Alpha?')
-        self.voicecommand.record()
-        question = self.voicecommand.decode('False')
+        self.voicerecognition.record()
+        question = self.voicerecognition.recognize('False')
         logging.info('Question? ' + question)
         self.voicesynthetizer.speechit(question)
         answer = self.wolfram.question(question)

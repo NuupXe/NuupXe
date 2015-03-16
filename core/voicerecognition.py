@@ -8,15 +8,15 @@ from core.pushtotalk import PushToTalk
 from core.speechrecognition import SpeechRecognition
 from core.voice import Voice
 
-class VoiceCommand(object):
+class VoiceRecognition(object):
 
     def __init__(self, voicesynthetizer):
 
         self.output = ""
         self.agent = "google"
         self.language = 'spanish'
-        self.audiofilewav = "voicecommand.wav"
-        self.audiofileflac = "voicecommand.flac"
+        self.audiofilewav = "output/voicerecognition.wav"
+        self.audiofileflac = "output/voicrecognition.flac"
         self.voicesynthetizer = voicesynthetizer
 
         self.irlp = Irlp()
@@ -54,12 +54,11 @@ class VoiceCommand(object):
             self.voice.record_stop(proc)
             commands.getstatusoutput("flac -f -o " + self.audiofileflac + " --channels=1 --sample-rate=48000 " + self.audiofilewav)
 
-    def decode(self, speech):
+    def recognize(self, speech):
 
         print 'Voice Command Decode'
 
 	if speech == 'True':
-            self.voicesynthetizer.speechit("Estamos procesando tu respuesta")
             self.pushtotalk.openport()
             self.voice.play()
             self.pushtotalk.closeport()

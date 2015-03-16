@@ -4,7 +4,7 @@ import commands
 import re
 
 from core.irlp import Irlp
-from core.voicecommand import VoiceCommand
+from core.voicerecognition import VoiceRecognition
 from core.voicesynthetizer import VoiceSynthetizer
 from core.pushtotalk import PushToTalk
 
@@ -20,7 +20,7 @@ class Command(object):
 
         self.output = ""
         self.voicesynthetizer = voicesynthetizer
-        self.voicecommand = VoiceCommand(self.voicesynthetizer)
+        self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
 
         self.clock = Clock(voicesynthetizer)
         self.identification = Identification(voicesynthetizer)
@@ -60,24 +60,20 @@ class Command(object):
 
     def execute(self):
         self.presentation()
-        self.voicecommand.record()
-        output = self.voicecommand.decode('False')
+        self.voicerecognition.record()
+        output = self.voicerecognition.recognize('False')
         print output
         self.parse(output)
 
     def background(self):
         print '[Cancun] Background Started'
 	while True:
-	        self.voicecommand.record()
-        	output = self.voicecommand.decode('False')
+	        self.voicerecognition.record()
+        	output = self.voicerecognition.recognize('False')
                 if re.search(r'canc', output, re.M|re.I):
                     self.voicesynthetizer.speechit("Alguien me hablo?. Soy el proyecto Cancun... Hasta pronto!")
                     break
                 print output
         print '[Cancun] Background Stopped'
 
-if __name__ == '__main__':
-
-    mytest = Commands()
-    mytest.record()
-    mytest.play()
+# Enf of File
