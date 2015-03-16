@@ -50,14 +50,15 @@ class Cancun(object):
 
     def modules_setup(self):
 
-        # Production
-        self.identification = Identification(self.voicesynthetizer)
-        self.clock = Clock(self.voicesynthetizer)
-        self.weather = Weather(self.voicesynthetizer)
-
-        # Experimental
+        # Production Modules
         self.alive = Alive()
         self.aprstt = Aprstt(self.voicesynthetizer)
+        self.clock = Clock(self.voicesynthetizer)
+        self.identification = Identification(self.voicesynthetizer)
+        self.selfie = Selfie(self.voicesynthetizer)
+        self.weather = Weather(self.voicesynthetizer)
+
+        # Experimental Modules
         self.assistant = Assistant(self.voicesynthetizer)
         self.command = Command(self.voicesynthetizer)
         self.commandterminal = CommandTerminal(self.voicesynthetizer)
@@ -66,7 +67,6 @@ class Cancun(object):
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.news = News(self.voicesynthetizer)
         self.tracker = Tracker(self.voicesynthetizer)
-        self.selfie = Selfie(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
         self.wolfram = Wolfram(self.voicesynthetizer)
@@ -133,16 +133,22 @@ class Cancun(object):
 
         print "[" + time.ctime() + "] Module Mode\n"
 
+        # Production Modules
         if module == 'alive':
             self.alive.report()
-        elif module == 'identification':
-            self.identification.identify()
-        elif module == 'hour':
-            self.clock.hour()
+        elif module == 'aprstt':
+            self.aprstt.query(dtmf)
         elif module == 'date':
             self.clock.date()
+        elif module == 'hour':
+            self.clock.hour()
+        elif module == 'identification':
+            self.identification.identify()
+        elif module == 'selfie':
+            self.selfie.get()
         elif module == 'weather':
             self.weather.report()
+        # Experimental Modules
         elif module == 'seismology':
             self.seismology.SismologicoMX()
         elif module == 'meteorology':
@@ -165,8 +171,6 @@ class Cancun(object):
             self.voicemail.run(dtmf)
         elif module == 'wolfram':
             self.wolfram.question('how many grams in kilograms')
-        elif module == 'aprstt':
-            self.aprstt.query(dtmf)
         elif module == 'terminal':
             self.commandterminal.execute()
         elif module == 'assistant':
@@ -175,8 +179,6 @@ class Cancun(object):
             self.command.execute()
         elif module == 'bc':
             self.command.background()
-        elif module == 'selfie':
-            self.selfie.get()
         else:
             print 'Module not found! Please check its name...\n'
 
@@ -188,33 +190,34 @@ class Cancun(object):
     def schedule(self):
 
         # Production Modules
-        self.scheduler.add_interval_job(self.commandterminal.execute, minutes=30)
-        self.scheduler.add_interval_job(self.identification.identify, minutes=30)
-        self.scheduler.add_interval_job(self.clock.date, minutes=30)
-        self.scheduler.add_interval_job(self.clock.hour, minutes=30)
-        self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
-        self.scheduler.add_interval_job(self.news.getitems, minutes=60)
-        self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=60)
-        self.scheduler.add_interval_job(self.commandterminal.execute, minutes=120)
+        self.scheduler.add_interval_job(self.alive.report, minutes=60)
+        self.scheduler.add_cron_job(self.clock.date,month='*',day_of_week='*',hour='6,12,22',minute ='00',second='0')
+        self.scheduler.add_interval_job(self.clock.hour, minutes=60)
+        self.scheduler.add_interval_job(self.identification.identify, minutes=120)
+        self.scheduler.add_cron_job(self.selfie.get,month='*',day_of_week='*',hour='6,12,22',minute ='00',second='0')
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
-        self.scheduler.add_interval_job(self.messages.stations, minutes=240)
 
-        self.scheduler.add_cron_job(self.alive.report,month='*',day_of_week='*',hour='8,20',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.selfie.get,month='*',day_of_week='*',hour='8,20',minute ='00',second='0')
+        # Experimental Modules
+        # self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
+        # self.scheduler.add_interval_job(self.news.getitems, minutes=60)
+        # self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=60)
+        # self.scheduler.add_interval_job(self.commandterminal.execute, minutes=120)
+        # self.scheduler.add_interval_job(self.messages.stations, minutes=240)
+        # self.scheduler.add_interval_job(self.commandterminal.execute, minutes=30)
 
 	# Learning Modules, AREJ
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,11,17',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,12,17',minute ='00',second='0')
 
         # Learning Modules, Morse
-        self.scheduler.add_cron_job(self.morseteacher.learn,month='*',day='*',hour='7,12,18',minute ='30',second='0')
-        self.scheduler.add_cron_job(self.morseteacher.contest,month='*',day='*',hour='7,12,18',minute ='45',second='0')
+        self.scheduler.add_cron_job(self.morseteacher.learn,month='*',day='*',hour='7,12,17',minute ='30',second='0')
+        self.scheduler.add_cron_job(self.morseteacher.contest,month='*',day='*',hour='7,12,17',minute ='45',second='0')
 
         # Learning Modules, Reglamentos
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'],month='*',day_of_week='mon,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.2'],month='*',day_of_week='tue,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.3'],month='*',day_of_week='wed,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.4'],month='*',day_of_week='thu,sat,sun',hour='8,13,19',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.5'],month='*',day_of_week='fri,sat,sun',hour='8,13,19',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'],month='*',day_of_week='mon',hour='8,13,18',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.2'],month='*',day_of_week='tue',hour='8,13,18',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.3'],month='*',day_of_week='wed',hour='8,13,18',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.4'],month='*',day_of_week='thu',hour='8,13,18',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.5'],month='*',day_of_week='fri',hour='8,13,18',minute ='00',second='0')
 
 def set_exit_handler(func):
     signal.signal(signal.SIGTERM, func)
@@ -237,8 +240,8 @@ def main(argv):
     args = parser.parse_args()
 
     if irlp.active():
-        print "Nodo activo, no podemos iniciar Proyecto Cancun"
-        sys.exit(1)
+        logging.info("Nodo activo, no podemos iniciar Proyecto Cancun")
+        sys.exit(0)
 
     experimental = Cancun(voicesynthetizer, irlp)
 
