@@ -59,11 +59,11 @@ class VoiceSynthetizer(logging.Handler):
         logging.info(text)
 
         if self.synthetizer == "festival":
-            command = "echo \"" + text + "\" | " + self.arguments
+            command = ['echo', text, '|', self.arguments]
         elif self.synthetizer == "espeak":
-            command = self.arguments + " \"" + text + "\" | aplay"
+            command = [self.arguments, text, ' | aplay']
         elif self.synthetizer == "google":
-            command = "core/google.sh " + " " + self.arguments + " " + text
+            command = ['core/google.sh', self.arguments, text]
         self.pushtotalk.message(command)
 
 # End of File
