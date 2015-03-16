@@ -79,10 +79,12 @@ class Cancun(object):
         dtmf_codes = {
         'PS0': 'alive',
         'PS1': 'aprstracker',
-        'PS2': 'selfie',
-        'PS3': 'voicecommand',
-        'PS4': 'wolframalpha',
-        'PS5': 'voiceexperimental'
+        'PS2': 'news',
+        'PS3': 'meteorology'
+        'PS4': 'selfie',
+        'PS5': 'voicecommand',
+        'PS6': 'wolframalpha',
+        'PS7': 'voiceexperimental'
         }
         return dtmf_codes.get(dtmf)
 
