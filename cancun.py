@@ -80,7 +80,7 @@ class Cancun(object):
         'PS0': 'alive',
         'PS1': 'aprstracker',
         'PS2': 'news',
-        'PS3': 'meteorology'
+        'PS3': 'meteorology',
         'PS4': 'selfie',
         'PS5': 'voicecommand',
         'PS6': 'wolframalpha',
