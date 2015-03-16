@@ -19,10 +19,10 @@ class AprsFi(object):
         self.conf.read(self.services)
         self.api_key = self.conf.get("aprsfi", "api_key")
 
-    def callsign_set(self, callsign):
+    def callsignset(self, callsign):
         self.callsign = callsign
 
-    def data_set(self, data):
+    def dataset(self, data):
         self.data = data
 
     def query(self):

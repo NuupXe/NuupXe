@@ -19,6 +19,7 @@ from core.voicesynthetizer import VoiceSynthetizer
 # Production
 
 from modules.alive import Alive
+from modules.aprstracker import AprsTracker
 from modules.aprstt import Aprstt
 from modules.clock import Clock
 from modules.identification import Identification
@@ -35,7 +36,6 @@ from modules.meteorology import Meteorology
 from learning.morseteacher import MorseTeacher
 from modules.news import News
 from modules.seismology import Seismology
-from modules.tracker import Tracker
 from modules.voicemail import VoiceMail
 from modules.voiceexperimental import VoiceExperimental
 
@@ -56,6 +56,7 @@ class Cancun(object):
 
         # Production Modules
         self.alive = Alive()
+        self.aprstracker = AprsTracker(self.voicesynthetizer)
         self.aprstt = Aprstt(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
         self.identification = Identification(self.voicesynthetizer)
@@ -71,16 +72,16 @@ class Cancun(object):
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.news = News(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
-        self.tracker = Tracker(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
         self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
 
     def dtmf_setup(self,dtmf):
         dtmf_codes = {
         'PS0': 'alive',
-        'PS1': 'selfie',
-        'PS2': 'voicecommand',
-        'PS3': 'wolframalpha'
+        'PS1': 'aprstracker',
+        'PS2': 'selfie',
+        'PS3': 'voicecommand',
+        'PS4': 'wolframalpha'
         }
         return dtmf_codes.get(dtmf)
 
@@ -142,6 +143,8 @@ class Cancun(object):
 
         if module == 'alive':
             self.alive.report()
+        elif module == 'aprstracker':
+            self.aprstracker.query()
         elif module == 'aprstt':
             self.aprstt.query(dtmf)
         elif module == 'date':
@@ -179,8 +182,6 @@ class Cancun(object):
             self.messages.readfile('learning/arej.radioclubs')
         elif module == 'stations':
             self.messages.stations()
-        elif module == 'tracker':
-            self.tracker.query()
         elif module == 'voicemail':
             self.voicemail.run(dtmf)
         elif module == 'assistant':

@@ -42,8 +42,8 @@ class Weather(object):
         callsign = self.conf.get("weather", "aprsficallsign")
         location = self.conf.get("weather", "aprsfilocation")
 
-        self.aprsfi.callsign_set(callsign)
-        self.aprsfi.data_set('wx')
+        self.aprsfi.callsignset(callsign)
+        self.aprsfi.dataset('wx')
         data = self.aprsfi.query()
 
         for entry in data['entries']:
