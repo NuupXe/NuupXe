@@ -27,16 +27,21 @@ class WolframAlpha(object):
         self.voicecommand.languageset('spanish')
         self.voicesynthetizer.setlanguage("spanish")
 
-    def report(self):
+    def ask(self):
 
-        logging.info('Wolfram Alpha Report')
+        logging.info('Wolfram Alpha Ask')
         self.setup()
+        self.voicesynthetizer.speechit('Yes! What is your question for Wolfram Alpha?')
         self.voicecommand.record()
         question = self.voicecommand.decode('False')
-        logging.info(question)
+        logging.info('Question? ' + question)
         self.voicesynthetizer.speechit(question)
         answer = self.wolfram.question(question)
-        self.voicesynthetizer.speechit(answer)
-        logging.info(answer)
+        if answer != None:
+            self.voicesynthetizer.speechit(answer)
+            logging.info('Answer! ' + answer)
+        else:
+            self.voicesynthetizer.speechit('Sorry! We do not have an answer')
+        self.cleanup()
 
 # End of File

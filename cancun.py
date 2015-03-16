@@ -33,7 +33,7 @@ from modules.seismology import Seismology
 from modules.tracker import Tracker
 from modules.voicemail import VoiceMail
 from modules.weather import Weather
-from modules.poc import Poc
+from modules.wolframalpha import WolframAlpha
 
 class Cancun(object):
 
@@ -57,6 +57,7 @@ class Cancun(object):
         self.identification = Identification(self.voicesynthetizer)
         self.selfie = Selfie(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
+        self.wolframalpha = WolframAlpha(self.voicesynthetizer)
 
         # Experimental Modules
         self.assistant = Assistant(self.voicesynthetizer)
@@ -69,12 +70,12 @@ class Cancun(object):
         self.tracker = Tracker(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
-        self.poc = Poc(self.voicesynthetizer)
 
     def dtmf_setup(self,dtmf):
         dtmf_codes = {
         'PS0': 'alive',
         'PS1': 'selfie',
+        'PS2': 'wolframalpha'
         }
         return dtmf_codes.get(dtmf)
 
@@ -134,6 +135,7 @@ class Cancun(object):
         print "[" + time.ctime() + "] Module Mode\n"
 
         # Production Modules
+
         if module == 'alive':
             self.alive.report()
         elif module == 'aprstt':
@@ -148,7 +150,11 @@ class Cancun(object):
             self.selfie.get()
         elif module == 'weather':
             self.weather.report()
+        elif module == 'wolframalpha':
+            self.wolframalpha.ask()
+
         # Experimental Modules
+
         elif module == 'seismology':
             self.seismology.SismologicoMX()
         elif module == 'meteorology':
@@ -177,8 +183,6 @@ class Cancun(object):
             self.command.execute()
         elif module == 'bc':
             self.command.background()
-        elif module == 'poc':
-            self.poc.report()
         else:
             print 'Module not found! Please check its name...\n'
 

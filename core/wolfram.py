@@ -19,10 +19,13 @@ class Wolfram(object):
     def question(self, question):
         logging.info('Wolfram Question')
         logging.info("Wolfram Alpha Experimental Module, Computational Knowledge Engine")
-        res = self.client.query(question)
-        logging.info((next(res.results).text))
-        string = re.sub('[^0-9a-zA-Z]+', ' ', next(res.results).text)
-        logging.info(string)
-        return string
+        try:
+            res = self.client.query(question)
+            logging.info((next(res.results).text))
+            string = re.sub('[^0-9a-zA-Z]+', ' ', next(res.results).text)
+            logging.info(string)
+            return string
+        except:
+            return None
 
 # End of File
