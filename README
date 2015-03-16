@@ -1,26 +1,21 @@
 Cancun Project
-"Abraham Arce" xe1gyq (at) gmail (dot) com
 
-What is Cancun Project?
+Software Voice Infrastructure for the Amateur Radio Community
 
- Cancun Project is a Text to Speech Experimental Software Infraestructure for
- HAM Radio Operators and Amateur Radio Clubs
+- Production Modules
 
-
-Pre-Alpha Release, Codename "Volta"
-
-- Initial Code
-- Core Modules
-
-  * Morse Code
-  * Phonetic
-  * Push To Talk
-  * Voice Synthetizer (festival, espeak, google)
-
-- Core Features
-
+  * Alive
+  * Aprstt
+  * Clock.Date
+  * Clock.Hour
   * Identification
-  * Clock (Date & Time)
-  * Weather (Yahoo, NOAA, APRS)
+  * Selfie
+  * Weather
+  * WolframAlpha
+
+Social Media
+
+  @ArjacCancun
+  #ProyectoCancun
 
 Copyright 2014, Released under Apache License
