@@ -33,7 +33,7 @@ class Selfie(object):
         try:
             self.camera.execute()
             message = Randomizer(2) + ' ' + self.conf.get("system", "hashtag") + ' #Selfie '
-            message = message + 'Voice Experimental Station ... Visit me @ https://github.com/xe1gyq/cancun'
+            message = message + 'Voice Infrastructure ... Visit me @ https://github.com/xe1gyq/cancun'
             logging.info(message)
             media='output/camerapygame.jpg'
             self.twitterc.timeline_set(message, media)
@@ -43,6 +43,5 @@ class Selfie(object):
             self.voicesynthetizer.speechit(message)
         except:
             logging.error('Cannot open Camera device')
-
 
 # End of File
