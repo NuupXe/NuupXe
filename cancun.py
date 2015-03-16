@@ -16,23 +16,28 @@ from apscheduler.threadpool import ThreadPool
 from core.irlp import Irlp
 from core.voicesynthetizer import VoiceSynthetizer
 
-from learning.morseteacher import MorseTeacher
+# Production
 
 from modules.alive import Alive
-from modules.assistant import Assistant
 from modules.aprstt import Aprstt
-from modules.voicecommand import VoiceCommand
 from modules.clock import Clock
 from modules.identification import Identification
+from modules.selfie import Selfie
+from modules.voicecommand import VoiceCommand
+from modules.weather import Weather
+from modules.wolframalpha import WolframAlpha
+
+# Experimental
+
+from modules.assistant import Assistant
 from modules.messages import Messages
 from modules.meteorology import Meteorology
+from learning.morseteacher import MorseTeacher
 from modules.news import News
-from modules.selfie import Selfie
 from modules.seismology import Seismology
 from modules.tracker import Tracker
 from modules.voicemail import VoiceMail
-from modules.weather import Weather
-from modules.wolframalpha import WolframAlpha
+from modules.voiceexperimental import VoiceExperimental
 
 class Cancun(object):
 
@@ -65,9 +70,10 @@ class Cancun(object):
         self.meteorology = Meteorology(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.news = News(self.voicesynthetizer)
-        self.tracker = Tracker(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
+        self.tracker = Tracker(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
+        self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
 
     def dtmf_setup(self,dtmf):
         dtmf_codes = {
@@ -155,6 +161,8 @@ class Cancun(object):
 
         # Experimental Modules
 
+        elif module == 'voiceexperimental':
+            self.voiceexperimental.listen()
         elif module == 'seismology':
             self.seismology.SismologicoMX()
         elif module == 'meteorology':
@@ -173,11 +181,11 @@ class Cancun(object):
             self.messages.stations()
         elif module == 'tracker':
             self.tracker.query()
-        elif module == 'vm':
+        elif module == 'voicemail':
             self.voicemail.run(dtmf)
         elif module == 'assistant':
             self.assistant.demo1()
-        elif module == 'bc':
+        elif module == 'voicebackground':
             self.voicecommand.background()
         else:
             print 'Module not found! Please check its name...\n'
