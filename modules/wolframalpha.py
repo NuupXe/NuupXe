@@ -24,7 +24,6 @@ class WolframAlpha(object):
 
         logging.info('Wolfram Alpha Cleanup')
         self.voicerecognition.languageset('spanish')
-        self.voicerecognition.languageset('spanish')
         self.voicesynthetizer.setlanguage("spanish")
 
     def ask(self):
