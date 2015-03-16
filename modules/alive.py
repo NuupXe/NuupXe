@@ -18,6 +18,7 @@ class Alive(object):
 
     def setup(self):
 
+        logging.info('Alive Setup')
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/general.config"
         self.conf.read(self.path)
@@ -28,6 +29,7 @@ class Alive(object):
 
     def report(self):
 
+        logging.info('Alive Report')
         self.setup()
 
         cpu = self.system.cpu()
@@ -38,7 +40,7 @@ class Alive(object):
         kernel = 'Kernel ' + kernel
         system = ' ' + cpu + ' ' + memory + ' ' + kernel
 
-        message = Randomizer(2) + ' #HamRadio #Hamr #Linux ' + self.conf.get("system", "hashtag") + ' '
+        message = Randomizer(2) + ' ' + self.conf.get("system", "hashtag") + ' '
         message = message + self.conf.get("general", "twitter") 
         technical = ' Freq ' + self.conf.get("general", "frequency") + system
         message = message + ' ' + technical
