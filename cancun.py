@@ -81,7 +81,8 @@ class Cancun(object):
         'PS1': 'aprstracker',
         'PS2': 'selfie',
         'PS3': 'voicecommand',
-        'PS4': 'wolframalpha'
+        'PS4': 'wolframalpha',
+        'PS5': 'voiceexperimental'
         }
         return dtmf_codes.get(dtmf)
 
