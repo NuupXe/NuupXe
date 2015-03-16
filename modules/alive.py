@@ -30,14 +30,21 @@ class Alive(object):
 
         self.setup()
 
-        system = self.system.execute()
-        message = Randomizer(2) + ' ' + self.conf.get("system", "hashtag") + ' '
-        message = message + self.conf.get("general", "twitter") + ' Frequency ' + self.conf.get("general", "frequency")
-        message = message + ' .. ' + system
+        cpu = self.system.cpu()
+        cpu = 'Cpu ' + cpu + '%'
+        memory = self.system.memory()
+        memory = 'Memory ' + memory
+        kernel = self.system.kernelVersion()
+        kernel = 'Kernel ' + kernel
+        system = ' ' + cpu + ' ' + memory + ' ' + kernel
 
-        logging.info(message)
-        self.aprs.send_message(system)
+        message = Randomizer(2) + ' #HamRadio #Hamr #Linux ' + self.conf.get("system", "hashtag") + ' '
+        message = message + self.conf.get("general", "twitter") 
+        technical = ' Freq ' + self.conf.get("general", "frequency") + system
+        message = message + ' ' + technical
+
+        self.aprs.send_message(technical)
         self.twitterc.timeline_set(message, media=None)
-        self.twitterc.timeline_get('arjaccancun', 1)
+        logging.info(message)
 
 # End of File
