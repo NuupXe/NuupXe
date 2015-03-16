@@ -21,8 +21,7 @@ from learning.morseteacher import MorseTeacher
 from modules.alive import Alive
 from modules.assistant import Assistant
 from modules.aprstt import Aprstt
-from modules.command import Command
-from modules.commandterminal import CommandTerminal
+from modules.voicecommand import VoiceCommand
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.messages import Messages
@@ -56,13 +55,12 @@ class Cancun(object):
         self.clock = Clock(self.voicesynthetizer)
         self.identification = Identification(self.voicesynthetizer)
         self.selfie = Selfie(self.voicesynthetizer)
+        self.voicecommand = VoiceCommand(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
         self.wolframalpha = WolframAlpha(self.voicesynthetizer)
 
         # Experimental Modules
         self.assistant = Assistant(self.voicesynthetizer)
-        self.command = Command(self.voicesynthetizer)
-        self.commandterminal = CommandTerminal(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.meteorology = Meteorology(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
@@ -75,7 +73,8 @@ class Cancun(object):
         dtmf_codes = {
         'PS0': 'alive',
         'PS1': 'selfie',
-        'PS2': 'wolframalpha'
+        'PS2': 'voicecommand',
+        'PS3': 'wolframalpha'
         }
         return dtmf_codes.get(dtmf)
 
@@ -96,9 +95,8 @@ class Cancun(object):
 
     def scheduler_mode(self):
 
-        print "[" + time.ctime() + "] Scheduler Mode\n"
+        logging.info('Mode Scheduler')
         self.voicesynthetizer.speechit("Modo Planificador")
-
         self.scheduler = Scheduler(misfire_grace_time=900, coalesce=True, threadpool=ThreadPool(max_threads=1))
         self.schedule()
         self.scheduler.start()
@@ -117,7 +115,7 @@ class Cancun(object):
 
     def writing_mode(self):
 
-        print "[" + time.ctime() + "] Writing Mode\n"
+        logging.info('Mode')
         self.voicesynthetizer.speechit("Modo Escritura")
 
         while True:
@@ -132,7 +130,7 @@ class Cancun(object):
 
     def module_mode(self, module, dtmf):
 
-        print "[" + time.ctime() + "] Module Mode\n"
+        logging.info('Mode Module')
 
         # Production Modules
 
@@ -148,6 +146,8 @@ class Cancun(object):
             self.identification.identify()
         elif module == 'selfie':
             self.selfie.get()
+        elif module == 'voicecommand':
+            self.voicecommand.execute()
         elif module == 'weather':
             self.weather.report()
         elif module == 'wolframalpha':
@@ -179,10 +179,8 @@ class Cancun(object):
             self.commandterminal.execute()
         elif module == 'assistant':
             self.assistant.demo1()
-        elif module == 'command':
-            self.command.execute()
         elif module == 'bc':
-            self.command.background()
+            self.voicecommand.background()
         else:
             print 'Module not found! Please check its name...\n'
 

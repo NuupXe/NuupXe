@@ -19,7 +19,7 @@ class SpeechRecognition(object):
 
     def languageset(self, language):
 
-        logging.info('SpeechRecognition LanguageSet')
+        logging.info('SpeechRecognition LanguageSet %s', language)
         if language == 'english':
             self.language = 'en-US'
         elif language == 'spanish':
@@ -54,6 +54,7 @@ class SpeechRecognition(object):
         response = p.read()
         response = response.split('\n', 1)[1]
         result = json.loads(response)['result'][0]['alternative'][0]['transcript']
+        logging.info('Result: %s', result)
         return result
 
     def nexiwave(self, audiofile):
