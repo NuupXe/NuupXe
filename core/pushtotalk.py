@@ -1,6 +1,10 @@
+#!/usr/bin/python
+# -*- coding: latin-1 -*-
 import commands
 import ConfigParser
+import logging
 import serial
+import subprocess
 import sys
 import time
 
@@ -24,6 +28,8 @@ class PushToTalk(object):
             self.port.close()
 
     def openport(self):
+
+        logging.info('Push To Talk Open Port')
         try:
             self.irlp.busy()
             self.irlp.forceptt()
@@ -35,6 +41,8 @@ class PushToTalk(object):
             pass
 
     def closeport(self):
+
+        logging.info('Push To Talk Open Port')
         try:
             self.irlp.forceunptt()
             self.port.close()
@@ -42,8 +50,11 @@ class PushToTalk(object):
             pass
 
     def message(self, msg):
+
+        logging.info('Push To Talk Message')
         self.openport()
-        status, output = commands.getstatusoutput(msg)
+        proc = subprocess.call(msg)
+        logging.info(msg)
         self.closeport()
 
 # End of File
