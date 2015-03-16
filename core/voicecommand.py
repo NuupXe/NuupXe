@@ -12,8 +12,9 @@ class VoiceCommand(object):
 
     def __init__(self, voicesynthetizer):
 
-	self.output = ""
+        self.output = ""
         self.agent = "google"
+        self.language = 'spanish'
         self.audiofilewav = "voicecommand.wav"
         self.audiofileflac = "voicecommand.flac"
         self.voicesynthetizer = voicesynthetizer
@@ -30,9 +31,13 @@ class VoiceCommand(object):
         status, output = commands.getstatusoutput("rm " + self.audiofilewav)
         status, output = commands.getstatusoutput("rm " + self.audiofileflac)
 
+    def languageset(self, language):
+        self.language = language
+        self.speechrecognition.languageset(self.language)
+
     def record(self):
 
-        print '[Cancun] Voice Command Record'
+        print 'Voice Command Record'
 
         if self.agent == 'nexiwave':
             status, output = commands.getstatusoutput("arecord -vv -f cd -d 5 " + self.audiofilewav)
@@ -51,7 +56,7 @@ class VoiceCommand(object):
 
     def decode(self, speech):
 
-        print '[Cancun] Voice Command Decode'
+        print 'Voice Command Decode'
 
 	if speech == 'True':
             self.voicesynthetizer.speechit("Estamos procesando tu respuesta")
