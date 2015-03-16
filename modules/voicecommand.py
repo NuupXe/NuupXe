@@ -50,7 +50,7 @@ class VoiceCommand(object):
             logging.error('Voice Command Unknown!')
             self.voicesynthetizer.speechit("No entendimos tu comando!")
 
-    def execute(self):
+    def listen(self):
 
         logging.info('Voice Command Listen')
         self.presentation()

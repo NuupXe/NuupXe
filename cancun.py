@@ -147,7 +147,7 @@ class Cancun(object):
         elif module == 'selfie':
             self.selfie.get()
         elif module == 'voicecommand':
-            self.voicecommand.execute()
+            self.voicecommand.listen()
         elif module == 'weather':
             self.weather.report()
         elif module == 'wolframalpha':
@@ -175,8 +175,6 @@ class Cancun(object):
             self.tracker.query()
         elif module == 'vm':
             self.voicemail.run(dtmf)
-        elif module == 'terminal':
-            self.commandterminal.execute()
         elif module == 'assistant':
             self.assistant.demo1()
         elif module == 'bc':
@@ -203,9 +201,7 @@ class Cancun(object):
         # self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
         # self.scheduler.add_interval_job(self.news.getitems, minutes=60)
         # self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=60)
-        # self.scheduler.add_interval_job(self.commandterminal.execute, minutes=120)
         # self.scheduler.add_interval_job(self.messages.stations, minutes=240)
-        # self.scheduler.add_interval_job(self.commandterminal.execute, minutes=30)
 
 	# Learning Modules, AREJ
         self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,12,17',minute ='00',second='0')
