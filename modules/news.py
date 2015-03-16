@@ -29,7 +29,9 @@ class News(threading.Thread):
 		self.initialize()
 
 	def initialize(self):
+		self.seturl("http://www.eluniversal.com.mx/rss/universalmxm.xml")
 		self.seturl("http://www.eluniversal.com.mx/rss/notashome.xml")
+		self.seturl("http://www.eluniversal.com.mx/rss/computo.xml")
 		self.parseurl()
 		self.setchannel("national")
 		self.setitemsnumber("1")
@@ -63,34 +65,18 @@ class News(threading.Thread):
 		newsdata = self.parsedurl
 		channel = newsdata.feed
 
-	def remove_accents(self, input_str):
-		nkfd_form = unicodedata.normalize('NFKD', input_str)
-		only_ascii = nkfd_form.encode('ASCII', 'ignore')
-		return only_ascii
-
 	def getitems(self):
                 newsdata = self.parsedurl
                 items = newsdata.entries
 
-		for item in items[0:5]:
-                        messagetitle = self.remove_accents(item['title'])
-                        messagedescription = self.remove_accents(item['description'])
-			if self.speak.getsynthetizer() == "google":
-				messagetitle = "\"" + messagetitle + "\""
-				messagedescription = "\"" + messagedescription + "\""
-			self.speak.speechit(messagetitle)
-			self.speak.speechit(messagedescription)
+		for item in items[0:2]:
+                        messagetitle = item['title'].replace("&quot;", "")
+			messagetitle = messagetitle.replace("#39;", "")
+                        messagedescription = item['description'].replace("&quot;", "")
+			messagedescription = messagedescription.replace("#39;", "")
+			if not messagetitle.startswith("<img"):
+				self.speak.speechit(messagetitle)
+			if not messagedescription.startswith("<img"):
+				self.speak.speechit(messagedescription)
 
-if __name__ == "__main__":
-
-	mynews = News()
-
-	mynews.seturl("http://www.eluniversal.com.mx/rss/universalmxm.xml")
-	mynews.seturl("http://www.eluniversal.com.mx/rss/computo.xml")
-	mynews.setchannel("national")
-	mynews.setitemsnumber("1")
-	mynews.parseurl()
-
-	title = mynews.gettitle()
-	mynews.getitems()
-
+# End of File
