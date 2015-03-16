@@ -59,13 +59,16 @@ class AprsTracker(object):
         logging.info(data)
 
         for entry in data['entries']:
-            self.speaker.speechit("Seguimiento por voz de estaciones en a p r s punto f i")
+            self.speaker.speechit("Localizacion de estaciones a traves de a p r s punto f i")
             self.speaker.speechit("Estacion , " + ' '.join(self.phonetic.decode(self.callsign)))
             weekday, day, month, year = self.clock(entry['lasttime'])
             lasttimeseen = "Ultima vez visto " + weekday + ' ' + day + ' de ' + month + ' del ' + year
             self.speaker.speechit(lasttimeseen)
             try:
                 self.speaker.speechit("Velocidad " + str(entry['speed']) + " Km/h")
+            except:
+                pass
+            try:
                 self.speaker.speechit("Altitud " + str(entry['altitude']) + " metros" )
             except:
                 pass
