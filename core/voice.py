@@ -10,7 +10,7 @@ class Voice(object):
         self.filename = "voice.wav"
         self.proc = None
 
-    def record_filename(self, name):
+    def filenameset(self, name):
         self.filename = name
 
     def record_start(self):

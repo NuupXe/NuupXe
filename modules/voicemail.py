@@ -16,6 +16,8 @@ class VoiceMail(object):
         self.voice = Voice()
 
         self.voicesynthetizer = voicesynthetizer
+        self.audiofileuser = 'output/voicemailuser'
+        self.audiofilemessage = 'output/voicemailmessage'
 
     def __del__(self):
         pass
@@ -49,25 +51,18 @@ class VoiceMail(object):
 	if dtmf:
             self.voicesynthetizer.speechit("Codigo recibido " + dtmf)
         self.voicesynthetizer.speechit("Identificate por favor")
-        self.voice.record_filename('user.wav')
+        self.voice.filenameset(self.audiofileuser)
         self.record()
 
         self.voicesynthetizer.speechit("Deja tu mensaje")
-        self.voice.record_filename('message.wav')
+        self.voice.filenameset(self.audiofilemessage)
         self.record()
 
         self.voicesynthetizer.speechit("Mensaje de")
-        self.voice.record_filename('user.wav')
+        self.voice.filenameset(self.audiofileuser)
         self.play()
-        self.voice.record_filename('message.wav')
+        self.voice.filenameset(self.audiofilemessage)
         self.play()
         
-        #self.voicesynthetizer.speechit("Borrando el mensaje")
-        #self.erase()
-
-if __name__ == '__main__':
-
-    mytest = VoiceMail()
-    mytest.record()
-    mytest.play()
+# Enf of File
 

@@ -24,7 +24,7 @@ class VoiceRecognition(object):
         self.speechrecognition = SpeechRecognition()
         self.voice = Voice()
 
-        self.voice.record_filename(self.audiofilewav)
+        self.voice.filenameset(self.audiofilewav)
 
     def __del__(self):
 
