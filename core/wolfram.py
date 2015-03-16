@@ -7,12 +7,9 @@ import wolframalpha
 
 class Wolfram(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self):
 
-        self.voicesynthetizer = voicesynthetizer
-        
-    def setup(self):
-        logging.info('Wolfram Setup')
+        logging.info('Wolfram')
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/services.config"
         self.conf.read(self.path)
@@ -21,15 +18,11 @@ class Wolfram(object):
 
     def question(self, question):
         logging.info('Wolfram Question')
-        self.setup()
-        self.voicesynthetizer.setlanguage("english")
         logging.info("Wolfram Alpha Experimental Module, Computational Knowledge Engine")
         res = self.client.query(question)
-        self.voicesynthetizer.speechit(question)
         logging.info((next(res.results).text))
         string = re.sub('[^0-9a-zA-Z]+', ' ', next(res.results).text)
         logging.info(string)
-        self.voicesynthetizer.speechit(string)
-        self.voicesynthetizer.setlanguage("spanish")
+        return string
 
 # End of File

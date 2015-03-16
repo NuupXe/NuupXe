@@ -15,7 +15,6 @@ from apscheduler.threadpool import ThreadPool
 
 from core.irlp import Irlp
 from core.voicesynthetizer import VoiceSynthetizer
-from core.wolfram import Wolfram
 
 from learning.morseteacher import MorseTeacher
 
@@ -34,6 +33,7 @@ from modules.seismology import Seismology
 from modules.tracker import Tracker
 from modules.voicemail import VoiceMail
 from modules.weather import Weather
+from modules.poc import Poc
 
 class Cancun(object):
 
@@ -69,7 +69,7 @@ class Cancun(object):
         self.tracker = Tracker(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
-        self.wolfram = Wolfram(self.voicesynthetizer)
+        self.poc = Poc(self.voicesynthetizer)
 
     def dtmf_setup(self,dtmf):
         dtmf_codes = {
@@ -169,8 +169,6 @@ class Cancun(object):
             self.tracker.query()
         elif module == 'vm':
             self.voicemail.run(dtmf)
-        elif module == 'wolfram':
-            self.wolfram.question('how many grams in kilograms')
         elif module == 'terminal':
             self.commandterminal.execute()
         elif module == 'assistant':
@@ -179,6 +177,8 @@ class Cancun(object):
             self.command.execute()
         elif module == 'bc':
             self.command.background()
+        elif module == 'poc':
+            self.poc.report()
         else:
             print 'Module not found! Please check its name...\n'
 
@@ -192,8 +192,8 @@ class Cancun(object):
         # Production Modules
         self.scheduler.add_interval_job(self.alive.report, minutes=60)
         self.scheduler.add_cron_job(self.clock.date,month='*',day_of_week='*',hour='6,12,22',minute ='00',second='0')
-        self.scheduler.add_interval_job(self.clock.hour, minutes=60)
-        self.scheduler.add_interval_job(self.identification.identify, minutes=120)
+        self.scheduler.add_interval_job(self.clock.hour, minutes=15)
+        self.scheduler.add_interval_job(self.identification.identify, minutes=30)
         self.scheduler.add_cron_job(self.selfie.get,month='*',day_of_week='*',hour='6,12,22',minute ='00',second='0')
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
 
