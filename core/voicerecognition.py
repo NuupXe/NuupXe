@@ -42,16 +42,7 @@ class VoiceRecognition(object):
         if self.agent == 'nexiwave':
             status, output = commands.getstatusoutput("arecord -vv -f cd -d 5 " + self.audiofilewav)
         elif self.agent == 'google':
-            print 'In voice command'
-            time.sleep(1)
-            while self.irlp.cosenabled() is 256:
-                pass
-            while self.irlp.cosenabled() is 0:
-                pass
-            proc = self.voice.recordstart()
-            while self.irlp.cosenabled() is 256:
-                pass
-            self.voice.recordstop(proc)
+            self.voice.record()
             commands.getstatusoutput("flac -f -o " + self.audiofileflac + " --channels=1 --sample-rate=48000 " + self.audiofilewav)
 
     def recognize(self, speech):
