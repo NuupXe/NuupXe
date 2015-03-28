@@ -25,6 +25,9 @@ class Irlp(object):
         self.forceunkey = self.irlppath + 'bin/forceunkey'
         self.activeflag = self.irlppath + 'local/active'
 
+    def exists(self):
+        return os.path.isfile(self.irlppath + 'bin/coscheck')
+
     def active(self):
         return os.path.isfile(self.activeflag)
 
