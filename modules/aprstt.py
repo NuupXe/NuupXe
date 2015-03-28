@@ -10,6 +10,8 @@ from core.aprsnet import AprsNet
 from core.voicesynthetizer import VoiceSynthetizer
 from core.phonetic import Phonetic
 
+from modules.aprstracker import AprsTracker
+
 class Aprstt(object):
 
     def __init__(self, voicesynthetizer):
@@ -21,6 +23,7 @@ class Aprstt(object):
         self.path = "configuration/aprstt.config"
         self.conf.read(self.path)
 
+        self.aprstracker =  AprsTracker(voicesynthetizer)
         self.speaker = voicesynthetizer
 
     def dtmf_replace(self, pair):
@@ -158,7 +161,10 @@ class Aprstt(object):
         callsign = self.keytype_get_aprstt(string)
         if callsign:
             self.speaker.speechit("Bienvenido " + ' '.join(self.phonetic.decode(callsign)))
-            self.aprs.address_set(callsign)
+            callsignmobile = callsign + '-9'
+            print callsignmobile
+            self.aprstracker.localize(callsignmobile)
+            self.aprs.address_set(callsignmobile)
             self.aprs.position_set(self.city_randomposition())
             self.aprs.send_message("Cancun Project APRS Touch Tone Basic Implementation, Random Position")
             sys.exit(0)

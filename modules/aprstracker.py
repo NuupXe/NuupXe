@@ -52,15 +52,18 @@ class AprsTracker(object):
     def query(self):
 
         logging.info('Aprs Tracker Query')
+        self.speaker.speechit("Localizacion de estaciones a traves de a p r s punto f i")
+        self.localize(self.callsign)
 
-        self.aprsfi.callsignset(self.callsign)
+    def localize(self, callsign):
+
+        self.aprsfi.callsignset(callsign)
         self.aprsfi.dataset('loc')
         data = self.aprsfi.query()
         logging.info(data)
 
         for entry in data['entries']:
-            self.speaker.speechit("Localizacion de estaciones a traves de a p r s punto f i")
-            self.speaker.speechit("Estacion , " + ' '.join(self.phonetic.decode(self.callsign)))
+            self.speaker.speechit("Estacion , " + ' '.join(self.phonetic.decode(callsign)))
             weekday, day, month, year = self.clock(entry['lasttime'])
             lasttimeseen = "Ultima vez visto " + weekday + ' ' + day + ' de ' + month + ' del ' + year
             self.speaker.speechit(lasttimeseen)
@@ -78,7 +81,7 @@ class AprsTracker(object):
                 self.speaker.speechit("Calle " + results[0].route)
                 self.speaker.speechit("Colonia " + results[0].political)
                 if results[0].administrative_area_level_2:
-                    self.speaker.speechit("Municipip " + results[0].administrative_area_level_2)
+                    self.speaker.speechit("Municipio " + results[0].administrative_area_level_2)
                 elif results[0].locality:
                     self.speaker.speechit("Municipio " + results[0].locality)
                 self.speaker.speechit(" " + results[0].administrative_area_level_1)
