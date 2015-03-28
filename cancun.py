@@ -210,10 +210,10 @@ class Cancun(object):
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
 
         # Experimental Modules
-        # self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=60)
-        # self.scheduler.add_interval_job(self.news.getitems, minutes=60)
-        # self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=60)
-        # self.scheduler.add_interval_job(self.messages.stations, minutes=240)
+        self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=120)
+        self.scheduler.add_interval_job(self.news.getitems, minutes=120)
+        self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=120)
+        self.scheduler.add_interval_job(self.messages.stations, minutes=240)
 
 	# Learning Modules, AREJ
         self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,12,17',minute ='00',second='0')
