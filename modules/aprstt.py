@@ -167,7 +167,8 @@ class Aprstt(object):
             self.aprs.address_set(callsignmobile)
             self.aprs.position_set(self.city_randomposition())
             self.aprs.send_message("Cancun Project APRS Touch Tone Basic Implementation, Random Position")
-            sys.exit(0)
+
+        return
 
         if self.keytype_get(string) is 'callsign':
             user, generic = self.user_get(string)

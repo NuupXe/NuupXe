@@ -275,13 +275,13 @@ def main(argv):
     if args.module:
         experimental.module_mode(args.module, args.dtmf)
 
-    if args.server == 'scheduler':
+    elif args.server == 'scheduler':
         experimental.scheduler_mode()
 
     elif args.server == 'writing':
         experimental.writing_mode()
 
-    if args.dtmf:
+    elif args.dtmf:
         logging.info(args.dtmf)
         if len(args.dtmf) == 3:
             module = experimental.dtmf_setup(args.dtmf)
