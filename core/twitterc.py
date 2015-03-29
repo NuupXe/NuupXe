@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import logging
 import tweepy
 import twython
 import ConfigParser
@@ -7,10 +8,11 @@ import ConfigParser
 from tweepy import OAuthHandler
 from twython import Twython
 
-class TwitterC(object):
+class TwitterC(logging.Handler):
 
     def __init__(self, agent):
 
+        logging.Handler.__init__(self)
         self.agent = agent
         self.configuration()
         self.authentication()

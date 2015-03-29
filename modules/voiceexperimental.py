@@ -3,6 +3,7 @@
 import json
 import logging
 
+from core.emailx import Emailx
 from core.twitterc import TwitterC
 from core.voicerecognition import VoiceRecognition
 
@@ -11,6 +12,7 @@ class VoiceExperimental(object):
     def __init__(self, voicesynthetizer):
 
         self.voicesynthetizer = voicesynthetizer
+        self.emailx = Emailx()
         self.twitterc = TwitterC('twython')
         self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
 
@@ -37,6 +39,8 @@ class VoiceExperimental(object):
         self.voicesynthetizer.speechit(question)
         question = '#HamRadio #ProyectoCancun #VoiceExperimental Module ... ' + question.capitalize()
         self.twitterc.timeline_set(question, media=None)
+        self.emailx.create('arjac.cacun', 'Voice Experimental Listen', question)
+        self.emailx.send()
         self.cleanup()
 
 # End of File
