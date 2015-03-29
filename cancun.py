@@ -85,7 +85,8 @@ class Cancun(object):
         'PS5': 'selfie',
         'PS6': 'voicecommand',
         'PS7': 'voiceexperimental',
-        'PS8': 'wolframalpha'
+        'PS8': 'wolframalpha',
+        'PS9': 'voicemail'
         }
         return dtmf_codes.get(dtmf)
 
