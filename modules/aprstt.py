@@ -162,9 +162,9 @@ class Aprstt(object):
         if callsign:
             self.speaker.speechit("Bienvenido " + ' '.join(self.phonetic.decode(callsign)))
             callsignmobile = callsign + '-9'
-            print callsignmobile
+            callsignexperimental = callsign + '-15'
             self.aprstracker.localize(callsignmobile)
-            self.aprs.address_set(callsignmobile)
+            self.aprs.address_set(callsignexperimental)
             self.aprs.position_set(self.city_randomposition())
             self.aprs.send_message("Cancun Project APRS Touch Tone Basic Implementation, Random Position")
 
