@@ -151,6 +151,8 @@ class Cancun(object):
             self.clock.date()
         elif module == 'hour':
             self.clock.hour()
+        elif module == 'temperature':
+            self.weather.temperature()
         elif module == 'weather':
             self.weather.report()
 

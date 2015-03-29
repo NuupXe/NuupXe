@@ -95,4 +95,11 @@ class Weather(object):
 
         self.aprspacket()
 
+    def temperature(self):
+
+        location = self.conf.get("weather", "location")
+        result = pywapi.get_weather_from_yahoo(location, 'metric')
+
+        self.speaker.speechit("Temperatura? " + result['condition']['temp'] + " grados centigrados")
+
 # End of File
