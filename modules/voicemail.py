@@ -21,29 +21,14 @@ class VoiceMail(object):
 
     def __del__(self):
         pass
-        #status, output = commands.getstatusoutput("rm " + self.audiofilewav)
 
     def record(self):
         print '[Cancun] Voice Mail Record'
-        time.sleep(1)
-        while self.irlp.cosenabled() is 256:
-            pass
-        while self.irlp.cosenabled() is 0:
-            pass
-        proc = self.voice.recordstart()
-        while self.irlp.cosenabled() is 256:
-            pass
-        self.voice.recordstop(proc)
+        self.voice.record()
 
     def play(self):
         print '[Cancun] Voice Mail Play'
-        self.pushtotalk.openport()
         self.voice.play()
-        self.pushtotalk.closeport()
-
-    def erase(self):
-        print '[Cancun] Voice Mail Erase'
-        self.voice.erase()
 
     def run(self, dtmf):
         print '[Cancun] Voice Mail Run'
@@ -63,6 +48,6 @@ class VoiceMail(object):
         self.play()
         self.voice.filenameset(self.audiofilemessage)
         self.play()
-        
+
 # Enf of File
 
