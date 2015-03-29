@@ -46,6 +46,9 @@ class VoiceCommand(object):
         elif re.search(r'clima', output, re.M|re.I):
             logging.info('Voice Command Decode Weather')
             self.weather.report()
+        elif re.search(r'tempe', output, re.M|re.I) or re.search(r'tura', output, re.M|re.I):
+            logging.info('Voice Command Decode Temperature')
+            self.weather.temperature()
         else:
             logging.error('Voice Command Unknown!')
             self.voicesynthetizer.speechit("No entendimos tu comando!")
