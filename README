@@ -19,4 +19,17 @@ Social Media
   @ArjacCancun
   #ProyectoCancun
 
+Groups Required
+ Add your username to dialout, audio and video groups
+
+Intel IoT DevKit
+ $ git clone https://github.com/intel-iot-devkit/mraa.git
+ # apt-get install swig cmake
+ $ cmake -DBUILDSWIGNODE=OFF ..
+ $ make
+ # make install
+ $ export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/site-packages/
+
 Copyright 2014, Released under Apache License
+
+# End of file
