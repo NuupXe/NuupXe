@@ -60,20 +60,20 @@ class Cancun(object):
         self.aprstt = Aprstt(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
         self.identification = Identification(self.voicesynthetizer)
+        self.meteorology = Meteorology(self.voicesynthetizer)
+        self.news = News(self.voicesynthetizer)
         self.selfie = Selfie(self.voicesynthetizer)
         self.voicecommand = VoiceCommand(self.voicesynthetizer)
+        self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
         self.wolframalpha = WolframAlpha(self.voicesynthetizer)
 
         # Experimental Modules
         self.assistant = Assistant(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
-        self.meteorology = Meteorology(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
-        self.news = News(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
-        self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
 
     def dtmf_setup(self,dtmf):
         dtmf_codes = {
@@ -81,10 +81,11 @@ class Cancun(object):
         'PS1': 'aprstracker',
         'PS2': 'news',
         'PS3': 'meteorology',
-        'PS4': 'selfie',
-        'PS5': 'voicecommand',
-        'PS6': 'wolframalpha',
-        'PS7': 'voiceexperimental'
+        'PS4': 'seismology',
+        'PS5': 'selfie',
+        'PS6': 'voicecommand',
+        'PS7': 'voiceexperimental',
+        'PS8': 'wolframalpha'
         }
         return dtmf_codes.get(dtmf)
 
@@ -142,43 +143,48 @@ class Cancun(object):
 
         logging.info('Mode Module')
 
-        # Production Modules
+        # Custom Decode Activated Modules
 
-        if module == 'alive':
-            self.alive.report()
-        elif module == 'aprstracker':
-            self.aprstracker.query()
-        elif module == 'aprstt':
-            self.aprstt.query(dtmf)
+        if module == 'identification':
+            self.identification.identify()
         elif module == 'date':
             self.clock.date()
         elif module == 'hour':
             self.clock.hour()
-        elif module == 'identification':
-            self.identification.identify()
+        elif module == 'weather':
+            self.weather.report()
+
+        # PS Activated Modules
+
+        elif module == 'alive':
+            self.alive.report()
+        elif module == 'aprstracker':
+            self.aprstracker.query()
+        elif module == 'news':
+            self.news.getitems()
+        elif module == 'meteorology':
+            self.meteorology.conagua_clima()
         elif module == 'selfie':
             self.selfie.get()
         elif module == 'voicecommand':
             self.voicecommand.listen()
-        elif module == 'weather':
-            self.weather.report()
         elif module == 'wolframalpha':
             self.wolframalpha.ask()
+        elif module == 'voiceexperimental':
+            self.voiceexperimental.listen()
+
+        # SS Activated Modules
 
         # Experimental Modules
 
-        elif module == 'voiceexperimental':
-            self.voiceexperimental.listen()
+        elif module == 'aprstt':
+            self.aprstt.query(dtmf)
         elif module == 'seismology':
             self.seismology.SismologicoMX()
-        elif module == 'meteorology':
-            self.meteorology.conagua_clima()
         elif module == 'morselearn':
             self.morseteacher.learn()
         elif module == 'morsecontest'	:
             self.morseteacher.contest()
-        elif module == 'news':
-            self.news.getitems()
 	elif module == 'regulations':
             self.messages.readfile('learning/reglamentos.1')
 	elif module == 'radioclub':
