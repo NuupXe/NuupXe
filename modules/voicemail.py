@@ -28,7 +28,9 @@ class VoiceMail(object):
 
     def play(self):
         print '[Cancun] Voice Mail Play'
+        self.pushtotalk.openport()
         self.voice.play()
+        self.pushtotalk.closeport()
 
     def run(self, dtmf):
         print '[Cancun] Voice Mail Run'
