@@ -34,25 +34,31 @@ class VoiceMailer(object):
     def decodeUser(self, dmtf):
         logging.info('Voice Mailer Decode User')
         user = dmtf[2:]
-        callsign = self.conf.get(user, "callsign")
-        email = self.conf.get(user, "email")
+        try:
+            callsign = self.conf.get(user, "callsign")
+            email = self.conf.get(user, "email")
+        except ConfigParser.NoSectionError:
+            return None, None
         return callsign, email
 
     def attend(self, dtmf):
+
         logging.info('Voice Mailer Attend')
 
         user, email = self.decodeUser(dtmf)
-        user = ' '.join(self.phonetic.decode(user))
-        self.voicesynthetizer.speechit("Mensaje para " + user)
-
-        self.voicesynthetizer.speechit('Cual es tu mensaje?')
-        self.voicerecognition.record()
-        message = self.voicerecognition.recognize('False')
-        logging.info('Mensaje? ' + message)
-        self.voicesynthetizer.speechit(message)
-        filename = self.voicerecognition.filegetname()
-        self.emailx.create(email, 'Proyecto Cancun Voice Mailer! Mensaje ...', message, filename)
-        self.emailx.send()
+        if user:
+            user = ' '.join(self.phonetic.decode(user))
+            self.voicesynthetizer.speechit("Mensaje para " + user)
+            self.voicesynthetizer.speechit('Cual es tu mensaje?')
+            self.voicerecognition.record()
+            message = self.voicerecognition.recognize('False')
+            logging.info('Mensaje? ' + message)
+            self.voicesynthetizer.speechit(message)
+            filename = self.voicerecognition.filegetname()
+            self.emailx.create(email, 'Proyecto Cancun Voice Mailer! Mensaje ...', message, filename)
+            self.emailx.send()
+        else:
+            self.voicesynthetizer.speechit('Usuario no asignado!')
 
 # Enf of File
 
