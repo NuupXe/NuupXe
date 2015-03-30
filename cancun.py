@@ -89,7 +89,6 @@ class Cancun(object):
         'PS7' : 'voiceexperimental',
         'PS8' : 'wolframalpha',
         'PS9' : 'voicemail',
-        'SS00': 'voicemailer'
         }
         return dtmf_codes.get(dtmf)
 
@@ -300,9 +299,8 @@ def main(argv):
         if len(args.dtmf) == 3:
             module = experimental.dtmf_setup(args.dtmf)
             experimental.module_mode(module, args.dtmf)
-        elif len(args.dtmf) == 4:
-            module = experimental.dtmf_setup(args.dtmf)
-            experimental.module_mode(module, args.dtmf)
+        elif len(args.dtmf) == 4 and args.dtmf.startswith('SS'):
+            experimental.module_mode('voicemailer', args.dtmf)
         elif len(args.dtmf) > 10:
             experimental.module_mode('aprstt', args.dtmf)
 
