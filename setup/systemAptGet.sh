@@ -32,6 +32,8 @@ export packageText2Speech="festival espeak"
 export packageCurl="curl"
 export packageFswebcam="fswebcam"
 export packagePythonDev="python-dev"
+export packagePythonPywapi="python-pywapi"
+export packageFlac="flac"
 
 # =============================================================================
 # Script Functions
@@ -72,5 +74,7 @@ aptgetFunctionInstall $packageText2Speech
 aptgetFunctionInstall $packageCurl
 aptgetFunctionInstall $packageFswebcam
 aptgetFunctionInstall $packagePythonDev
+aptgetFunctionInstall $packagePythonPywapi
+aptgetFunctionInstall $packageFlac
 
 # End of file
