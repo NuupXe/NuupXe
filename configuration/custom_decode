@@ -11,6 +11,7 @@ if [ "$1" = "P5" ] ; then cd "$CUSTOM"/cancun; python cancun.py -m temperature ;
 
 # Cancun Project, Module Mode, Experimental
 if [[ "$1" == PS* ]] ; then cd "$CUSTOM"/cancun; python cancun.py -d $1 ; exit 1 ; fi
+if [[ "$1" == SS* ]] ; then cd "$CUSTOM"/cancun; python cancun.py -d $1 ; exit 1 ; fi
 if [[ "$1" == A* ]] ; then cd "$CUSTOM"/cancun; python cancun.py -d $1 ; exit 1 ; fi
 
 exit 0
