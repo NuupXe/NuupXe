@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import commands
+import logging
 import time
 
 from core.irlp import Irlp
@@ -32,12 +33,21 @@ class VoiceRecognition(object):
         status, output = commands.getstatusoutput("rm " + self.audiofileflac)
 
     def languageset(self, language):
+
+        logging.info('Voice Recognition Language Set')
+
         self.language = language
         self.speechrecognition.languageset(self.language)
 
+    def filegetname(self):
+
+        logging.info('Voice Recogntion File Get Name')
+
+        return self.audiofilewav
+
     def record(self):
 
-        print 'Voice Command Record'
+        logging.info('Voice Recognition Record')
 
         if self.agent == 'nexiwave':
             status, output = commands.getstatusoutput("arecord -vv -f cd -d 5 " + self.audiofilewav)
@@ -47,7 +57,7 @@ class VoiceRecognition(object):
 
     def recognize(self, speech):
 
-        print 'Voice Command Decode'
+        logging.info('Voice Recognition Decode')
 
 	if speech == 'True':
             self.pushtotalk.openport()

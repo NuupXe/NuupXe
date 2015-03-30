@@ -23,8 +23,12 @@ from modules.aprstracker import AprsTracker
 from modules.aprstt import Aprstt
 from modules.clock import Clock
 from modules.identification import Identification
+from modules.meteorology import Meteorology
+from modules.news import News
+from modules.seismology import Seismology
 from modules.selfie import Selfie
 from modules.voicecommand import VoiceCommand
+from modules.voicemail import VoiceMail
 from modules.weather import Weather
 from modules.wolframalpha import WolframAlpha
 
@@ -32,12 +36,9 @@ from modules.wolframalpha import WolframAlpha
 
 from modules.assistant import Assistant
 from modules.messages import Messages
-from modules.meteorology import Meteorology
 from learning.morseteacher import MorseTeacher
-from modules.news import News
-from modules.seismology import Seismology
-from modules.voicemail import VoiceMail
 from modules.voiceexperimental import VoiceExperimental
+from modules.voicemailer import VoiceMailer
 
 class Cancun(object):
 
@@ -64,7 +65,7 @@ class Cancun(object):
         self.news = News(self.voicesynthetizer)
         self.selfie = Selfie(self.voicesynthetizer)
         self.voicecommand = VoiceCommand(self.voicesynthetizer)
-        self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
+        self.voicemail = VoiceMail(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
         self.wolframalpha = WolframAlpha(self.voicesynthetizer)
 
@@ -73,20 +74,22 @@ class Cancun(object):
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
-        self.voicemail = VoiceMail(self.voicesynthetizer)
+        self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
+        self.voicemailer = VoiceMailer(self.voicesynthetizer)
 
     def dtmf_setup(self,dtmf):
         dtmf_codes = {
-        'PS0': 'alive',
-        'PS1': 'aprstracker',
-        'PS2': 'news',
-        'PS3': 'meteorology',
-        'PS4': 'seismology',
-        'PS5': 'selfie',
-        'PS6': 'voicecommand',
-        'PS7': 'voiceexperimental',
-        'PS8': 'wolframalpha',
-        'PS9': 'voicemail'
+        'PS0' : 'alive',
+        'PS1' : 'aprstracker',
+        'PS2' : 'news',
+        'PS3' : 'meteorology',
+        'PS4' : 'seismology',
+        'PS5' : 'selfie',
+        'PS6' : 'voicecommand',
+        'PS7' : 'voiceexperimental',
+        'PS8' : 'wolframalpha',
+        'PS9' : 'voicemail',
+        'SS00': 'voicemailer'
         }
         return dtmf_codes.get(dtmf)
 
@@ -171,10 +174,10 @@ class Cancun(object):
             self.selfie.get()
         elif module == 'voicecommand':
             self.voicecommand.listen()
+        elif module == 'voicemail':
+            self.voicemail.run(dtmf)
         elif module == 'wolframalpha':
             self.wolframalpha.ask()
-        elif module == 'voiceexperimental':
-            self.voiceexperimental.listen()
 
         # SS Activated Modules
 
@@ -194,12 +197,14 @@ class Cancun(object):
             self.messages.readfile('learning/arej.radioclubs')
         elif module == 'stations':
             self.messages.stations()
-        elif module == 'voicemail':
-            self.voicemail.run(dtmf)
         elif module == 'assistant':
             self.assistant.demo1()
         elif module == 'voicebackground':
             self.voicecommand.background()
+        elif module == 'voiceexperimental':
+            self.voiceexperimental.listen()
+        elif module == 'voicemailer':
+            self.voicemailer.attend(dtmf)
         else:
             print 'Module not found! Please check its name...\n'
 
@@ -293,6 +298,9 @@ def main(argv):
     elif args.dtmf:
         logging.info(args.dtmf)
         if len(args.dtmf) == 3:
+            module = experimental.dtmf_setup(args.dtmf)
+            experimental.module_mode(module, args.dtmf)
+        elif len(args.dtmf) == 4:
             module = experimental.dtmf_setup(args.dtmf)
             experimental.module_mode(module, args.dtmf)
         elif len(args.dtmf) > 10:
