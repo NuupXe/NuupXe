@@ -32,6 +32,8 @@ class Emailx(object):
 
     def create(self, to, subject, body, attachment=None):
 
+        self.to = to
+
         self.msg = MIMEMultipart()
         self.msg['Subject'] = subject
         self.msg['From'] = self.me
