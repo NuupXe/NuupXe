@@ -31,11 +31,11 @@ class Selfie(object):
         self.setup()
 
         try:
-            self.camera.execute()
+            self.camera.pictureCapture()
+            media = self.camera.picturePath()
             message = Randomizer(2) + ' ' + self.conf.get("system", "hashtag") + ' #Selfie '
             message = message + 'Voice Infrastructure ... Visit me @ https://github.com/xe1gyq/cancun'
             logging.info(message)
-            media='output/camerapygame.jpg'
             self.twitterc.timeline_set(message, media)
             message = "Hola! Mi selfie en twitter.com/ " + ' arjac cancun'
             self.voicesynthetizer.speechit(message)
