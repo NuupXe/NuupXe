@@ -18,22 +18,24 @@ class Selfie(object):
 	self.twitterc = TwitterC('twython')
         self.voicesynthetizer = voicesynthetizer
 
+        self.setup()
+
     def setup(self):
 
         logging.info('Selfie Setup')
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/general.config"
         self.conf.read(self.path)
+        self.hashtag = self.conf.get("system", "hashtag")
 
     def get(self):
 
         logging.info('Selfie Get')
-        self.setup()
 
         try:
             self.camera.pictureCapture()
             media = self.camera.picturePath()
-            message = Randomizer(2) + ' ' + self.conf.get("system", "hashtag") + ' #Selfie '
+            message = Randomizer(2) + ' ' + self.hashtag + ' #Selfie '
             message = message + 'Voice Infrastructure ... Visit me @ https://github.com/xe1gyq/cancun'
             logging.info(message)
             self.twitterc.timeline_set(message, media)

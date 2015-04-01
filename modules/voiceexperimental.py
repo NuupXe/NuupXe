@@ -16,6 +16,12 @@ class VoiceExperimental(object):
         self.twitterc = TwitterC('twython')
         self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
 
+        self.setup()
+
+    def __del__(self):
+
+        self.cleanup()
+
     def setup(self):
 
         logging.info('Voice Experimental Setup')
@@ -31,7 +37,6 @@ class VoiceExperimental(object):
     def listen(self):
 
         logging.info('Voice Experimental Listen')
-        self.setup()
         self.voicesynthetizer.speechit('Hola! Dime tu frase!')
         self.voicerecognition.record()
         question = self.voicerecognition.recognize('False')
@@ -41,6 +46,5 @@ class VoiceExperimental(object):
         self.twitterc.timeline_set(question, media=None)
         self.emailx.create('arjac.cacun', 'Voice Experimental Listen', question)
         self.emailx.send()
-        self.cleanup()
 
 # End of File

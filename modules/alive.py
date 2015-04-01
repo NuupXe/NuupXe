@@ -16,6 +16,8 @@ class Alive(object):
         self.system = System()
         self.twitterc = TwitterC('twython')
 
+        self.setup()
+
     def setup(self):
 
         logging.info('Alive Setup')
@@ -30,7 +32,6 @@ class Alive(object):
     def report(self):
 
         logging.info('Alive Report')
-        self.setup()
 
         cpu = self.system.cpu()
         cpu = 'Cpu ' + cpu + '%'
