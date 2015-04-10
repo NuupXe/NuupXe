@@ -22,8 +22,8 @@ class Identification(object):
     def identify(self):
         logging.info('Identification')
         self.morse.generate('cq cq')
-        self.voicesynthetizer.speechit(self.conf.get("general", "radioclub"))
-        message = ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
+        message = self.conf.get("general", "radioclub")
+        message = message + ' ' + ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
         message = "\"" + message + "\""
         self.voicesynthetizer.speechit(message)
         self.morse.generate(self.conf.get("general", "callsign"))
