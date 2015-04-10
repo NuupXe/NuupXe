@@ -269,7 +269,7 @@ def main(argv):
     experimental = Cancun(voicesynthetizer, irlp)
 
     if (args.module or args.server) and experimental.enabled():
-        voicesynthetizer.speechit("Proyecto Cancun ya habilitado, no podemos iniciar otra instancia")
+        logging.info("Proyecto Cancun ya habilitado, no podemos iniciar otra instancia")
         sys.exit(1)
 
     if args.server == 'stop' and not experimental.enabled():
