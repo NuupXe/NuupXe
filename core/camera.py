@@ -20,14 +20,18 @@ class Camera(object):
         pass
 
     def setup(self):
-        logging.info('Camera Setup')
-        pygame.camera.init()
-        self.mycamera = pygame.camera.Camera("/dev/video0",(1280,720))
-        self.mycamera.start()
 
-        self.fswebcam = 'fswebcam'
-        self.fswebcamarguments = ' -r 1280x720 -s brightness=65% -s Contrast=50% -s Gamma=100% --jpeg 100 --no-banner '
-        self.fswebcamcommand = self.fswebcam + self.fswebcamarguments + self.picturefswebcam
+        try:
+            logging.info('Camera Setup')
+            pygame.camera.init()
+            self.mycamera = pygame.camera.Camera("/dev/video0",(1280,720))
+            self.mycamera.start()
+
+            self.fswebcam = 'fswebcam'
+            self.fswebcamarguments = ' -r 1280x720 -s brightness=65% -s Contrast=50% -s Gamma=100% --jpeg 100 --no-banner '
+            self.fswebcamcommand = self.fswebcam + self.fswebcamarguments + self.picturefswebcam
+        except:
+            print 'Camera Error'
 
     def pictureCapture(self):
         logging.info('Camera Picture Capture')
