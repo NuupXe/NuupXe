@@ -3,6 +3,7 @@
 import ConfigParser
 import commands
 import os
+import time
 
 class Irlp(object):
 
@@ -48,6 +49,7 @@ class Irlp(object):
 
     def forceptt(self):
         commands.getstatusoutput(self.forcekey)
+        time.sleep(1)
 
     def forceunptt(self):
         commands.getstatusoutput(self.forceunkey)
