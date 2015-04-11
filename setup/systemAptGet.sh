@@ -34,6 +34,7 @@ export packageFswebcam="fswebcam"
 export packagePythonDev="python-dev"
 export packagePythonPywapi="python-pywapi"
 export packageFlac="flac"
+export packagePythonImage="python-image"
 
 # =============================================================================
 # Script Functions
@@ -76,5 +77,6 @@ aptgetFunctionInstall $packageFswebcam
 aptgetFunctionInstall $packagePythonDev
 aptgetFunctionInstall $packagePythonPywapi
 aptgetFunctionInstall $packageFlac
+aptgetFunctionInstall $packagePythonImage
 
 # End of file
