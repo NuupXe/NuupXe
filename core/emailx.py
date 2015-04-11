@@ -20,9 +20,6 @@ class Emailx(object):
         self.msg = MIMEMultipart('alternative')
         self.msg.set_charset('utf8')
 
-        self.setup()
-        self.create(self.to, self.subject, self.body)
-
     def setup(self):
 
         self.configuration = ConfigParser.ConfigParser()
@@ -32,6 +29,7 @@ class Emailx(object):
 
     def create(self, to, subject, body, attachment=None):
 
+        self.setup()
         self.to = to
 
         self.msg = MIMEMultipart()

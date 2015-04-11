@@ -14,8 +14,6 @@ class Camera(object):
         self.picturepygame = 'output/camerapygame.jpg'
         self.picturefswebcam = 'output/camerafswebcam.jpg'
 
-        self.setup()
-
     def __del__(self):
         pass
 
@@ -35,6 +33,7 @@ class Camera(object):
 
     def pictureCapture(self):
         logging.info('Camera Picture Capture')
+        self.setup()
         image = self.mycamera.get_image()
         pygame.image.save(image, self.picturepygame)
         self.mycamera.stop()

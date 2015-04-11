@@ -13,16 +13,14 @@ class Alive(object):
     def __init__(self):
 
         self.aprs = AprsNet()
+        self.conf = ConfigParser.ConfigParser()
         self.system = System()
         self.twitterc = TwitterC('twython')
-
-        self.setup()
 
     def setup(self):
 
         logging.info('Alive Setup')
 
-        self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/general.config"
         self.conf.read(self.path)
 
@@ -41,6 +39,7 @@ class Alive(object):
     def report(self):
 
         logging.info('Alive Report')
+        self.setup()
 
         cpu = 'Cpu ' + self.cpu + '%'
         memory = 'Memory ' + self.memory

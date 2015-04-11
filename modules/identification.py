@@ -19,8 +19,6 @@ class Identification(object):
         self.path = "configuration/general.config"
         self.conf.read(self.path)
 
-        self.setup()
-
     def setup(self):
         logging.info('Identification Setup')
         self.message = self.conf.get("general", "radioclub")
@@ -30,6 +28,7 @@ class Identification(object):
 
     def identify(self):
         logging.info('Identification Identify')
+        self.setup()
         self.morse.generate('cq cq ' + self.callsign)
         self.voicesynthetizer.speechit(self.message)
 

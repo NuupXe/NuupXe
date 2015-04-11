@@ -18,8 +18,6 @@ class Selfie(object):
 	self.twitterc = TwitterC('twython')
         self.voicesynthetizer = voicesynthetizer
 
-        self.setup()
-
     def setup(self):
 
         logging.info('Selfie Setup')
@@ -31,6 +29,7 @@ class Selfie(object):
     def get(self):
 
         logging.info('Selfie Get')
+        self.setup()
 
         try:
             self.camera.pictureCapture()
