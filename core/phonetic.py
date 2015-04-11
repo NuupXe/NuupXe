@@ -12,16 +12,16 @@ phoneticnumber = {'1': 'primero',    '2': 'segundo',   '3': 'tercero',
     '0': 'negativo',
     }
 
-phoneticalphabet = {'A': 'alfa',    'B': 'bravo',   'C': 'charli',
-        'D': 'delta',   'E': 'eco', 'F': 'foxtrot',
-    'G': 'golf',    'H': 'hotel',   'I': 'india',
-    'J': 'yuliet',  'K': 'kilo',    'L': 'lima',
-    'M': 'maik',    'N': 'november','O': 'oscar',
-    'P': 'papa',    'Q': 'quebec',  'R': 'romeo',
-    'S': 'sierra',  'T': 'tango',   'U': 'union',
-    'V': 'victor',  'W': 'wiski',   'X': 'exrey',
-    'Y': 'yanqui',  'Z': 'zulu',    '@': 'arroba',
-    '.': 'punto',   '+': 'positivo','-': 'negativo',
+phoneticalphabet = {'A': 'alpha',     'B': 'bravo',   'C': 'charlie',
+    'D': 'delta',   'E': 'eco',       'F': 'foxtrot',
+    'G': 'golf',    'H': 'hotel',     'I': 'india',
+    'J': 'juliet',  'K': 'kilo',      'L': 'lima',
+    'M': 'mike',    'N': 'november',  'O': 'oscar',
+    'P': 'papa',    'Q': 'quebec',    'R': 'romeo',
+    'S': 'sierra',  'T': 'tango',     'U': 'union',
+    'V': 'victor',  'W': 'whisky',    'X': 'xray',
+    'Y': 'yankee',  'Z': 'zulu',      '@': 'arroba',
+    '.': 'punto',   '+': 'positivo',  '-': 'negativo',
     '#': 'gato',    '*': 'asterisco', '/': 'diagonal'
     }
 
