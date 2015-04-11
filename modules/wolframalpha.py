@@ -14,8 +14,6 @@ class WolframAlpha(object):
         self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
         self.wolfram = Wolfram()
 
-        self.setup()
-
     def __del__(self):
 
         self.cleanup()
@@ -35,6 +33,7 @@ class WolframAlpha(object):
     def ask(self):
 
         logging.info('Wolfram Alpha Ask')
+        self.setup()
         self.voicesynthetizer.speechit('Yes! What is your question for Wolfram Alpha?')
         self.voicerecognition.record()
         question = self.voicerecognition.recognize('False')
@@ -46,5 +45,6 @@ class WolframAlpha(object):
             logging.info('Answer! ' + answer)
         else:
             self.voicesynthetizer.speechit('Sorry! We do not have an answer')
+        self.cleanup()
 
 # End of File
