@@ -51,13 +51,13 @@ class Weather(object):
             message = "Reporte del clima en la ciudad de " + location
             message = message + ", Datos de a p r s punto fi"
             message = message + ", Estacion meteorologica, " + ' '.join(self.phonetic.decode(callsign))
-            message = message + ", Temperatura, " + entry['temp'] + " grados centigrados"
-            message = message + ", Humedad relativa, " + entry['humidity'] + " por ciento"
-            message = message + ", Presion Atmosferica, " + entry['pressure'] + " milibares"
-            message = message + ", Direccion del viento, " + entry['wind_direction'] + " grados"
-            message = message + ", Velocidad del viento, " + entry['wind_speed'] + " metros por segundo"
+            message = message + ", Temperatura " + entry['temp'] + " grados centigrados"
+            message = message + ", Humedad relativa " + entry['humidity'] + " por ciento"
+            message = message + ", Presion Atmosferica " + entry['pressure'] + " milibares"
+            message = message + ", Direccion del viento " + entry['wind_direction'] + " grados"
+            message = message + ", Velocidad del viento " + entry['wind_speed'] + " metros por segundo"
             message = message + ", Rafagas de " + entry['wind_gust'] + " metros por segundo"
-            message = message + ", Precipitacion pluvial, " + entry['rain_1h'] + " milimetros"
+            message = message + ", Precipitacion pluvial " + entry['rain_1h'] + " milimetros"
             self.speaker.speechit(message)
 
     def yahoo(self):
@@ -68,10 +68,10 @@ class Weather(object):
         result = pywapi.get_weather_from_yahoo(location, 'metric')
 
         message = "Reporte del Clima en " + result['location']['city']
-        message = message + ", Temperatura, " + result['condition']['temp'] + " grados centigrados"
-        message = message + ", Presion Atmosferica, " + result['atmosphere']['pressure'] + " milibares"
-        message = message + ", Visibilidad, " + result['atmosphere']['visibility'] + " kilometros"
-        message = message + ", Humedad, " + result['atmosphere']['humidity'] + " por ciento"
+        message = message + ", Temperatura " + result['condition']['temp'] + " grados centigrados"
+        message = message + ", Presion Atmosferica " + result['atmosphere']['pressure'] + " milibares"
+        message = message + ", Visibilidad " + result['atmosphere']['visibility'] + " kilometros"
+        message = message + ", Humedad " + result['atmosphere']['humidity'] + " por ciento"
         message = message + ", El Sol se oculta a las " + result['astronomy']['sunset']
         self.speaker.speechit(message)
 
@@ -83,8 +83,8 @@ class Weather(object):
         result = pywapi.get_weather_from_noaa('MMGL')
 
         message = "Reporte del Clima"
-        message = message + ", Temperatura, " + result['temp_c'] + " grados centigrados"
-        message = message + ", Humedad, " + result['relative_humidity'] + " por ciento"
+        message = message + ", Temperatura " + result['temp_c'] + " grados centigrados"
+        message = message + ", Humedad " + result['relative_humidity'] + " por ciento"
         self.speaker.speechit(message)
 
     def report(self):
