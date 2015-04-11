@@ -13,14 +13,9 @@ class VoiceSynthetizer(logging.Handler):
     def __init__(self, synthetizer, language):
         self.synthetizer = synthetizer
         self.language = language
-        self.arguments = ""
-
-        self.setsynthetizer(self.synthetizer)
 
     def setsynthetizer(self, synthetizer):
         self.synthetizer = synthetizer
-        self.setlanguage(self.language)
-        self.setarguments()
 
     def getsynthetizer(self):
         return self.synthetizer
@@ -54,16 +49,17 @@ class VoiceSynthetizer(logging.Handler):
             self.arguments = self.languageargument
 
     def speechit(self, text):
-        self.setarguments()
-        self.pushtotalk = PushToTalk()
         logging.info(text)
+
+        self.pushtotalk = PushToTalk()
+        self.setarguments()
 
         if self.synthetizer == "festival":
             command = ['echo', text, '|', self.arguments]
         elif self.synthetizer == "espeak":
             command = [self.arguments, text, ' | aplay']
         elif self.synthetizer == "google":
-            command = ['core/google.sh', self.arguments, text]
+            command = ['core/GoogleTTS.py', '-l', self.arguments, '-s', text]
         self.pushtotalk.message(command)
 
 # End of File
