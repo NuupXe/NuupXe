@@ -70,7 +70,7 @@ class Morse(object):
                     pygame.mixer.music.play()
                     time.sleep(self.threeunits)
         elif self.morseagent == 'cwpcm':
-            message = 'echo ' + message + ' | /home/irlp/bin/cwpcm -sm -l 007 -p 1000 > /dev/dsp'
+            message = 'echo ' + message + ' | /home/irlp/bin/cwpcm -sx -l 007 -p 1000 > /dev/dsp'
             status, output = commands.getstatusoutput(message)
 
         self.pushtotalk.closeport()
