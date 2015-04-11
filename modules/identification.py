@@ -22,7 +22,7 @@ class Identification(object):
     def setup(self):
         logging.info('Identification Setup')
         self.message = self.conf.get("general", "radioclub")
-        self.message = self.message + ' ' + ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
+        self.message = self.message + ', ' + ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
         self.message = "\"" + self.message + "\""
         self.callsign = self.conf.get("general", "callsign")
 
