@@ -19,13 +19,18 @@ class Identification(object):
         self.path = "configuration/general.config"
         self.conf.read(self.path)
 
+        self.setup()
+
+    def setup(self):
+        logging.info('Identification Setup')
+        self.message = self.conf.get("general", "radioclub")
+        self.message = self.message + ' ' + ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
+        self.message = "\"" + self.message + "\""
+        self.callsign = self.conf.get("general", "callsign")
+
     def identify(self):
-        logging.info('Identification')
-        self.morse.generate('cq cq')
-        message = self.conf.get("general", "radioclub")
-        message = message + ' ' + ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
-        message = "\"" + message + "\""
-        self.voicesynthetizer.speechit(message)
-        self.morse.generate(self.conf.get("general", "callsign"))
+        logging.info('Identification Identify')
+        self.morse.generate('cq cq ' + self.callsign)
+        self.voicesynthetizer.speechit(self.message)
 
 # End of File
