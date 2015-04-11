@@ -42,16 +42,21 @@ from modules.voicemailer import VoiceMailer
 
 class Cancun(object):
 
-    def __init__(self, voicesynthetizer, irlp):
+    def __init__(self, irlp):
 
         self.irlp = irlp
-        self.voicesynthetizer = voicesynthetizer
         self.pidfile = None
         self.scheduler_status = False
         self.pidfile = "/tmp/cancun.pid"
 
     def __del__(self):
         pass
+
+    def voicesynthetizer(self):
+        self.voicesynthetizer = VoiceSynthetizer("google", "spanish")
+
+    def voicesynthetizerget(self):
+        return self.voicesynthetizer
 
     def modules_setup(self):
 
@@ -254,7 +259,6 @@ def main(argv):
     logging.basicConfig(filename='output/cancun.log', level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
     irlp = Irlp()
-    voicesynthetizer = VoiceSynthetizer("google", "spanish")
 
     parser = argparse.ArgumentParser(description='Cancun Project, Voice Services Experimental Project')
     parser.add_argument('-m', '--module', help='Module Mode')
@@ -266,7 +270,9 @@ def main(argv):
         logging.info("Nodo activo, no podemos iniciar Proyecto Cancun")
         sys.exit(0)
 
-    experimental = Cancun(voicesynthetizer, irlp)
+    experimental = Cancun(irlp)
+    experimental.voicesynthetizer()
+    voicesynthetizer = experimental.voicesynthetizerget()
 
     if (args.module or args.server) and experimental.enabled():
         logging.info("Proyecto Cancun ya habilitado, no podemos iniciar otra instancia")
