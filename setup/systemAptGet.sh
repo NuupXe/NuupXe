@@ -37,6 +37,7 @@ export packageFlac="flac"
 export packagePythonImage="python-image"
 export packageLibAsound2Dev="libasound2-dev"
 export packageLibJpegDev="libjpeg-dev"
+export packagePythonImaging="python-imaging"
 
 # =============================================================================
 # Script Functions
@@ -82,5 +83,6 @@ aptgetFunctionInstall $packageFlac
 aptgetFunctionInstall $packagePythonImage
 aptgetFunctionInstall $packageLibAsound2Dev
 aptgetFunctionInstall $packageLibJpegDev
+aptgetFunctionInstall $packagePythonImaging
 
 # End of file
