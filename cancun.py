@@ -86,16 +86,17 @@ class Cancun(object):
 
     def dtmf_setup(self,dtmf):
         dtmf_codes = {
-        'PS0' : 'alive',
-        'PS1' : 'aprstracker',
-        'PS2' : 'news',
-        'PS3' : 'meteorology',
-        'PS4' : 'seismology',
-        'PS5' : 'selfie',
-        'PS6' : 'voicecommand',
-        'PS7' : 'voiceexperimental',
-        'PS8' : 'wolframalpha',
-        'PS9' : 'voicemail',
+        'PS0'  : 'alive',
+        'PS1'  : 'aprstracker',
+        'PS2'  : 'news',
+        'PS3'  : 'meteorology',
+        'PS4'  : 'seismology',
+        'PS5'  : 'selfie',
+        'PS6'  : 'voicecommand',
+        'PS7'  : 'voiceexperimental',
+        'PS8'  : 'wolframalpha',
+        'PS9'  : 'voicemail',
+        'PS10' : 'sstv',
         }
         return dtmf_codes.get(dtmf)
 
@@ -306,10 +307,10 @@ def main(argv):
 
     elif args.dtmf:
         logging.info(args.dtmf)
-        if len(args.dtmf) == 3:
+        if args.dtmf.startswith('PS') and len(args.dtmf) == 3 or len(args.dtmf) == 4:
             module = experimental.dtmf_setup(args.dtmf)
             experimental.module_mode(module, args.dtmf)
-        elif len(args.dtmf) == 4 and args.dtmf.startswith('SS'):
+        elif args.dtmf.startswith('SS') and len(args.dtmf) == 4:
             experimental.module_mode('voicemailer', args.dtmf)
         elif len(args.dtmf) > 10:
             experimental.module_mode('aprstt', args.dtmf)
