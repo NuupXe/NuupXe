@@ -52,6 +52,7 @@ class VoiceSynthetizer(logging.Handler):
         logging.info(text)
 
         self.pushtotalk = PushToTalk()
+        self.setlanguage(self.language)
         self.setarguments()
 
         if self.synthetizer == "festival":

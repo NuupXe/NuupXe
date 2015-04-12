@@ -107,7 +107,7 @@ class NuupXe(object):
 
         pid = str(os.getpid())
         logging.info('Process Id' + pid)
-        # file(self.pidfile, 'w').write(pid)
+        file(self.pidfile, 'w').write(pid)
 
     def disable(self):
 
@@ -151,40 +151,53 @@ class NuupXe(object):
                 self.voicesynthetizer.speechit(x)
             time.sleep(1)
 
-    def module_mode(self, module, dtmf):
+    def module_mode(self, module, dtmf=None):
 
         logging.info('Mode Module')
 
         # Custom Decode Activated Modules
 
         if module == 'identification':
+            self.identification = Identification(self.voicesynthetizer)
             self.identification.identify()
         elif module == 'date':
+            self.clock = Clock(self.voicesynthetizer)
             self.clock.date()
         elif module == 'hour':
+            self.clock = Clock(self.voicesynthetizer)
             self.clock.hour()
         elif module == 'temperature':
+            self.weather = Weather(self.voicesynthetizer)
             self.weather.temperature()
         elif module == 'weather':
+            self.weather = Weather(self.voicesynthetizer)
             self.weather.report()
 
         # PS Activated Modules
 
         elif module == 'alive':
+            self.alive = Alive()
             self.alive.report()
         elif module == 'aprstracker':
+            self.aprstracker = AprsTracker(self.voicesynthetizer)
             self.aprstracker.query()
         elif module == 'news':
+            self.news = News(self.voicesynthetizer)
             self.news.getitems()
         elif module == 'meteorology':
+            self.meteorology = Meteorology(self.voicesynthetizer)
             self.meteorology.conagua_clima()
         elif module == 'selfie':
+            self.selfie = Selfie(self.voicesynthetizer)
             self.selfie.get()
         elif module == 'voicecommand':
+            self.voicecommand = VoiceCommand(self.voicesynthetizer)
             self.voicecommand.listen()
         elif module == 'voicemail':
+            self.voicemail = VoiceMail(self.voicesynthetizer)
             self.voicemail.run(dtmf)
         elif module == 'wolframalpha':
+            self.wolframalpha = WolframAlpha(self.voicesynthetizer)
             self.wolframalpha.ask()
 
         # SS Activated Modules
@@ -192,28 +205,40 @@ class NuupXe(object):
         # Experimental Modules
 
         elif module == 'aprstt':
+            self.aprstt = Aprstt(self.voicesynthetizer)
             self.aprstt.query(dtmf)
         elif module == 'seismology':
+            self.seismology = Seismology(self.voicesynthetizer)
             self.seismology.SismologicoMX()
         elif module == 'morselearn':
+            self.morseteacher = MorseTeacher(self.voicesynthetizer)
             self.morseteacher.learn()
         elif module == 'morsecontest'	:
+            self.morseteacher = MorseTeacher(self.voicesynthetizer)
             self.morseteacher.contest()
 	elif module == 'regulations':
+            self.messages = Messages(self.voicesynthetizer)
             self.messages.readfile('learning/reglamentos.1')
 	elif module == 'radioclub':
+            self.messages = Messages(self.voicesynthetizer)
             self.messages.readfile('learning/arej.radioclubs')
         elif module == 'stations':
+            self.messages = Messages(self.voicesynthetizer)
             self.messages.stations()
         elif module == 'sstv':
+            self.sstv = SSTV(self.voicesynthetizer)
             self.sstv.decode()
         elif module == 'assistant':
+            self.assistant = Assistant(self.voicesynthetizer)
             self.assistant.demo1()
         elif module == 'voicebackground':
+            self.voicecommand = VoiceCommand(self.voicesynthetizer)
             self.voicecommand.background()
         elif module == 'voiceexperimental':
+            self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
             self.voiceexperimental.listen()
         elif module == 'voicemailer':
+            self.voicemailer = VoiceMailer(self.voicesynthetizer)
             self.voicemailer.attend(dtmf)
         else:
             print 'Module not found! Please check its name...\n'
@@ -226,17 +251,17 @@ class NuupXe(object):
     def schedule(self):
 
         # Production Modules
-        self.scheduler.add_interval_job(self.alive.report, minutes=60)
-        self.scheduler.add_cron_job(self.clock.date,month='*',day_of_week='*',hour='6,12,22',minute ='00',second='0')
+        self.scheduler.add_interval_job(self.alive.report, minutes=120)
+        self.scheduler.add_cron_job(self.clock.date,month='*',day_of_week='*',hour='6,12,22',minute ='00',second='00')
         self.scheduler.add_interval_job(self.clock.hour, minutes=15)
         self.scheduler.add_interval_job(self.identification.identify, minutes=30)
-        self.scheduler.add_cron_job(self.selfie.get,month='*',day_of_week='*',hour='6,12,22',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.selfie.get,month='*',day_of_week='*',hour='6,12,22',minute ='00',second='00')
         self.scheduler.add_interval_job(self.weather.report, minutes=120)
 
         # Experimental Modules
-        self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=120)
-        self.scheduler.add_interval_job(self.news.getitems, minutes=120)
-        self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=120)
+        self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=240)
+        self.scheduler.add_interval_job(self.news.getitems, minutes=240)
+        self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=240)
         self.scheduler.add_interval_job(self.messages.stations, minutes=240)
 
 	# Learning Modules, AREJ
@@ -294,16 +319,15 @@ def main(argv):
         status, output = commands.getstatusoutput('./nuupxe.sh stop')
         sys.exit(1)
 
-    experimental.enable()
-    experimental.modules_setup()
-
     if args.module:
         experimental.module_mode(args.module, args.dtmf)
 
     elif args.server == 'scheduler':
+        experimental.modules_setup()
         experimental.scheduler_mode()
 
     elif args.server == 'writing':
+        experimental.modules_setup()
         experimental.writing_mode()
 
     elif args.dtmf:

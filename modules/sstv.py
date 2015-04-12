@@ -28,13 +28,13 @@ class SSTV(object):
 
         logging.info('SSTV Decode')
         self.setup()
-        self.alive()
-        #self.voicesynthetizer.speechit("Modulo Experimental de Television de Barrido Lento, Modo Robot 36")
         try:
-            #status, output = commands.getstatusoutput('python -m pysstv --mode Robot36 output/radioclub.jpg output/sstv.wav')
+            #status, output = commands.getstatusoutput('python -m pysstv --mode Robot36 --vox output/radioclub.jpg output/sstv.wav')
+            self.voicesynthetizer.speechit("Modulo Experimental de Television de Barrido Lento, Modo Robot 36")
             self.pushtotalk.openport()
-            #status, output = commands.getstatusoutput('aplay output/sstv.wav')
+            status, output = commands.getstatusoutput('aplay output/sstv.wav')
             self.pushtotalk.closeport()
+            self.alive()
         except:
             logging.error('Cannot decode file')
 
