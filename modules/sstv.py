@@ -23,8 +23,8 @@ class SSTV(object):
         self.setup()
 
         try:
+            status, output = commands.getstatusoutput('python -m pysstv --mode Robot36 output/craeg.jpg output/sstv.wav')
             self.pushtotalk.openport()
-            status, output = commands.getstatusoutput('python -m pysstv --mode Robot36 --vox output/craeg.jpg output/sstv.wav')
             status, output = commands.getstatusoutput('aplay output/sstv.wav')
             self.pushtotalk.closeport()
         except:
