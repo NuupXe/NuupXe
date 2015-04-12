@@ -106,7 +106,8 @@ class NuupXe(object):
     def enable(self):
 
         pid = str(os.getpid())
-        file(self.pidfile, 'w').write(pid)
+        logging.info('Process Id' + pid)
+        # file(self.pidfile, 'w').write(pid)
 
     def disable(self):
 
