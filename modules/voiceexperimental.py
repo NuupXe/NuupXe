@@ -11,6 +11,7 @@ class VoiceExperimental(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = 'VoiceExperimental'
         self.voicesynthetizer = voicesynthetizer
         self.emailx = Emailx()
         self.twitterc = TwitterC('twython')
@@ -28,6 +29,10 @@ class VoiceExperimental(object):
         self.voicerecognition.languageset('spanish')
         self.voicesynthetizer.setlanguage("spanish")
 
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
+
     def cleanup(self):
 
         logging.info('Voice Experimental Cleanup')
@@ -37,6 +42,7 @@ class VoiceExperimental(object):
     def listen(self):
 
         logging.info('Voice Experimental Listen')
+        self.alive()
         self.voicesynthetizer.speechit('Hola! Dime tu frase!')
         self.voicerecognition.record()
         question = self.voicerecognition.recognize('False')

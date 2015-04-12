@@ -6,6 +6,7 @@ import random
 import string
 import sys
 
+from core.alive import Alive
 from core.aprsnet import AprsNet
 from core.voicesynthetizer import VoiceSynthetizer
 from core.phonetic import Phonetic
@@ -16,6 +17,8 @@ class Aprstt(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = "AprsTt"
+
         self.aprs = AprsNet()
         self.phonetic = Phonetic()
 
@@ -25,6 +28,10 @@ class Aprstt(object):
 
         self.aprstracker =  AprsTracker(voicesynthetizer)
         self.speaker = voicesynthetizer
+
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
 
     def dtmf_replace(self, pair):
         d = {}
@@ -157,6 +164,7 @@ class Aprstt(object):
     def query(self, string):
 
         print '[NuupXe] APRS Touch Tone | ' + string
+        self.alive()
 
         callsign = self.keytype_get_aprstt(string)
         if callsign:

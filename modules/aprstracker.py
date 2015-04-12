@@ -11,6 +11,7 @@ import time
 import unicodedata
 
 from pygeocoder import Geocoder
+from core.alive import Alive
 from core.aprsfi import AprsFi
 from core.voicesynthetizer import VoiceSynthetizer
 from core.phonetic import Phonetic
@@ -30,6 +31,7 @@ class AprsTracker(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = 'AprsTracker'
         self.phonetic = Phonetic()
         self.aprsfi = AprsFi()
 
@@ -39,6 +41,10 @@ class AprsTracker(object):
 
         self.speaker = voicesynthetizer
         self.callsign = 'XE1GQP-9'
+
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
 
     def clock(self, aprstime):
 
@@ -57,36 +63,37 @@ class AprsTracker(object):
 
     def localize(self, callsign):
 
+        self.alive()
         self.aprsfi.callsignset(callsign)
         self.aprsfi.dataset('loc')
         data = self.aprsfi.query()
         logging.info(data)
 
         for entry in data['entries']:
-            self.speaker.speechit("Estacion , " + ' '.join(self.phonetic.decode(callsign)))
+            message = ", Estacion " + ' '.join(self.phonetic.decode(callsign))
             weekday, day, month, year = self.clock(entry['lasttime'])
-            lasttimeseen = "Ultima vez visto " + weekday + ' ' + day + ' de ' + month + ' del ' + year
-            self.speaker.speechit(lasttimeseen)
+            message = message + ", Ultima vez visto " + weekday + ' ' + day + ' de ' + month + ' del ' + year
             try:
-                self.speaker.speechit("Velocidad " + str(entry['speed']) + " Km/h")
+                message =  message + ", Velocidad " + str(entry['speed']) + " Km/h"
             except:
                 pass
             try:
-                self.speaker.speechit("Altitud " + str(entry['altitude']) + " metros" )
+                message =  message + ", Altitud " + str(entry['altitude']) + " metros"
             except:
                 pass
             results = Geocoder.reverse_geocode(float(entry['lat']), float(entry['lng']))
             logging.info(results)
             try:
-                self.speaker.speechit("Calle " + results[0].route)
-                self.speaker.speechit("Colonia " + results[0].political)
+                message = message + ", Calle " + results[0].route
+                message = message + ", Colonia " + results[0].political
                 if results[0].administrative_area_level_2:
-                    self.speaker.speechit("Municipio " + results[0].administrative_area_level_2)
+                    message = message + ", Municipio " + results[0].administrative_area_level_2
                 elif results[0].locality:
-                    self.speaker.speechit("Municipio " + results[0].locality)
-                self.speaker.speechit(" " + results[0].administrative_area_level_1)
-                self.speaker.speechit(" " + results[0].country)
+                    message =  message + ", Municipio " + results[0].locality
+                message =  message + ", " + results[0].administrative_area_level_1
+                message =  message + ", " + results[0].country
             except:
                 pass
+            self.speaker.speechit(message)
 
 # End of File

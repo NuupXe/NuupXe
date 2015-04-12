@@ -4,6 +4,7 @@ import ConfigParser
 import commands
 import logging
 
+from core.alive import Alive
 from core.emailx import Emailx
 from core.irlp import Irlp
 from core.phonetic import Phonetic
@@ -15,6 +16,7 @@ class VoiceMailer(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = 'VoiceMailer'
         self.emailx = Emailx()
         self.irlp = Irlp()
         self.phonetic = Phonetic()
@@ -31,6 +33,10 @@ class VoiceMailer(object):
     def __del__(self):
         pass
 
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
+
     def decodeUser(self, dmtf):
         logging.info('Voice Mailer Decode User')
         user = dmtf[2:]
@@ -44,6 +50,7 @@ class VoiceMailer(object):
     def attend(self, dtmf):
 
         logging.info('Voice Mailer Attend')
+        self.alive()
 
         user, email = self.decodeUser(dtmf)
         if user:

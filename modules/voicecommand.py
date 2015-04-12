@@ -4,6 +4,7 @@ import commands
 import logging
 import re
 
+from core.alive import Alive
 from core.voicerecognition import VoiceRecognition
 
 from modules.clock import Clock
@@ -14,6 +15,7 @@ class VoiceCommand(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = 'VoiceCommand'
         self.output = ""
         self.voicesynthetizer = voicesynthetizer
         self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
@@ -21,6 +23,10 @@ class VoiceCommand(object):
         self.clock = Clock(voicesynthetizer)
         self.identification = Identification(voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
+
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
 
     def presentation(self):
 
@@ -30,6 +36,7 @@ class VoiceCommand(object):
     def decode(self, output):
 
         logging.info('Voice Command Decode')
+        self.alive()
 
         if re.search(r'coman', output, re.M|re.I) or re.search(r'disponi', output, re.M|re.I):
             logging.info('Voice Command Decode Available Commands')

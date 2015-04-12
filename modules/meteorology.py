@@ -20,14 +20,20 @@ class Meteorology(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = 'Meteorology'
 	self.twitterc = TwitterC('twython')
 
         self.voicesynthetizer = voicesynthetizer
+
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
 
     def conagua_clima(self):
 
         logging.info('Meteorology Conagua Clima')
         self.voicesynthetizer.speechit('Servicio Meteorologico Nacional, Comision Nacional del Agua')
+        self.alive()
 
         tstatus = self.twitterc.timeline_get('conagua_clima', 3)
         for status in tstatus:

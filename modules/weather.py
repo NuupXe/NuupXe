@@ -10,6 +10,7 @@ import json
 import urllib2
 import pprint
 
+from core.alive import Alive
 from core.aprsfi import AprsFi
 from core.aprsnet import AprsNet
 from core.voicesynthetizer import VoiceSynthetizer
@@ -19,6 +20,7 @@ class Weather(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = 'Weather'
         self.phonetic = Phonetic()
         self.aprsfi = AprsFi()
         self.aprsnet = AprsNet()
@@ -30,6 +32,10 @@ class Weather(object):
         self.agent = self.conf.get("weather", "agent")
 
         self.speaker = voicesynthetizer
+
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
 
     def aprspacket(self):
 
@@ -89,6 +95,8 @@ class Weather(object):
 
     def report(self):
 
+        self.alive()
+
         if self.agent == "aprsfi":
                 self.aprsfi()
         elif self.agent == "yahoo":
@@ -99,6 +107,8 @@ class Weather(object):
         self.aprspacket()
 
     def temperature(self):
+
+        self.alive()
 
         location = self.conf.get("weather", "location")
         result = pywapi.get_weather_from_yahoo(location, 'metric')

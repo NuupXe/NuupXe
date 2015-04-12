@@ -3,6 +3,7 @@
 import logging
 import ConfigParser
 
+from core.alive import Alive
 from core.morse import Morse
 from core.phonetic import Phonetic
 from core.voicesynthetizer import VoiceSynthetizer
@@ -11,6 +12,7 @@ class Identification(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = 'Identification'
         self.phonetic = Phonetic()
         self.morse = Morse()
         self.voicesynthetizer = voicesynthetizer
@@ -18,6 +20,10 @@ class Identification(object):
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/general.config"
         self.conf.read(self.path)
+
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
 
     def setup(self):
         logging.info('Identification Setup')
@@ -28,6 +34,7 @@ class Identification(object):
 
     def identify(self):
         logging.info('Identification Identify')
+        self.alive()
         self.setup()
         self.morse.generate('cq cq ' + self.callsign)
         self.voicesynthetizer.speechit(self.message)

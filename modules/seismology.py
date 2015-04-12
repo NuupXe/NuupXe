@@ -2,6 +2,7 @@
 
 import re
 
+from core.alive import Alive
 from core.twitterc import TwitterC
 
 state = {'CHIS': 'Chiapas', 'NL': 'Nuevo Leon', 'VER': 'Veracruz',
@@ -12,13 +13,18 @@ class Seismology(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = 'Seismology'
 	self.twitterc = TwitterC('twython')
-
         self.voicesynthetizer = voicesynthetizer
+
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
 
     def SismologicoMX(self):
         print '[NuupXe] Seismology'
         self.voicesynthetizer.speechit('Servicio Sismologico Nacional, Universidad Nacional Autonoma de Mexico')
+        self.alive()
 
         tstatus = self.twitterc.timeline_get('SismologicoMX', 1)
         sismo = 'False'

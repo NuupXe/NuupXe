@@ -4,6 +4,7 @@ import ConfigParser
 import logging
 import random
 
+from core.alive import Alive
 from core.camera import Camera
 from core.phonetic import Phonetic
 from core.twitterc import TwitterC
@@ -13,6 +14,7 @@ class Selfie(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = 'Selfie'
 	self.camera = Camera(voicesynthetizer)
         self.phonetic = Phonetic()
 	self.twitterc = TwitterC('twython')
@@ -26,10 +28,15 @@ class Selfie(object):
         self.conf.read(self.path)
         self.hashtag = self.conf.get("system", "hashtag")
 
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
+
     def get(self):
 
         logging.info('Selfie Get')
         self.setup()
+        self.alive()
 
         try:
             self.camera.pictureCapture()

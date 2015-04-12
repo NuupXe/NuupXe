@@ -4,6 +4,7 @@ import threading
 from time import sleep
 import re
 
+from core.alive import Alive
 from core.twitterc import TwitterC
 from core.voicerecognition import VoiceRecognition
 from core.voicesynthetizer import VoiceSynthetizer
@@ -28,7 +29,10 @@ def main(voicesynthetizer):
         print "If only daemonic threads are left, terminate whole program."
 
 class Assistant(object):
+
     def __init__(self, voicesynthetizer):
+
+        self.modulename = 'Assistant'
         self.running = True
 	self.introduced = False
         self.threads = []
@@ -41,6 +45,10 @@ class Assistant(object):
         self.weather = Weather(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
+
+    def alive(self):
+        self.alive = Alive()
+        self.alive.report(self.modulename)
 
     def demo1(self):
 	self.introduction1()

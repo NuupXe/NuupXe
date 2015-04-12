@@ -13,12 +13,12 @@ import time
 from apscheduler.scheduler import Scheduler
 from apscheduler.threadpool import ThreadPool
 
+from core.alive import Alive
 from core.irlp import Irlp
 from core.voicesynthetizer import VoiceSynthetizer
 
 # Production
 
-from modules.alive import Alive
 from modules.aprstracker import AprsTracker
 from modules.aprstt import Aprstt
 from modules.clock import Clock

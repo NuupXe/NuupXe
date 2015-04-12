@@ -26,6 +26,7 @@ class Alive(object):
 
         self.twitteraccount = self.conf.get("general", "twitter")
         self.hashtag = self.conf.get("system", "hashtag")
+        self.location =  self.conf.get("general", "location")
         self.systemfrequency =  self.conf.get("general", "frequency")
         self.systemcoordinates = self.conf.get("general", "coordinates")
 
@@ -36,7 +37,7 @@ class Alive(object):
         callsign = self.conf.get("general", "callsign") + '-1'
         self.aprs.address_set(callsign)
 
-    def report(self):
+    def report(self, module=None):
 
         logging.info('Alive Report')
         self.setup()
@@ -47,7 +48,9 @@ class Alive(object):
         system = ' ' + cpu + ' ' + memory + ' ' + kernel
 
         message = Randomizer(2) + ' ' + self.hashtag + ' '
-        message = message + self.twitteraccount 
+        if module:
+            message = message + '#' + module + ' '
+        message = message + self.twitteraccount + ' ' + self.location
         technical = ' Freq ' + self.systemfrequency + system
         message = message + ' ' + technical
 
