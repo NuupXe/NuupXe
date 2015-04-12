@@ -27,6 +27,7 @@ from modules.meteorology import Meteorology
 from modules.news import News
 from modules.seismology import Seismology
 from modules.selfie import Selfie
+from modules.sstv import SSTV
 from modules.voicecommand import VoiceCommand
 from modules.voicemail import VoiceMail
 from modules.weather import Weather
@@ -79,6 +80,7 @@ class Cancun(object):
         self.messages = Messages(self.voicesynthetizer)
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
+        self.sstv = SSTV(self.voicesynthetizer)
         self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
         self.voicemailer = VoiceMailer(self.voicesynthetizer)
 
@@ -201,6 +203,8 @@ class Cancun(object):
             self.messages.readfile('learning/arej.radioclubs')
         elif module == 'stations':
             self.messages.stations()
+        elif module == 'sstv':
+            self.sstv.decode()
         elif module == 'assistant':
             self.assistant.demo1()
         elif module == 'voicebackground':
