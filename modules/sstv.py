@@ -29,8 +29,9 @@ class SSTV(object):
         logging.info('SSTV Decode')
         self.setup()
         try:
-            #status, output = commands.getstatusoutput('python -m pysstv --mode Robot36 --vox output/radioclub.jpg output/sstv.wav')
-            self.voicesynthetizer.speechit("Modulo Experimental de Television de Barrido Lento, Modo Robot 36")
+            status, output = commands.getstatusoutput('convert -resize 320x256\! output/bing.jpg output/radioclub.jpg')
+            status, output = commands.getstatusoutput('python -m pysstv --mode MartinM1 --vox output/radioclub.jpg output/sstv.wav')
+            self.voicesynthetizer.speechit("Modulo Experimental de Television de Barrido Lento, Modo Martin Uno")
             self.pushtotalk.openport()
             status, output = commands.getstatusoutput('aplay output/sstv.wav')
             self.pushtotalk.closeport()
