@@ -35,6 +35,8 @@ export packagePythonDev="python-dev"
 export packagePythonPywapi="python-pywapi"
 export packageFlac="flac"
 export packagePythonImage="python-image"
+export packageLibAsound2Dev="libasound2-dev"
+export packageLibJpegDev="libjpeg-dev"
 
 # =============================================================================
 # Script Functions
@@ -78,5 +80,7 @@ aptgetFunctionInstall $packagePythonDev
 aptgetFunctionInstall $packagePythonPywapi
 aptgetFunctionInstall $packageFlac
 aptgetFunctionInstall $packagePythonImage
+aptgetFunctionInstall $packageLibAsound2Dev
+aptgetFunctionInstall $packageLibJpegDev
 
 # End of file
