@@ -33,11 +33,11 @@ class Weather(object):
 
     def aprspacket(self):
 
-        self.aprsnet.send_packet("XE1GYQ-13>APRS,TCPIP*,qAS,XE1GYQ-10:@232353z2036.96N/10324.58W_000/000g000t000r000p000P000h00b00000Cancun Project Experimental Weather Station")
+        self.aprsnet.send_packet("XE1GYQ-13>APRS,TCPIP*,qAS,XE1GYQ-10:@232353z2036.96N/10324.58W_000/000g000t000r000p000P000h00b00000NuupXe Weather Station")
 
     def aprsfi(self):
 
-        print '[Cancun] Weather aprs.fi'
+        print '[NuupXe] Weather aprs.fi'
 
         callsign = self.conf.get("weather", "aprsficallsign")
         location = self.conf.get("weather", "aprsfilocation")
@@ -62,7 +62,7 @@ class Weather(object):
 
     def yahoo(self):
 
-        print '[Cancun] Weather Yahoo'
+        print '[NuupXe] Weather Yahoo'
 
         location = self.conf.get("weather", "location")
         result = pywapi.get_weather_from_yahoo(location, 'metric')
@@ -77,7 +77,7 @@ class Weather(object):
 
     def noaa(self):
 
-        print '[Cancun] Weather NOAA'
+        print '[NuupXe] Weather NOAA'
 
         location = self.conf.get("weather", "location")
         result = pywapi.get_weather_from_noaa('MMGL')

@@ -55,7 +55,7 @@ class VoiceMailer(object):
             logging.info('Mensaje? ' + message)
             self.voicesynthetizer.speechit(message)
             filename = self.voicerecognition.filegetname()
-            self.emailx.create(email, 'Proyecto Cancun Voice Mailer! Mensaje ...', message, filename)
+            self.emailx.create(email, 'NuupXe Voice Mailer! Mensaje ...', message, filename)
             self.emailx.send()
         else:
             self.voicesynthetizer.speechit('Usuario no asignado!')

@@ -1,30 +1,24 @@
 To Do List
-- Change Google Text to Speech shell script to a Python script
-- Add DTMF support
 - Identification, pause actual job executing and identify
 - apscheduler, identify jobs being executed
 - pylint execution
 - implement setup.py, an example is
   http://learnpythonthehardway.org/book/ex46.html
-- twitterc, allow status update
 - twitterc, inform of new earthquakes as soon as it is reported on twitter
 - Remove harcoded city in weather module, move to general configuration file
-- cwpcm
 - localization
 - OpenWeatherMap
 - Morse contest, breakout by line to avoid timeout
 - Fix google tts by passing spanish text without removing accents
 - callsign identification experimental module
 - console, type any text and speech it
-- Conagua twitter
 - Remove /home/irlp/, use configuration file instead
 - Common pause time irlp to allow cancellation of jobs
-- In Cancun mode then connected to Irlp
-- Check COS state then start recording
+- In NuupXe mode then connected to Irlp
 - VoiceMail DTMF Groups Users
 - Money XE1HAX Voice Recognition
 - Repeater Fall
-- Cancun sending information to APRS.IS
+- NuupXe sending information to APRS.IS
 - https://github.com/ampledata/aprs
 - Simplify dictionaries for Day and Month in Clock and Tracker
 - Review machine state of Irlp and rewrite core/irlp.py
@@ -34,19 +28,13 @@ To Do List
 - D is not recognized by Irlp DTMF module
 - *, # is S, P in Irlp so we are not expecting a Sierra, Papa
 - Read http://www.aprs-is.net/q.aspx
-- Error in Tracker
-- Cancun] Tracker aprs.fi
-{u'found': 1, u'what': u'loc', u'command': u'get', u'result': u'ok', u'entries': [{u'comment': u'www.xe1gqp.org', u'mice_msg': u'101', u'name': u'XE1GQP-9', u'speed': 9.2599999999999998, u'altitude': 1584, u'path': u'XE1AU-1*,WIDE1*,WIDE2-1,qAR,XE1AO-10', u'dstcall': u'R0SUTV', u'symbol': u'/>', u'course': 0, u'time': u'1416807112', u'lat': u'20.59100', u'srccall': u'XE1GQP-9', u'lng': u'-103.39167', u'lasttime': u'1416807112', u'type': u'l', u'class': u'a'}]}
-Cond. Bambú, Jardines de Miraflores, 45601 JAL, Mexico
-- Fail
-repeater@stn8261:~/custom/cancun$ python cancun.py -s start
-[Mon Nov 24 22:08:26 2014] Cancun Project, Repeater Voice Services
+repeater@stn8261:~/custom/cancun$ python nuupxe.py -s start
+[Mon Nov 24 22:08:26 2014] NuupXe Project, Repeater Voice Services
 Traceback (most recent call last):
-  File "cancun.py", line 297, in <module>
+  File "nuupxe.py", line 297, in <module>
     main(sys.argv[1:])
-  File "cancun.py", line 277, in main
+  File "nuupxe.py", line 277, in main
     experimental.scheduler_mode()
-- Add Twithon library to allow posting images
 - DropBox, what can we do?
 - Movement Sensor?
 - https://github.com/yssk22/tweethandler/blob/master/tweethandler/setuputil.py#L26

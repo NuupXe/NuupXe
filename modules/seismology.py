@@ -17,7 +17,7 @@ class Seismology(object):
         self.voicesynthetizer = voicesynthetizer
 
     def SismologicoMX(self):
-        print '[Cancun] Seismology'
+        print '[NuupXe] Seismology'
         self.voicesynthetizer.speechit('Servicio Sismologico Nacional, Universidad Nacional Autonoma de Mexico')
 
         tstatus = self.twitterc.timeline_get('SismologicoMX', 1)

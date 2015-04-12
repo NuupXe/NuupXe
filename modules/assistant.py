@@ -58,7 +58,7 @@ class Assistant(object):
 	while True:
 	        self.voicerecognition.record('5')
 	        output = self.voicerecognition.recognize('False')
-	        if re.search(r'hola', output, re.M|re.I) or re.search(r'cancun', output, re.M|re.I):
+	        if re.search(r'hola', output, re.M|re.I) or re.search(r'nu', output, re.M|re.I):
 	            self.voicesynthetizer.speechit("Hola! Dime como puedo ayudarte?")
 		    self.introduced = True
 		    break
@@ -68,25 +68,25 @@ class Assistant(object):
 		self.voicerecognition.record()
 	        output = self.voicerecognition.recognize('False')
  	        if re.search(r'identif', output, re.M|re.I):
-		    print '[Cancun] Assistant Identification'
+		    print '[NuupXe] Assistant Identification'
 	            self.identification.identify()
 	        elif re.search(r'hora', output, re.M|re.I) or re.search(r'ora', output, re.M|re.I) :
-	            print '[Cancun] Assistant Hour'
+	            print '[NuupXe] Assistant Hour'
 	            self.clock.hour()
 	        elif re.search(r'fecha', output, re.M|re.I):
-	            print '[Cancun] Assistant Date'
+	            print '[NuupXe] Assistant Date'
 	            self.clock.date()
 	        elif re.search(r'reporte', output, re.M|re.I) or re.search(r'clima', output, re.M|re.I):
-	            print '[Cancun] Assistant Weather'
+	            print '[NuupXe] Assistant Weather'
 	            self.weather.report()
 	        elif re.search(r'estaciones', output, re.M|re.I) or re.search(r'repetidores', output, re.M|re.I):
-	            print '[Cancun] Assistant Stations'
+	            print '[NuupXe] Assistant Stations'
 	            self.messages.stations()
 	        elif re.search(r'sismo', output, re.M|re.I):
-	            print '[Cancun] Assistant Seismic'
+	            print '[NuupXe] Assistant Seismic'
 	            self.seismology.SismologicoMX()
 	        elif re.search(r'mensaje', output, re.M|re.I) or re.search(r'avis', output, re.M|re.I):
-	            print '[Cancun] Assistant Message'
+	            print '[NuupXe] Assistant Message'
 		    if self.voicemail.status:
 			    self.voicesynthetizer.speechit("Mensaje existente!")
 			    while True:
@@ -94,41 +94,41 @@ class Assistant(object):
 			            self.voicerecognition.record()
 		        	    output = self.voicerecognition.recognize('False')
 				    if re.search(r'escuchar', output, re.M|re.I):
-					    print '[Cancun] Assistant Message Play'
+					    print '[NuupXe] Assistant Message Play'
 					    self.voicemail.play()
 				    elif re.search(r'borrar', output, re.M|re.I):
-					    print '[Cancun] Assistant Message Erase'
+					    print '[NuupXe] Assistant Message Erase'
 					    self.voicemail.erase()
 				    elif re.search(r'salir', output, re.M|re.I):
-					    print '[Cancun] Assistant Message Quit'
+					    print '[NuupXe] Assistant Message Quit'
 					    self.voicesynthetizer.speechit("Saliendo de Opcion Mensaje")
 					    break
 		    else:
 		            self.voicemail.record()
 		            self.voicemail.play()
 	        elif re.search(r'dormir', output, re.M|re.I):
-	            print '[Cancun] Assistant Sleep'
+	            print '[NuupXe] Assistant Sleep'
 		    self.voicesynthetizer.speechit("Perfecto! Gracias! Dormire por los proximos 30 segundos")
 		    sleep(30)
 		    self.voicesynthetizer.speechit("Ya desperte! Que rica siesta!")
 		elif re.search(r'eventos', output, re.M|re.I):
-		    print '[Cancun] Assistant Bye'
+		    print '[NuupXe] Assistant Bye'
 		    self.voicesynthetizer.speechit("El radioclub tiene 2 eventos proximos")
 		    self.voicesynthetizer.speechit("Boletin Tecnologico, Miercoles, 8:00 pm")
 		    self.voicesynthetizer.speechit("Junta Mensual, Jueves 8:00 pm, recuerda traer galletas")
 		elif re.search(r'nada', output, re.M|re.I) or re.search(r'dios', output, re.M|re.I) or re.search(r'ativo', output, re.M|re.I):
-		    print '[Cancun] Assistant Bye'
+		    print '[NuupXe] Assistant Bye'
 		    self.voicesynthetizer.speechit("Hasta pronto!")
 	            self.running = False
 		    break
         	else:
-	            print '[Cancun] Assistant? Unknown!'
+	            print '[NuupXe] Assistant? Unknown!'
 
 		self.voicesynthetizer.speechit("Se ofrece algo mas?")
 
     def foo(self):
         while(self.running):
-            print '[Cancun] Assistante | Foo Hello'
+            print '[NuupXe] Assistante | Foo Hello'
             sleep(5)
 
     def get_user_input(self):
@@ -147,7 +147,7 @@ class Assistant(object):
 	self.newstatus = ''
 	
 	while (self.running):
-            print '[Cancun] Assistante | Twitter Hello'
+            print '[NuupXe] Assistante | Twitter Hello'
 	    #self.voicesynthetizer.speechit("Veamos")
 	    tstatus = self.twitterc.timeline_get('xe1gyq', 1)
 	    for status in tstatus:

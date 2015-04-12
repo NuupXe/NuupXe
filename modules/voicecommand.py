@@ -68,7 +68,7 @@ class VoiceCommand(object):
 	        self.voicerecognition.record()
         	output = self.voicerecognition.recognize('False')
                 if re.search(r'canc', output, re.M|re.I):
-                    self.voicesynthetizer.speechit("Alguien me hablo?. Soy el proyecto Cancun... Hasta pronto!")
+                    self.voicesynthetizer.speechit("Alguien me hablo?. Soy NuupXe... Hasta pronto!")
                     break
                 print output
 

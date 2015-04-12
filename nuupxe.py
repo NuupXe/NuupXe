@@ -41,14 +41,14 @@ from learning.morseteacher import MorseTeacher
 from modules.voiceexperimental import VoiceExperimental
 from modules.voicemailer import VoiceMailer
 
-class Cancun(object):
+class NuupXe(object):
 
     def __init__(self, irlp):
 
         self.irlp = irlp
         self.pidfile = None
         self.scheduler_status = False
-        self.pidfile = "/tmp/cancun.pid"
+        self.pidfile = "/tmp/nuupxe.pid"
 
     def __del__(self):
         pass
@@ -130,7 +130,7 @@ class Cancun(object):
             if self.irlp.active():
                 time.sleep(5)
                 self.irlp.busy()
-                self.voicesynthetizer.speechit("Se ha activado el nodo, Proyecto Cancun se despide, hasta pronto!")
+                self.voicesynthetizer.speechit("Se ha activado el nodo, Proyecto NuupXe dice hasta pronto!")
                 break
 
         self.disable()
@@ -261,36 +261,36 @@ def on_exit(sig, func=None):
 
 def main(argv):
 
-    logging.basicConfig(filename='output/cancun.log', level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+    logging.basicConfig(filename='output/nuupxe.log', level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
     irlp = Irlp()
 
-    parser = argparse.ArgumentParser(description='Cancun Project, Voice Services Experimental Project')
+    parser = argparse.ArgumentParser(description='NuupXe Project, Voice Services Experimental Project')
     parser.add_argument('-m', '--module', help='Module Mode')
     parser.add_argument('-s', '--server', help='Server mode')
     parser.add_argument('-d', '--dtmf', help='DMTF Code')
     args = parser.parse_args()
 
     if irlp.active():
-        logging.info("Nodo activo, no podemos iniciar Proyecto Cancun")
+        logging.info("Nodo activo, no podemos iniciar Proyecto NuupXe")
         sys.exit(0)
 
-    experimental = Cancun(irlp)
+    experimental = NuupXe(irlp)
     experimental.voicesynthetizer()
     voicesynthetizer = experimental.voicesynthetizerget()
 
     if (args.module or args.server) and experimental.enabled():
-        logging.info("Proyecto Cancun ya habilitado, no podemos iniciar otra instancia")
+        logging.info("Proyecto NuupXe ya habilitado, no podemos iniciar otra instancia")
         sys.exit(1)
 
     if args.server == 'stop' and not experimental.enabled():
-        voicesynthetizer.speechit("Proyecto Cancun deshabilitado")
-        status, output = commands.getstatusoutput('./cancun.sh stop')
+        voicesynthetizer.speechit("Proyecto NuupXe deshabilitado")
+        status, output = commands.getstatusoutput('./nuupxe.sh stop')
         sys.exit(1)
 
     if args.server == 'stop' and experimental.enabled():
-        voicesynthetizer.speechit("Deshabilitando Proyecto Cancun, hasta pronto!")
-        status, output = commands.getstatusoutput('./cancun.sh stop')
+        voicesynthetizer.speechit("Deshabilitando Proyecto NuupXe, hasta pronto!")
+        status, output = commands.getstatusoutput('./nuupxe.sh stop')
         sys.exit(1)
 
     experimental.enable()

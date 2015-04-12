@@ -23,17 +23,17 @@ class VoiceMail(object):
         pass
 
     def record(self):
-        print '[Cancun] Voice Mail Record'
+        print '[NuupXe] Voice Mail Record'
         self.voice.record()
 
     def play(self):
-        print '[Cancun] Voice Mail Play'
+        print '[NuupXe] Voice Mail Play'
         self.pushtotalk.openport()
         self.voice.play()
         self.pushtotalk.closeport()
 
     def run(self, dtmf):
-        print '[Cancun] Voice Mail Run'
+        print '[NuupXe] Voice Mail Run'
 
 	if dtmf:
             self.voicesynthetizer.speechit("Codigo recibido " + dtmf)

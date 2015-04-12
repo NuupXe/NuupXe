@@ -42,9 +42,9 @@ class VoiceExperimental(object):
         question = self.voicerecognition.recognize('False')
         logging.info('Phrase? ' + question)
         self.voicesynthetizer.speechit(question)
-        question = '#HamRadio #ProyectoCancun #VoiceExperimental ... ' + question.capitalize()
+        question = '#HamRadio #NuupXe #VoiceExperimental ... ' + question.capitalize()
         self.twitterc.timeline_set(question, media=None)
-        self.emailx.create('arjac.cacun', 'Voice Experimental Listen', question)
+        self.emailx.create('nuupxe', 'Voice Experimental Listen', question)
         self.emailx.send()
 
 # End of File

@@ -13,8 +13,8 @@ from email.header import Header
 class Emailx(object):
 
     def __init__(self):
-        self.me = 'arjac.cancun@gmail.com'
-        self.to = 'arjac.cancun@gmail.com'
+        self.me = None
+        self.to = None
         self.body = 'Default Body'
         self.subject = 'Default Subject'
         self.msg = MIMEMultipart('alternative')
@@ -26,6 +26,11 @@ class Emailx(object):
         self.configuration.read('configuration/services.config')
         self.username = self.configuration.get('gmail','username')
         self.password = self.configuration.get('gmail','password')
+
+        self.system = ConfigParser.ConfigParser()
+        self.system.read('configuration/general.config')
+        self.me = self.system.get('system','email')
+        self.to = self.me
 
     def create(self, to, subject, body, attachment=None):
 

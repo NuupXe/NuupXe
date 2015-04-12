@@ -35,12 +35,12 @@ class Selfie(object):
             self.camera.pictureCapture()
             media = self.camera.picturePath()
             message = Randomizer(2) + ' ' + self.hashtag + ' #Selfie '
-            message = message + 'Voice Infrastructure ... Visit me @ https://github.com/xe1gyq/cancun'
+            message = message + 'Voice Infrastructure ... Visit me @ https://github.com/xe1gyq/nuupxe'
             logging.info(message)
             self.twitterc.timeline_set(message, media)
-            message = "Hola! Mi selfie en twitter.com/ " + ' arjac cancun'
+            message = "Hola! Mi selfie en twitter.com/ " + 'nuup x e'
             self.voicesynthetizer.speechit(message)
-            message = ' '.join(self.phonetic.decode("arjaccancun"))
+            message = ' '.join(self.phonetic.decode("nuupxe"))
             self.voicesynthetizer.speechit(message)
         except:
             logging.error('Cannot open Camera device')

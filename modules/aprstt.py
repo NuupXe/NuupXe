@@ -156,7 +156,7 @@ class Aprstt(object):
 
     def query(self, string):
 
-        print '[Cancun] APRS Touch Tone | ' + string
+        print '[NuupXe] APRS Touch Tone | ' + string
 
         callsign = self.keytype_get_aprstt(string)
         if callsign:
@@ -166,7 +166,7 @@ class Aprstt(object):
             self.aprstracker.localize(callsignmobile)
             self.aprs.address_set(callsignexperimental)
             self.aprs.position_set(self.city_randomposition())
-            self.aprs.send_message("Cancun Project APRS Touch Tone Basic Implementation, Random Position")
+            self.aprs.send_message("NuupXe APRS Touch Tone Basic Implementation, Random Position")
 
         return
 

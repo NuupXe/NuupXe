@@ -18,6 +18,7 @@ class TwitterC(logging.Handler):
         self.authentication()
 
     def configuration(self):
+        logging.info('[NuupXe] Twitter Configuration')
         self.configuration = ConfigParser.ConfigParser()
         self.configuration.read('configuration/services.config')
         self.consumer_key = self.configuration.get('twitter','consumer_key')
@@ -26,6 +27,7 @@ class TwitterC(logging.Handler):
         self.access_token_secret = self.configuration.get('twitter','access_token_secret')
 
     def authentication(self):
+        logging.info('[NuupXe] Twitter Authentication')
         if self.agent == 'tweepy':
             self.authenticate = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
             self.authenticate.set_access_token(self.access_token, self.access_token_secret)
@@ -34,6 +36,7 @@ class TwitterC(logging.Handler):
             self.twitter = Twython(self.consumer_key,self.consumer_secret,self.access_token,self.access_token_secret)
 
     def timeline_get(self, user, items):
+        logging.info('[NuupXe] Twitter TimelineGet')
 	try:
             if self.agent == 'tweepy':
                 self.twitter.get_user(user)
@@ -41,9 +44,10 @@ class TwitterC(logging.Handler):
             elif self.agent == 'twython':
                 return self.twitter.get_user_timeline(screen_name=user, include_rts=True, count=items)
 	except:
-	    print '[Cancun] Twitter | Timeline Get Error ...'
+	    logging.info('[NuupXe] Twitter | Timeline Get Error ...')
 
     def timeline_set(self, status, media):
+        logging.info('[NuupXe] Twitter TimelineSet')
         if self.agent == 'tweepy':
             self.twitter.update_status(status)
         elif self.agent == 'twython':
