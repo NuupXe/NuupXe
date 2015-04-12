@@ -28,6 +28,7 @@ export packageYowsup2=yowsup2
 export packagePsutil=psutil
 export packageGitPython=gitpython
 export packageTropo=tropo-webapi-python
+export packagePySSTV=pySSTV
 
 # =============================================================================
 # Script Functions
@@ -64,5 +65,6 @@ pipFunctionInstall $packageTwython
 pipFunctionInstall $packagePsutil
 pipFunctionInstall $packageGitPython
 pipFunctionInstall $packageTropo
+pipFunctionInstall $packagePySSTV
 
 # End of file
