@@ -153,7 +153,7 @@ class NuupXe(object):
 
     def module_mode(self, module, dtmf=None):
 
-        logging.info('Mode Module')
+        logging.info('Mode Module ' + module)
 
         # Custom Decode Activated Modules
 
@@ -332,7 +332,7 @@ def main(argv):
 
     elif args.dtmf:
         logging.info(args.dtmf)
-        if args.dtmf.startswith('PS') and len(args.dtmf) == 3 or len(args.dtmf) == 4:
+        if args.dtmf.startswith('PS'):
             module = experimental.dtmf_setup(args.dtmf)
             experimental.module_mode(module, args.dtmf)
         elif args.dtmf.startswith('SS') and len(args.dtmf) == 4:
