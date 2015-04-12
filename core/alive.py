@@ -37,7 +37,7 @@ class Alive(object):
         callsign = self.conf.get("general", "callsign") + '-1'
         self.aprs.address_set(callsign)
 
-    def report(self, module=None):
+    def report(self, module=None, media=None):
 
         logging.info('Alive Report')
         self.setup()
@@ -56,7 +56,10 @@ class Alive(object):
 
         self.aprs.send_message(technical)
         self.aprs.position_set(self.systemcoordinates)
-        self.twitterc.timeline_set(message, media=None)
+        if media:
+            self.twitterc.timeline_set(message, media)
+        else:
+            self.twitterc.timeline_set(message, media=None)
         logging.info(message)
 
 # End of File
