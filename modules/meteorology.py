@@ -9,12 +9,14 @@ import sys
 import feedparser
 import threading
 
+from core.alive import Alive
 from core.twitterc import TwitterC
 
 state = {'CHIS': 'Chiapas', 'NL': 'Nuevo Leon', 'VER': 'Veracruz',
         'JAL': 'Jalisco', 'OAX': 'Oaxaca', 'GRO': 'Guerrero',
         'BC': 'Baja California', 'SON': 'Sonora', 'TX': 'Texas',
-	'Temp': 'Temperatura', 'DGO': 'Durango', 'Dgo': 'Durango',}
+        'Temp': 'Temperatura', 'DGO': 'Durango', 'Dgo': 'Durango',
+        'Chih': 'Chihuahua'}
 
 class Meteorology(object):
 
@@ -32,9 +34,8 @@ class Meteorology(object):
     def conagua_clima(self):
 
         logging.info('Meteorology Conagua Clima')
-        self.voicesynthetizer.speechit('Servicio Meteorologico Nacional, Comision Nacional del Agua')
+        message = 'Servicio Meteorologico Nacional, Comision Nacional del Agua, '
         self.alive()
-
         tstatus = self.twitterc.timeline_get('conagua_clima', 3)
         for status in tstatus:
             status['text'] = status['text']
@@ -53,9 +54,10 @@ class Meteorology(object):
             pattern = re.compile(r'\b(' + '|'.join(state.keys()) + r')\b')
             status['text'] = pattern.sub(lambda x: state[x.group()], status['text'])
             try:
-                self.voicesynthetizer.speechit(status['text'])
+                message =  message + status['text'] + ' '
             except:
                 logging.info('Meteorology Conagua Clima Error')
-        self.voicesynthetizer.speechit('Mas informacion en twitter.com/conagua_clima')
+        message = message + 'Mas informacion en twitter.com/conagua_clima'
+        self.voicesynthetizer.speechit(message)
 
 # End of File
