@@ -3,6 +3,7 @@
 import json
 import logging
 
+from core.alive import Alive
 from core.emailx import Emailx
 from core.twitterc import TwitterC
 from core.voicerecognition import VoiceRecognition

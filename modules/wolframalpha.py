@@ -11,6 +11,7 @@ class WolframAlpha(object):
 
     def __init__(self, voicesynthetizer):
 
+        self.modulename = 'WolframAlpha'
         self.voicesynthetizer = voicesynthetizer
         self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
         self.wolfram = Wolfram()
