@@ -263,20 +263,21 @@ class NuupXe(object):
         self.scheduler.add_interval_job(self.news.getitems, minutes=240)
         self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=240)
         self.scheduler.add_interval_job(self.messages.stations, minutes=240)
+        self.scheduler.add_cron_job(self.sstv.decode,month='*',day='*',hour='8,14,19',minute ='00',second='00')
 
 	# Learning Modules, AREJ
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,12,17',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,12,17',minute ='00',second='00')
 
         # Learning Modules, Morse
-        self.scheduler.add_cron_job(self.morseteacher.learn,month='*',day='*',hour='7,12,17',minute ='30',second='0')
-        self.scheduler.add_cron_job(self.morseteacher.contest,month='*',day='*',hour='7,12,17',minute ='45',second='0')
+        self.scheduler.add_cron_job(self.morseteacher.learn,month='*',day='*',hour='7,12,17',minute ='30',second='00')
+        self.scheduler.add_cron_job(self.morseteacher.contest,month='*',day='*',hour='7,12,17',minute ='45',second='00')
 
         # Learning Modules, Reglamentos
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'],month='*',day_of_week='mon',hour='8,13,18',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.2'],month='*',day_of_week='tue',hour='8,13,18',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.3'],month='*',day_of_week='wed',hour='8,13,18',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.4'],month='*',day_of_week='thu',hour='8,13,18',minute ='00',second='0')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.5'],month='*',day_of_week='fri',hour='8,13,18',minute ='00',second='0')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'],month='*',day_of_week='mon',hour='8,13,18',minute ='00',second='00')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.2'],month='*',day_of_week='tue',hour='8,13,18',minute ='00',second='00')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.3'],month='*',day_of_week='wed',hour='8,13,18',minute ='00',second='00')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.4'],month='*',day_of_week='thu',hour='8,13,18',minute ='00',second='00')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.5'],month='*',day_of_week='fri',hour='8,13,18',minute ='00',second='00')
 
 def set_exit_handler(func):
     signal.signal(signal.SIGTERM, func)
