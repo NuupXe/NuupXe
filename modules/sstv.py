@@ -29,6 +29,7 @@ class SSTV(object):
         logging.info('SSTV Decode')
         self.setup()
         try:
+            status, output = commands.getstatusoutput('python core/bing.py')
             status, output = commands.getstatusoutput('convert -resize 320x256\! output/bing.jpg output/radioclub.jpg')
             status, output = commands.getstatusoutput('python -m pysstv --mode MartinM1 --vox output/radioclub.jpg output/sstv.wav')
             self.voicesynthetizer.speechit("Modulo Experimental de Television de Barrido Lento, Modo Martin Uno")
