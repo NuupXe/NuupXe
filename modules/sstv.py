@@ -11,7 +11,7 @@ class SSTV(object):
 
     def __init__(self, voicesynthetizer):
 
-        self.modulename = 'SSTV'
+        self.modulename = 'SSTV @Bing'
         self.modulepicture = 'output/radioclub.jpg'
         self.voicesynthetizer = voicesynthetizer
         self.pushtotalk = PushToTalk()
@@ -33,7 +33,7 @@ class SSTV(object):
             self.pushtotalk.openport()
             status, output = commands.getstatusoutput('aplay output/sstv.wav')
             self.pushtotalk.closeport()
-            alive(self.modulename)
+            alive(self.modulename, 'output/bing.jpg')
         except:
             logging.error('Cannot decode file')
 

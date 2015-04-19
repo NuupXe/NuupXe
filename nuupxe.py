@@ -252,7 +252,7 @@ class NuupXe(object):
         self.scheduler.add_cron_job(self.clock.date, month='*', day_of_week='*', hour='6,12,22', minute ='00', second='00')
         self.scheduler.add_cron_job(self.clock.hour, month='*', day_of_week='*', hour='*', minute ='*/15', second='00')
         self.scheduler.add_cron_job(self.identification.identify, month='*', day_of_week='*', hour='*', minute ='*/30', second='00')
-        self.scheduler.add_cron_job(self.selfie.get, month='*', day_of_week='*', hour='6,12,22', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.selfie.get, month='*', day_of_week='*', hour='8,14,19,00,04', minute ='00', second='00')
         self.scheduler.add_cron_job(self.weather.report, month='*', day_of_week='*', hour='*/2', minute ='00', second='00')
 
         # Experimental Modules
