@@ -4,9 +4,8 @@ import commands
 import logging
 import re
 
-from core.alive import Alive
+from core.alive import alive
 from core.voicerecognition import VoiceRecognition
-
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.weather import Weather
@@ -24,10 +23,6 @@ class VoiceCommand(object):
         self.identification = Identification(voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
 
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
-
     def presentation(self):
 
         logging.info('Voice Command Presentation')
@@ -36,7 +31,6 @@ class VoiceCommand(object):
     def decode(self, output):
 
         logging.info('Voice Command Decode')
-        self.alive()
 
         if re.search(r'coman', output, re.M|re.I) or re.search(r'disponi', output, re.M|re.I):
             logging.info('Voice Command Decode Available Commands')
@@ -59,6 +53,8 @@ class VoiceCommand(object):
         else:
             logging.error('Voice Command Unknown!')
             self.voicesynthetizer.speechit("No entendimos tu comando!")
+
+        alive(self.modulename)
 
     def listen(self):
 

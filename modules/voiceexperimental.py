@@ -3,7 +3,7 @@
 import json
 import logging
 
-from core.alive import Alive
+from core.alive import alive
 from core.emailx import Emailx
 from core.twitterc import TwitterC
 from core.voicerecognition import VoiceRecognition
@@ -30,10 +30,6 @@ class VoiceExperimental(object):
         self.voicerecognition.languageset('spanish')
         self.voicesynthetizer.setlanguage("spanish")
 
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
-
     def cleanup(self):
 
         logging.info('Voice Experimental Cleanup')
@@ -43,7 +39,6 @@ class VoiceExperimental(object):
     def listen(self):
 
         logging.info('Voice Experimental Listen')
-        self.alive()
         self.voicesynthetizer.speechit('Hola! Dime tu frase!')
         self.voicerecognition.record()
         question = self.voicerecognition.recognize('False')
@@ -53,5 +48,6 @@ class VoiceExperimental(object):
         self.twitterc.timeline_set(question, media=None)
         self.emailx.create('nuupxe', 'Voice Experimental Listen', question)
         self.emailx.send()
+        alive(self.modulename)
 
 # End of File

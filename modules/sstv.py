@@ -4,7 +4,7 @@ import commands
 import ConfigParser
 import logging
 
-from core.alive import Alive
+from core.alive import alive
 from core.pushtotalk import PushToTalk
 
 class SSTV(object):
@@ -20,10 +20,6 @@ class SSTV(object):
 
         logging.info('SSTV Setup')
 
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename, self.modulepicture)
-
     def decode(self):
 
         logging.info('SSTV Decode')
@@ -37,7 +33,7 @@ class SSTV(object):
             self.pushtotalk.openport()
             status, output = commands.getstatusoutput('aplay output/sstv.wav')
             self.pushtotalk.closeport()
-            self.alive()
+            alive(self.modulename)
         except:
             logging.error('Cannot decode file')
 

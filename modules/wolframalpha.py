@@ -3,7 +3,7 @@
 import json
 import logging
 
-from core.alive import Alive
+from core.alive import alive
 from core.voicerecognition import VoiceRecognition
 from core.wolfram import Wolfram
 
@@ -26,10 +26,6 @@ class WolframAlpha(object):
         self.voicerecognition.languageset('english')
         self.voicesynthetizer.setlanguage("english")
 
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
-
     def cleanup(self):
 
         logging.info('Wolfram Alpha Cleanup')
@@ -40,7 +36,6 @@ class WolframAlpha(object):
 
         logging.info('Wolfram Alpha Ask')
         self.setup()
-        self.alive()
         self.voicesynthetizer.speechit('Yes! What is your question for Wolfram Alpha?')
         self.voicerecognition.record()
         question = self.voicerecognition.recognize('False')
@@ -53,5 +48,7 @@ class WolframAlpha(object):
         else:
             self.voicesynthetizer.speechit('Sorry! We do not have an answer')
         self.cleanup()
+
+        alive(self.modulename)
 
 # End of File

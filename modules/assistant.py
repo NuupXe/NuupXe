@@ -4,7 +4,7 @@ import threading
 from time import sleep
 import re
 
-from core.alive import Alive
+from core.alive import alive
 from core.twitterc import TwitterC
 from core.voicerecognition import VoiceRecognition
 from core.voicesynthetizer import VoiceSynthetizer
@@ -45,10 +45,6 @@ class Assistant(object):
         self.weather = Weather(self.voicesynthetizer)
         self.messages = Messages(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
-
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
 
     def demo1(self):
 	self.introduction1()

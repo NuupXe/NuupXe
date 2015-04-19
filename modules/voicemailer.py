@@ -4,7 +4,7 @@ import ConfigParser
 import commands
 import logging
 
-from core.alive import Alive
+from core.alive import alive
 from core.emailx import Emailx
 from core.irlp import Irlp
 from core.phonetic import Phonetic
@@ -33,10 +33,6 @@ class VoiceMailer(object):
     def __del__(self):
         pass
 
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
-
     def decodeUser(self, dmtf):
         logging.info('Voice Mailer Decode User')
         user = dmtf[2:]
@@ -50,7 +46,6 @@ class VoiceMailer(object):
     def attend(self, dtmf):
 
         logging.info('Voice Mailer Attend')
-        self.alive()
 
         user, email = self.decodeUser(dtmf)
         if user:
@@ -66,6 +61,8 @@ class VoiceMailer(object):
             self.emailx.send()
         else:
             self.voicesynthetizer.speechit('Usuario no asignado!')
+
+        alive(self.modulename)
 
 # Enf of File
 

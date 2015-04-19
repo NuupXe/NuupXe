@@ -3,7 +3,7 @@
 import logging
 import time
 
-from core.alive import Alive
+from core.alive import alive
 from core.voicesynthetizer import VoiceSynthetizer
 
 days = {'Monday': 'Lunes',  'Tuesday': 'Martes',    'Wednesday': 'Miercoles',
@@ -23,21 +23,17 @@ class Clock(object):
         self.modulename = 'Clock'
         self.voicesynthetizer = voicesynthetizer
 
-    def alive(self, submodule):
-        self.alive = Alive()
-        self.alive.report(self.modulename + submodule)
-
     def date(self):
         logging.info(self.modulename + ' Date')
         date = days[time.strftime("%A")] + ", "  + time.strftime("%d").lstrip('0')
         date = date + " de " + months[time.strftime("%B")] + " de " + time.strftime("%Y")
         self.voicesynthetizer.speechit(date)
-        self.alive('Date')
+        alive(self.modulename + 'Date')
 
     def hour(self):
         logging.info(self.modulename + ' Hour')
         hour = "Son las " + time.strftime("%H") + " horas y " + time.strftime("%M") + " minutos"
         self.voicesynthetizer.speechit(hour)
-        self.alive('Hour')
+        alive(self.modulename + 'Hour')
 
 # End of File

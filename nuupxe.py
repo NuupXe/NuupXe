@@ -13,7 +13,7 @@ import time
 from apscheduler.scheduler import Scheduler
 from apscheduler.threadpool import ThreadPool
 
-from core.alive import Alive
+from core.alive import alive
 from core.irlp import Irlp
 from core.voicesynthetizer import VoiceSynthetizer
 
@@ -62,7 +62,6 @@ class NuupXe(object):
     def modules_setup(self):
 
         # Production Modules
-        self.alive = Alive()
         self.aprstracker = AprsTracker(self.voicesynthetizer)
         self.aprstt = Aprstt(self.voicesynthetizer)
         self.clock = Clock(self.voicesynthetizer)
@@ -176,8 +175,7 @@ class NuupXe(object):
         # PS Activated Modules
 
         elif module == 'alive':
-            self.alive = Alive()
-            self.alive.report()
+            alive()
         elif module == 'aprstracker':
             self.aprstracker = AprsTracker(self.voicesynthetizer)
             self.aprstracker.query()
@@ -251,33 +249,33 @@ class NuupXe(object):
     def schedule(self):
 
         # Production Modules
-        self.scheduler.add_interval_job(self.alive.report, minutes=120)
-        self.scheduler.add_cron_job(self.clock.date,month='*',day_of_week='*',hour='6,12,22',minute ='00',second='00')
-        self.scheduler.add_interval_job(self.clock.hour, minutes=15)
-        self.scheduler.add_interval_job(self.identification.identify, minutes=30)
-        self.scheduler.add_cron_job(self.selfie.get,month='*',day_of_week='*',hour='6,12,22',minute ='00',second='00')
-        self.scheduler.add_interval_job(self.weather.report, minutes=120)
+        self.scheduler.add_cron_job(alive, month='*', day_of_week='*', hour='*/2', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.clock.date, month='*', day_of_week='*', hour='6,12,22', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.clock.hour, month='*', day_of_week='*', hour='*', minute ='*/15', second='00')
+        self.scheduler.add_cron_job(self.identification.identify, month='*', day_of_week='*', hour='*', minute ='*/30', second='00')
+        self.scheduler.add_cron_job(self.selfie.get, month='*', day_of_week='*', hour='6,12,22', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.weather.report, month='*', day_of_week='*', hour='*/2', minute ='00', second='00')
 
         # Experimental Modules
-        self.scheduler.add_interval_job(self.seismology.SismologicoMX, minutes=240)
-        self.scheduler.add_interval_job(self.news.getitems, minutes=240)
-        self.scheduler.add_interval_job(self.meteorology.conagua_clima, minutes=240)
-        self.scheduler.add_interval_job(self.messages.stations, minutes=240)
-        self.scheduler.add_cron_job(self.sstv.decode,month='*',day='*',hour='8,14,19',minute ='00',second='00')
+        self.scheduler.add_cron_job(self.seismology.SismologicoMX, month='*', day='*', hour='*/4', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.news.getitems, month='*', day='*', hour='*/4', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.meteorology.conagua_clima, month='*', day='*', hour='*/4', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.messages.stations, month='*', day='*', hour='*/4', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.sstv.decode, month='*', day='*', hour='8,14,19,00,04', minute ='00', second='00')
 
 	# Learning Modules, AREJ
         self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,12,17',minute ='00',second='00')
 
         # Learning Modules, Morse
-        self.scheduler.add_cron_job(self.morseteacher.learn,month='*',day='*',hour='7,12,17',minute ='30',second='00')
-        self.scheduler.add_cron_job(self.morseteacher.contest,month='*',day='*',hour='7,12,17',minute ='45',second='00')
+        self.scheduler.add_cron_job(self.morseteacher.learn, month='*', day='*', hour='7,12,17', minute ='30', second='00')
+        self.scheduler.add_cron_job(self.morseteacher.contest, month='*', day='*', hour='7,12,17', minute ='45', second='00')
 
         # Learning Modules, Reglamentos
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'],month='*',day_of_week='mon',hour='8,13,18',minute ='00',second='00')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.2'],month='*',day_of_week='tue',hour='8,13,18',minute ='00',second='00')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.3'],month='*',day_of_week='wed',hour='8,13,18',minute ='00',second='00')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.4'],month='*',day_of_week='thu',hour='8,13,18',minute ='00',second='00')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.5'],month='*',day_of_week='fri',hour='8,13,18',minute ='00',second='00')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'], month='*', day_of_week='mon', hour='8,13,18', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.2'], month='*', day_of_week='tue', hour='8,13,18', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.3'], month='*', day_of_week='wed', hour='8,13,18', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.4'], month='*', day_of_week='thu', hour='8,13,18', minute ='00', second='00')
+        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.5'], month='*', day_of_week='fri', hour='8,13,18', minute ='00', second='00')
 
 def set_exit_handler(func):
     signal.signal(signal.SIGTERM, func)

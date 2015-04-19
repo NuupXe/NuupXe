@@ -7,7 +7,7 @@ import sys
 
 from datetime import date
 
-from core.alive import Alive
+from core.alive import alive
 from core.morse import Morse
 from core.phonetic import Phonetic
 from core.voicesynthetizer import VoiceSynthetizer
@@ -20,10 +20,6 @@ class Messages(object):
         self.morse = Morse()
         self.speaker = voicesynthetizer
         self.phonetic = Phonetic()
-
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
 
     def message(self, message):
         if self.speaker.getsynthetizer() == "google":
@@ -48,8 +44,6 @@ class Messages(object):
     def stations(self):
 
 	print '[NuupXe] Messages: Stations'
-
-        self.alive()
 
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/stations.config"
@@ -88,7 +82,4 @@ class Messages(object):
 
                 None
 
-if __name__ == "__main__":
-
-    mytest = Messages()
-    mytest.repeaters()
+        alive(self.modulename)

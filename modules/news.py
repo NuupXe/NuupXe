@@ -5,7 +5,7 @@ import feedparser
 import threading
 import unicodedata
 
-from core.alive import Alive
+from core.alive import alive
 
 COMMON_CHANNEL_PROPERTIES = [
     ('Channel title:', 'title', None),
@@ -33,10 +33,6 @@ class News(threading.Thread):
         threading.Thread.__init__(self)
         self.speak = voicesynthetizer
         self.initialize()
-
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
 
     def initialize(self):
         self.seturl("http://www.eluniversal.com.mx/rss/universalmxm.xml")
@@ -78,7 +74,6 @@ class News(threading.Thread):
     def getitems(self):
 
         logging.info('News Get Items')
-        self.alive()
         newsdata = self.parsedurl
         items = newsdata.entries
 
@@ -92,5 +87,7 @@ class News(threading.Thread):
             if not messagedescription.startswith("<img"):
                 message = message + ', ' + messagedescription
             self.speak.speechit(message)
+
+        alive(self.modulename)
 
 # End of File

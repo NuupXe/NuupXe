@@ -26,6 +26,7 @@ class Wolfram(object):
             logging.info(string)
             return string
         except:
+            logging.info('Wolfram Question Error in Client Query')
             return None
 
 # End of File

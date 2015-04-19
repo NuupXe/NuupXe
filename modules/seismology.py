@@ -3,7 +3,7 @@
 
 import re
 
-from core.alive import Alive
+from core.alive import alive
 from core.twitterc import TwitterC
 
 state = {'CHIS': 'Chiapas', 'NL': 'Nuevo Leon', 'VER': 'Veracruz',
@@ -18,14 +18,9 @@ class Seismology(object):
 	self.twitterc = TwitterC('twython')
         self.voicesynthetizer = voicesynthetizer
 
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
-
     def SismologicoMX(self):
         print '[NuupXe] Seismology'
         message = 'Servicio Sismologico '
-        self.alive()
 
         tstatus = self.twitterc.timeline_get('skyalertmx', 3)
         sismo = 'False'
@@ -51,6 +46,8 @@ class Seismology(object):
             self.voicesynthetizer.speechit("No se encontraron sismos en las ultimas horas")
         else:
             self.voicesynthetizer.speechit(message)
+
+        alive(self.modulename)
 
 if __name__ == '__main__':
 

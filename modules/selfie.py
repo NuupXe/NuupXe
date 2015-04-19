@@ -4,7 +4,7 @@ import ConfigParser
 import logging
 import random
 
-from core.alive import Alive
+from core.alive import alive
 from core.camera import Camera
 from core.phonetic import Phonetic
 from core.twitterc import TwitterC
@@ -28,15 +28,10 @@ class Selfie(object):
         self.conf.read(self.path)
         self.hashtag = self.conf.get("system", "hashtag")
 
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
-
     def get(self):
 
         logging.info('Selfie Get')
         self.setup()
-        self.alive()
 
         try:
             self.camera.pictureCapture()
@@ -51,5 +46,7 @@ class Selfie(object):
             self.voicesynthetizer.speechit(message)
         except:
             logging.error('Cannot open Camera device')
+
+        alive(self.modulename, media)
 
 # End of File

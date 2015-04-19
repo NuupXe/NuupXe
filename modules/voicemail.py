@@ -3,7 +3,7 @@
 import commands
 import time
 
-from core.alive import Alive
+from core.alive import alive
 from core.irlp import Irlp
 from core.pushtotalk import PushToTalk
 from core.voice import Voice
@@ -24,10 +24,6 @@ class VoiceMail(object):
     def __del__(self):
         pass
 
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
-
     def record(self):
         print '[NuupXe] Voice Mail Record'
         self.voice.record()
@@ -40,7 +36,6 @@ class VoiceMail(object):
 
     def run(self, dtmf):
         print '[NuupXe] Voice Mail Run'
-        self.alive()
 
 	if dtmf:
             self.voicesynthetizer.speechit("Codigo recibido " + dtmf)
@@ -57,6 +52,8 @@ class VoiceMail(object):
         self.play()
         self.voice.filenameset(self.audiofilemessage)
         self.play()
+
+        alive(self.modulename)
 
 # Enf of File
 

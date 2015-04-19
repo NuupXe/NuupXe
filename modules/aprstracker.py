@@ -10,8 +10,9 @@ import sys
 import time
 import unicodedata
 
+from core.alive import alive
+
 from pygeocoder import Geocoder
-from core.alive import Alive
 from core.aprsfi import AprsFi
 from core.voicesynthetizer import VoiceSynthetizer
 from core.phonetic import Phonetic
@@ -42,10 +43,6 @@ class AprsTracker(object):
         self.speaker = voicesynthetizer
         self.callsign = 'XE1GQP-9'
 
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
-
     def clock(self, aprstime):
 
         logging.info('Aprs Tracker Clock')
@@ -63,7 +60,6 @@ class AprsTracker(object):
 
     def localize(self, callsign):
 
-        self.alive()
         self.aprsfi.callsignset(callsign)
         self.aprsfi.dataset('loc')
         data = self.aprsfi.query()
@@ -95,5 +91,8 @@ class AprsTracker(object):
             except:
                 pass
             self.speaker.speechit(message)
+
+        alive(self.modulename)
+
 
 # End of File

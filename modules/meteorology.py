@@ -9,7 +9,7 @@ import sys
 import feedparser
 import threading
 
-from core.alive import Alive
+from core.alive import alive
 from core.twitterc import TwitterC
 
 state = {'CHIS': 'Chiapas', 'NL': 'Nuevo Leon', 'VER': 'Veracruz',
@@ -27,15 +27,10 @@ class Meteorology(object):
 
         self.voicesynthetizer = voicesynthetizer
 
-    def alive(self):
-        self.alive = Alive()
-        self.alive.report(self.modulename)
-
     def conagua_clima(self):
 
         logging.info('Meteorology Conagua Clima')
         message = 'Servicio Meteorologico Nacional, Comision Nacional del Agua, '
-        self.alive()
         tstatus = self.twitterc.timeline_get('conagua_clima', 3)
         for status in tstatus:
             status['text'] = status['text']
@@ -59,5 +54,7 @@ class Meteorology(object):
                 logging.info('Meteorology Conagua Clima Error')
         message = message + 'Mas informacion en twitter.com/conagua_clima'
         self.voicesynthetizer.speechit(message)
+
+        alive(self.modulename)
 
 # End of File

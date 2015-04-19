@@ -8,58 +8,49 @@ from core.system import System
 from core.twitterc import TwitterC
 from core.utilities import Randomizer
 
-class Alive(object):
+def alive(module=None, media=None):
 
-    def __init__(self):
+    logging.info('Alive')
 
-        self.aprs = AprsNet()
-        self.conf = ConfigParser.ConfigParser()
-        self.system = System()
-        self.twitterc = TwitterC('twython')
+    aprs = AprsNet()
+    conf = ConfigParser.ConfigParser()
+    system = System()
+    twitterc = TwitterC('twython')
 
-    def setup(self):
+    path = "configuration/general.config"
+    conf.read(path)
 
-        logging.info('Alive Setup')
+    twitteraccount = conf.get("general", "twitter")
+    hashtag = conf.get("system", "hashtag")
+    location =  conf.get("general", "location")
+    systemfrequency = conf.get("general", "frequency")
+    systemcoordinates = conf.get("general", "coordinates")
 
-        self.path = "configuration/general.config"
-        self.conf.read(self.path)
+    cpu = system.cpu()
+    memory = system.memory()
+    kernel = system.kernelVersion()
 
-        self.twitteraccount = self.conf.get("general", "twitter")
-        self.hashtag = self.conf.get("system", "hashtag")
-        self.location =  self.conf.get("general", "location")
-        self.systemfrequency =  self.conf.get("general", "frequency")
-        self.systemcoordinates = self.conf.get("general", "coordinates")
+    callsign = conf.get("general", "callsign") + '-1'
+    aprs.address_set(callsign)
 
-        self.cpu = self.system.cpu()
-        self.memory = self.system.memory()
-        self.kernel = self.system.kernelVersion()
+    cpu = 'Cpu ' + cpu + '%'
+    memory = 'Memory ' + memory
+    kernel = 'Kernel ' + kernel
+    system = ' ' + cpu + ' ' + memory + ' ' + kernel
 
-        callsign = self.conf.get("general", "callsign") + '-1'
-        self.aprs.address_set(callsign)
+    message = Randomizer(2) + ' ' + hashtag + ' '
+    if module:
+        message = message + '#' + module + ' '
+    message = message + twitteraccount + ' ' + location
+    technical = ' Freq ' + systemfrequency + system
+    message = message + ' ' + technical
 
-    def report(self, module=None, media=None):
-
-        logging.info('Alive Report')
-        self.setup()
-
-        cpu = 'Cpu ' + self.cpu + '%'
-        memory = 'Memory ' + self.memory
-        kernel = 'Kernel ' + self.kernel
-        system = ' ' + cpu + ' ' + memory + ' ' + kernel
-
-        message = Randomizer(2) + ' ' + self.hashtag + ' '
-        if module:
-            message = message + '#' + module + ' '
-        message = message + self.twitteraccount + ' ' + self.location
-        technical = ' Freq ' + self.systemfrequency + system
-        message = message + ' ' + technical
-
-        self.aprs.send_message(technical)
-        self.aprs.position_set(self.systemcoordinates)
-        if media:
-            self.twitterc.timeline_set(message, media)
-        else:
-            self.twitterc.timeline_set(message, media=None)
-        logging.info(message)
+    aprs.send_message(technical)
+    aprs.position_set(systemcoordinates)
+    if media:
+        twitterc.timeline_set(message, media)
+    else:
+        twitterc.timeline_set(message, media=None)
+    logging.info(message)
 
 # End of File
