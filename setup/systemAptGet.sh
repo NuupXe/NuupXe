@@ -38,6 +38,7 @@ export packagePythonImage="python-image"
 export packageLibAsound2Dev="libasound2-dev"
 export packageLibJpegDev="libjpeg-dev"
 export packagePythonImaging="python-imaging"
+export packageSdr="rtl-sdr gnuradio gnuradio-dev gr-osmosdr"
 
 # =============================================================================
 # Script Functions
@@ -84,5 +85,6 @@ aptgetFunctionInstall $packagePythonImage
 aptgetFunctionInstall $packageLibAsound2Dev
 aptgetFunctionInstall $packageLibJpegDev
 aptgetFunctionInstall $packagePythonImaging
+aptgetFunctionInstall $packageSdr
 
 # End of file
