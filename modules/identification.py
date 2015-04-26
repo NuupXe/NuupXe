@@ -25,6 +25,7 @@ class Identification(object):
         logging.info('Identification Setup')
         self.message = self.conf.get("general", "radioclub")
         self.messagex = self.message + ' ' + self.conf.get("general", "callsign")
+        self.messagex = "\"" + self.messagex + "\""
         self.message = self.message + ', ' + ' '.join(self.phonetic.decode(self.conf.get("general", "callsign")))
         self.message = "\"" + self.message + "\""
         self.callsign = self.conf.get("general", "callsign")
