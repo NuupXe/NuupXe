@@ -52,7 +52,8 @@ def alive(modulename=None, modulemessage=None, media=None):
     aprs.position_set(systemcoordinates)
     message = (message[:136] + '...')
     if media:
-        twitterc.timeline_set(message, media)
+        message = (message[:110] + '...')
+        twitterc.timeline_set(message, media=media)
     else:
         twitterc.timeline_set(message, media=None)
     logging.info(message)
