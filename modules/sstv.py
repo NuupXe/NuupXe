@@ -33,7 +33,7 @@ class SSTV(object):
             self.pushtotalk.openport()
             status, output = commands.getstatusoutput('aplay output/sstv.wav')
             self.pushtotalk.closeport()
-            alive(self.modulename, 'output/bing.jpg')
+            alive(modulename=self.modulename, media='output/bing.jpg')
         except:
             logging.error('Cannot decode file')
 

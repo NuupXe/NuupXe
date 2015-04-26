@@ -47,6 +47,6 @@ class Selfie(object):
         except:
             logging.error('Cannot open Camera device')
 
-        alive(self.modulename, media)
+        alive(modulename=self.modulename, media=media)
 
 # End of File

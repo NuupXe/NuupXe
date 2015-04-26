@@ -16,7 +16,7 @@ state = {'CHIS': 'Chiapas', 'NL': 'Nuevo Leon', 'VER': 'Veracruz',
         'JAL': 'Jalisco', 'OAX': 'Oaxaca', 'GRO': 'Guerrero',
         'BC': 'Baja California', 'SON': 'Sonora', 'TX': 'Texas',
         'Temp': 'Temperatura', 'DGO': 'Durango', 'Dgo': 'Durango',
-        'Chih': 'Chihuahua'}
+        'Chih': 'Chihuahua', 'Tamps': 'Tamaulipas'}
 
 class Meteorology(object):
 
@@ -30,7 +30,7 @@ class Meteorology(object):
     def conagua_clima(self):
 
         logging.info('Meteorology Conagua Clima')
-        message = 'Servicio Meteorologico Nacional, Comision Nacional del Agua, '
+        message = 'Servicio Meteorologico Nacional @conagua_clima '
         tstatus = self.twitterc.timeline_get('conagua_clima', 3)
         for status in tstatus:
             status['text'] = status['text']
@@ -55,6 +55,6 @@ class Meteorology(object):
         message = message + 'Mas informacion en twitter.com/conagua_clima'
         self.voicesynthetizer.speechit(message)
 
-        alive(self.modulename)
+        alive(modulename=self.modulename, modulemessage=message)
 
 # End of File

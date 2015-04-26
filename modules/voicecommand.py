@@ -54,8 +54,6 @@ class VoiceCommand(object):
             logging.error('Voice Command Unknown!')
             self.voicesynthetizer.speechit("No entendimos tu comando!")
 
-        alive(self.modulename)
-
     def listen(self):
 
         logging.info('Voice Command Listen')
@@ -63,6 +61,7 @@ class VoiceCommand(object):
         self.voicerecognition.record()
         output = self.voicerecognition.recognize('False')
         self.decode(output)
+        alive(modulename=self.modulename, modulemessage=' Command ' + output.capitalize())
 
     def background(self):
 

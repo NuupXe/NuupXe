@@ -87,7 +87,6 @@ class News(threading.Thread):
             if not messagedescription.startswith("<img"):
                 message = message + ', ' + messagedescription
             self.speak.speechit(message)
-
-        alive(self.modulename)
+            alive(modulename=self.modulename, modulemessage=message)
 
 # End of File

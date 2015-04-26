@@ -39,16 +39,19 @@ class WolframAlpha(object):
         self.voicesynthetizer.speechit('Yes! What is your question for Wolfram Alpha?')
         self.voicerecognition.record()
         question = self.voicerecognition.recognize('False')
-        logging.info('Question? ' + question)
+        questionmessage = 'Question? ' + question
+        logging.info(questionmessage)
         self.voicesynthetizer.speechit(question)
         answer = self.wolfram.question(question)
         if answer != None:
             self.voicesynthetizer.speechit(answer)
-            logging.info('Answer! ' + answer)
+            answermessage = 'Answer? ' + answer
+            logging.info(answermessage)
         else:
-            self.voicesynthetizer.speechit('Sorry! We do not have an answer')
+            answermessage = 'Answer? Sorry! Something went wrong!'
+            self.voicesynthetizer.speechit(answermessage)
         self.cleanup()
 
-        alive(self.modulename)
+        alive(modulename=self.modulename, modulemessage=questionmessage + ' ' + answermessage )
 
 # End of File

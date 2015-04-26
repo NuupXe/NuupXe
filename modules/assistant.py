@@ -4,7 +4,6 @@ import threading
 from time import sleep
 import re
 
-from core.alive import alive
 from core.twitterc import TwitterC
 from core.voicerecognition import VoiceRecognition
 from core.voicesynthetizer import VoiceSynthetizer

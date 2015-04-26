@@ -44,10 +44,10 @@ class VoiceExperimental(object):
         question = self.voicerecognition.recognize('False')
         logging.info('Phrase? ' + question)
         self.voicesynthetizer.speechit(question)
-        question = '#HamRadio #NuupXe #VoiceExperimental ... ' + question.capitalize()
-        self.twitterc.timeline_set(question, media=None)
-        self.emailx.create('nuupxe', 'Voice Experimental Listen', question)
+        question = '#VoiceRecognition ' + question.capitalize()
+        self.twitterc.timeline_set('#' + self.modulename + ' ' + question, media=None)
+        self.emailx.create('nuupxe@gmail.com', 'Voice Experimental Listen', question)
         self.emailx.send()
-        alive(self.modulename)
+        alive(modulename=self.modulename, modulemessage=question)
 
 # End of File

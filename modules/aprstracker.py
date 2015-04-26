@@ -66,9 +66,10 @@ class AprsTracker(object):
         logging.info(data)
 
         for entry in data['entries']:
-            message = ", Estacion " + ' '.join(self.phonetic.decode(callsign))
+            station = "Estacion " + callsign
+            stationdecoded = "Estacion " + ' '.join(self.phonetic.decode(callsign))
             weekday, day, month, year = self.clock(entry['lasttime'])
-            message = message + ", Ultima vez visto " + weekday + ' ' + day + ' de ' + month + ' del ' + year
+            message = ", Ultima vez visto " + weekday + ' ' + day + ' de ' + month + ' del ' + year
             try:
                 message =  message + ", Velocidad " + str(entry['speed']) + " Km/h"
             except:
@@ -90,9 +91,11 @@ class AprsTracker(object):
                 message =  message + ", " + results[0].country
             except:
                 pass
-            self.speaker.speechit(message)
 
-        alive(self.modulename)
+            speechmessage = stationdecoded + message
+            self.speaker.speechit(speechmessage)
 
+        modulemessage = station + message
+        alive(modulename=self.modulename, modulemessage=modulemessage)
 
 # End of File
