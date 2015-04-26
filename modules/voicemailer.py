@@ -55,7 +55,7 @@ class VoiceMailer(object):
             self.voicerecognition.record()
             message = self.voicerecognition.recognize('False')
             self.voicesynthetizer.speechit(message)
-            messageanswer = 'Mensaje? ' + message
+            messageanswer = 'Mensaje! ' + message.capitalize()
             logging.info(messageanswer)
             filename = self.voicerecognition.filegetname()
             self.emailx.create(email, 'NuupXe Voice Mailer! Mensaje ...', message, filename)
