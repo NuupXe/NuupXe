@@ -8,7 +8,7 @@ from core.system import System
 from core.twitterc import TwitterC
 from core.utilities import Randomizer
 
-def alive(module=None, media=None):
+def alive(modulename=None, modulemessage=None, media=None):
 
     logging.info('Alive')
 
@@ -39,14 +39,18 @@ def alive(module=None, media=None):
     system = ' ' + cpu + ' ' + memory + ' ' + kernel
 
     message = Randomizer(2) + ' ' + hashtag + ' '
-    if module:
-        message = message + '#' + module + ' '
+    if modulename:
+        message = message + '#' + modulename + ' '
     message = message + twitteraccount + ' ' + location
     technical = ' Freq ' + systemfrequency + system
-    message = message + ' ' + technical
+    if modulemessage:
+        message = message + ' ' + modulemessage
+    else:
+        message = message + ' ' + technical
 
     aprs.send_message(technical)
     aprs.position_set(systemcoordinates)
+    message = (message[:136] + '...')
     if media:
         twitterc.timeline_set(message, media)
     else:
