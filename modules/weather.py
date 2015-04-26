@@ -61,6 +61,7 @@ class Weather(object):
             message = message + ", Rafagas de " + entry['wind_gust'] + " metros por segundo"
             message = message + ", Precipitacion pluvial " + entry['rain_1h'] + " milimetros"
             self.speaker.speechit(message)
+            self.message = message
 
     def yahoo(self):
 
@@ -76,6 +77,7 @@ class Weather(object):
         message = message + ", Humedad " + result['atmosphere']['humidity'] + " por ciento"
         message = message + ", El Sol se oculta a las " + result['astronomy']['sunset']
         self.speaker.speechit(message)
+        self.message = message
 
     def noaa(self):
 
@@ -88,6 +90,7 @@ class Weather(object):
         message = message + ", Temperatura " + result['temp_c'] + " grados centigrados"
         message = message + ", Humedad " + result['relative_humidity'] + " por ciento"
         self.speaker.speechit(message)
+        self.message = message
 
     def report(self):
 
@@ -99,7 +102,7 @@ class Weather(object):
                 self.noaa()
 
         self.aprspacket()
-        alive(self.modulename + 'Report')
+        alive(modulename=self.modulename + 'Report', modulemessage=self.message)
 
     def temperature(self):
 

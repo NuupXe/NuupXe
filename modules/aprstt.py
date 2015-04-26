@@ -163,6 +163,7 @@ class Aprstt(object):
 
         callsign = self.keytype_get_aprstt(string)
         if callsign:
+            message = "Bienvenido " + callsign
             self.speaker.speechit("Bienvenido " + ' '.join(self.phonetic.decode(callsign)))
             callsignmobile = callsign + '-9'
             callsignexperimental = callsign + '-15'
@@ -171,7 +172,7 @@ class Aprstt(object):
             self.aprs.position_set(self.city_randomposition())
             self.aprs.send_message("NuupXe APRS Touch Tone Basic Implementation, Random Position")
 
-        self.alive(self.modulename)
+        alive(modulename=self.modulename, modulemessage=message)
 
         return
 

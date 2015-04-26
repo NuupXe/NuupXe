@@ -2,6 +2,7 @@
 
 import codecs
 import ConfigParser
+import logging
 import time
 import sys
 
@@ -51,35 +52,45 @@ class Messages(object):
 
         city = self.conf.get('general', 'city')
         self.speaker.speechit("Lista de Repetidores y Estaciones en la ciudad de " + city)
+        self.conf.remove_section('general')
 
-        self.sections = self.conf.sections()
-        for section in self.sections:
+        for section in self.conf.sections():
 
             try:
-                type = self.conf.get(section, 'type')           
+
+                type = self.conf.get(section, 'type')
                 owner = self.conf.get(section, 'owner')
                 callsign = self.conf.get(section, 'callsign')
                 frequency = self.conf.get(section, 'frequency')
                 subtone = self.conf.get(section, 'subtone')
 
-                self.speaker.speechit(type + ", " + ' '.join(self.phonetic.decode(callsign)))
                 self.morse.generate(callsign)
-                self.speaker.speechit("Propietario, " + owner)
-                self.speaker.speechit("Frecuencia, " +  ', '.join(frequency.split('.')))
-                self.speaker.speechit("Subtono, " +  ' '.join(self.phonetic.decode(subtone)))
+                station = type + ' ' + callsign
+                stationdecoded = type + ' ' + ' '.join(self.phonetic.decode(callsign))
+                message = ", Propietario " + owner
+                messagex = ", Propietario " + owner
+                message = message + ", Frecuencia " +  '.'.join(frequency.split('.'))
+                messagex = messagex + ", Frecuencia " +  frequency
+                message = message + ", Subtono " + ' '.join(self.phonetic.decode(subtone))
+                messagex = messagex + ", Subtono " + subtone
 
                 sign = self.conf.get(section, 'sign')
                 offset = self.conf.get(section, 'offset')
-                
-                if sign == 'simplex':
-                    self.speaker.speechit("Offset, " + sign)
-                else:
-                    self.speaker.speechit("Offset, " + ' '.join(self.phonetic.decode(sign)) + " " + offset) 
 
+                if sign == 'simplex':
+                    message = message + ", Offset " + sign
+                    messagex = messagex + ", Offset " + sign
+                else:
+                    message = message + ", Offset " + ' '.join(self.phonetic.decode(sign)) + " " + offset
+                    messagex = messagex + ", Offset " + sign + " " + offset
+
+                modulemessage = station + messagex
+                speechmessage = stationdecoded + message
+                self.speaker.speechit(speechmessage)
+                alive(modulename=self.modulename, modulemessage=modulemessage)
                 time.sleep(2)
 
             except:
 
-                None
+                logging.error(self.modulename + 'Error Stations')
 
-        alive(self.modulename)

@@ -49,20 +49,21 @@ class VoiceMailer(object):
 
         user, email = self.decodeUser(dtmf)
         if user:
-            user = ' '.join(self.phonetic.decode(user))
-            self.voicesynthetizer.speechit("Mensaje para " + user)
-            self.voicesynthetizer.speechit('Cual es tu mensaje?')
+            messagepresentation = "Mensaje para " + user + ', Cual es tu mensaje?'
+            messagepresentationdecoded = "Mensaje para " + ' '.join(self.phonetic.decode(user)) + ', Cual es tu mensaje?'
+            self.voicesynthetizer.speechit(messagepresentationdecoded)
             self.voicerecognition.record()
             message = self.voicerecognition.recognize('False')
-            logging.info('Mensaje? ' + message)
             self.voicesynthetizer.speechit(message)
+            messageanswer = 'Mensaje! ' + message.capitalize()
+            logging.info(messageanswer)
             filename = self.voicerecognition.filegetname()
             self.emailx.create(email, 'NuupXe Voice Mailer! Mensaje ...', message, filename)
             self.emailx.send()
+            modulemessage = messagepresentation + ' ' + messageanswer
+            alive(modulename=self.modulename, modulemessage=modulemessage)
         else:
             self.voicesynthetizer.speechit('Usuario no asignado!')
-
-        alive(self.modulename)
 
 # Enf of File
 

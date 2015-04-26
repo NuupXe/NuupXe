@@ -1,28 +1,28 @@
 #!/usr/bin/python
 
-number = {'1': 'uno',    '2': 'dos',   '3': 'tres',
-    '4': 'cuatro',  '5': 'cinco',   '6': 'seis',
-    '7': 'siete',   '8': 'ocho',    '9': 'nueve',
-    '0': 'cero',
+number = {'1': 'Uno',    '2': 'Dos',   '3': 'Tres',
+    '4': 'Cuatro',  '5': 'Cinco',   '6': 'Seis',
+    '7': 'Siete',   '8': 'Ocho',    '9': 'Nueve',
+    '0': 'Cero',
     }
 
-phoneticnumber = {'1': 'primero',    '2': 'segundo',   '3': 'tercero',
-    '4': 'cuarto',  '5': 'quinto',   '6': 'sexto',
-    '7': 'septimo',   '8': 'octavo',    '9': 'noveno',
-    '0': 'negativo',
+phoneticnumber = {'1': 'Primero',    '2': 'Segundo',   '3': 'Tercero',
+    '4': 'Cuarto',  '5': 'Quinto',   '6': 'Sexto',
+    '7': 'Septimo',   '8': 'Octavo',    '9': 'Noveno',
+    '0': 'Negativo',
     }
 
-phoneticalphabet = {'A': 'alpha',     'B': 'bravo',   'C': 'charlie',
-    'D': 'delta',   'E': 'eco',       'F': 'foxtrot',
-    'G': 'golf',    'H': 'hotel',     'I': 'india',
-    'J': 'juliet',  'K': 'kilo',      'L': 'lima',
-    'M': 'mike',    'N': 'november',  'O': 'oscar',
-    'P': 'papa',    'Q': 'quebec',    'R': 'romeo',
-    'S': 'sierra',  'T': 'tango',     'U': 'union',
-    'V': 'victor',  'W': 'whisky',    'X': 'xray',
-    'Y': 'yankee',  'Z': 'zulu',      '@': 'arroba',
-    '.': 'punto',   '+': 'positivo',  '-': 'negativo',
-    '#': 'gato',    '*': 'asterisco', '/': 'diagonal'
+phoneticalphabet = {'A': 'Alpha',     'B': 'Bravo',   'C': 'Charlie',
+    'D': 'Delta',   'E': 'Echo',      'F': 'Foxtrot',
+    'G': 'Golf',    'H': 'Hotel',     'I': 'India',
+    'J': 'Juliet',  'K': 'Kilo',      'L': 'Lima',
+    'M': 'Mike',    'N': 'November',  'O': 'Oscar',
+    'P': 'Papa',    'Q': 'Quebec',    'R': 'Romeo',
+    'S': 'Sierra',  'T': 'Tango',     'U': 'Uniform',
+    'V': 'Victor',  'W': 'Whiskey',   'X': 'Xray',
+    'Y': 'Yankee',  'Z': 'Zulu',      '@': 'Arroba',
+    '.': 'Punto',   '+': 'Positivo',  '-': 'Negativo',
+    '#': 'Gato',    '*': 'Asterisco', '/': 'Diagonal'
     }
 
 class Phonetic(object):

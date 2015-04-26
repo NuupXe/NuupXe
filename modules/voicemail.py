@@ -38,7 +38,8 @@ class VoiceMail(object):
         print '[NuupXe] Voice Mail Run'
 
 	if dtmf:
-            self.voicesynthetizer.speechit("Codigo recibido " + dtmf)
+            message = "Codigo recibido " + dtmf
+            self.voicesynthetizer.speechit(message)
         self.voicesynthetizer.speechit("Identificate por favor")
         self.voice.filenameset(self.audiofileuser)
         self.record()
@@ -53,7 +54,7 @@ class VoiceMail(object):
         self.voice.filenameset(self.audiofilemessage)
         self.play()
 
-        alive(self.modulename)
+        alive(modulename=self.modulename, modulemessage=message)
 
 # Enf of File
 

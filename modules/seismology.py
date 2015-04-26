@@ -46,10 +46,6 @@ class Seismology(object):
             self.voicesynthetizer.speechit("No se encontraron sismos en las ultimas horas")
         else:
             self.voicesynthetizer.speechit(message)
+            alive(modulename=self.modulename, modulemessage=message)
 
-        alive(self.modulename)
-
-if __name__ == '__main__':
-
-    mytest = SeismologyC("google")
-    mytest.sismologicomx()
+# End of File

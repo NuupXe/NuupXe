@@ -25,15 +25,15 @@ class Clock(object):
 
     def date(self):
         logging.info(self.modulename + ' Date')
-        date = days[time.strftime("%A")] + ", "  + time.strftime("%d").lstrip('0')
+        date = days[time.strftime("%A")] + " "  + time.strftime("%d").lstrip('0')
         date = date + " de " + months[time.strftime("%B")] + " de " + time.strftime("%Y")
         self.voicesynthetizer.speechit(date)
-        alive(self.modulename + 'Date')
+        alive(modulename=self.modulename + 'Date', modulemessage=date)
 
     def hour(self):
         logging.info(self.modulename + ' Hour')
         hour = "Son las " + time.strftime("%H") + " horas y " + time.strftime("%M") + " minutos"
         self.voicesynthetizer.speechit(hour)
-        alive(self.modulename + 'Hour')
+        alive(modulename=self.modulename + 'Hour', modulemessage=hour)
 
 # End of File
