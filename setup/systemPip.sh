@@ -29,6 +29,7 @@ export packagePsutil=psutil
 export packageGitPython=gitpython
 export packageTropo=tropo-webapi-python
 export packagePySSTV=pySSTV
+export packageXmlToDict=xmltodict
 
 # =============================================================================
 # Script Functions
@@ -66,5 +67,6 @@ pipFunctionInstall $packagePsutil
 pipFunctionInstall $packageGitPython
 pipFunctionInstall $packageTropo
 pipFunctionInstall $packagePySSTV
+pipFunctionInstall $packageXmlToDict
 
 # End of file
