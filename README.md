@@ -29,6 +29,10 @@ Edison
 
 Make sure your date/time is correct!
 
+    conf/systemPip.sh
+    apt-get install python-pygame
+    apt-get install mpg123
+
     wget 'http://www.libsdl.org/release/SDL-1.2.15.tar.gz'
     tar -xf SDL-1.2.15.tar.gz
     cd SDL-1.2.15
