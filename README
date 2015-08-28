@@ -21,6 +21,11 @@ Social Media
 Groups Required
  Add your username to dialout, audio and video groups
 
+Configurations Files Required
+
+conf/general.config
+conf/services.config
+
 Intel IoT DevKit
  $ git clone https://github.com/intel-iot-devkit/mraa.git
  # apt-get install swig cmake
