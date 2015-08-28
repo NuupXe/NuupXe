@@ -32,6 +32,9 @@ Make sure your date/time is correct!
     conf/systemPip.sh
     apt-get install python-pygame
     apt-get install mpg123
+    
+    arecord -f cd -D plughw:1,0 -d 20 test.wav
+    aplay -D hw:1,0 test.wav
 
     wget 'http://www.libsdl.org/release/SDL-1.2.15.tar.gz'
     tar -xf SDL-1.2.15.tar.gz
