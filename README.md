@@ -1,30 +1,29 @@
-NuupXe
-Amateur Radio Voice Software Infrastructure
+# NuupXe Amateur Radio Voice Software Infrastructure
 
-- Production Modules
+## Production Modules
 
-  * Alive
-  * Aprstt
-  * Clock.Date
-  * Clock.Hour
-  * Identification
-  * Selfie
-  * Voice Command
-  * Weather
-  * WolframAlpha
+- Alive
+- Aprstt
+- Clock.Date
+- Clock.Hour
+- Identification
+- Selfie
+- Voice Command
+- Weather
+- WolframAlpha
 
-Social Media
+## Social Media
 
-  @NuupXe
-  #NuupXe
+- @NuupXe
+- #NuupXe
 
-Groups Required
- Add your username to dialout, audio and video groups
+## Groups Required
+Add your username to dialout, audio and video groups
 
-Configurations Files Required
+## Configurations Files Required
 
-conf/general.config
-conf/services.config
+- conf/general.config
+- conf/services.config
 
 Edison
 
@@ -40,7 +39,10 @@ Edison
     cd pygame-1.9.1release
     python2.7 setup.py install --prefix=$HOME
 
-Intel IoT DevKit
+## Intel IoT DevKit
+
+Not sure why this is here, anyway! let's keep it!
+
  $ git clone https://github.com/intel-iot-devkit/mraa.git
  # apt-get install swig cmake
  $ cmake -DBUILDSWIGNODE=OFF ..
