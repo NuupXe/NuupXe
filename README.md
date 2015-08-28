@@ -32,6 +32,7 @@ Make sure your date/time is correct!
     conf/systemPip.sh
     apt-get install python-pygame
     apt-get install mpg123
+    apt-get install flac
     
     aplay -Ll
     /etc/asound.conf
