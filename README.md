@@ -33,6 +33,9 @@ Make sure your date/time is correct!
     apt-get install python-pygame
     apt-get install mpg123
     
+    aplay -Ll
+    /etc/asound.conf
+     pcm.!default sysdefault:MS
     arecord -f cd -D plughw:1,0 -d 20 test.wav
     aplay -D hw:1,0 test.wav
 
