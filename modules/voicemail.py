@@ -54,7 +54,7 @@ class VoiceMail(object):
         self.voice.filenameset(self.audiofilemessage)
         self.play()
 
-        alive(modulename=self.modulename, modulemessage=message)
+        alive(modulename=self.modulename, modulemessage='VoiceMail')
 
 # Enf of File
 
