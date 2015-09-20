@@ -20,7 +20,7 @@ export packageApscheduler=apscheduler==2.1.0
 export packagePyserial=pyserial
 export packageWolframalpha=wolframalpha
 export packagePywapi=pywapi
-export packageRequests=requests
+export packageRequests=requests==2.6.0
 export packagePygeocoder=pygeocoder
 export packageDropbox=dropbox
 export packageTwython=twython

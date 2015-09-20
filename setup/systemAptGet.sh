@@ -40,6 +40,8 @@ export packageLibJpegDev="libjpeg-dev"
 export packagePythonImaging="python-imaging"
 export packageGnuRadio="gnuradio gnuradio-dev"
 export packageSdr="rtl-sdr gr-osmosdr"
+export packageLibFfi="libffi-dev"
+export packageLibSsl="libssl-dev"
 
 # =============================================================================
 # Script Functions
@@ -88,5 +90,7 @@ aptgetFunctionInstall $packageLibJpegDev
 aptgetFunctionInstall $packagePythonImaging
 aptgetFunctionInstall $packageGnuRadio
 aptgetFunctionInstall $packageSdr
+aptgetFunctionInstall $packageLibFfi
+aptgetFunctionInstall $packageLibSsl
 
 # End of file
