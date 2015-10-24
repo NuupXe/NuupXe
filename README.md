@@ -43,6 +43,12 @@ Make sure your date/time is correct!
     apt-get install mpg123
     apt-get install flac
     
+    root@ubilinux:/home/edison# apt-get install git libffi-dev libssl-dev
+    root@ubilinux:/home/edison# apt-get install python-dev libxml2-dev libxslt1-dev
+    root@ubilinux:/home/edison# pip install requests[security] scrapy
+    root@ubilinux:/home/edison# pip install pyopenssl ndg-httpsclient pyasn1 scrapy
+
+    
     aplay -Ll
     /etc/asound.conf
      pcm.!default sysdefault:MS
