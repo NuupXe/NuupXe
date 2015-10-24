@@ -31,6 +31,7 @@ export packageTropo=tropo-webapi-python
 export packagePySSTV=pySSTV
 export packageXmlToDict=xmltodict
 export packageNumPy=numpy
+export packageSpeechRecognition=SpeechRecognition
 
 # =============================================================================
 # Script Functions
@@ -70,5 +71,6 @@ pipFunctionInstall $packageTropo
 pipFunctionInstall $packagePySSTV
 pipFunctionInstall $packageXmlToDict
 pipFunctionInstall $packageNumPy
+pipFunctionInstall $packageSpeechRecognition
 
 # End of file

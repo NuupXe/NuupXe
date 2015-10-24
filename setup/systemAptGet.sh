@@ -42,6 +42,8 @@ export packageGnuRadio="gnuradio gnuradio-dev"
 export packageSdr="rtl-sdr gr-osmosdr"
 export packageLibFfi="libffi-dev"
 export packageLibSsl="libssl-dev"
+export packageFlac="flac"
+export packagePythonPyAudio="python-pyaudio"
 
 # =============================================================================
 # Script Functions
@@ -92,5 +94,7 @@ aptgetFunctionInstall $packageGnuRadio
 aptgetFunctionInstall $packageSdr
 aptgetFunctionInstall $packageLibFfi
 aptgetFunctionInstall $packageLibSsl
+aptgetFunctionInstall $packageFlac
+aptgetFunctionInstall $packagePythonPyAudio
 
 # End of file
