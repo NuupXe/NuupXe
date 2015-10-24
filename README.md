@@ -25,6 +25,11 @@ Add your username to dialout, audio and video groups
 - conf/general.config
 - conf/services.config
 
+##
+
+    https://pypi.python.org/pypi/SpeechRecognition/3.1.0
+    apt-get install python-pyaudio python3-pyaudio
+
 Edison
 
 Make sure your date/time is correct!
