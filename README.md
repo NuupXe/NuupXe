@@ -30,7 +30,8 @@ Add your username to dialout, audio and video groups
 - https://pypi.python.org/pypi/SpeechRecognition/3.1.0
   - apt-get install python-pyaudio python3-pyaudio
 - dig https://pypi.python.org/pypi/dig/0.1.10
-  - tar requests 2.8.1
+  - manual install requests 2.8.1
+  - manuel install futures 3.0.3
     
 
 Edison
