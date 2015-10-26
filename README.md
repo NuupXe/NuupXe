@@ -12,7 +12,7 @@
 - Weather
 - WolframAlpha
 
-## Social Media 
+## Social Media
 
 - @NuupXe
 - #NuupXe
