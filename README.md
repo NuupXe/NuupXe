@@ -32,6 +32,7 @@ Add your username to dialout, audio and video groups
 - dig https://pypi.python.org/pypi/dig/0.1.10
   - manual install requests 2.8.1
   - manuel install futures 3.0.3
+- Telegram Bot
     
 
 Edison
