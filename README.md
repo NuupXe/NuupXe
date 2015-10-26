@@ -16,6 +16,7 @@
 
 - @NuupXe
 - #NuupXe
+- Telegram NuupXeBot
 
 ## Groups Required
 Add your username to dialout, audio and video groups
