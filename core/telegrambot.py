@@ -14,7 +14,7 @@ class TelegramBot():
         for m in message:
             chatid = m.chat.id
             if m.content_type == 'text':
-                text = m.text
+                text = ascii_ignore(m.text)
                 if m.text == '/date':
                     self.mybot.send_message(chatid, text)
                     self.mybot.send_message(chatid, "The date is ...")
