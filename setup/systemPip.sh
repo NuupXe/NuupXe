@@ -32,6 +32,7 @@ export packagePySSTV=pySSTV
 export packageXmlToDict=xmltodict
 export packageNumPy=numpy
 export packageSpeechRecognition=SpeechRecognition
+export packageTelepot=telepot
 
 # =============================================================================
 # Script Functions
@@ -72,5 +73,6 @@ pipFunctionInstall $packagePySSTV
 pipFunctionInstall $packageXmlToDict
 pipFunctionInstall $packageNumPy
 pipFunctionInstall $packageSpeechRecognition
+pipFunctionInstall $packageTelepot
 
 # End of file
