@@ -1,3 +1,3 @@
 # Introduction
 
-sound dummy
+sound dummy kernel module loaded
