@@ -6,7 +6,7 @@ import logging
 import signal
 import sys
 
-from nuupxeMain import NuupXe
+from serviceManager import ServiceManager
 
 from core.irlp import Irlp
 from core.voicesynthetizer import VoiceSynthetizer
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         logging.info("Nodo activo, no podemos iniciar Proyecto NuupXe")
         sys.exit(0)
 
-    experimental = NuupXe(irlp)
+    experimental = ServiceManager(irlp)
     experimental.voicesynthetizer()
     voicesynthetizer = experimental.voicesynthetizerget()
 

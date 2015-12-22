@@ -33,6 +33,7 @@ export packageXmlToDict=xmltodict
 export packageNumPy=numpy
 export packageSpeechRecognition=SpeechRecognition
 export packageTelepot=telepot
+export packagePyTelegramBotApi=pyTelegramBotAPI
 
 # =============================================================================
 # Script Functions
@@ -74,5 +75,6 @@ pipFunctionInstall $packageXmlToDict
 pipFunctionInstall $packageNumPy
 pipFunctionInstall $packageSpeechRecognition
 pipFunctionInstall $packageTelepot
+pipFunctionInstall $packagePyTelegramBotApi
 
 # End of file

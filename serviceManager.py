@@ -39,7 +39,7 @@ from learning.morseteacher import MorseTeacher
 from modules.voiceexperimental import VoiceExperimental
 from modules.voicemailer import VoiceMailer
 
-class NuupXe(object):
+class ServiceManager(object):
 
     def __init__(self, irlp):
 
