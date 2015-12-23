@@ -10,6 +10,7 @@ https://docs.python.org/2/library/abc.html
 https://newcircle.com/s/post/1743/2015/06/17/tutorial-the-observer-pattern-in-python
 https://www.youtube.com/watch?v=87MNuBgeg34
 http://tradingwithpython.blogspot.mx/2011/12/howto-observer-pattern.html
+http://home.gna.org/py-notify/tutorial.html
 
 ## 1
 
