@@ -8,3 +8,4 @@ Telegram
 - http://serverfault.com/questions/598113/process-monitoring-and-service-manager-for-python-web-application
 
     nohup python nuupxe.py &
+    http://ridingpython.blogspot.mx/2011/08/turning-your-python-script-into-linux.html
