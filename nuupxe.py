@@ -55,6 +55,10 @@ if __name__ == "__main__":
     if args.module:
         experimental.module_mode(args.module, args.dtmf)
 
+    elif args.server == 'observer':
+        experimental.modules_setup()
+        experimental.observer_mode()
+
     elif args.server == 'scheduler':
         experimental.modules_setup()
         experimental.scheduler_mode()

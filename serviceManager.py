@@ -13,6 +13,7 @@ from apscheduler.threadpool import ThreadPool
 
 from core.alive import alive
 from core.irlp import Irlp
+from core.observer import Subscriber, Publisher
 from core.voicesynthetizer import VoiceSynthetizer
 
 # Production
@@ -112,6 +113,28 @@ class ServiceManager(object):
             os.unlink(self.pidfile)
         if self.scheduler_status:
             self.scheduler.shutdown()
+
+    def observer_mode(self):
+
+        logging.info('Mode Observer')
+        pub = Publisher(['text', 'voice'])
+
+        # Radio, Twitter, Email, Telegram, Whatsapp
+
+        radio = Subscriber('radio')
+        twitter = Subscriber('twitter')
+        email = Subscriber('email')
+        telegram = Subscriber('telegram')
+
+        pub.register("text", radio)
+        pub.register("voice", radio)
+        pub.register("text", twitter)
+        pub.register("text", email)
+        pub.register("text", telegram)
+        pub.register("voice", telegram)
+
+        pub.dispatch("text", "this is text")
+        pub.dispatch("voice", "this is voice")
 
     def scheduler_mode(self):
 
