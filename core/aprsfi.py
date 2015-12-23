@@ -8,7 +8,7 @@ import urllib2
 
 class AprsFi(object):
 
-    def __init__(self, callsign, data):
+    def __init__(self, callsign=None, data=None):
         logging.info('[AprsFi]')
         self.callsign = callsign
         self.data = data
