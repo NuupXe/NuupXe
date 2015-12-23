@@ -16,5 +16,6 @@ http://home.gna.org/py-notify/tutorial.html
 
 http://www.giantflyingsaucer.com/blog/?p=5117
 https://github.com/jpmeijers/picontroller/blob/master/picontroller.py
+https://github.com/sq6jnx/sr0wx.py/blob/master/pl_google/pl_google.py
 
 http://beej.us/blog/data/observer-pattern/
