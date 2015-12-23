@@ -2,6 +2,7 @@
 
 import ConfigParser
 import commands
+import logging
 import os
 import time
 
