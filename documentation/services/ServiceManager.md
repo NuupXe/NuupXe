@@ -12,3 +12,4 @@ https://docs.python.org/2/library/abc.html
 
 http://www.giantflyingsaucer.com/blog/?p=5117
 
+http://beej.us/blog/data/observer-pattern/
