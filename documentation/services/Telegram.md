@@ -7,4 +7,4 @@ Telegram
 - https://github.com/nachocarballeda/RaspyBot/blob/master/raspybot.py
 - http://serverfault.com/questions/598113/process-monitoring-and-service-manager-for-python-web-application
 
-    nohup python loopydoopy.py &
+    nohup python nuupxe.py &
