@@ -14,5 +14,6 @@ http://tradingwithpython.blogspot.mx/2011/12/howto-observer-pattern.html
 ## 1
 
 http://www.giantflyingsaucer.com/blog/?p=5117
+https://github.com/jpmeijers/picontroller/blob/master/picontroller.py
 
 http://beej.us/blog/data/observer-pattern/
