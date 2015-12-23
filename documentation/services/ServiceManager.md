@@ -9,6 +9,7 @@ https://www.google.com.mx/url?sa=t&rct=j&q=&esrc=s&source=web&cd=12&cad=rja&uact
 https://docs.python.org/2/library/abc.html
 https://newcircle.com/s/post/1743/2015/06/17/tutorial-the-observer-pattern-in-python
 https://www.youtube.com/watch?v=87MNuBgeg34
+http://tradingwithpython.blogspot.mx/2011/12/howto-observer-pattern.html
 
 ## 1
 
