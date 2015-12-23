@@ -62,7 +62,7 @@ class VoiceSynthetizer(logging.Handler):
         elif self.synthetizer == "google":
             #command = ['core/GoogleTTS.py', '-l', self.arguments, '-s', text]
             #command = ['core/google.sh', 'es', text]
-            command = ['core/voicerss.sh', text]
+            command = ['core/voicerss.sh', 'es-mx', text]
         self.pushtotalk.message(command)
 
 # End of File

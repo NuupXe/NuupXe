@@ -37,7 +37,7 @@ class Weather(object):
 
         self.aprsnet.send_packet("XE1GYQ-13>APRS,TCPIP*,qAS,XE1GYQ-10:@232353z2036.96N/10324.58W_000/000g000t000r000p000P000h00b00000NuupXe Weather Station")
 
-    def aprsfi(self):
+    def aprsfi_service(self):
 
         print '[NuupXe] Weather aprs.fi'
 
@@ -95,7 +95,7 @@ class Weather(object):
     def report(self):
 
         if self.agent == "aprsfi":
-                self.aprsfi()
+                self.aprsfi_service()
         elif self.agent == "yahoo":
                 self.yahoo()
         elif self.agent == "noaa":
