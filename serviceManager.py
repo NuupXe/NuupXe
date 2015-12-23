@@ -199,7 +199,7 @@ class ServiceManager(object):
             alive()
         elif module == 'aprstracker':
             self.aprstracker = AprsTracker(self.voicesynthetizer)
-            self.aprstracker.query()
+            self.aprstracker.localize()
         elif module == 'news':
             self.news = News(self.voicesynthetizer)
             self.news.getitems()
