@@ -1,12 +1,9 @@
-"""
-This is a detailed example using almost every command of the API
-"""
+#!/usr/bin/python
 
+import ConfigParser
 import telebot
 from telebot import types
 import time
-
-TOKEN = '141201631:AAGFyu_b8HpqXoM8sVnc9iEMj4Y5Dg97FL0'
 
 knownUsers = []  # todo: save these in a file,
 userStep = {}  # so they won't reset every time the bot restarts
@@ -40,7 +37,6 @@ def get_user_step(uid):
         print "New user detected, who hasn't used \"/start\" yet"
         return 0
 
-
 # only used for console output now
 def listener(messages):
     """
@@ -51,10 +47,11 @@ def listener(messages):
             # print the sent message to the console
             print str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text
 
-
-bot = telebot.TeleBot(TOKEN)
+configuration = ConfigParser.ConfigParser()
+configuration.read('configuration/services.config')
+token = configuration.get('telegram','token')
+bot = telebot.TeleBot(token)
 bot.set_update_listener(listener)  # register listener
-
 
 # handle the "/start" command
 @bot.message_handler(commands=['start'])
@@ -68,7 +65,6 @@ def command_start(m):
         command_help(m)  # show the new user the help page
     else:
         bot.send_message(cid, "I already know you, no need for me to scan you again!")
-
 
 # help page
 @bot.message_handler(commands=['help'])
@@ -93,7 +89,6 @@ def command_long_text(m):
     bot.send_chat_action(cid, 'typing')  # show the bot "typing" (max. 5 secs)
     time.sleep(3)
     bot.send_message(cid, ".")
-
 
 # user can chose an image (multi-stage command example)
 @bot.message_handler(commands=['getImage'])
