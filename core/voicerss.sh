@@ -5,7 +5,6 @@ text=$2
 mashapekey=`cat configuration/voicerss.mk`
 apikey=`cat configuration/voicerss.ak`
 
-echo $language
 echo "Text: " $text
 
 curl -X POST --include "https://voicerss-text-to-speech.p.mashape.com/?key=${apikey}" \
