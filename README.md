@@ -82,4 +82,7 @@ Not sure why this is here, anyway! let's keep it!
 
 Copyright 2014, Released under Apache License
 
+http://www.sqlalchemy.org/features.html
+
 # End of file
+
