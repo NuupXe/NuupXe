@@ -83,6 +83,7 @@ Not sure why this is here, anyway! let's keep it!
 Copyright 2014, Released under Apache License
 
 http://www.sqlalchemy.org/features.html
+http://henrywconklin.github.io/projects/2015/08/17/oliver-twitter.html
 
 # End of file
 
