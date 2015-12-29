@@ -11,6 +11,8 @@ from serviceManager import ServiceManager
 from core.irlp import Irlp
 from core.voicesynthetizer import VoiceSynthetizer
 
+from tendo import singleton
+
 def set_exit_handler(func):
     signal.signal(signal.SIGTERM, func)
 
@@ -19,6 +21,8 @@ def on_exit(sig, func=None):
     sys.exit(1)
 
 if __name__ == "__main__":
+
+    this = singleton.SingleInstance()
 
     logging.basicConfig(filename='output/nuupxe.log', level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
