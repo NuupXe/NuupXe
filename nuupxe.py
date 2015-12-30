@@ -22,11 +22,12 @@ def on_exit(sig, func=None):
 
 if __name__ == "__main__":
 
-    this = singleton.SingleInstance()
+    # this = singleton.SingleInstance()
 
     logging.basicConfig(filename='output/nuupxe.log', level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
     irlp = Irlp()
+    irlp.forceunptt()
 
     parser = argparse.ArgumentParser(description='NuupXe Project, Voice Services Experimental Project')
     parser.add_argument('-m', '--module', help='Module Mode')
