@@ -5,136 +5,91 @@ import telebot
 from telebot import types
 import time
 
-knownUsers = []  # todo: save these in a file,
-userStep = {}  # so they won't reset every time the bot restarts
+knownUsers = []
+userStep = {}
 
 commands = {
-              'start': 'Get used to the bot',
-              'help': 'Gives you information about the available commands',
-              'sendLongText': 'A test using the \'send_chat_action\' command',
-              'getImage': 'A test using multi-stage messages, custom keyboard, and media sending'
+              'ayuda': 'Informacion de comandos disponibles',
+              'mensaje': 'Enviar mensaje para reproducir en el repetidor',
+              'sonido': 'Ultimo mensaje que se envio a traves del repetidor',
+              'sstv': 'Ultima fotografia que se decodifico por SSTV',
+              'estado': 'Estado del sistema'
 }
 
-imageSelect = types.ReplyKeyboardMarkup(one_time_keyboard=True)  # create the image selection keyboard
-imageSelect.add('em', 'let')
-
-hideBoard = types.ReplyKeyboardHide()  # if sent as reply_markup, will hide the keyboard
+user_dict = {}
 
 class User:
-    def __init__(self, name):
-        self.name = name
-        self.callsign = None
+    def __init__(self, callsign):
+        self.callsign = callsign
+        self.announcement = None
 
-# error handling if user isn't known yet
-# (obsolete once known users are saved to file, because all users
-#   had to use the /start command and are therefore known to the bot)
-def get_user_step(uid):
-    if uid in userStep:
-        return userStep[uid]
-    else:
-        knownUsers.append(uid)
-        userStep[uid] = 0
-        print "New user detected, who hasn't used \"/start\" yet"
-        return 0
+hideBoard = types.ReplyKeyboardHide()
 
-# only used for console output now
 def listener(messages):
-    """
-    When new messages arrive TeleBot will call this function.
-    """
     for m in messages:
         if m.content_type == 'text':
-            # print the sent message to the console
             print str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text
 
 configuration = ConfigParser.ConfigParser()
 configuration.read('configuration/services.config')
 token = configuration.get('telegram','token')
 bot = telebot.TeleBot(token)
-bot.set_update_listener(listener)  # register listener
+bot.set_update_listener(listener)
 
-# handle the "/start" command
-@bot.message_handler(commands=['start'])
-def command_start(m):
-    cid = m.chat.id
-    if cid not in knownUsers:  # if user hasn't used the "/start" command yet:
-        knownUsers.append(cid)  # save user id, so you could brodcast messages to all users of this bot later
-        userStep[cid] = 0  # save user id and his current "command level", so he can use the "/getImage" command
-        bot.send_message(cid, "Hello, stranger, let me scan you...")
-        bot.send_message(cid, "Scanning complete, I know you now")
-        command_help(m)  # show the new user the help page
-    else:
-        bot.send_message(cid, "I already know you, no need for me to scan you again!")
-
-# help page
-@bot.message_handler(commands=['help'])
+@bot.message_handler(commands=['ayuda'])
 def command_help(m):
     cid = m.chat.id
-    help_text = "The following commands are available: \n"
-    for key in commands:  # generate help text out of the commands dictionary defined at the top
+    help_text = "Los siguientes comandos estan disponibles: \n"
+    for key in commands:
         help_text += "/" + key + ": "
         help_text += commands[key] + "\n"
-    bot.send_message(cid, help_text)  # send the generated help page
+    bot.send_message(cid, help_text)
 
-# ping command
-@bot.message_handler(commands=["ping"])
-def on_ping(message):
-    bot.reply_to(message, "Still alive and kicking!")
+@bot.message_handler(commands=["mensaje"])
+def command_message(m):
+    msg = bot.reply_to(m, "Hola, Cual es tu indicativo?")
+    print msg
+    bot.register_next_step_handler(msg, process_message)
 
-# chat_action example (not a good one...)
-@bot.message_handler(commands=['sendLongText'])
-def command_long_text(m):
-    cid = m.chat.id
-    bot.send_message(cid, "If you think so...")
-    bot.send_chat_action(cid, 'typing')  # show the bot "typing" (max. 5 secs)
-    time.sleep(3)
-    bot.send_message(cid, ".")
+def process_message(m):
+    try:
+        chat_id = m.chat.id
+        callsign = m.text
+        user = User(callsign)
+        user_dict[chat_id] = user
+        msg = bot.reply_to(m, 'Que mensaje quieres enviar?')
+        bot.register_next_step_handler(msg, process_message_repeater)
+    except Exception as e:
+        bot.reply_to(m, 'Algo no esta funcionando!')
 
-# user can chose an image (multi-stage command example)
-@bot.message_handler(commands=['getImage'])
-def command_image(m):
-    cid = m.chat.id
-    bot.send_message(cid, "Please choose your image now", reply_markup=imageSelect)  # show the keyboard
-    userStep[cid] = 1  # set the user to the next step (expecting a reply in the listener now)
+def process_message_repeater(m):
+    try:
+        chat_id = m.chat.id
+        announcement = m.text
+        user = user_dict[chat_id]
+        user.announcement = announcement
+        bot.send_message(chat_id, 'Gracias ' + user.callsign + '\nReproduciremos el mensaje: ' + user.announcement)        
+    except Exception as e:
+        bot.reply_to(m, 'Algo no esta funcionando!')
 
-# if the user has issued the "/getImage" command, process the answer
-@bot.message_handler(func=lambda message: get_user_step(message.chat.id) == 1)
-def msg_image_select(m):
-    cid = m.chat.id
-    text = m.text
-
-    # for some reason the 'upload_photo' status isn't quite working (doesn't show at all)
-    bot.send_chat_action(cid, 'typing')
-
-    if text == "em":  # send the appropriate image based on the reply to the "/getImage" command
-        bot.send_photo(cid, open('em.jpg', 'rb'),
-                       reply_markup=hideBoard)  # send file and hide keyboard, after image is sent
-        userStep[cid] = 0  # reset the users step back to 0
-    elif text == "let":
-        bot.send_photo(cid, open('let.jpg', 'rb'), reply_markup=hideBoard)
-        userStep[cid] = 0
-    else:
-        bot.send_message(cid, "Please try again")
-
-#sound command
-@bot.message_handler(commands=["sound"])
-def on_ping(m):
+@bot.message_handler(commands=["sonido"])
+def command_sound(m):
     cid =  m.chat.id
-    #bot.reply_to(message, "Sound?!")
-    #bot.send_voice(cid, open('tests/test_data/record.ogg'))
-    audio = open('output/record.mp3', 'rb')
+    audio = open('output/voicerss.mp3', 'rb')
     bot.send_audio(cid, audio)
 
-# filter on a specific message
-@bot.message_handler(func=lambda message: message.text == "loveyou")
-def command_text_loveyou(m):
-    bot.send_message(m.chat.id, "I love you too!")
+@bot.message_handler(commands=['sstv'])
+def command_sstv(m):
+    cid = m.chat.id
+    bot.send_photo(cid, open('output/bing.jpg', 'rb'),
+                   reply_markup=hideBoard)
 
+@bot.message_handler(commands=["estado"])
+def command_status(m):
+    bot.reply_to(m, "Estoy vivo!")
 
-# default handler for every other text
-@bot.message_handler(func=lambda message: True, content_types=['text'])
-def command_default(m):
-    # this is the standard reply to a normal message
-    bot.send_message(m.chat.id, "I don't understand \"" + m.text + "\"\nMaybe try the help page at /help")
+#@bot.message_handler(func=lambda message: True, content_types=['text'])
+#def command_default(m):
+#    bot.send_message(m.chat.id, "Hola! No creo conocer tu comando \"" + m.text + "\"\nQue tal si pides ayuda con /help")
 
 bot.polling()
