@@ -5,4 +5,5 @@
 * [Services](documentation/Services.md)
    * [Telegram](documentation/services/Telegram.md)
    * [ServiceManager](documentation/services/ServiceManager.md)
+* Credentials
 
