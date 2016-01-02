@@ -2,8 +2,8 @@
 
 * [Cover](README.md)
 * [Introduction](documentation/Introduction.md)
+* [Credentials](Credentials.md)
 * [Services](documentation/Services.md)
    * [Telegram](documentation/services/Telegram.md)
    * [ServiceManager](documentation/services/ServiceManager.md)
-* [Credentials](Credentials.md)
 
