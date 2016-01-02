@@ -264,6 +264,13 @@ class ServiceManager(object):
 
         self.disable()
 
+    def voice_mode(self, text):
+
+        logging.info('Voice Mode')
+        try:
+            self.voicesynthetizer.speechit(text)
+        except (StopIteration, KeyboardInterrupt, SystemExit):
+            pass
     def schedule_print(self):
         self.scheduler.print_jobs()
 
