@@ -31,7 +31,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='NuupXe Project, Voice Services Experimental Project')
     parser.add_argument('-m', '--module', help='Module Mode')
-    parser.add_argument('-s', '--server', help='Server mode')
+    parser.add_argument('-p', '--phonetic', help='Phonetic Mode')
+    parser.add_argument('-s', '--server', help='Server Mode')
     parser.add_argument('-v', '--voice', help='Voice Mode')
     parser.add_argument('-d', '--dtmf', help='DMTF Code')
     args = parser.parse_args()
@@ -85,6 +86,9 @@ if __name__ == "__main__":
 
     elif args.voice:
         experimental.voice_mode(args.voice)
+
+    elif args.phonetic:
+        experimental.phonetic_mode(args.phonetic)
 
     experimental.disable()
 

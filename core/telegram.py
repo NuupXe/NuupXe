@@ -1,14 +1,16 @@
 #!/usr/bin/python
 
 import ConfigParser
+import commands
 import telebot
 from telebot import types
 import time
+import unicodedata
 
 knownUsers = []
 userStep = {}
 
-commands = {
+commandsbot = {
               'ayuda': 'Informacion de comandos disponibles',
               'mensaje': 'Enviar mensaje para reproducir en el repetidor',
               'sonido': 'Ultimo mensaje que se envio a traves del repetidor',
@@ -40,15 +42,14 @@ bot.set_update_listener(listener)
 def command_help(m):
     cid = m.chat.id
     help_text = "Los siguientes comandos estan disponibles: \n"
-    for key in commands:
+    for key in commandsbot:
         help_text += "/" + key + ": "
-        help_text += commands[key] + "\n"
+        help_text += commandsbot[key] + "\n"
     bot.send_message(cid, help_text)
 
 @bot.message_handler(commands=["mensaje"])
 def command_message(m):
-    msg = bot.reply_to(m, "Hola, Cual es tu indicativo?")
-    print msg
+    msg = bot.reply_to(m, "Hola, cual es tu indicativo?")
     bot.register_next_step_handler(msg, process_message)
 
 def process_message(m):
@@ -57,7 +58,7 @@ def process_message(m):
         callsign = m.text
         user = User(callsign)
         user_dict[chat_id] = user
-        msg = bot.reply_to(m, 'Que mensaje quieres enviar?')
+        msg = bot.reply_to(m, 'Que anuncio quieres enviar?')
         bot.register_next_step_handler(msg, process_message_repeater)
     except Exception as e:
         bot.reply_to(m, 'Algo no esta funcionando!')
@@ -68,7 +69,15 @@ def process_message_repeater(m):
         announcement = m.text
         user = user_dict[chat_id]
         user.announcement = announcement
-        bot.send_message(chat_id, 'Gracias ' + user.callsign + '\nReproduciremos el mensaje: ' + user.announcement)        
+        bot.send_message(chat_id, 'Gracias *' + user.callsign + \
+                                  '*!\nAnuncio: _' + user.announcement + '_', \
+                                  parse_mode="Markdown")
+        repeater = 'python nuupxe.py -v \"Anuncio recibido desde Telegram\"'
+        status, output = commands.getstatusoutput(repeater)
+        repeater = 'python nuupxe.py -p \"' + user.callsign + '\"'
+        status, output = commands.getstatusoutput(repeater)
+        repeater = 'python nuupxe.py -v \"' + user.announcement + '\"'
+        status, output = commands.getstatusoutput(repeater)
     except Exception as e:
         bot.reply_to(m, 'Algo no esta funcionando!')
 

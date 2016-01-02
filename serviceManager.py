@@ -7,6 +7,7 @@ import signal
 import sys
 import thread
 import time
+import unicodedata
 
 from apscheduler.scheduler import Scheduler
 from apscheduler.threadpool import ThreadPool
@@ -14,6 +15,7 @@ from apscheduler.threadpool import ThreadPool
 from core.alive import alive
 from core.irlp import Irlp
 from core.observer import Subscriber, Publisher
+from core.phonetic import Phonetic
 from core.voicesynthetizer import VoiceSynthetizer
 
 # Production
@@ -265,12 +267,21 @@ class ServiceManager(object):
         self.disable()
 
     def voice_mode(self, text):
-
         logging.info('Voice Mode')
         try:
             self.voicesynthetizer.speechit(text)
         except (StopIteration, KeyboardInterrupt, SystemExit):
             pass
+
+    def phonetic_mode(self, text):
+        logging.info('Phonetic Mode')
+        phonetic = Phonetic()
+        try:
+            text = ' '.join(phonetic.decode(text))
+            self.voicesynthetizer.speechit(text)
+        except (StopIteration, KeyboardInterrupt, SystemExit):
+            pass
+
     def schedule_print(self):
         self.scheduler.print_jobs()
 
