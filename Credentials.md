@@ -1,5 +1,6 @@
 # Credentials
 
+```sh
 [twitter]
 consumer_key=
 consumer_secret=
@@ -30,5 +31,6 @@ password=
 
 [telegram]
 token=
+```
 
 # End of File
