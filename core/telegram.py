@@ -27,6 +27,10 @@ class User:
 
 hideBoard = types.ReplyKeyboardHide()
 
+def remove_accents(input_str):
+    nfkd_form = unicodedata.normalize('NFKD', input_str)
+    return u"".join([c for c in nfkd_form if not unicodedata.combining(c)])
+
 def listener(messages):
     for m in messages:
         if m.content_type == 'text':
@@ -66,7 +70,7 @@ def process_message(m):
 def process_message_repeater(m):
     try:
         chat_id = m.chat.id
-        announcement = m.text
+        announcement = remove_accents(m.text)
         user = user_dict[chat_id]
         user.announcement = announcement
         bot.send_message(chat_id, 'Gracias *' + user.callsign + \
