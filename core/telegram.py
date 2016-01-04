@@ -103,7 +103,7 @@ def process_message_repeater(m):
         announcement = remove_accents(m.text)
         user = user_dict[chat_id]
         user.announcement = announcement
-        msg = bot.reply_to(m, 'Cada cucantos minutos quieres ejecutarlo?')
+        msg = bot.reply_to(m, 'Cada cuantos segundos quieres ejecutarlo?')
         bot.register_next_step_handler(msg, process_message_recurrence)
     except Exception as e:
         bot.reply_to(m, 'Algo no esta funcionando!')
