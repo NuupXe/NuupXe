@@ -29,6 +29,7 @@ from modules.news import News
 from modules.seismology import Seismology
 from modules.selfie import Selfie
 from modules.sstv import SSTV
+from modules.voiceapp import VoiceApp
 from modules.voicecommand import VoiceCommand
 from modules.voicemail import VoiceMail
 from modules.weather import Weather
@@ -81,6 +82,7 @@ class ServiceManager(object):
         self.morseteacher = MorseTeacher(self.voicesynthetizer)
         self.seismology = Seismology(self.voicesynthetizer)
         self.sstv = SSTV(self.voicesynthetizer)
+        self.voiceapp = VoiceApp(self.voicesynthetizer)
         self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
         self.voicemailer = VoiceMailer(self.voicesynthetizer)
 
@@ -214,6 +216,9 @@ class ServiceManager(object):
         elif module == 'voicecommand':
             self.voicecommand = VoiceCommand(self.voicesynthetizer)
             self.voicecommand.listen()
+        elif module == 'voiceapp':
+            self.voiceapp = VoiceApp(self.voicesynthetizer)
+            self.voiceapp.application()
         elif module == 'voicemail':
             self.voicemail = VoiceMail(self.voicesynthetizer)
             self.voicemail.run(dtmf)

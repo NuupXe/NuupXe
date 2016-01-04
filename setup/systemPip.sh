@@ -35,6 +35,7 @@ export packageSpeechRecognition=SpeechRecognition
 export packageTelepot=telepot
 export packagePyTelegramBotApi=pyTelegramBotAPI
 export packageTendo=tendo
+export packageWit=wit
 
 # =============================================================================
 # Script Functions
@@ -78,5 +79,6 @@ pipFunctionInstall $packageSpeechRecognition
 pipFunctionInstall $packageTelepot
 pipFunctionInstall $packagePyTelegramBotApi
 pipFunctionInstall $packageTendo
+pipFunctionInstall $packageWit
 
 # End of file

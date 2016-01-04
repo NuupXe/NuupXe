@@ -44,6 +44,7 @@ export packageLibFfi="libffi-dev"
 export packageLibSsl="libssl-dev"
 export packageFlac="flac"
 export packagePythonPyAudio="python-pyaudio"
+export packageLibSoxDev="libsox-dev"
 
 # =============================================================================
 # Script Functions
@@ -96,5 +97,6 @@ aptgetFunctionInstall $packageLibFfi
 aptgetFunctionInstall $packageLibSsl
 aptgetFunctionInstall $packageFlac
 aptgetFunctionInstall $packagePythonPyAudio
+aptgetFunctionInstall $packageLibSoxDev
 
 # End of file
