@@ -48,7 +48,6 @@ bot = telebot.TeleBot(token)
 bot.set_update_listener(listener)
 
 sched = Scheduler()
-sched.start()
 
 callsign = None
 announcement = None
@@ -103,7 +102,7 @@ def process_message_repeater(m):
         announcement = remove_accents(m.text)
         user = user_dict[chat_id]
         user.announcement = announcement
-        msg = bot.reply_to(m, 'Cada cuantos segundos quieres ejecutarlo?')
+        msg = bot.reply_to(m, 'Cada cuantos minutos quieres ejecutarlo?')
         bot.register_next_step_handler(msg, process_message_recurrence)
     except Exception as e:
         bot.reply_to(m, 'Algo no esta funcionando!')
@@ -135,7 +134,8 @@ def process_message_recurrence(m):
         status, output = commands.getstatusoutput(repeater)
         repeater = 'python nuupxe.py -v \"' + user.announcement + '\"'
         status, output = commands.getstatusoutput(repeater)
-        schedinstance = sched.add_interval_job(job_function, seconds=recurrence)
+        schedinstance = sched.add_interval_job(job_function, minutes=recurrence)
+        sched.start()
     except Exception as e:
         bot.reply_to(m, 'Algo no esta funcionando!')
 
