@@ -7,12 +7,15 @@ from telebot import types
 import time
 import unicodedata
 
+from apscheduler.scheduler import Scheduler
+
 knownUsers = []
 userStep = {}
 
 commandsbot = {
               'ayuda': 'Informacion de comandos disponibles',
-              'mensaje': 'Enviar mensaje para reproducir en el repetidor',
+              'anuncio': 'Enviar anuncio para reproducir en el repetidor',
+              'noanuncio': 'Cancelar la reproduccion del anuncio en el repetidor',
               'modulo': 'Ejecutar modulo especifico',
               'sonido': 'Ultimo mensaje que se envio a traves del repetidor',
               'sstv': 'Ultima fotografia que se decodifico por SSTV',
@@ -25,6 +28,7 @@ class User:
     def __init__(self, callsign):
         self.callsign = callsign
         self.announcement = None
+        self.recurrence = None
 
 hideBoard = types.ReplyKeyboardHide()
 
@@ -43,6 +47,21 @@ token = configuration.get('telegram','token')
 bot = telebot.TeleBot(token)
 bot.set_update_listener(listener)
 
+sched = Scheduler()
+sched.start()
+
+callsign = None
+announcement = None
+schedinstance = None
+
+def job_function():
+    global callsign
+    global announcement
+    repeater = 'python nuupxe.py -p \"' + callsign + '\"'
+    status, output = commands.getstatusoutput(repeater)
+    repeater = 'python nuupxe.py -v \"' + announcement + '\"'
+    status, output = commands.getstatusoutput(repeater)
+
 @bot.message_handler(commands=['ayuda'])
 def command_help(m):
     cid = m.chat.id
@@ -52,8 +71,18 @@ def command_help(m):
         help_text += commandsbot[key] + "\n"
     bot.send_message(cid, help_text)
 
-@bot.message_handler(commands=["mensaje"])
-def command_message(m):
+@bot.message_handler(commands=['noanuncio'])
+def command_noannouncement(m):
+    cid = m.chat.id
+    global schedinstance
+    try:
+        sched.unschedule_job(schedinstance)
+    except:
+        pass
+    bot.send_message(cid, "Hemos cancelado cualquier anuncio")
+
+@bot.message_handler(commands=["anuncio"])
+def command_announcement(m):
     msg = bot.reply_to(m, "Hola, cual es tu indicativo?")
     bot.register_next_step_handler(msg, process_message)
 
@@ -74,8 +103,31 @@ def process_message_repeater(m):
         announcement = remove_accents(m.text)
         user = user_dict[chat_id]
         user.announcement = announcement
+        msg = bot.reply_to(m, 'Cada cucantos minutos quieres ejecutarlo?')
+        bot.register_next_step_handler(msg, process_message_recurrence)
+    except Exception as e:
+        bot.reply_to(m, 'Algo no esta funcionando!')
+
+def process_message_recurrence(m):
+    try:
+        chat_id = m.chat.id
+        recurrence = m.text
+        user = user_dict[chat_id]
+        user.recurrence = recurrence
+        recurrence = int(user.recurrence)
+        global callsign
+        global announcement
+        global sched
+        global schedinstance
+        try:
+            sched.unschedule_job(schedinstance)
+        except:
+            pass
+        callsign = user.callsign
+        announcement = user.announcement
         bot.send_message(chat_id, 'Gracias *' + user.callsign + \
-                                  '*!\nAnuncio: _' + user.announcement + '_', \
+                                  '*!\nRecurrence: ' + user.recurrence + \
+                                  '\nAnuncio: _' + user.announcement + '_', \
                                   parse_mode="Markdown")
         repeater = 'python nuupxe.py -v \"Anuncio recibido desde Telegram\"'
         status, output = commands.getstatusoutput(repeater)
@@ -83,6 +135,7 @@ def process_message_repeater(m):
         status, output = commands.getstatusoutput(repeater)
         repeater = 'python nuupxe.py -v \"' + user.announcement + '\"'
         status, output = commands.getstatusoutput(repeater)
+        schedinstance = sched.add_interval_job(job_function, seconds=recurrence)
     except Exception as e:
         bot.reply_to(m, 'Algo no esta funcionando!')
 
