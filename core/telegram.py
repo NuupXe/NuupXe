@@ -13,6 +13,7 @@ userStep = {}
 commandsbot = {
               'ayuda': 'Informacion de comandos disponibles',
               'mensaje': 'Enviar mensaje para reproducir en el repetidor',
+              'modulo': 'Ejecutar modulo especifico',
               'sonido': 'Ultimo mensaje que se envio a traves del repetidor',
               'sstv': 'Ultima fotografia que se decodifico por SSTV',
               'estado': 'Estado del sistema'
@@ -81,6 +82,22 @@ def process_message_repeater(m):
         repeater = 'python nuupxe.py -p \"' + user.callsign + '\"'
         status, output = commands.getstatusoutput(repeater)
         repeater = 'python nuupxe.py -v \"' + user.announcement + '\"'
+        status, output = commands.getstatusoutput(repeater)
+    except Exception as e:
+        bot.reply_to(m, 'Algo no esta funcionando!')
+
+@bot.message_handler(commands=["modulo"])
+def command_module(m):
+    msg = bot.reply_to(m, "Que modulo quieres ejecutar?")
+    bot.register_next_step_handler(msg, process_module)
+
+def process_module(m):
+    try:
+        chat_id = m.chat.id
+        module = m.text.lower()
+        bot.send_message(chat_id, 'Listo! Ejecutaremos *' + module + \
+                                  '*', parse_mode="Markdown")
+        repeater = 'python nuupxe.py -m \"' + module + '\"'
         status, output = commands.getstatusoutput(repeater)
     except Exception as e:
         bot.reply_to(m, 'Algo no esta funcionando!')
