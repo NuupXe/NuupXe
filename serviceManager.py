@@ -99,6 +99,7 @@ class ServiceManager(object):
         'PS8'  : 'wolframalpha',
         'PS9'  : 'voicemail',
         'PS10' : 'sstv',
+        'PS11' : 'voiceapp',
         }
         return dtmf_codes.get(dtmf)
 
@@ -267,7 +268,7 @@ class ServiceManager(object):
             self.voicemailer = VoiceMailer(self.voicesynthetizer)
             self.voicemailer.attend(dtmf)
         else:
-            print 'Module not found! Please check its name...\n'
+            self.voicesynthetizer.speechit("No hemos implementado tu comando! Lo siento!")
 
         self.disable()
 

@@ -19,6 +19,8 @@ class VoiceApp(object):
 
     def application(self):
         logging.info(self.modulename)
+        repeater = 'python nuupxe.py -v \"Hola! En que puedo ayudarte?\"'
+        status, output = commands.getstatusoutput(repeater)
         response = self.voiceapplication.action()
         repeater = 'python nuupxe.py -m \"' + response + '\"'
         status, output = commands.getstatusoutput(repeater)
