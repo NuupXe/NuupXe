@@ -7,6 +7,7 @@ Telegram
 - https://github.com/nachocarballeda/RaspyBot/blob/master/raspybot.py
 - http://serverfault.com/questions/598113/process-monitoring-and-service-manager-for-python-web-application
 - http://awesome-python.com/
+- https://learn.adafruit.com/raspberry-pi-hosting-node-red/managing-node-red
 
 ```
     nohup python nuupxe.py &
