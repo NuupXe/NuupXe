@@ -12,7 +12,7 @@ def alive(modulename=None, modulemessage=None, media=None):
 
     logging.info('Alive')
 
-    aprs = AprsNet()
+    #aprs = AprsNet()
     conf = ConfigParser.ConfigParser()
     system = System()
     twitterc = TwitterC('twython')
@@ -31,7 +31,7 @@ def alive(modulename=None, modulemessage=None, media=None):
     kernel = system.kernelVersion()
 
     callsign = conf.get("general", "callsign") + '-1'
-    aprs.address_set(callsign)
+    #aprs.address_set(callsign)
 
     cpu = 'Cpu ' + cpu + '%'
     memory = 'Memory ' + memory
@@ -48,8 +48,8 @@ def alive(modulename=None, modulemessage=None, media=None):
     else:
         message = message + ' ' + technical
 
-    aprs.send_message(technical)
-    aprs.position_set(systemcoordinates)
+    #aprs.send_message(technical)
+    #aprs.position_set(systemcoordinates)
     message = (message[:136] + '...')
     if media:
         message = (message[:110] + '...')
