@@ -6,5 +6,5 @@
 * [Credentials](Credentials.md)
 * [Services](documentation/Services.md)
    * [Telegram](documentation/services/Telegram.md)
-   * Weather
+   * [Weather](documentation/Weather.md)
 
