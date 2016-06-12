@@ -7,5 +7,5 @@ chmod 755 /etc/init.d/nuupxe
 /etc/init.d/nuupxe start
 /etc/init.d/nuupxe stop
 update-rc.d nuupxe defaults
-root@stn8422:/home/irlp/custom/nuupxe# update-rc.d nuupxe defaults
+update-rc.d nuupxe defaults
 ```
