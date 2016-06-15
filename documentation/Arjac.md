@@ -67,9 +67,9 @@ Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco d
 ```
 
 ```
-Que tal si participo en otro de los proyectos más ambiciosos del Internet de las Cosas? esta tecnología es lo que se ha definido como “ciudades inteligentes“. Un montón de sensores capaces de recoger información de las calles y hacer más eficientes algunas acciones. 
+Que tal si participo en otro de los proyectos más ambiciosos del Internet de las Cosas? esta tecnología es lo que se ha definido como “ciudades inteligentes“. Un montón de sensores capaces de recoger información de las calles y hacer más eficientes algunas acciones.
 ```
 
 ```
-Todo lo anterior sera posible gracias a una conversacion casi natural entre tu y yo, a la integracion de tecnologias de robots por software con tecnologias de inteligencia artificial. Sere un Siri! La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! Quiero conocer mas repetidores, llegar a otros paises, hacer la vida mejor de cada radio aficionado y cada radio club. Esperemos vernos en la Convencion Nacional, sera un placer poder platicar contigo.
+Todo lo anterior sera posible gracias a una conversacion casi natural entre tu y yo, a la integracion de tecnologias de robots por software con tecnologias de inteligencia artificial. Has escuchado hablar de Siri en el Ai Fon! La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! Quiero conocer mas repetidores, llegar a otros paises, hacer la vida mejor de cada radio aficionado y cada radio club. Esperemos vernos en la Convencion Nacional, sera un placer poder platicar contigo.
 ```
