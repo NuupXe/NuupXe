@@ -67,7 +67,7 @@ Control de Agendas? Al compartirme la agenda del radio club podre recordarte eve
 ```
 
 ```
-Mencionamos tambien la parte de Estadisticas, pero que tienen que ver con la inteligencia artificial? Mi objetivo va mas alla de ser un asistente virtual, quiero ser  
+Mencionamos tambien la parte de Estadisticas, pero que tienen que ver con la inteligencia artificial? Mi objetivo va mas alla de ser un asistente virtual, quiero ser un sistema de Internet de las Cosas para Radioaficionados y la parte de Big Data y Inteligencia Artifical no podran vivir separadas, esta combinacion hara que hagamos un Radio Club mejor 
 ```
 
 ```
