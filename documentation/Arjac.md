@@ -79,5 +79,5 @@ Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco d
 ```
 
 ```
-La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! 
+La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! Quiero conocer mas repetidores, llegar a otros paises, quiero 
 ```
