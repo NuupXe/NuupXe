@@ -15,7 +15,7 @@ Actualmente estoy trabajando en 3 estados de la republica mexicana: Guanajuato, 
 ```
 
 ```
-Mis conocimientos basicos incluyen
+Mis conocimientos basicos incluyen identificarme, decir la hora, la fecha, el clima y la temperatura.
 ```
 
 ## Modulos Basicos
