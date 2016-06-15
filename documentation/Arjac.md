@@ -18,12 +18,6 @@ Actualmente estoy trabajando en 3 estados de la republica mexicana: Guanajuato, 
 Mis conocimientos basicos incluyen identificarme, decir la hora, la fecha, el clima y la temperatura.
 ```
 
-```
-Puedo entender que necesitas desde 3 lugares distintos: tu telefono celular, codigos d t m f, y hablandome a traves del microfono de tu radio
-```
-
-## Modulos Basicos
-
 ```sh
 python nuupxe.py -m identification
 python nuupxe.py -m hour
@@ -31,6 +25,12 @@ python nuupxe.py -m date
 python nuupxe.py -m weather
 python nuupxe.py -m temperature
 ```
+
+```
+Puedo entender que necesitas desde 3 lugares distintos: tu telefono celular, codigos d t m f, y hablandome a traves del microfono de tu radio
+```
+
+## Modulos Basicos
 
 ## Modulos Experimentales
 
