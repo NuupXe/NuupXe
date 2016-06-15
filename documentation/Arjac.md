@@ -71,6 +71,7 @@ Mencionamos tambien la parte de Estadisticas, pero que tienen que ver con la int
 ```
 
 ```
+Hay ocasiones en las que nos quejamos 
 ```
 
 ```
