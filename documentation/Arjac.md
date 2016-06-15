@@ -43,7 +43,7 @@ Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con el titulo
 ```
 
 ```
-Como Radioaficionados muy pronto veremos como cada uno de nuestros repetidores empiezan a tomar vida: conversando con nosotros cuando nadie mas esta al aire, llevando control de nuestros agendas, brindandonos estadisticas de uso asi como sugiriendonos actividades que nos motivaran a hacer mas radio, y esto es solo el comienzo...
+Como Radioaficionados muy pronto veremos como cada uno de nuestros repetidores empiezan a tomar vida: conversando con nosotros cuando nadie mas esta al aire, llevando control de nuestras agendas, brindandonos estadisticas de uso asi como sugiriendonos actividades que nos motivaran a hacer mas radio, y esto es solo el comienzo...
 ```
 
 ```
