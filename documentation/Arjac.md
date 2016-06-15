@@ -55,6 +55,6 @@ Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con el titulo
 ```
 
 ```
-Imaginemos algunos casos de uso?
+Imaginemos algunos casos de uso? 
 ```
 
