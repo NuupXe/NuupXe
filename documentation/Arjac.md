@@ -15,11 +15,11 @@ Corria en computadores personales inicialmente, al dia de hoy he sido validado e
 ```
 
 ```
-Actualmente estoy trabajando en 3 estados de la republica mexicana: Guanajuato, Durango y Jalisco. He mostrado cierta estabilidad en mi operacion basica e incrementado algunos conocimientos avanzados.
+Puedo entender que necesitas desde 3 lugares distintos: tu telefono celular, codigos d t m f, y por voz hablandome a traves del microfono de tu radio
 ```
 
 ```
-Puedo entender que necesitas desde 3 lugares distintos: tu telefono celular, codigos d t m f, y por voz hablandome a traves del microfono de tu radio
+Actualmente estoy trabajando en 3 estados de la republica mexicana: Guanajuato, Durango y Jalisco. He mostrado cierta estabilidad en mi operacion basica e incrementado algunos conocimientos avanzados.
 ```
 
 ```
