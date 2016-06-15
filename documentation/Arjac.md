@@ -75,9 +75,9 @@ Podre decir cuanto tiempo se ha mantenido ocupado el repetidor, crear consursos 
 ```
 
 ```
-Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco duro, que mi conexion a internet ha estado fallando, prender o apagar luces, aires acondicionados, informarte sobre el estado de las bandas de radio aficionados, estaciones de otros paises en ciertas bandas, trafico en la ciudad,  si tengo una camara, puedo enviarte una foto, pero que mas consideras tu que deba aprender? Todo esto sera posible gracias a una conversacion natural entre tu y yo, a la integracion de tecnologias de robots por software con tecnologias de inteligencia artificial.
+Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco duro, que mi conexion a internet ha estado fallando, prender o apagar luces, aires acondicionados, informarte sobre el estado de las bandas de radio aficionados, estaciones de otros paises en ciertas bandas, trafico en la ciudad,  si tengo una camara, puedo enviarte una foto, pero que mas consideras tu que deba aprender?
 ```
 
 ```
-La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! Quiero conocer mas repetidores, llegar a otros paises. Esperemos vernos en la Convencion Nacional, sera un placer poder hablarte, ensenarte todo lo aprendido 
+ Todo esto sera posible gracias a una conversacion natural entre tu y yo, a la integracion de tecnologias de robots por software con tecnologias de inteligencia artificial. La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! Quiero conocer mas repetidores, llegar a otros paises. Esperemos vernos en la Convencion Nacional, sera un placer poder hablarte, ensenarte todo lo aprendido 
 ```
