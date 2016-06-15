@@ -11,7 +11,7 @@ Naci siendo Proyecto Cancun, era una estacion experimental que convertia texto a
 ```
 
 ```
-Corria en computadores personales inicialmente, al dia de hoy he sido validado en tarjetas de desarrollo, desde la famosa rasp berry pai hasta tarjetas con costo de 9 dolares
+Corria en computadores personales inicialmente, al dia de hoy he sido portado a tarjetas de desarrollo, desde la famosa rasp berry pai hasta tarjetas con costo de 9 dolares
 ```
 
 ```
