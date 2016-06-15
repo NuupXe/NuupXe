@@ -43,5 +43,5 @@ Transmite EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arja
 ```
 
 ```
-Mis conocimientos avanzados estan en fase de experimentacion. Estoy aprendiendo a darte informacion de Meteorologia, Sismologia, puedo convertirme en una grabdora digital, 
+Mis conocimientos avanzados estan en fase de experimentacion. Estoy aprendiendo a darte informacion de Meteorologia, Sismologia, puedo convertirme en una grabadora digital, mandarte imagenes por SSTV
 ```
