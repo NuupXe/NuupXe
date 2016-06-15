@@ -71,7 +71,7 @@ Mencionamos tambien la parte de Estadisticas, pero que tienen que ver con la int
 ```
 
 ```
-Podre decirte cuantas ocasiones se ha apretado el P T T, conocer de las 24 horas del dia cuanto tiempo se ha mantenido ocupado el repetidor, 
+Podre decirte cuantas ocasiones se ha apretado el P T T, conocer de las 24 horas del dia cuanto tiempo se ha mantenido ocupado el repetidor, podra decirle a la federacion quien ha usado mas los repetidores
 ```
 
 ```
