@@ -59,6 +59,6 @@ Como Radioaficionados muy pronto veremos como cada uno nuestros repetidores empi
 ```
 
 ```
-Control de Agendas? Al compartirme la agenda del radio club me escucharas decir alguno de los siguientes
+Control de Agendas? Al compartirme la agenda del radio club me escucharas decir alguno de los siguientes mensajes: "No olvides "
 ```
 
