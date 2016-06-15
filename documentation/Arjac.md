@@ -23,7 +23,7 @@ Transmite EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arja
 ```
 
 ```
-Actualmente estoy trabajando en 3 estados de la Republica Mexicana: Guanajuato, Durango y Jalisco. He mostrado cierta estabilidad en mi operacion basica e aprendido algunos conocimientos avanzados.
+Actualmente estoy trabajando en 3 estados de la Republica Mexicana: Guanajuato, Durango y Jalisco. He mostrado cierta estabilidad en mi operacion basica e obtenido algunos conocimientos avanzados.
 ```
 
 ```
