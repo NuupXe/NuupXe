@@ -15,6 +15,10 @@ Actualmente estoy trabajando en 3 estados de la republica mexicana: Guanajuato, 
 ```
 
 ```
+Puedo entender que necesitas desde 3 lugares distintos: tu telefono celular, codigos d t m f, y hablandome a traves del microfono de tu radio
+```
+
+```
 Mis conocimientos basicos incluyen identificarme, decir la hora, la fecha, el clima y la temperatura.
 ```
 
@@ -26,11 +30,4 @@ python nuupxe.py -m weather
 python nuupxe.py -m temperature
 ```
 
-```
-Puedo entender que necesitas desde 3 lugares distintos: tu telefono celular, codigos d t m f, y hablandome a traves del microfono de tu radio
-```
-
-```sh
-python nuupxe.py -m aprstracker
-```
 
