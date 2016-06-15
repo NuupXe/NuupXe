@@ -15,6 +15,10 @@ Corria en computadores personales inicialmente, al dia de hoy he sido validado e
 ```
 
 ```
+Transmite EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
+```
+
+```
 Puedo entender que necesitas desde 3 lugares distintos: tu telefono celular, codigos d t m f, y por voz hablandome a traves del microfono de tu radio
 ```
 
