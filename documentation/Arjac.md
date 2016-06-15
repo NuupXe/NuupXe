@@ -67,5 +67,5 @@ Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco d
 ```
 
 ```
-Todo lo anterior sera posible gracias a una conversacion casi natural entre tu y yo, a la integracion de tecnologias de robots por software con tecnologias de inteligencia artificial. La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! Quiero conocer mas repetidores, llegar a otros paises, hacer la vida de cada radio aficionado y cada radio club mejor. Esperemos vernos en la Convencion Nacional, sera un placer poder platicar contigo.
+Todo lo anterior sera posible gracias a una conversacion casi natural entre tu y yo, a la integracion de tecnologias de robots por software con tecnologias de inteligencia artificial. Sere un Siri! La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! Quiero conocer mas repetidores, llegar a otros paises, hacer la vida de cada radio aficionado y cada radio club mejor. Esperemos vernos en la Convencion Nacional, sera un placer poder platicar contigo.
 ```
