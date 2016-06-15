@@ -63,7 +63,7 @@ Transmite EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arja
 ```
 
 ```
-Control de Agendas? Al compartirme la agenda del radio club podre recordarte eventos o compartirte los eventos si me preguntas, dandote por ejemplo una respuesta asi: "Hola! Red semanal del club de radio amateur del estado de Guanajuato por el reflector 97 36 en 30 minutos"
+Control de Agendas? Al compartirme la agenda del radio club podre recordarte eventos o compartirte los eventos si me preguntas por ellos, dandote por ejemplo una respuesta asi: "Hola! Red semanal del club de radio amateur del estado de Guanajuato por el reflector 97 36 en 30 minutos"
 ```
 
 ```
