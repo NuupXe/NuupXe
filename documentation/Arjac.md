@@ -51,5 +51,5 @@ python nuupxe.py -m aprstracking
 ```
 
 ```
-Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con el titulo del tema? Inteligencia Artificial para  
+Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con el titulo del tema? Inteligencia Artificial para Repetidores de  
 ```
