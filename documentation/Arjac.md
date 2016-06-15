@@ -42,3 +42,6 @@ python nuupxe.py -m temperature
 Transmite EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
 ```
 
+```
+Mis conocimientos avanzados estan en fase de experimentacion. 
+```
