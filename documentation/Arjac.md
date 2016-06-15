@@ -11,7 +11,7 @@ Naci siendo Proyecto Cancun, era una estacion experimental que convertia texto a
 ```
 
 ```
-Corria en computadores personales y por le necesidad he sido validado en varios sistemas embebidos
+Corria en computadores personales y por le necesidad he sido validado en varios sistemas embebidos, es decir, tarjetas de desarrollo 
 ```
 
 ```
