@@ -67,11 +67,11 @@ Control de Agendas? Al compartirme la agenda del radio club podre recordarte eve
 ```
 
 ```
-Mencionamos tambien la parte de Estadisticas, pero que tienen que ver con la inteligencia artificial? Mi objetivo va mas alla de ser un asistente virtual, quiero ser el primer sistema de Internet de las Cosas en Repetidores para Radioaficionados y Radio clubes, la parte de Big Data e Inteligencia Artifical no podran vivir separadas y esta combinacion hara que puedo yo actuar para hacer un mejor Radio Club y mejores Radio Aficionados, pero como Nup Si, es decir, yo actuare?
+Mencionamos tambien la parte de Estadisticas, pero que tienen que ver con la inteligencia artificial? Mi objetivo va mas alla de ser un asistente virtual, quiero ser el primer sistema de Internet de las Cosas en Repetidores para Radioaficionados y Radio clubes, la parte de Big Data e Inteligencia Artifical no podran vivir separadas y esta combinacion hara que puedo yo actuar para hacer un mejor Radio Club y mejores Radio Aficionados, pero como Nup Si, es decir, yo actuare? 
 ```
 
 ```
-Podre decirte cuantas ocasiones se ha apretado el P T T, conocer de las 24 horas dle dia, cuanto tiempo se ha mentenido ocupado el repetidor, 
+Podre decirte cuantas ocasiones se ha apretado el P T T, conocer de las 24 horas del dia cuanto tiempo se ha mantenido ocupado el repetidor, 
 ```
 
 ```
