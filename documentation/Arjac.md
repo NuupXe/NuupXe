@@ -15,7 +15,7 @@ Corria en computadores personales, al dia de hoy he sido portado a tarjetas de d
 ```
 
 ```
-Puedo entender tus instrucciones desde 3 lugares distintos: tu telefono celular, codigo d t m f, y por voz hablandome a traves del microfono de tu radio. Puedo contestarte a tu telefono celular o en la frequencia de acceso
+Puedo entender tus instrucciones desde 3 lugares distintos: tu telefono celular, codigo d t m f, y por voz hablandome a traves del microfono de tu radio. Puedo contestarte a tu telefono celular o en la frequencia del repetidor.
 ```
 
 ```
