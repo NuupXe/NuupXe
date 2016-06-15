@@ -7,7 +7,11 @@ Hola, muy buenas noches! Transmite Proyecto Nup Si en colaboracion con EksRey Ec
 ```
 
 ```
-Naci siendo Proyecto Cancun corriendo una computadora con Linux, era una estacion experimental que convertia texto a voz, despues aprendi a escuchar y decodificar el audio en texto, sentando las bases para convertirme en un asistente virtual para cualquier radio aficionado y radio club
+Naci siendo Proyecto Cancun, era una estacion experimental que convertia texto a voz, despues aprendi a escuchar y decodificar el audio en texto, sentando las bases para convertirme en un asistente virtual para cualquier radio aficionado y radio club
+```
+
+```
+Aprendi  
 ```
 
 ```
