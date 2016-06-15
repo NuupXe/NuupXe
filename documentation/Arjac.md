@@ -59,6 +59,6 @@ Como Radioaficionados muy pronto veremos como cada uno nuestros repetidores empi
 ```
 
 ```
-Control de Agendas? Al compartirme la agenda del radio club podre recordarte eventos, por ejemplo: "No olvidemos la red semanal del club de radio amateur del estado de Guanajuato por el reflector 97 36"
+Control de Agendas? Al compartirme la agenda del radio club podre recordarte eventos, por ejemplo: "Hola a todos! No olvidemos la red semanal del club de radio amateur del estado de Guanajuato por el reflector 97 36"
 ```
 
