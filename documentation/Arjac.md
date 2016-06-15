@@ -67,7 +67,7 @@ Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco d
 ```
 
 ```
-Que tal si participo en otro de los proyectos más ambiciosos del Internet de las Cosas? esta tecnología que se ha definido como “ciudades inteligentes“. Muchos sensores capaces de obtener información de las calles y hacer más eficientes algunas acciones.
+Que tal si participo en otro de los proyectos más ambiciosos del Internet de las Cosas? esta tecnología que se ha definido como “ciudades inteligentes“. Muchos sensores capaces de obtener información de las calles y hacer más eficientes algunas acciones. O acaso no somos parte de las calles?
 ```
 
 ```
