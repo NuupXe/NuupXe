@@ -23,19 +23,11 @@ Transmite EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arja
 ```
 
 ```
-Actualmente estoy trabajando en 3 estados de la Republica Mexicana: Guanajuato, Durango y Jalisco. He mostrado cierta estabilidad en mi operacion basica e obtenido algunos conocimientos avanzados.
+Actualmente estoy trabajando en 3 estados de la Republica Mexicana: Guanajuato, Durango y Jalisco. He mostrado cierta estabilidad en mi operacion basica y obtenido algunos conocimientos avanzados.
 ```
 
 ```
-Mis conocimientos basicos incluyen identificarme, decir la hora, la fecha, el clima y la temperatura, que tal si recordamos como me escucho?
-```
-
-```sh
-python nuupxe.py -m identification
-python nuupxe.py -m hour
-python nuupxe.py -m date
-python nuupxe.py -m weather
-python nuupxe.py -m temperature
+Mis conocimientos basicos incluyen identificarme, decir la hora, la fecha, el clima y la temperatura
 ```
 
 ```
