@@ -35,10 +35,6 @@ Mis conocimientos avanzados estan en fase de experimentacion. Estoy aprendiendo 
 ```
 
 ```
-python nuupxe.py -m aprstracking
-```
-
-```
 Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con el titulo del tema? La era de la Inteligencia Artificial en Repetidores de Radioaficionados. Todos los modulos anteriormente descritos son la base, estamos en la etapa inicial en el diseño y la creacion de sistemas para Repetidores capaces de resolver problemas cotidianos por sí mismos, utilizando como paradigma la inteligencia humana.
 ```
 
@@ -47,7 +43,7 @@ Como Radioaficionados muy pronto veremos como cada uno de nuestros repetidores e
 ```
 
 ```
-Transmite EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
+Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
 ```
 
 ```
@@ -64,6 +60,10 @@ Podre decir cuanto tiempo se ha mantenido ocupado el repetidor, crear concursos 
 
 ```
 Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco duro, que mi conexion a internet ha estado fallando, prender o apagar luces, aires acondicionados, informarte sobre el estado de las bandas de radio aficionados, estaciones de otros paises en ciertas bandas, trafico en la ciudad,  si tengo una camara, puedo enviarte una foto, pero que mas consideras tu que deba aprender?
+```
+
+```
+Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
 ```
 
 ```
