@@ -75,7 +75,7 @@ Podre decir cuanto tiempo se ha mantenido ocupado el repetidor, crear consursos 
 ```
 
 ```
-Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco duro, que mi conexion a internet ha estado fallando, prender o apagar luces, aires acondicionados, informarte sobre el estado de las bandas de radio aficionados, estaciones, trafico en la ciudad,  si tengo una camara, puedo enviarte una foto
+Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco duro, que mi conexion a internet ha estado fallando, prender o apagar luces, aires acondicionados, informarte sobre el estado de las bandas de radio aficionados, estaciones , trafico en la ciudad,  si tengo una camara, puedo enviarte una foto
 ```
 
 ```
