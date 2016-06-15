@@ -51,5 +51,5 @@ python nuupxe.py -m aprstracking
 ```
 
 ```
-Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con el titulo del tema? La era de la Inteligencia Artificial en Repetidores de Radioaficionados.   
+Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con el titulo del tema? La era de la Inteligencia Artificial en Repetidores de Radioaficionados. Todos los modulos anteriormente descritos son la base  
 ```
