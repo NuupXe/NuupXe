@@ -19,7 +19,7 @@ Puedo entender tus instrucciones desde 3 lugares distintos: tu telefono celular,
 ```
 
 ```
-Transmite EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
+Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
 ```
 
 ```
