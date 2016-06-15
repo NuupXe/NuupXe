@@ -19,7 +19,7 @@ Actualmente estoy trabajando en 3 estados de la republica mexicana: Guanajuato, 
 ```
 
 ```
-Puedo entender que necesitas desde 3 lugares distintos: tu telefono celular, codigos d t m f, y hablandome a traves del microfono de tu radio
+Puedo entender que necesitas desde 3 lugares distintos: tu telefono celular, codigos d t m f, y por voz hablandome a traves del microfono de tu radio
 ```
 
 ```
