@@ -19,7 +19,7 @@ Mis conocimientos basicos incluyen identificarme, decir la hora, la fecha, el cl
 ```
 
 ```
-Puedo entenderte desde 3 lugares distintos: 
+Puedo entender que necesitas desde 3 lugares distintos: 
 ```
 
 ## Modulos Basicos
