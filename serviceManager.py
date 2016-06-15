@@ -164,7 +164,7 @@ class ServiceManager(object):
     def writing_mode(self):
 
         logging.info('Mode')
-        self.voicesynthetizer.speechit("Modo Escritura")
+        # self.voicesynthetizer.speechit("Modo Escritura")
 
         while True:
             print " Type any text to make use of Text to Speech infraestructure"
