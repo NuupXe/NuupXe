@@ -67,7 +67,7 @@ Control de Agendas? Al compartirme la agenda del radio club podre recordarte eve
 ```
 
 ```
-Que tienen las estadisticas que ver con la Inteligencia Artificial? 
+Mencionamos tambien la parte de Estadisticas, pero que tienen que ver con la inteligencia artificial? Mi objetivo va mas alla de ser un asistente virtual 
 ```
 
 ```
