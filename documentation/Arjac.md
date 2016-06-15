@@ -71,9 +71,9 @@ Mencionamos tambien la parte de Estadisticas, pero que tienen que ver con la int
 ```
 
 ```
-Podre decir cuanto tiempo se ha mantenido ocupado el repetidor, crear consursos de conocimientos, decirte chistes para que no te aburras, si no hay nadie mas quiza quieras conversar conmigo preguntandome sobre cosas de historia, tecnologia o hasta quieras saber la historia del radio club. 
+Podre decir cuanto tiempo se ha mantenido ocupado el repetidor, crear consursos de conocimientos, decirte chistes para que no te aburras, si no hay nadie mas quiza quieras conversar conmigo preguntandome sobre cosas de historia, tecnologia o hasta quieras saber la historia del radio club,  felicitar a cada uno de los miembros del radio club en su cumple,
 ```
 
 ```
-Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco duro, que mi conexion a internet ha estado fallando, felicitar a cada uno de los miembros del radio club en su cumple, informarte sobre el estado de las bandas, estaciones, trafico en la ciudad
+Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco duro, que mi conexion a internet ha estado fallando, informarte sobre el estado de las bandas, estaciones, trafico en la ciudad
 ```
