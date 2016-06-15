@@ -51,5 +51,5 @@ python nuupxe.py -m aprstracking
 ```
 
 ```
-Ahora! Porque 
+Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con  
 ```
