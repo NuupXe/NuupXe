@@ -11,7 +11,7 @@ Naci siendo Proyecto Cancun, era una estacion experimental que convertia texto a
 ```
 
 ```
-Aprendi  
+Comenze  
 ```
 
 ```
