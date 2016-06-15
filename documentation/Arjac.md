@@ -51,7 +51,7 @@ python nuupxe.py -m aprstracking
 ```
 
 ```
-Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con el titulo del tema? La era de la Inteligencia Artificial en Repetidores de Radioaficionados. Todos los modulos anteriormente descritos son la base, sstamos en la etapa inicial en el diseño y la creacion de sistemas para Repetidores capaces de resolver problemas cotidianos por sí mismos, utilizando como paradigma la inteligencia humana. Como Radioaficionados muy pronto veremos como cada uno nuestros repetidores empiezan a tomar vida: conversando con nosotros cuando nadie mas esta al aire, llevando control de nuestros agendas, brindandonos estadisticas de uso asi como sugiriendonos actividades que nos motivaran a hacer mas radio, y esto es solo el comienzo...
+Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con el titulo del tema? La era de la Inteligencia Artificial en Repetidores de Radioaficionados. Todos los modulos anteriormente descritos son la base, estamos en la etapa inicial en el diseño y la creacion de sistemas para Repetidores capaces de resolver problemas cotidianos por sí mismos, utilizando como paradigma la inteligencia humana. Como Radioaficionados muy pronto veremos como cada uno nuestros repetidores empiezan a tomar vida: conversando con nosotros cuando nadie mas esta al aire, llevando control de nuestros agendas, brindandonos estadisticas de uso asi como sugiriendonos actividades que nos motivaran a hacer mas radio, y esto es solo el comienzo...
 
 ```
 
