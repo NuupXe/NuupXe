@@ -14,7 +14,9 @@ Naci siendo Proyecto Cancun, era una estacion experimental que convertia texto a
 Actualmente estoy trabajando en 3 estados de la republica mexicana: Guanajuato, Durango y Jalisco. He mostrado cierta estabilidad en mi operacion basica e incrementado algunos conocimientos avanzados.
 ```
 
-
+```
+Mis conocimientos basicos incluyen
+```
 
 ## Modulos Basicos
 
