@@ -45,3 +45,5 @@ Transmite EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arja
 ```
 Mis conocimientos avanzados estan en fase de experimentacion. Estoy aprendiendo a darte informacion de Meteorologia, Sismologia, puedo convertirme en una grabadora digital, mandarte imagenes por SSTV, hacer concursos de codigo morse, regulaciones o conocimientos tecnicos, entre otros. Quieres saber donde esta una estacion usando el sistema a p r s? preguntame! por ejemplo, donde vimos por ultima ocasion a nuestro gran Radio aficionado EksRey Eco Primero Golf Quebec Papa? 
 ```
+
+python nuupxe.py -m aprstracking
