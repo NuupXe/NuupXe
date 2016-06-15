@@ -79,5 +79,5 @@ Podre ser una calculadora, avisarte que me estoy quedando sin espacio en disco d
 ```
 
 ```
-Si estoy en un lugar remoto y quieres que apague o prenda las luces, lo podre hacer!
+Si estoy en un lugar remoto y quieres que apague o prenda las luces, lo podre hacer! 
 ```
