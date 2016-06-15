@@ -71,7 +71,7 @@ Mencionamos tambien la parte de Estadisticas, pero que tienen que ver con la int
 ```
 
 ```
-Hay ocasiones en las que nos quejamos 
+Podre decirte cuantas ocasiones se ha apretado el P T T, conocer de las 24 horas dle dia, cuanto tiempo se ha mentenido ocupado el repetidor, 
 ```
 
 ```
