@@ -30,10 +30,6 @@ python nuupxe.py -m temperature
 Puedo entender que necesitas desde 3 lugares distintos: tu telefono celular, codigos d t m f, y hablandome a traves del microfono de tu radio
 ```
 
-## Modulos Basicos
-
-## Modulos Experimentales
-
 ```sh
 python nuupxe.py -m aprstracker
 ```
