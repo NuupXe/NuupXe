@@ -18,7 +18,7 @@ Cuentanos de tu arquitectura!
 Corria en computadores personales, al dia de hoy he sido portado a tarjetas de desarrollo, desde la famosa rasp berry pai hasta tarjetas con costo de 9 dolares, puedo hablar varios idiomas asi como cambiar mi voz de mujer a hombre
 ```
 
-Como podemos comunicarnos?
+Como podemos comunicarnos contigo?
 
 ```
 Puedo entender tus instrucciones desde 3 lugares distintos: tu telefono celular, codigo d t m f, y por voz hablandome a traves del microfono de tu radio. Puedo contestarte a tu telefono celular o en la frequencia del repetidor.
