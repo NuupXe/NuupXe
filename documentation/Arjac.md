@@ -95,4 +95,3 @@ Gracias NuupXe! Nos quedan un par de minutos, algo mas que quieras agregar?
 ```
 La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! Quiero conocer mas repetidores, llegar a otros paises, hacer la vida mejor de cada radio aficionado y cada radio club. Esperemos vernos en la Convencion Nacional, sera un placer poder platicar contigo.
 ```
-
