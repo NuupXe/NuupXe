@@ -2,8 +2,6 @@
 
 # 2016/06/15
 
-
-
 ```
 Hola, muy buenas noches! Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
 ```
