@@ -8,7 +8,7 @@
 Hola, muy buenas noches! Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
 ```
 
-NuupXe, quiza nadie recuerde tu historia! Por favor, platicanos
+NuupXe, quiza nadie recuerde tu historia! Por favor, danos un resumen de lo que ha sido tu vida
 
 ```
 Naci siendo Proyecto Cancun, era una estacion experimental que convertia texto a voz, despues aprendi a escuchar y decodificar palabras de audio a texto, sentando las bases para convertirme en una primera fase en asistente virtual para cualquier radio aficionado y radio club
