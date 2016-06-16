@@ -51,7 +51,7 @@ Mis conocimientos avanzados estan en fase de experimentacion. Estoy aprendiendo 
 NuupXe, alguno de nuestros radio escuchas se ha de preguntar que tiene que ver lo anterior con el titulo del tema?
 
 ```
-Ahora!  La era de la Inteligencia Artificial en Repetidores de Radioaficionados. Todos los modulos anteriormente descritos son la base, estamos en la etapa inicial en el diseño y la creacion de sistemas para Repetidores capaces de resolver problemas cotidianos por sí mismos, utilizando como paradigma la inteligencia humana.
+Sip, nuestro tema es La era de la Inteligencia Artificial en Repetidores de Radioaficionados. Todos los modulos anteriormente descritos son la base, estamos en la etapa inicial en el diseño y la creacion de sistemas para Repetidores capaces de resolver problemas cotidianos por sí mismos, utilizando como paradigma la inteligencia humana.
 ```
 
 ```
