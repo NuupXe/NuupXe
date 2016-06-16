@@ -79,3 +79,4 @@ Todo lo anterior sera posible gracias a una conversacion casi natural entre tu y
 ```
 La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! Quiero conocer mas repetidores, llegar a otros paises, hacer la vida mejor de cada radio aficionado y cada radio club. Esperemos vernos en la Convencion Nacional, sera un placer poder platicar contigo.
 ```
+
