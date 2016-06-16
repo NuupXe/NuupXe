@@ -12,7 +12,7 @@ Que onda NuupXe, Bienvenido y gracias a ti por tu tiempo! Quiza nadie recuerde t
 Naci siendo Proyecto Cancun, era una estacion experimental que convertia texto a voz, despues aprendi a escuchar y decodificar palabras de audio a texto, sentando las bases para convertirme en una primera fase en asistente virtual para cualquier radio aficionado y radio club
 ```
 
-Cuentanos de tu arquitectura! 
+Cuentanos de tu arquitectura!
 
 ```
 Corria en computadores personales, al dia de hoy he sido portado a tarjetas de desarrollo, desde la famosa rasp berry pai hasta tarjetas con costo de 9 dolares, puedo hablar varios idiomas asi como cambiar mi voz de mujer a hombre
