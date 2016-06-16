@@ -30,6 +30,8 @@ Puedo entender tus instrucciones desde 3 lugares distintos: tu telefono celular,
 Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
 ```
 
+Quien te esta usando?
+
 ```
 Actualmente estoy trabajando en 3 estados de la Republica Mexicana: Guanajuato, Durango y Jalisco. He mostrado cierta estabilidad en mi operacion basica y obtenido algunos conocimientos avanzados.
 ```
