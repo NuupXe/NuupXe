@@ -31,7 +31,7 @@ Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Que
 Quien te esta usando?
 
 ```
-Actualmente estoy trabajando en 3 estados de la Republica Mexicana: Guanajuato, Durango y Jalisco. He mostrado cierta estabilidad en mi operacion basica y obtenido algunos conocimientos avanzados. Otro sincero agradecimiento al Club de Radio Amateur del Estado de Guanajuato y al Radio Club Guadiana.
+Actualmente estoy trabajando en 3 estados de la Republica Mexicana: Guanajuato, Durango y Jalisco. He mostrado cierta estabilidad en mi operacion basica y obtenido algunos conocimientos avanzados. Otro sincero agradecimiento al Club de Radio Amateur del Estado de Guanajuato y al Radio Club Guadiana de Durango.
 ```
 
 Platicanos de tus conocimientos basicos!
