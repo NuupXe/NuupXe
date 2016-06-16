@@ -83,7 +83,7 @@ Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Que
 ```
 
 ```
-Que tal si participo en otro de los proyectos más ambiciosos del Internet de las Cosas? esta tecnología que se ha definido como “ciudades inteligentes“. Muchos sensores capaces de obtener información de las calles y hacer más eficientes algunas acciones. O acaso no somos parte de las calles y podemos contruir en el dia a dia en lugar de ?
+Que tal si participo en otro de los proyectos más ambiciosos del Internet de las Cosas? esta tecnología que se ha definido como “ciudades inteligentes“. Muchos sensores capaces de obtener información de las calles y hacer más eficientes algunas acciones. O acaso no somos parte de las calles y podemos contruir en el dia a dia con nuestra infraestructura ademas de situaciones de emergencia?
 ```
 
 ```
