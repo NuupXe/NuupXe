@@ -42,6 +42,8 @@ Platicanos de tus conocimientos basicos!
 Mis conocimientos basicos incluyen identificarme, decir la hora, la fecha, el clima y la temperatura
 ```
 
+Y los avanzados?
+
 ```
 Mis conocimientos avanzados estan en fase de experimentacion. Estoy aprendiendo a darte informacion de Meteorologia, Sismologia, puedo convertirme en una grabadora digital, mandarte imagenes por SSTV, hacer concursos de codigo morse, regulaciones o conocimientos tecnicos, entre otros. Quieres saber donde esta una estacion usando el sistema a p r s? preguntame!
 ```
