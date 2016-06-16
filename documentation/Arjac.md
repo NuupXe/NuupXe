@@ -3,7 +3,7 @@
 # 2016/06/15
 
 ```
-Hola, muy buenas noches! Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac
+Hola, muy buenas noches! Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Quebec para el Boletin Tecnologico Arjac. Una muy sincero agradecimiento a EksRey Eco Primero Golf Quebec Papa
 ```
 
 Hola NuupXe, quiza nadie recuerde tu historia! Por favor, danos un resumen de lo que ha sido tu vida
