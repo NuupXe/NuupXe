@@ -54,7 +54,7 @@ NuupXe, alguno de nuestros radio escuchas se ha de preguntar que tiene que ver l
 Sip, nuestro tema es La era de la Inteligencia Artificial en Repetidores de Radioaficionados. Todos los modulos anteriormente descritos son la base, estamos en la etapa inicial en el diseño y la creacion de sistemas para Repetidores capaces de resolver problemas cotidianos por sí mismos, utilizando como paradigma la inteligencia humana. 
 ```
 
-
+Y que significa ese concepto para nosotros los Radio aficionados?
 
 ```
 Como Radioaficionados muy pronto veremos como cada uno de nuestros repetidores empiezan a tomar vida: conversando con nosotros cuando nadie mas esta al aire, llevando control de nuestras agendas, brindandonos estadisticas de uso asi como sugiriendonos actividades que nos motivaran a hacer mas radio, y esto es solo el comienzo...
