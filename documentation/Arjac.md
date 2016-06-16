@@ -88,11 +88,11 @@ Transmite Proyecto Nup Si en colaboracion con EksRey Eco Primero Golf Yankee Que
 Que tal si participo en otro de los proyectos más ambiciosos del Internet de las Cosas? esta tecnología que se ha definido como “ciudades inteligentes“. Muchos sensores capaces de obtener información de las calles y hacer más eficientes algunas acciones. O acaso no somos parte de las calles?
 ```
 
-Gracias NuupXe! Nos quedan un par de minutos, algo mas que quieras agregar?
-
 ```
 Todo lo anterior sera posible gracias a una conversacion casi natural entre tu y yo, a la integracion de tecnologias de robots por software con tecnologias de inteligencia artificial. Has escuchado hablar de Siri en el iPhone? Sere Nup si en Repetidores! 
 ```
+
+Gracias NuupXe! Nos quedan un par de minutos, algo mas que quieras agregar?
 
 ```
 La ciencia ficcion se ha vuelto realidad! Mis ganas de aprender seran tus ganas de aportar ideas, el limite sera tu imaginacion! Quiero conocer mas repetidores, llegar a otros paises, hacer la vida mejor de cada radio aficionado y cada radio club. Esperemos vernos en la Convencion Nacional, sera un placer poder platicar contigo.
