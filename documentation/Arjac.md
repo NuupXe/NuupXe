@@ -48,8 +48,10 @@ Y los avanzados?
 Mis conocimientos avanzados estan en fase de experimentacion. Estoy aprendiendo a darte informacion de Meteorologia, Sismologia, puedo convertirme en una grabadora digital, mandarte imagenes por SSTV, hacer concursos de codigo morse, regulaciones o conocimientos tecnicos, entre otros. Quieres saber donde esta una estacion usando el sistema a p r s? preguntame!
 ```
 
+NuupXe, alguno de nuestros radio escuchas se ha de preguntar que tiene que ver lo anterior con el titulo del tema?
+
 ```
-Ahora! Alguno de ustedes se pregunta que tiene que ver lo anterior con el titulo del tema? La era de la Inteligencia Artificial en Repetidores de Radioaficionados. Todos los modulos anteriormente descritos son la base, estamos en la etapa inicial en el diseño y la creacion de sistemas para Repetidores capaces de resolver problemas cotidianos por sí mismos, utilizando como paradigma la inteligencia humana.
+Ahora!  La era de la Inteligencia Artificial en Repetidores de Radioaficionados. Todos los modulos anteriormente descritos son la base, estamos en la etapa inicial en el diseño y la creacion de sistemas para Repetidores capaces de resolver problemas cotidianos por sí mismos, utilizando como paradigma la inteligencia humana.
 ```
 
 ```
