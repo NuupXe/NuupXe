@@ -7,6 +7,7 @@
    * [Source Code](documentation/InstallationSourceCode.md)
    * [Dependencies](documentation/InstallationDependencies.md)
    * [Configuration](documentation/InstallationConfiguration.md)
+   * Scheduling
 * [ServiceManager](documentation/services/ServiceManager.md)
 * [Dependencies](documentation/Dependencies.md)
 * [Credentials](documentation/Credentials.md)
