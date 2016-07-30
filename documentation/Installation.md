@@ -130,7 +130,7 @@ root@stn8148:/home/irlp/custom/nuupxe# sh setup/systemPip.sh
 
 
 ```sh
-repeater@stn8148:~/custom$ cat custom_decode 
+repeater@stn8148:~/custom$ nano custom_decode 
 ...
 
 # NuupXe Project, Module Mode, Production
