@@ -114,7 +114,7 @@ repeater@stn8148:~/custom/nuupxe$
 repeater@stn8148:~/custom/nuupxe$ exit
 logout
 root@stn8148:~# ls /home
-EchoIRLP  irlp	XE1***
+EchoIRLP  irlp	XE1DGC
 root@stn8148:~# cd /home/irlp/custom/nuupxe/
 root@stn8148:/home/irlp/custom/nuupxe# 
 ```
