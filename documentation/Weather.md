@@ -44,7 +44,12 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> import pyowm
 >>> owm = pyowm.OWM('3b6cda5c376c3eae4ec112682177c560')
 >>> forecast = owm.daily_forecast("Guadalajara,Mx")
-
+>>> tomorrow = pyowm.timeutils.tomorrow()
+>>> forecast.will_be_sunny_at(tomorrow)
+False
+>>> print forecast
+<pyowm.webapi25.forecaster.Forecaster>
+>>> 
 ```
 
 # Forecast IO
