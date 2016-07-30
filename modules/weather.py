@@ -107,10 +107,11 @@ class Weather(object):
     def temperature(self):
 
         location = self.conf.get("weather", "location")
-        result = pywapi.get_weather_from_yahoo(location, 'metric')
+        result = pywapi.get_weather_from_noaa(location)
 
-        message = "Temperatura en " + result['location']['city'] + " "
-        self.speaker.speechit(message + result['condition']['temp'] + " grados centigrados")
+        message = "Temperatura en " + self.conf.get("general", "location") + " "
+        message = message + result['temp_c'] + " grados centigrados"
+        self.speaker.speechit(message)
         alive(self.modulename + 'Temperature')
 
 # End of File
