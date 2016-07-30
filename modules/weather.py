@@ -111,7 +111,7 @@ class Weather(object):
         w = observation.get_weather()
         x = observation.get_location()
 
-        message = "Reporte del Clima en " + x.get_name()
+        message = "Reporte del Clima promedio en " + x.get_name()
         message = message + ", Temperatura " + str(w.get_temperature('celsius')['temp']) + " grados centigrados"
         message = message + ", Presion Atmosferica " + str(w.get_pressure()['press']) + " milibares"
         message = message + ", Humedad " + str(w.get_humidity()) + " por ciento"
@@ -138,13 +138,15 @@ class Weather(object):
 
     def temperature(self):
 
+        owm = pyowm.OWM(self.owmkey)
         location = self.conf.get("weather", "location")
-        result = pywapi.get_weather_from_noaa(location)
-        print result
+        observation = owm.weather_at_place(location)
+        w = observation.get_weather()
+        x = observation.get_location()
 
-        #message = "Temperatura promedio en " + self.conf.get("general", "location") + " "
-        #message = message + result['temp_c'] + " grados centigrados"
-        #self.speaker.speechit(message)
-        #alive(self.modulename + 'Temperature')
+        message = "Temperatura promedio en " + x.get_name() + " "
+        message = message + str(w.get_temperature('celsius')['temp']) + " grados centigrados"
+        self.speaker.speechit(message)
+        alive(self.modulename + 'Temperature')
 
 # End of File
