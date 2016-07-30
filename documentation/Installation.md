@@ -1,6 +1,10 @@
 # Installation
 
 ```sh
+xe1gyq@jessie:~/nuupxe$ ssh root@stn8148.ip.irlp.net
+```
+
+```sh
 root@stn8148:~# apt-get update
 Des:1 http://security.debian.org wheezy/updates Release.gpg [1 554 B]
 Des:2 http://security.debian.org wheezy/updates Release [39.0 kB]
@@ -51,10 +55,6 @@ Configurando liberror-perl (0.17-1) ...
 Configurando git-man (1:1.7.10.4-1+wheezy3) ...
 Configurando git (1:1.7.10.4-1+wheezy3) ...
 root@stn8148:~# 
-```
-
-```sh
-xe1gyq@jessie:~/nuupxe$ ssh root@stn8148.ip.irlp.net
 ```
 
 ```sh
