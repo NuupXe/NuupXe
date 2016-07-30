@@ -23,6 +23,14 @@ Successfully installed pyowm-2.3.2
 repeater@nuupxe:~$ 
 ```
 
+```python
+Python 2.7.9 (default, Mar  1 2015, 18:22:53) 
+[GCC 4.9.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import pyowm
+>>> 
+
+```
 
 # Forecast IO
 
