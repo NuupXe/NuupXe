@@ -22,3 +22,9 @@ Last login: Fri Jul 29 21:17:56 2016 from 38.65.136.138
 root@stn8148:~# su - repeater
 repeater@stn8148:~/$ 
 ```
+
+```sh
+root@stn8148:~# su - repeater
+repeater@stn8148:~/$ cd custom/
+```
+
