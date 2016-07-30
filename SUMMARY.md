@@ -3,6 +3,7 @@
 * [Cover](README.md)
 * [Introduction](documentation/Introduction.md)
 * [ServiceManager](documentation/services/ServiceManager.md)
+* Dependencies
 * [Credentials](Credentials.md)
 * [Services](documentation/Services.md)
    * [Telegram](documentation/services/Telegram.md)
@@ -12,5 +13,4 @@
 * Presentations
    * [Arjac](documentation/Arjac.md)
 * Modules
-* Dependencies
 
