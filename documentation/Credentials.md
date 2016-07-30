@@ -2,7 +2,7 @@
 
 # Mashape
 
-1. [Sign Up / Register](https://market.mashape.com/register)
+1. [Sign Up / Register](https://market.mashape.com/register
    - Username
    - Email
    - Password
