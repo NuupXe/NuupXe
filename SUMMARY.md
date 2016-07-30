@@ -4,7 +4,7 @@
 * [Introduction](documentation/Introduction.md)
 * [Installation](documentation/Installation.md)
    * [Setup](documentation/InstallationSetup.md)
-   * Source Code
+   * [Source Code](documentation/InstallationSourceCode.md)
 * [ServiceManager](documentation/services/ServiceManager.md)
 * [Dependencies](documentation/Dependencies.md)
 * [Credentials](documentation/Credentials.md)
