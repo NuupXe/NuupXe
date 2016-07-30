@@ -9,6 +9,8 @@ repeater@stn8148:~/custom/nuupxe/configuration$
 
 ```sh
 repeater@stn8148:~/custom/nuupxe/configuration$ nano general.config
+repeater@stn8148:~/custom/nuupxe/configuration$ nano voicerss.ak
+repeater@stn8148:~/custom/nuupxe/configuration$ nano voicerss.mk
 ```
 
 ```sh
