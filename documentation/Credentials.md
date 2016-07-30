@@ -1,5 +1,9 @@
 # Credentials
 
+# Mashape
+
+
+
 ```sh
 [twitter]
 consumer_key=
