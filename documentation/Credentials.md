@@ -18,6 +18,14 @@
 # VoiceRss
 
 1. [Registration](http://www.voicerss.org/registration.aspx)
+   - First Name: 
+   - Last Name: 
+   - Company Name:
+   - Email: 
+   - Password:
+   - Confirm Password:
+   - Site URL:
+   - Code Protection: 
 
 ```sh
 [twitter]
