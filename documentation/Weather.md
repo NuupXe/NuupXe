@@ -43,7 +43,7 @@ Python 2.7.9 (default, Mar  1 2015, 18:22:53)
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import pyowm
 >>> owm = pyowm.OWM('3b6cda5c376c3eae4ec112682177c560')
->>> 
+>>> forecast = owm.daily_forecast("Guadalajara,Mx")
 
 ```
 
