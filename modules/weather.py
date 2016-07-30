@@ -9,6 +9,11 @@ import string
 import json
 import urllib2
 import pprint
+import pyowm
+import dateutil.parser
+import datetime
+from datetime import datetime
+from pytz import timezone
 
 from core.alive import alive
 from core.aprsfi import AprsFi
@@ -25,10 +30,14 @@ class Weather(object):
         self.aprsfi = AprsFi()
         self.aprsnet = AprsNet()
 
+        self.services = ConfigParser.ConfigParser()
+        self.path = "configuration/services.config"
+        self.services.read(self.path)
+        self.owmkey = self.services.get("openweathermap", "key")
+
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/general.config"
         self.conf.read(self.path)
-
         self.agent = self.conf.get("weather", "agent")
 
         self.speaker = voicesynthetizer
@@ -92,6 +101,28 @@ class Weather(object):
         self.speaker.speechit(message)
         self.message = message
 
+    def owm(self):
+
+        print '[NuupXe] Open Weather Map'
+
+        owm = pyowm.OWM(self.owmkey)
+        location = self.conf.get("weather", "location")   
+        observation = owm.weather_at_place('Guadalajara,MX')
+        w = observation.get_weather()
+        x = observation.get_location()
+
+        message = "Reporte del Clima en " + x.get_name()
+        message = ""
+        message = message + ", Temperatura " + str(w.get_temperature('celsius')['temp']) + " grados centigrados"
+        message = message + ", Presion Atmosferica " + str(w.get_pressure()['press']) + " milibares"
+        message = message + ", Humedad " + str(w.get_humidity()) + " por ciento"
+        message = message + ", Nubosidad " + str(w.get_clouds()) + " por ciento"
+        #print w.get_visibility_distance()
+        #message = message + ", Precipitacion Pluvial " + str(w.get_rain()) + " por ciento"
+        message = message + ", El Sol se oculta a las " + time.strftime("%H:%M", time.localtime(int(w.get_sunset_time('unix'))))
+        self.speaker.speechit(message)
+        self.message = message
+
     def report(self):
 
         if self.agent == "aprsfi":
@@ -100,6 +131,8 @@ class Weather(object):
                 self.yahoo()
         elif self.agent == "noaa":
                 self.noaa()
+        elif self.agent == "owm":
+                self.owm()
 
         self.aprspacket()
         alive(modulename=self.modulename + 'Report', modulemessage=self.message)
@@ -108,10 +141,11 @@ class Weather(object):
 
         location = self.conf.get("weather", "location")
         result = pywapi.get_weather_from_noaa(location)
+        print result
 
-        message = "Temperatura promedio en " + self.conf.get("general", "location") + " "
-        message = message + result['temp_c'] + " grados centigrados"
-        self.speaker.speechit(message)
-        alive(self.modulename + 'Temperature')
+        #message = "Temperatura promedio en " + self.conf.get("general", "location") + " "
+        #message = message + result['temp_c'] + " grados centigrados"
+        #self.speaker.speechit(message)
+        #alive(self.modulename + 'Temperature')
 
 # End of File
