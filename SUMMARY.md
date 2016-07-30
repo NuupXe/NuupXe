@@ -2,6 +2,7 @@
 
 * [Cover](README.md)
 * [Introduction](documentation/Introduction.md)
+* [Installation](documentation/Installation.md)
 * [ServiceManager](documentation/services/ServiceManager.md)
 * [Dependencies](documentation/Dependencies.md)
 * [Credentials](documentation/Credentials.md)
@@ -13,5 +14,4 @@
 * Presentations
    * [Arjac](documentation/Arjac.md)
 * Modules
-* [Installation](documentation/Installation.md)
 
