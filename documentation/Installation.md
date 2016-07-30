@@ -130,12 +130,12 @@ root@stn8148:/home/irlp/custom/nuupxe# sh setup/systemPip.sh
 
 
 ```sh
-repeater@stn8474:~/custom$ cat custom_decode 
+repeater@stn8148:~/custom$ cat custom_decode 
 ...
 
 # NuupXe Project, Module Mode, Production
 if [ "$1" = "P1" ] ; then cd "$CUSTOM"/nuupxe; python nuupxe.py -m weather ; exit 1 ; fi
 
 exit 0 
-repeater@stn8474:~/custom$ 
+repeater@stn8148:~/custom$ 
 ```
