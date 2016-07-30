@@ -33,7 +33,13 @@
    -  Search: VoiceRss
    -  https://market.mashape.com/voicerss/text-to-speech-1
 
+## ENDPOINTS
 
+Convert text to speech via HTTP POST
+> Converts textual content to audio content
+
+URL PARAMETERS
+- key: 
 
 
 ```sh
