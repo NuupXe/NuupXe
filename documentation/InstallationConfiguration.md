@@ -11,9 +11,11 @@ exit 0
 repeater@stn8148:~/custom$ 
 ```
 
+```sh
+repeater@stn8474:~/custom$ nano custom.crons
+#Reporte meteorologico cada 2 horas
+30 0,3,6,9,12,15,18,21 * * * (/home/irlp/scripts/decode P4 &>/dev/null 2>&1)
+repeater@stn8474:~/custom$ 
 ```
-repeater@stn8474:~/custom/nuupxe$ ls configuration/
-aprstt.config  general.config	stations.config     voicerss.ak
-custom_decode  services.config	voicemailer.config  voicerss.mk
-repeater@stn8474:~/custom/nuupxe$ 
-```
+
+
