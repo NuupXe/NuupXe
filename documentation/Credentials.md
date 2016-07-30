@@ -2,6 +2,8 @@
 
 # VoiceRss
 
+> The Voice RSS Text-to-Speech (TTS) API allows conversion of textual content to speech easier than ever. Just connect to our Text-to-Speech (TTS) API with a few lines of code and get verbal representation of a textual content. For converting text to speech you don’t need special hardware to care about intensive use of CPU and memory during conversion operations. [Homepage](http://www.voicerss.org/)
+
 1. [Registration](http://www.voicerss.org/registration.aspx)
    - First Name: 
    - Last Name: 
