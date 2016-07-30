@@ -1,4 +1,5 @@
 # Dependencies
 
 ```sh
-pip install pyowm
+repeater@nuupxe:~$ sudo pip install pyowm
+```
