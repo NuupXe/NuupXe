@@ -30,7 +30,9 @@
    - Register ...
 2. [Personel](http://www.voicerss.org/personel)
 3. Generate New API Key
-   -  
+   - API Key: -------------------
+   - Current Plan: Free
+   - Update
 
 
 ```sh
