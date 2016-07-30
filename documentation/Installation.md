@@ -1,21 +1,6 @@
 # Installation
 
 ```sh
-root@stn8148:~# apt-get update
-Des:1 http://security.debian.org wheezy/updates Release.gpg [1 554 B]
-Des:2 http://security.debian.org wheezy/updates Release [39.0 kB]              
-Des:3 http://security.debian.org wheezy/updates/main Sources [272 kB]
-Des:4 http://security.debian.org wheezy/updates/main i386 Packages [426 kB]    
-Des:5 http://security.debian.org wheezy/updates/main Translation-en [233 kB]   
-Des:6 http://cdn.debian.net wheezy Release.gpg [2 373 B]                       
-Des:7 http://cdn.debian.net wheezy Release [191 kB]                            
-Des:8 http://cdn.debian.net wheezy/main Sources [5 993 kB]                     
-Des:9 http://cdn.debian.net wheezy/main i386 Packages [5 857 kB]               
-Obj http://cdn.debian.net wheezy/main Translation-es                           
-Des:10 http://cdn.debian.net wheezy/main Translation-en [3 846 kB]             
-Descargados 16.9 MB en 1min. 7seg. (249 kB/s)                                  
-Leyendo lista de paquetes... 96%
-
 ```
 
 ```sh
