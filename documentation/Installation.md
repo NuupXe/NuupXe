@@ -125,5 +125,5 @@ root@stn8148:/home/irlp/custom/nuupxe#
 
 ```sh
 root@stn8148:/home/irlp/custom/nuupxe# sh setup/systemAptGet.sh
-
+root@stn8148:/home/irlp/custom/nuupxe# sh setup/systemPip.sh
 ```
