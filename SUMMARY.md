@@ -3,7 +3,7 @@
 * [Cover](README.md)
 * [Introduction](documentation/Introduction.md)
 * [Installation](documentation/Installation.md)
-   * Setup
+   * [Setup](documentation/InstallationSetup.md)
 * [ServiceManager](documentation/services/ServiceManager.md)
 * [Dependencies](documentation/Dependencies.md)
 * [Credentials](documentation/Credentials.md)
