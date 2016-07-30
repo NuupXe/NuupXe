@@ -7,7 +7,7 @@
 
 ## Register
 
-1. Go to [Register](https://developer.forecast.io/register)
+1. [Register](https://developer.forecast.io/register)
 2. 
 
 - [OpenWeatherMap](http://openweathermap.org/current)
