@@ -7,6 +7,7 @@
 * [Services](documentation/Services.md)
    * [Telegram](documentation/services/Telegram.md)
    * [Weather](documentation/Weather.md)
+   * Translation
 * Presentations
    * [Arjac](documentation/Arjac.md)
 * Modules
