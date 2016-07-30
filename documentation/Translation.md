@@ -3,7 +3,7 @@
 > Goslate: Free Google Translate API [GoSlate Pip](https://pypi.python.org/pypi/goslate)
 
 ```sh
-xe1gyq@jessie:~$ sudo pip install goslate
+repeater@nuupxe:~$ sudo pip install goslate
 Collecting goslate
   Downloading goslate-1.5.1.tar.gz
 Requirement already satisfied (use --upgrade to upgrade): futures in /usr/local/lib/python2.7/dist-packages (from goslate)
@@ -13,5 +13,5 @@ Building wheels for collected packages: goslate
 Successfully built goslate
 Installing collected packages: goslate
 Successfully installed goslate-1.5.1
-xe1gyq@jessie:~$ 
+repeater@nuupxe:~$ 
 ```
