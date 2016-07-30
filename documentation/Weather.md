@@ -1,17 +1,5 @@
 # Weather
 
-# Forecast IO
-
-- [Forecast.Io](https://github.com/ZeevG/python-forecast.io)
-- [Forecast Io Developer](https://developer.forecast.io/)
-
-## Register
-
-1. [Register](https://developer.forecast.io/register)
-   1 Email
-   2 Password
-   3 Confirm Password
-
 # OpenWeatherMap
 
 > OpenWeatherMap is an online service that provides a free API for weather data, including current weather data, forecasts, and historical data to the developers of web services and mobile applications. For data sources, it utilizes meteorological broadcast services, raw data from airport weather stations, raw data from radar stations, and raw data from other official weather stations. [OpenWeatherMap](http://openweathermap.org/current)
@@ -31,3 +19,17 @@ Installing collected packages: pyowm
 Successfully installed pyowm-2.3.2
 repeater@nuupxe:~$ 
 ```
+
+
+# Forecast IO
+
+- [Forecast.Io](https://github.com/ZeevG/python-forecast.io)
+- [Forecast Io Developer](https://developer.forecast.io/)
+
+## Register
+
+1. [Register](https://developer.forecast.io/register)
+   1 Email
+   2 Password
+   3 Confirm Password
+
