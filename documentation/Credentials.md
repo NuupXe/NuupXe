@@ -8,6 +8,8 @@
    - Password
    - Create Account
 3. [Mashape Dashboard](https://market.mashape.com/dashboard)
+4. Add New Application. Mashape allows you to consume and monitor APIs in your Application, giving you a one stop shop for monitoring, payments, and management.
+   -  Application Name: NuupXe
 
 ```sh
 [twitter]
