@@ -8,6 +8,7 @@
    * [Telegram](documentation/services/Telegram.md)
    * [Weather](documentation/Weather.md)
    * [Translation](documentation/Translation.md)
+   * Speech Recognition
 * Presentations
    * [Arjac](documentation/Arjac.md)
 * Modules
