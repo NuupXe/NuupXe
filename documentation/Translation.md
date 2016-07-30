@@ -17,3 +17,8 @@ Installing collected packages: goslate
 Successfully installed goslate-1.5.1
 repeater@nuupxe:~$ 
 ```
+
+# py-translate
+
+> A Translation Tool for Humans [py-translate pip](https://pypi.python.org/pypi/py-translate)
+
