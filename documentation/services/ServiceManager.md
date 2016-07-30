@@ -1,5 +1,7 @@
 # ServiceManager
 
+# Links
+
 http://www.tutorialspoint.com/python/python_multithreading.htm
 http://stackoverflow.com/questions/2846653/python-multithreading-for-dummies
 http://code.activestate.com/recipes/577432-simple-event-dispatcher/
@@ -11,9 +13,6 @@ https://newcircle.com/s/post/1743/2015/06/17/tutorial-the-observer-pattern-in-py
 https://www.youtube.com/watch?v=87MNuBgeg34
 http://tradingwithpython.blogspot.mx/2011/12/howto-observer-pattern.html
 http://home.gna.org/py-notify/tutorial.html
-
-## 1
-
 http://www.giantflyingsaucer.com/blog/?p=5117
 https://github.com/jpmeijers/picontroller/blob/master/picontroller.py
 https://github.com/sq6jnx/sr0wx.py/blob/master/pl_google/pl_google.py
