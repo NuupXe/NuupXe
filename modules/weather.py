@@ -106,13 +106,12 @@ class Weather(object):
         print '[NuupXe] Open Weather Map'
 
         owm = pyowm.OWM(self.owmkey)
-        location = self.conf.get("weather", "location")   
-        observation = owm.weather_at_place('Guadalajara,MX')
+        location = self.conf.get("weather", "location")
+        observation = owm.weather_at_place(location)
         w = observation.get_weather()
         x = observation.get_location()
 
         message = "Reporte del Clima en " + x.get_name()
-        message = ""
         message = message + ", Temperatura " + str(w.get_temperature('celsius')['temp']) + " grados centigrados"
         message = message + ", Presion Atmosferica " + str(w.get_pressure()['press']) + " milibares"
         message = message + ", Humedad " + str(w.get_humidity()) + " por ciento"
