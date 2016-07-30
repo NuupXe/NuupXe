@@ -38,8 +38,10 @@
 Convert text to speech via HTTP POST
 > Converts textual content to audio content
 
-URL PARAMETERS
-- key: -------------------
+- URL PARAMETERS
+  - key: -------------------
+- REQUEST HEADERS
+  - X-Mashape-Key: Default Application
 
 
 ```sh
