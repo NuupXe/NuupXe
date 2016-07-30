@@ -1,20 +1,5 @@
 # Credentials
 
-# Mashape
-
-1. [Sign Up / Register](https://market.mashape.com/register
-   - Username
-   - Email
-   - Password
-   - Create Account
-3. [Mashape Dashboard](https://market.mashape.com/dashboard)
-4. Add New Application. Mashape allows you to consume and monitor APIs in your Application, giving you a one stop shop for monitoring, payments, and management.
-   -  Application Name: NuupXe
-5. Add Another API: Explore Market Place
-   -  Search: VoiceRss
-   -  https://market.mashape.com/voicerss/text-to-speech-1
-
-
 # VoiceRss
 
 1. [Registration](http://www.voicerss.org/registration.aspx)
@@ -33,6 +18,22 @@
    - API Key: -------------------
    - Current Plan: Free
    - Update
+
+# Mashape
+
+1. [Sign Up / Register](https://market.mashape.com/register
+   - Username
+   - Email
+   - Password
+   - Create Account
+3. [Mashape Dashboard](https://market.mashape.com/dashboard)
+4. Add New Application. Mashape allows you to consume and monitor APIs in your Application, giving you a one stop shop for monitoring, payments, and management.
+   -  Application Name: NuupXe
+5. Add Another API: Explore Market Place
+   -  Search: VoiceRss
+   -  https://market.mashape.com/voicerss/text-to-speech-1
+
+
 
 
 ```sh
