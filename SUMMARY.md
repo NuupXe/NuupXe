@@ -13,4 +13,5 @@
 * Presentations
    * [Arjac](documentation/Arjac.md)
 * Modules
+* Installation
 
