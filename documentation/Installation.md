@@ -90,3 +90,12 @@ Resolving deltas: 100% (2709/2709), done.
 repeater@stn8148:~/custom$ 
 ```
 
+```sh
+repeater@stn8148:~/custom$ cd nuupxe/
+repeater@stn8148:~/custom/nuupxe$ ls
+configuration  __init__.py  modules	nuupxe.sh  serviceManager.py  TODO
+core	       learning     morsefiles	output	   setup
+documentation  LICENSE	    nuupxe.py	README.md  SUMMARY.md
+repeater@stn8148:~/custom/nuupxe$ 
+```
+
