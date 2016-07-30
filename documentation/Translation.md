@@ -22,3 +22,13 @@ repeater@nuupxe:~$
 
 > A Translation Tool for Humans [py-translate pip](https://pypi.python.org/pypi/py-translate)
 
+``sh
+repeater@nuupxe:~$ sudo pip install py-translate
+[sudo] password for xe1gyq: 
+Collecting py-translate
+  Downloading py_translate-1.0.3-py2.py3-none-any.whl (61kB)
+    100% |████████████████████████████████| 61kB 409kB/s 
+Installing collected packages: py-translate
+Successfully installed py-translate-1.0.3
+repeater@nuupxe:~$  
+```
