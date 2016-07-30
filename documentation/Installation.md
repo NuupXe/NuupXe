@@ -99,3 +99,14 @@ documentation  LICENSE	    nuupxe.py	README.md  SUMMARY.md
 repeater@stn8148:~/custom/nuupxe$ 
 ```
 
+```sh
+repeater@stn8148:~/custom/nuupxe$ python nuupxe.py -m identification
+Traceback (most recent call last):
+  File "nuupxe.py", line 9, in <module>
+    from serviceManager import ServiceManager
+  File "/home/irlp/custom/nuupxe/serviceManager.py", line 12, in <module>
+    from apscheduler.scheduler import Scheduler
+ImportError: No module named apscheduler.scheduler
+repeater@stn8148:~/custom/nuupxe$ 
+```
+
