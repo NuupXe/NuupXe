@@ -143,6 +143,6 @@ repeater@stn8148:~/custom$
 ```sh
 repeater@stn8474:~/custom$ nano custom.crons
 #Reporte meteorologico cada 2 horas
-40 0,2,4,6,8,10,12,14,16,18,20,22 * * * (/home/irlp/scripts/decode P4 &>/dev/null 2>&1)
+40 0,3,6,9,12,15,18,21 * * * (/home/irlp/scripts/decode P4 &>/dev/null 2>&1)
 repeater@stn8474:~/custom$ 
 ```
