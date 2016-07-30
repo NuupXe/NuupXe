@@ -52,6 +52,20 @@ False
 >>> 
 ```
 
+```python
+>>> observation = owm.weather_at_place('Guadalajara,Mx')
+>>> w = observation.get_weather()
+>>> print(w)
+<pyowm.webapi25.weather.Weather - reference time=2016-07-30 17:49:00+00, status=Clouds>
+>>> w.get_wind()
+{u'speed': 2.6, u'deg': 30}
+>>> w.get_humidity()
+60
+>>> w.get_temperature('celsius')
+{'temp_max': 23.0, 'temp_kf': None, 'temp': 23.0, 'temp_min': 23.0}
+>>> 
+```
+
 # Forecast IO
 
 - [Forecast.Io](https://github.com/ZeevG/python-forecast.io)
