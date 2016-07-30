@@ -6,7 +6,8 @@
 
 1. [Sign Up](https://home.openweathermap.org/users/sign_up)
 2. 
-3. How and where will you use our API? Hi! We are doing some housekeeping around thousands of our customers. Your impact will be much appreciated. All you need to do is to choose in which exact area you use our services.
+3. How and where will you use our API? 
+   >  Hi! We are doing some housekeeping around thousands of our customers. Your impact will be much appreciated. All you need to do is to choose in which exact area you use our services.
    - Company: NuupXe
    - Purpose: Other
    - Your Answer: HAM Radio
