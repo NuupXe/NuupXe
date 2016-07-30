@@ -14,8 +14,10 @@
    - Company: NuupXe
    - Purpose: Other
    - Your Answer: HAM Radio
-4. NEW! Find your API keys in the special sheet [API keys](NEW! Find your API keys in the special sheet API keys)
-   -  
+4. NEW! Find your API keys in the special sheet [API keys](https://home.openweathermap.org/api_keys)
+   -  Key: 3b6cda5c376c3eae4ec112682177c560
+   -  Name: Default
+
 # PyOWM
 
 > PyOWM - A Python wrapper around the OpenWeatherMap Web API [Pip Page](https://github.com/csparpa/pyowm)
