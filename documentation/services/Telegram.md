@@ -1,8 +1,8 @@
 # Telegram
 
-```
-    nohup python nuupxe.py &
-    http://ridingpython.blogspot.mx/2011/08/turning-your-python-script-into-linux.html
+```sh
+nohup python nuupxe.py &
+http://ridingpython.blogspot.mx/2011/08/turning-your-python-script-into-linux.html
 ```
 
 # Links
