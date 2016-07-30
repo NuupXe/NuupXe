@@ -15,9 +15,9 @@
    -  https://market.mashape.com/voicerss/text-to-speech-1
 
 
-# Mashape
+# VoiceRss
 
-Please get API key at http://www.voicerss.org/registration.aspx
+1. [Registration](http://www.voicerss.org/registration.aspx)
 
 ```sh
 [twitter]
