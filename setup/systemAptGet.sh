@@ -67,14 +67,14 @@ aptgetFunctionUpdate
 
 aptgetFunctionInstall $packageGit
 
-aptgetFunctionInstall $packageKernelPackage
-aptgetFunctionInstall $packageLibNCurses5
-aptgetFunctionInstall $packageLibNCursesDev
+#aptgetFunctionInstall $packageKernelPackage
+#aptgetFunctionInstall $packageLibNCurses5
+#aptgetFunctionInstall $packageLibNCursesDev
 
-aptgetFunctionInstall $packageAx25Tools
-aptgetFunctionInstall $packageAx25Xtools
-aptgetFunctionInstall $packageAx25Apps
-aptgetFunctionInstall $packageLibAx25Dev
+#aptgetFunctionInstall $packageAx25Tools
+#aptgetFunctionInstall $packageAx25Xtools
+#aptgetFunctionInstall $packageAx25Apps
+#aptgetFunctionInstall $packageLibAx25Dev
 
 aptgetFunctionInstall $packageFestival
 aptgetFunctionInstall $packagePyPi
