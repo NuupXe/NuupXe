@@ -6,6 +6,7 @@
    * [Setup](documentation/InstallationSetup.md)
    * [Source Code](documentation/InstallationSourceCode.md)
    * [Dependencies](documentation/InstallationDependencies.md)
+   * Configuration
 * [ServiceManager](documentation/services/ServiceManager.md)
 * [Dependencies](documentation/Dependencies.md)
 * [Credentials](documentation/Credentials.md)
