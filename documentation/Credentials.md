@@ -17,7 +17,7 @@
 3. Generate New API Key
    - API Key: -------------------
    - Current Plan: Free
-   - Update
+   - Update ...
 
 # Mashape
 
@@ -42,9 +42,7 @@ Convert text to speech via HTTP POST
   - key: -------------------
 2. REQUEST HEADERS
   - X-Mashape-Key: Default Application
-3. TEST ENDPOINT
-
-
+3. TEST ENDPOINT ...
 
 ```sh
 [twitter]
