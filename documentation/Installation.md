@@ -39,6 +39,9 @@ Des:10 http://cdn.debian.net wheezy/main Translation-en [3 846 kB]
 Descargados 16.9 MB en 1min. 7seg. (249 kB/s)      
 Leyendo lista de paquetes... Hecho
 root@stn8148:~# 
+```
+
+```sh
 root@stn8148:~# apt-get install git
 Leyendo lista de paquetes... Hecho
 Creando árbol de dependencias       
