@@ -7,7 +7,7 @@
    - Email
    - Password
    - Create Account
-3. How and where will you use our API? 
+3. [Mashape Dashboard](https://market.mashape.com/dashboard)
 
 ```sh
 [twitter]
