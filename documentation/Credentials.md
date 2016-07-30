@@ -26,7 +26,8 @@
    - Confirm Password:
    - Site URL:
    - Code Protection: 
-   - Discount Coupon:
+   - Discount Coupon: 
+   - Register ...
 
 ```sh
 [twitter]
