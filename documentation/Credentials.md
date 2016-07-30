@@ -12,6 +12,7 @@
    -  Application Name: NuupXe
 5. Add Another API: Explore Market Place
    -  Search: VoiceRss
+   -  https://market.mashape.com/voicerss/text-to-speech-1
 6. 
 
 ```sh
