@@ -4,7 +4,7 @@
 * [Introduction](documentation/Introduction.md)
 * [ServiceManager](documentation/services/ServiceManager.md)
 * [Dependencies](documentation/Dependencies.md)
-* [Credentials](Credentials.md)
+* [Credentials](documentation/Credentials.md)
 * [Services](documentation/Services.md)
    * [Weather](documentation/Weather.md)
    * [Telegram](documentation/services/Telegram.md)
