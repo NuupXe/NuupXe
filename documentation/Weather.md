@@ -43,7 +43,7 @@ Python 2.7.9 (default, Mar  1 2015, 18:22:53)
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import pyowm
 >>> owm = pyowm.OWM('3b6cda5c376c3eae4ec112682177c560')
->>> forecast = owm.daily_forecast("Guadalajara,Mx")
+>>> forecast = owm.daily_forecast("Guadalajara,MX")
 >>> tomorrow = pyowm.timeutils.tomorrow()
 >>> forecast.will_be_sunny_at(tomorrow)
 False
@@ -53,7 +53,7 @@ False
 ```
 
 ```python
->>> observation = owm.weather_at_place('Guadalajara,Mx')
+>>> observation = owm.weather_at_place('Guadalajara,MX')
 >>> w = observation.get_weather()
 >>> print(w)
 <pyowm.webapi25.weather.Weather - reference time=2016-07-30 17:49:00+00, status=Clouds>
