@@ -3,7 +3,7 @@
 ```sh
 repeater@stn8148:~/custom/nuupxe/$ cd configuration
 repeater@stn8148:~/custom/nuupxe/configuration$ ls
-aprstt.config  custom_decode  general.config  stations.config
+aprstt.config  custom_decode  stations.config
 repeater@stn8148:~/custom/nuupxe/configuration$ 
 ```
 
