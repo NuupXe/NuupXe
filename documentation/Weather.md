@@ -8,6 +8,8 @@
 ## Register
 
 1. [Register](https://developer.forecast.io/register)
-2. 
+   1.1 Email
+   1.2 Password
+   1.3 Confirm Password
 
 - [OpenWeatherMap](http://openweathermap.org/current)
