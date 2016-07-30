@@ -4,7 +4,8 @@
 
 > OpenWeatherMap is an online service that provides a free API for weather data, including current weather data, forecasts, and historical data to the developers of web services and mobile applications. For data sources, it utilizes meteorological broadcast services, raw data from airport weather stations, raw data from radar stations, and raw data from other official weather stations. [OpenWeatherMap](http://openweathermap.org/current)
 
-1. [](https://home.openweathermap.org/users/sign_in)
+1. [Sign Up](https://home.openweathermap.org/users/sign_up)
+2. 
 
 # PyOWM
 
