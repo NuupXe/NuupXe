@@ -84,7 +84,7 @@ class Weather(object):
         print '[NuupXe] Weather NOAA'
 
         location = self.conf.get("weather", "location")
-        result = pywapi.get_weather_from_noaa('MMGL')
+        result = pywapi.get_weather_from_noaa(location)
 
         message = "Reporte del Clima"
         message = message + ", Temperatura " + result['temp_c'] + " grados centigrados"
