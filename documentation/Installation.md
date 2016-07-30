@@ -139,3 +139,9 @@ if [ "$1" = "P1" ] ; then cd "$CUSTOM"/nuupxe; python nuupxe.py -m weather ; exi
 exit 0 
 repeater@stn8148:~/custom$ 
 ```
+
+```sh
+repeater@stn8474:~/custom$ nano custom.crons
+#Reporte meteorologico cada 2 horas
+40 0,2,4,6,8,10,12,14,16,18,20,22 * * * (/home/irlp/scripts/decode P4 &>/dev/null 2>&1)
+```
