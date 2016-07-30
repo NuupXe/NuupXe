@@ -3,10 +3,10 @@
 # Mashape
 
 1. [Sign Up / Register](https://market.mashape.com/register)
-2. 
    - Username
    - Email
    - Password
+   - Create Account
 3. How and where will you use our API? 
 
 ```sh
