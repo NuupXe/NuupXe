@@ -1,5 +1,12 @@
 # Telegram
 
+```
+    nohup python nuupxe.py &
+    http://ridingpython.blogspot.mx/2011/08/turning-your-python-script-into-linux.html
+```
+
+# Links
+
 - https://github.com/eternnoir/pyTelegramBotAPI
 - http://www.akirasan.net/crear-bots-para-telegram-mediante-python/
 - https://geekytheory.com/telegram-programando-un-bot-en-python/
@@ -8,8 +15,3 @@
 - http://awesome-python.com/
 - https://learn.adafruit.com/raspberry-pi-hosting-node-red/managing-node-red
 - https://impythonist.wordpress.com/2015/12/06/building-a-virtual-personal-assistant-with-telegram-app-and-telepot/
-
-```
-    nohup python nuupxe.py &
-    http://ridingpython.blogspot.mx/2011/08/turning-your-python-script-into-linux.html
-```
