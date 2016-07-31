@@ -5,6 +5,7 @@ import logging
 
 from core.alive import alive
 from core.voicerecognition import VoiceRecognition
+from core.wolfram import Wolfram
 from core.xspeechrecognition import xSpeechRecognition
 
 class WolframAlpha(object):
