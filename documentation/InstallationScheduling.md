@@ -9,7 +9,8 @@ repeater@stn8148:~/custom$ nano custom_decode
 ...
 
 # NuupXe Project, Module Mode, Production
-if [ "$1" = "P1" ] ; then cd "$CUSTOM"/nuupxe; python nuupxe.py -m weather ; exit 1 ; fi
+if [ "$1" = "P1" ] ; then cd "$CUSTOM"/nuupxe; python nuupxe.py -m identification ; exit 1 ; fi
+if [ "$1" = "P2" ] ; then cd "$CUSTOM"/nuupxe; python nuupxe.py -m weather ; exit 1 ; fi
 
 # NuupXe  Project, Module Mode, Experimental
 if [[ "$1" == PS* ]] ; then cd "$CUSTOM"/nuupxe; python nuupxe.py -d $1 ; exit 1 ; fi
