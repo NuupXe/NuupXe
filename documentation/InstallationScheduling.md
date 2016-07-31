@@ -24,8 +24,10 @@ repeater@stn8148:~/custom$ nano custom.crons
 ```sh
 ...
 ...
-#Reporte meteorologico cada 3 horas
-30 0,3,6,9,12,15,18,21 * * * (/home/irlp/scripts/decode P4 &>/dev/null 2>&1)
-repeater@stn8148:~/custom$ 
+# Identificacion
+05 0,3,6,9,12,15,18,21 * * * (/home/irlp/scripts/decode P1 &>/dev/null 2>&1)
+
+# Reporte meteorologico cada 3 horas
+30 0,3,6,9,12,15,18,21 * * * (/home/irlp/scripts/decode P2 &>/dev/null 2>&1)
 ```
 
