@@ -1,38 +1,45 @@
-#!/usr/bin/python
-# Download today's picture from bing.com
-# usage:
-# ./bing.py path/to/save/image/to
-# C. Ladroue
-
 import urllib2
-from urllib import urlopen
-from datetime import date
-import re
-import sys
-
-def download(url,filename):
-	""" download the binary file at url """
-	instream=urlopen(url)
-	outfile=open(filename,'wb')
-	for chunk in instream:
-		outfile.write(chunk)
-	instream.close()
-	outfile.close()
-
-if __name__=="__main__":
-	try:
-		dest=sys.argv[1]
-	except Exception, err:
-		dest='.'
-	doc=urllib2.urlopen('http://www.bing.com')
-	content=doc.read()
-
-	result=re.search(r"g_img={url:'([^']*)",content)
-	if result is None:
-		print "Didn't find the image url"
-	else:
-		result=result.groups(0)[0]
-		result=result.replace('\\','')
-		filename=dest+'/output/bing.jpg'
-		download('http://www.bing.com'+result,filename)
-
+import json
+import datetime
+import os.path, time
+from os.path import expanduser
+ 
+#market options: en-US, zh-CN, ja-JP, en-AU, en-UK, de-DE, en-NZ
+market = 'en-US'
+resolution = '1920x1080'
+BingDirectory= 'output/'
+WallpaperName = 'bing.jpg'
+ 
+loop_value = 1
+while (loop_value == 1):
+    try:
+        urllib2.urlopen("http://google.com")
+    except urllib2.URLError, e:
+        time.sleep( 10 )
+    else:
+        loop_value = 0
+ 
+        response = urllib2.urlopen("http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=" + market)
+        obj = json.load(response)
+        url = (obj['images'][0]['urlbase'])
+        url = 'http://www.bing.com' + url + '_' + resolution + '.jpg'
+ 
+        if not os.path.exists(BingDirectory): 
+            os.makedirs(BingDirectory)
+        path = BingDirectory + WallpaperName
+ 
+        if os.path.exists(path):
+            todayDate = datetime.datetime.now().strftime("%m/%d/%Y")
+            fileDate = time.strftime('%m/%d/%Y', time.gmtime(os.path.getmtime(path)))
+            if todayDate == fileDate:
+                print "You already have today's Bing image"
+            else:
+                print ("Downloading Bing wallpaper to %s" % (path))
+                f = open(path, 'w')
+                bingpic = urllib2.urlopen(url)
+                f.write(bingpic.read())
+        else:
+            print ("Downloading Bing wallpaper to %s" % (path))
+            f = open(path, 'w')
+            bingpic = urllib2.urlopen(url)
+            f.write(bingpic.read())

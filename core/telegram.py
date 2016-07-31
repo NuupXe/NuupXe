@@ -17,6 +17,7 @@ commandsbot = {
               'anuncio': 'Enviar anuncio para reproducir en el repetidor',
               'noanuncio': 'Cancelar la reproduccion del anuncio en el repetidor',
               'modulo': 'Ejecutar modulo especifico',
+              'dtmf': 'Enviar codigo DTMF especifico',
               'sonido': 'Ultimo mensaje que se envio a traves del repetidor',
               'sstv': 'Ultima fotografia que se decodifico por SSTV',
               'estado': 'Estado del sistema'
@@ -152,6 +153,24 @@ def process_module(m):
                                   '*', parse_mode="Markdown")
         repeater = 'python nuupxe.py -m \"' + module + '\"'
         status, output = commands.getstatusoutput(repeater)
+    except Exception as e:
+        bot.reply_to(m, 'Algo no esta funcionando!')
+
+@bot.message_handler(commands=["dtmf"])
+def command_dtmf(m):
+    msg = bot.reply_to(m, "Que codigo DTMF quieres enviar?")
+    bot.register_next_step_handler(msg, process_dtmf)
+
+def process_dtmf(m):
+    try:
+        chat_id = m.chat.id
+        dtmf = m.text.upper()
+        bot.send_message(chat_id, 'Listo! Enviaremos *' + dtmf + \
+                                  '*', parse_mode="Markdown")
+        repeater = 'python nuupxe.py -d \"' + dtmf + '\"'
+        print repeater
+        status, output = commands.getstatusoutput(repeater)
+        print status, output
     except Exception as e:
         bot.reply_to(m, 'Algo no esta funcionando!')
 
