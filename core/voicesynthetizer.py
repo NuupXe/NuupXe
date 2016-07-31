@@ -48,11 +48,11 @@ class VoiceSynthetizer(logging.Handler):
         elif self.synthetizer == "google":
             self.arguments = self.languageargument
 
-    def speechit(self, text):
+    def speechit(self, text, language="spanish"):
         logging.info(text)
 
         self.pushtotalk = PushToTalk()
-        self.setlanguage(self.language)
+        self.setlanguage(language)
         self.setarguments()
 
         if self.synthetizer == "festival":

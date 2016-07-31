@@ -5,7 +5,7 @@ import logging
 
 from core.alive import alive
 from core.voicerecognition import VoiceRecognition
-from core.wolfram import Wolfram
+from core.xspeechrecognition import xSpeechRecognition
 
 class WolframAlpha(object):
 
@@ -15,6 +15,7 @@ class WolframAlpha(object):
         self.voicesynthetizer = voicesynthetizer
         self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
         self.wolfram = Wolfram()
+        self.idSpeechRecognition = xSpeechRecognition()
 
     def __del__(self):
 
@@ -36,20 +37,20 @@ class WolframAlpha(object):
 
         logging.info('Wolfram Alpha Ask')
         self.setup()
-        self.voicesynthetizer.speechit('Yes! What is your question for Wolfram Alpha?')
+        self.voicesynthetizer.speechit('Yes! What is your question for Wolfram Alpha?', 'english')
         self.voicerecognition.record()
         question = self.voicerecognition.recognize('False')
         questionmessage = 'Question? ' + question
         logging.info(questionmessage)
-        self.voicesynthetizer.speechit(question)
+        self.voicesynthetizer.speechit(question, 'english')
         answer = self.wolfram.question(question)
         if answer != None:
-            self.voicesynthetizer.speechit(answer)
+            self.voicesynthetizer.speechit(answer, 'english')
             answermessage = 'Answer? ' + answer
             logging.info(answermessage)
         else:
             answermessage = 'Answer? Sorry! Something went wrong!'
-            self.voicesynthetizer.speechit(answermessage)
+            self.voicesynthetizer.speechit(answermessage, 'english')
         self.cleanup()
 
         alive(modulename=self.modulename, modulemessage=questionmessage + ' ' + answermessage )
