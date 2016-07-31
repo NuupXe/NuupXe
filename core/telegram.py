@@ -2,25 +2,28 @@
 
 import ConfigParser
 import commands
+import json
 import telebot
 from telebot import types
 import time
 import unicodedata
 
 from apscheduler.scheduler import Scheduler
+from collections import OrderedDict
 
 knownUsers = []
 userStep = {}
 
 commandsbot = {
+              'acerca': 'Acerca de NuupXe Bot',
               'ayuda': 'Informacion de comandos disponibles',
               'anuncio': 'Enviar anuncio para reproducir en el repetidor',
-              'noanuncio': 'Cancelar la reproduccion del anuncio en el repetidor',
-              'modulo': 'Ejecutar modulo especifico',
               'dtmf': 'Enviar codigo DTMF especifico',
+              'estado': 'Estado de NuupXe Bot',
+              'modulo': 'Ejecutar modulo especifico',
+              'noanuncio': 'Cancelar la reproduccion del anuncio en el repetidor',
               'sonido': 'Ultimo mensaje que se envio a traves del repetidor',
               'sstv': 'Ultima fotografia que se decodifico por SSTV',
-              'estado': 'Estado del sistema'
 }
 
 user_dict = {}
@@ -48,6 +51,11 @@ token = configuration.get('telegram','token')
 bot = telebot.TeleBot(token)
 bot.set_update_listener(listener)
 
+
+responses = None
+with open('configuration/messages.json') as f:
+    responses = json.load(f, object_pairs_hook=OrderedDict)
+
 sched = Scheduler()
 
 callsign = None
@@ -61,6 +69,12 @@ def job_function():
     status, output = commands.getstatusoutput(repeater)
     repeater = 'python nuupxe.py -v \"' + announcement + '\"'
     status, output = commands.getstatusoutput(repeater)
+
+# Handles all sent documents and audio files
+@bot.message_handler(content_types=['document', 'audio'])
+def handle_docs_audio(message):
+    print 'audio file'
+    pass
 
 @bot.message_handler(commands=['ayuda'])
 def command_help(m):
@@ -189,12 +203,31 @@ def command_sound(m):
 @bot.message_handler(commands=['sstv'])
 def command_sstv(m):
     cid = m.chat.id
+
+    markup = types.InlineKeyboardMarkup()
+    b1 = types.InlineKeyboardButton("Channel", url="https://telegram.me/league_of_legends_channel")
+    b2 = types.InlineKeyboardButton("Developer", url="https://telegram.me/edurolp")
+    b3 = types.InlineKeyboardButton("GitHub", url="https://github.com/i32ropie/lol")
+    markup.add(b1, b2, b3)
+    b4 = types.InlineKeyboardButton("PayPal", url="https://paypal.me/edurolp")
+    markup.add(b4)
+
     bot.send_photo(cid, open('output/bing.jpg', 'rb'),
                    reply_markup=hideBoard)
 
+@bot.message_handler(func=lambda m: m.content_type ==
+                     'text' and m.text in ['ESTADO', 'Estado', 'estado'])
 @bot.message_handler(commands=["estado"])
 def command_status(m):
-    bot.reply_to(m, "Estoy vivo!")
+    global responses
+    bot.reply_to(m, responses['info'])
+
+@bot.message_handler(func=lambda m: m.content_type ==
+                     'text' and m.text in ['ACERCA', 'Acerca', 'acerca'])
+@bot.message_handler(commands=["acerca"])
+def command_status(m):
+    global responses
+    bot.reply_to(m, responses['acerca'])
 
 #@bot.message_handler(func=lambda message: True, content_types=['text'])
 #def command_default(m):
