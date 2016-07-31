@@ -36,6 +36,8 @@ export packageTelepot=telepot
 export packagePyTelegramBotApi=pyTelegramBotAPI
 export packageTendo=tendo
 export packageWit=wit
+export packagePyowm=pyowm
+export packageDateutil=python-dateutil
 
 # =============================================================================
 # Script Functions
@@ -80,5 +82,7 @@ pipFunctionInstall $packageTelepot
 pipFunctionInstall $packagePyTelegramBotApi
 pipFunctionInstall $packageTendo
 pipFunctionInstall $packageWit
+pipFunctionInstall $packagePyowm
+pipFunctionInstall $packageDateutil
 
 # End of file

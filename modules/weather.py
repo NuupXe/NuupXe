@@ -144,7 +144,8 @@ class Weather(object):
         w = observation.get_weather()
         x = observation.get_location()
 
-        message = "Temperatura promedio en " + x.get_name() + " "
+        city = self.conf.get("general", "location")
+        message = "Temperatura promedio en " + city + " "
         message = message + str(w.get_temperature('celsius')['temp']) + " grados centigrados"
         self.speaker.speechit(message)
         alive(self.modulename + 'Temperature')
