@@ -125,6 +125,8 @@ def process_message_recurrence(m):
             pass
         callsign = user.callsign
         announcement = user.announcement
+        bot.send_chat_action(chat_id, 'typing')
+        time.sleep(2)
         bot.send_message(chat_id, 'Gracias *' + user.callsign + \
                                   '*!\nRecurrence: ' + user.recurrence + \
                                   '\nAnuncio: _' + user.announcement + '_', \
@@ -149,6 +151,8 @@ def process_module(m):
     try:
         chat_id = m.chat.id
         module = m.text.lower()
+        bot.send_chat_action(chat_id, 'typing')
+        time.sleep(2)
         bot.send_message(chat_id, 'Listo! Ejecutaremos *' + module + \
                                   '*', parse_mode="Markdown")
         repeater = 'python nuupxe.py -m \"' + module + '\"'
@@ -165,6 +169,8 @@ def process_dtmf(m):
     try:
         chat_id = m.chat.id
         dtmf = m.text.upper()
+        bot.send_chat_action(chat_id, 'typing')
+        time.sleep(2)
         bot.send_message(chat_id, 'Listo! Enviaremos *' + dtmf + \
                                   '*', parse_mode="Markdown")
         repeater = 'python nuupxe.py -d \"' + dtmf + '\"'
@@ -192,6 +198,6 @@ def command_status(m):
 
 #@bot.message_handler(func=lambda message: True, content_types=['text'])
 #def command_default(m):
-#    bot.send_message(m.chat.id, "Hola! No creo conocer tu comando \"" + m.text + "\"\nQue tal si pides ayuda con /help")
+#    bot.send_message(m.chat.id, "Hola! No creo conocer tu comando \"" + m.text + "\"\nQue tal si pides ayuda con /ayuda")
 
 bot.polling()
