@@ -1,5 +1,6 @@
 # Modules
 
+# colorclass
 
 ```sh
 xe1gyq@jessie:~/nuupxe$ sudo pip install colorclass
