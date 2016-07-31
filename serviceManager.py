@@ -119,6 +119,12 @@ class ServiceManager(object):
         if self.scheduler_status:
             self.scheduler.shutdown()
 
+    def bing_mode(self):
+
+        logging.info('Mode Bing')
+        self.sstv = SSTV(self.voicesynthetizer)
+        self.sstv.download()
+
     def observer_mode(self):
 
         logging.info('Mode Observer')
@@ -163,7 +169,7 @@ class ServiceManager(object):
 
     def writing_mode(self):
 
-        logging.info('Mode')
+        logging.info('Mode Writing')
         # self.voicesynthetizer.speechit("Modo Escritura")
 
         while True:

@@ -18,10 +18,11 @@ commandsbot = {
               'acerca': 'Acerca de NuupXe Bot',
               'ayuda': 'Informacion de comandos disponibles',
               'anuncio': 'Enviar anuncio para reproducir en el repetidor',
-              'dtmf': 'Enviar codigo DTMF especifico',
-              'estado': 'Estado de NuupXe Bot',
-              'modulo': 'Ejecutar modulo especifico',
+              'bing': 'Obtener fotografia del dia gracias a @Bing',
               'noanuncio': 'Cancelar la reproduccion del anuncio en el repetidor',
+              'dtmf': 'Enviar codigo DTMF',
+              'estado': 'Estado de NuupXe Bot',
+              'modulo': 'Ejecutar modulo',
               'sonido': 'Ultimo mensaje que se envio a traves del repetidor',
               'sstv': 'Ultima fotografia que se decodifico por SSTV',
 }
@@ -212,6 +213,16 @@ def command_sstv(m):
     b4 = types.InlineKeyboardButton("PayPal", url="https://paypal.me/edurolp")
     markup.add(b4)
 
+    bot.send_photo(cid, open('output/bing.jpg', 'rb'),
+                   reply_markup=hideBoard)
+
+@bot.message_handler(func=lambda m: m.content_type ==
+                     'text' and m.text in ['BING', 'Bing', 'bing'])
+@bot.message_handler(commands=['bing'])
+def command_bing(m):
+    cid = m.chat.id
+    repeater = 'python nuupxe.py -b \"bing\"'
+    status, output = commands.getstatusoutput(repeater)
     bot.send_photo(cid, open('output/bing.jpg', 'rb'),
                    reply_markup=hideBoard)
 
