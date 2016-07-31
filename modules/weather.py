@@ -111,7 +111,8 @@ class Weather(object):
         w = observation.get_weather()
         x = observation.get_location()
 
-        message = "Reporte del Clima promedio en " + x.get_name()
+        city = self.conf.get("general", "location")
+        message = "Reporte del Clima promedio en " + city
         message = message + ", Temperatura " + str(w.get_temperature('celsius')['temp']) + " grados centigrados"
         message = message + ", Presion Atmosferica " + str(w.get_pressure()['press']) + " milibares"
         message = message + ", Humedad " + str(w.get_humidity()) + " por ciento"
