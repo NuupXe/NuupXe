@@ -45,6 +45,7 @@ export packageLibSsl="libssl-dev"
 export packageFlac="flac"
 export packagePythonPyAudio="python-pyaudio"
 export packageLibSoxDev="libsox-dev"
+export packageImageMagick="imagemagick"
 
 # =============================================================================
 # Script Functions
@@ -98,5 +99,6 @@ aptgetFunctionInstall $packageLibSsl
 aptgetFunctionInstall $packageFlac
 aptgetFunctionInstall $packagePythonPyAudio
 aptgetFunctionInstall $packageLibSoxDev
+aptgetFunctionInstall $packageImageMagick
 
 # End of file
