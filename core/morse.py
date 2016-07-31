@@ -32,7 +32,7 @@ class Morse(object):
 
     def configuration(self):
         self.message = ""
-        self.oneunit = 0.5
+        self.oneunit = 0.3
         self.threeunits = 3 * self.oneunit
         self.sevenunits = 7 * self.oneunit
         self.morsefiles = 'morsefiles/'
