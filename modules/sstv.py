@@ -32,7 +32,7 @@ class SSTV(object):
         self.setup()
         try:
             self.voicesynthetizer.speechit("Modulo Experimental de Television de Barrido Lento, Modo Martin Uno, Procesando la imagen!")
-            self.picture()
+            self.download()
             status, output = commands.getstatusoutput('python -m pysstv --mode MartinM1 --vox output/iotd.jpg output/sstv.wav')
             self.voicesynthetizer.speechit("Imagen lista! Comenzamos con la transmision en Modo Martin Uno")
             self.pushtotalk.openport()
