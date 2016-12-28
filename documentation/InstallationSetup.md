@@ -15,7 +15,7 @@ Obj http://cdn.debian.net wheezy/main Translation-es
 Des:10 http://cdn.debian.net wheezy/main Translation-en [3 846 kB]
 Descargados 16.9 MB en 1min. 7seg. (249 kB/s)      
 Leyendo lista de paquetes... Hecho
-root@stn8148:~# 
+root@stn8148:~#
 ```
 
 ```sh
@@ -53,5 +53,8 @@ Configurando libcurl3-gnutls:i386 (7.26.0-1+wheezy13) ...
 Configurando liberror-perl (0.17-1) ...
 Configurando git-man (1:1.7.10.4-1+wheezy3) ...
 Configurando git (1:1.7.10.4-1+wheezy3) ...
-root@stn8148:~# 
+root@stn8148:~#
 ```
+
+
+
