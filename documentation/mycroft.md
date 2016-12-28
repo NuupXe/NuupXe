@@ -30,3 +30,13 @@ sudo pip install pocketsphinx
 ```sh
 pymelab@workstation:~/speech_recognition/examples$ sudo pip install pyaudio --upgrade
 ```
+
+# Microphone
+```
+sudo apt-get remove python-pyaudio
+sudo apt-get -f install
+sudo apt-get autoremove
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install python-pyaudio
+```
