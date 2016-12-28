@@ -49,7 +49,7 @@ pipFunctionUpgrade() {
 
 pipFunctionInstall() {
 	packageName=$@
-	$pipName $pipCommandInstall $packageName
+	python -m $pipName $pipCommandInstall $packageName
 }
 
 # =============================================================================
