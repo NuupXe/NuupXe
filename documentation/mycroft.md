@@ -26,3 +26,7 @@ sudo apt-get install -qq python python-dev python-pip build-essential swig libpu
 ```sh
 sudo pip install pocketsphinx
 ```
+
+```sh
+pymelab@workstation:~/speech_recognition/examples$ sudo pip install pyaudio --upgrade
+```
