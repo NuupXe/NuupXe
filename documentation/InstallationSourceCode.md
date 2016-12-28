@@ -1,10 +1,12 @@
 # Source Code
 
-```bash
+```sh
 root@stn8148:~# su - repeater
 repeater@stn8148:~/$ cd custom/
 root@stn8148:~# su - repeater
+```
 
+```sh
 repeater@stn8148:~/custom$ git clone https://github.com/xe1gyq/nuupxe.git
 Cloning into 'nuupxe'...
 remote: Counting objects: 3928, done.
