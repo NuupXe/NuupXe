@@ -16,3 +16,7 @@ pymelab@workstation:~/mycroft-core$ ./build_host_setup_debian.sh
 ```sh
 pymelab@workstation:~/mycroft-core$ ./dev_setup.sh 
 ```
+
+```
+sudo apt-get install -qq python python-dev python-pip build-essential swig libpulse-dev
+```
