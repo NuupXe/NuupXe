@@ -20,3 +20,4 @@ pymelab@workstation:~/mycroft-core$ ./dev_setup.sh
 ```
 sudo apt-get install -qq python python-dev python-pip build-essential swig libpulse-dev
 ```
+
