@@ -9,3 +9,7 @@ Comprobando la conectividad… hecho.
 pymelab@workstation:~$ 
 ```
 
+```sh
+pymelab@workstation:~/mycroft-core$ ./build_host_setup_debian.sh 
+```
+
