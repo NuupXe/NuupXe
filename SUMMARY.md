@@ -18,6 +18,7 @@
     * [Telegram](documentation/services/Telegram.md)
     * [Translation](documentation/Translation.md)
     * [Speech Recognition](documentation/SpeechRecognition.md)
+    * [Mycroft](documentation/mycroft.md)
 * Presentations
     * [Arjac](documentation/Arjac.md)
 * [Modules](documentation/Modules.md)
