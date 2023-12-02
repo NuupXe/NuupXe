@@ -104,7 +104,7 @@ def audio_extract(input_text='',args=None):
                 args.output.write(response.read())
                 time.sleep(.5)
             except urllib2.URLError as e:
-                print ('%s' % e)
+                print('%s' % e)
     args.output.close()
     print('Saved MP3 to %s' % args.output.name)
 
@@ -132,7 +132,7 @@ def text_to_speech_mp3_argparse():
     if len(sys.argv) == 1:
         parser.print_help()
         sys.exit(1)
-    print parser.parse_args()
+    print(parser.parse_args())
     return parser.parse_args()
     
 

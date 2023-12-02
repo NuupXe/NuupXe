@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import commands
+import subprocess
 import time
 
 from core.alive import alive
@@ -25,19 +25,19 @@ class VoiceMail(object):
         pass
 
     def record(self):
-        print '[NuupXe] Voice Mail Record'
+        print('[NuupXe] Voice Mail Record')
         self.voice.record()
 
     def play(self):
-        print '[NuupXe] Voice Mail Play'
+        print('[NuupXe] Voice Mail Play')
         self.pushtotalk.openport()
         self.voice.play()
         self.pushtotalk.closeport()
 
     def run(self, dtmf):
-        print '[NuupXe] Voice Mail Run'
+        print('[NuupXe] Voice Mail Run')
 
-	if dtmf:
+        if dtmf:
             message = "Codigo recibido " + dtmf
             self.voicesynthetizer.speechit(message)
         self.voicesynthetizer.speechit("Identificate por favor")

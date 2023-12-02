@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
-import ConfigParser
+import configparser
 import time
 import feedparser
 import os
-import pywapi
 import string
 import json
-import urllib2
+import urllib
 import pprint
 import pyowm
 import dateutil.parser
@@ -48,7 +47,7 @@ class Weather(object):
 
     def aprsfi_service(self):
 
-        print '[NuupXe] Weather aprs.fi'
+        print('[NuupXe] Weather aprs.fi')
 
         callsign = self.conf.get("weather", "aprsficallsign")
         location = self.conf.get("weather", "aprsfilocation")
@@ -74,8 +73,8 @@ class Weather(object):
 
     def yahoo(self):
 
-        print '[NuupXe] Weather Yahoo'
-
+        print('[NuupXe] Weather Yahoo')
+        """
         location = self.conf.get("weather", "location")
         result = pywapi.get_weather_from_yahoo(location, 'metric')
 
@@ -87,11 +86,12 @@ class Weather(object):
         message = message + ", El Sol se oculta a las " + result['astronomy']['sunset']
         self.speaker.speechit(message)
         self.message = message
+        """
 
     def noaa(self):
 
-        print '[NuupXe] Weather NOAA'
-
+        print('[NuupXe] Weather NOAA')
+        """
         location = self.conf.get("weather", "location")
         result = pywapi.get_weather_from_noaa(location)
 
@@ -100,10 +100,11 @@ class Weather(object):
         message = message + ", Humedad " + result['relative_humidity'] + " por ciento"
         self.speaker.speechit(message)
         self.message = message
+        """
 
     def owm(self):
 
-        print '[NuupXe] Open Weather Map'
+        print('[NuupXe] Open Weather Map')
 
         owm = pyowm.OWM(self.owmkey)
         location = self.conf.get("weather", "location")
@@ -117,7 +118,7 @@ class Weather(object):
         message = message + ", Presion Atmosferica " + str(w.get_pressure()['press']) + " milibares"
         message = message + ", Humedad " + str(w.get_humidity()) + " por ciento"
         message = message + ", Nubosidad " + str(w.get_clouds()) + " por ciento"
-        #print w.get_visibility_distance()
+        #print(w.get_visibility_distance())
         #message = message + ", Precipitacion Pluvial " + str(w.get_rain()) + " por ciento"
         message = message + ", El Sol se oculta a las " + time.strftime("%H:%M", time.localtime(int(w.get_sunset_time('unix'))))
         self.speaker.speechit(message)

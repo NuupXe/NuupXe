@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import argparse
-import commands
+import subprocess
 import logging
 import signal
 import sys
@@ -17,7 +17,7 @@ def set_exit_handler(func):
     signal.signal(signal.SIGTERM, func)
 
 def on_exit(sig, func=None):
-    print "exit handler triggered"
+    print("exit handler triggered")
     sys.exit(1)
 
 if __name__ == "__main__":

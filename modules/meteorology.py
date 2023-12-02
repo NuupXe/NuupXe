@@ -23,7 +23,7 @@ class Meteorology(object):
     def __init__(self, voicesynthetizer):
 
         self.modulename = 'Meteorology'
-	self.twitterc = TwitterC('twython')
+        self.twitterc = TwitterC('twython')
 
         self.voicesynthetizer = voicesynthetizer
 

@@ -1,4 +1,4 @@
-import ConfigParser
+import configparser
 import logging
 import string
 import sys

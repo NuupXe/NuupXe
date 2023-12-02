@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import ConfigParser
+import configparser
 import json
 import os
 import re
@@ -45,6 +45,6 @@ def recognizeSpeech():
 if __name__ == "__main__":
 
     xSpeechRecognition = xSpeechRecognition()
-    print xSpeechRecognition.recognize()
+    print(xSpeechRecognition.recognize())
 
 # End of File

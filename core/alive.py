@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 import logging
-import ConfigParser
+import configparser
+#from backports import configparser
 
 from core.aprsnet import AprsNet
 from core.system import System
@@ -13,7 +14,7 @@ def alive(modulename=None, modulemessage=None, media=None):
     logging.info('Alive')
 
     #aprs = AprsNet()
-    conf = ConfigParser.ConfigParser()
+    conf = configparser.ConfigParser()
     system = System()
     twitterc = TwitterC('twython')
 
@@ -33,9 +34,9 @@ def alive(modulename=None, modulemessage=None, media=None):
     callsign = conf.get("general", "callsign") + '-1'
     #aprs.address_set(callsign)
 
-    cpu = 'Cpu ' + cpu + '%'
-    memory = 'Memory ' + memory
-    kernel = 'Kernel ' + kernel
+    cpu = 'Cpu ' + str(cpu) + '%'
+    memory = 'Memory ' + str(memory)
+    kernel = 'Kernel ' + str(kernel)
     system = ' ' + cpu + ' ' + memory + ' ' + kernel
 
     message = Randomizer(2) + ' ' + hashtag + ' '
@@ -51,6 +52,7 @@ def alive(modulename=None, modulemessage=None, media=None):
     #aprs.send_message(technical)
     #aprs.position_set(systemcoordinates)
     message = (message[:136] + '...')
+    return
     if media:
         message = (message[:110] + '...')
         twitterc.timeline_set(message, media=media)

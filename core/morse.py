@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-import ConfigParser
-import commands
+import configparser
+import subprocess
 import pygame
 import sys
 import time
 
-from pushtotalk import PushToTalk
+from core.pushtotalk import PushToTalk
 
 code = {'A': '.-',  'B': '-...',    'C': '-.-.',
     'D': '-..', 'E': '.',   'F': '..-.',
@@ -61,11 +61,11 @@ class Morse(object):
             self.verify(message)
             for char in message:
                 if char == ' ':
-                    print ' '*7,
+                    print(' '*7,)
                     time.sleep(self.sevenunits)
                 else:
-                    print code[char.upper()],
-                    print
+                    print(code[char.upper()],)
+                    print("")
                     pygame.mixer.music.load(self.morsefiles + char.upper() + '_morse_code.ogg')
                     pygame.mixer.music.play()
                     time.sleep(self.threeunits)

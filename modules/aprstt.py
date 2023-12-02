@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import ConfigParser
+import configparser
 import os
 import random
 import string
@@ -75,7 +75,7 @@ class Aprstt(object):
                 nextchar = number[p+1]
                 if ( is_number(number[p]) and not is_number(nextchar)): # Valid number letter pair
                     newpair = number[p] + nextchar
-                    print newpair
+                    print(newpair)
                     translated_number = translated_number + self.dtmf_replace(newpair)
                 elif (is_number(number[p]) and is_number(nextchar)): # Valid number.
                     translated_number = translated_number + number[p] # This is for the callsign number
@@ -153,13 +153,13 @@ class Aprstt(object):
             return '20' + str(randomn) + '.' + str(randomxn).zfill(2) + 'N/103' + str(randomw) + '.' + str(randomxw).zfill(2) + 'W'
         if city == 'leon':
             # Coordinates 211000N 216.00N 10144.00N 10138.00N
-            randomn = random.randint(06,10)
+            randomn = random.randint(6,10)
             randomw = random.randint(38,44)
             return '21' + str(randomn).zfill(2) + '.' + str(randomxn).zfill(2) + 'N/101' + str(randomw) + '.' + str(randomxw).zfill(2) + 'W'
 
     def query(self, string):
 
-        print '[NuupXe] APRS Touch Tone | ' + string
+        print('[NuupXe] APRS Touch Tone | ' + string)
 
         callsign = self.keytype_get_aprstt(string)
         if callsign:

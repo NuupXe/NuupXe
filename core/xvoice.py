@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import commands
 import os
 import subprocess
 import time
@@ -28,7 +27,7 @@ class xVoice(object):
         #args = ['arecord', '-t', 'wav', '-f', 'S16_LE', '-r', '48000', self.filename]
         args = ['arecord', '-d', '5', self.voicefile]
         proc = subprocess.Popen(args)
-        print "PID:", proc.pid
+        print("PID:", proc.pid)
         return proc
 
     def recordstop(self, proc):
@@ -56,7 +55,7 @@ class xVoice(object):
         stream = audio.open(format=FORMAT, channels=CHANNELS,
                         rate=RATE, input=True,
                         frames_per_buffer=CHUNK)
-        print "recording..."
+        print("recording...")
         frames = []
 
         threshold = 1000
@@ -64,9 +63,9 @@ class xVoice(object):
             data = stream.read(CHUNK)
             rms = audioop.rms(data,2)
             if rms > threshold:
-                print "I am hearing you now"
+                print("I am hearing you now")
             frames.append(data)
-        print "finished recording"
+        print("finished recording")
  
         # stop Recording
         stream.stop_stream()
@@ -84,7 +83,7 @@ class xVoice(object):
     def play(self):
         #status, output = commands.getstatusoutput("aplay -D default " + self.voicefile)
         status, output = commands.getstatusoutput("aplay " + self.voicefile)
-        print output
+        print(output)
 
     def erase(self):
         status, output = commands.getstatusoutput("rm " + self.voicefile)

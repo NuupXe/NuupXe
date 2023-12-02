@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-import ConfigParser
+import configparser
 import json
 import logging
-import urllib2
+import urllib
 
 
 class AprsFi(object):
@@ -40,7 +40,7 @@ class AprsFi(object):
                   self.callsign + '&what=' + \
                   self.data + '&apikey=' + \
                   self.api_key + '&format=json'
-            result = json.loads(urllib2.urlopen(url).read())
+            result = json.loads(urllib.urlopen(url).read())
             return result
         except:
             logging.info('[AprsFi] Query Error')

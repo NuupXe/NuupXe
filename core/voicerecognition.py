@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import commands
+import subprocess
 import logging
 import time
 
@@ -59,7 +59,7 @@ class VoiceRecognition(object):
 
         logging.info('Voice Recognition Decode')
 
-	if speech == 'True':
+        if speech == 'True':
             self.pushtotalk.openport()
             self.voice.play()
             self.pushtotalk.closeport()

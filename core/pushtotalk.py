@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
-import commands
-import ConfigParser
+import subprocess
+import configparser
 import logging
 import serial
 import subprocess
@@ -16,7 +16,7 @@ class PushToTalk(object):
         self.portdefault = None
         self.port = None
 
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.path = "configuration/general.config"
         self.conf.read(self.path)
         self.portdefault = self.conf.get("general", "serialport")
@@ -53,7 +53,8 @@ class PushToTalk(object):
 
         logging.info('Push To Talk Message')
         self.openport()
-        proc = subprocess.call(msg)
+        print(msg)
+        proc = subprocess.call(msg, shell=True)
         logging.info(msg)
         self.closeport()
 

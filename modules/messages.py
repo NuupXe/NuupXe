@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import codecs
-import ConfigParser
+import configparser
 import logging
 import time
 import sys
@@ -30,7 +30,7 @@ class Messages(object):
 
     def readfile(self, textfile):
 
-        print '[NuupXe] Messages: Voice to Speech Text File'
+        print('[NuupXe] Messages: Voice to Speech Text File')
 
         file = codecs.open(textfile)
         for line in file.readlines():
@@ -44,7 +44,7 @@ class Messages(object):
 
     def stations(self):
 
-	print '[NuupXe] Messages: Stations'
+        print('[NuupXe] Messages: Stations')
 
         self.conf = ConfigParser.ConfigParser()
         self.path = "configuration/stations.config"

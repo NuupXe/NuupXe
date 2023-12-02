@@ -5,12 +5,14 @@ import os
 import random
 import signal
 import sys
-import thread
+import _thread
 import time
 import unicodedata
 
-from apscheduler.scheduler import Scheduler
-from apscheduler.threadpool import ThreadPool
+"""
+from APScheduler.scheduler import Scheduler
+from APScheduler.threadpool import ThreadPool
+"""
 
 from core.alive import alive
 from core.irlp import Irlp
@@ -56,7 +58,7 @@ class ServiceManager(object):
         pass
 
     def voicesynthetizer(self):
-        self.voicesynthetizer = VoiceSynthetizer("google", "spanish")
+        self.voicesynthetizer = VoiceSynthetizer("espeak", "spanish")
 
     def voicesynthetizerget(self):
         return self.voicesynthetizer
@@ -151,6 +153,7 @@ class ServiceManager(object):
 
         logging.info('Mode Scheduler')
         self.voicesynthetizer.speechit("Modo Planificador")
+        """
         self.scheduler = Scheduler(misfire_grace_time=900, coalesce=True, threadpool=ThreadPool(max_threads=1))
         self.schedule()
         self.scheduler.start()
@@ -166,6 +169,7 @@ class ServiceManager(object):
                 break
 
         self.disable()
+        """
 
     def writing_mode(self):
 
@@ -173,7 +177,7 @@ class ServiceManager(object):
         # self.voicesynthetizer.speechit("Modo Escritura")
 
         while True:
-            print " Type any text to make use of Text to Speech infraestructure"
+            print(" Type any text to make use of Text to Speech infraestructure")
             x = raw_input(" Type 'e' for exit: ")
             if x.lower() == 'e':
                 self.disable()
@@ -249,10 +253,10 @@ class ServiceManager(object):
         elif module == 'morsecontest'	:
             self.morseteacher = MorseTeacher(self.voicesynthetizer)
             self.morseteacher.contest()
-	elif module == 'regulations':
+        elif module == 'regulations':
             self.messages = Messages(self.voicesynthetizer)
             self.messages.readfile('learning/reglamentos.1')
-	elif module == 'radioclub':
+        elif module == 'radioclub':
             self.messages = Messages(self.voicesynthetizer)
             self.messages.readfile('learning/arej.radioclubs')
         elif module == 'stations':

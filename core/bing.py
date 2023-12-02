@@ -32,14 +32,14 @@ while (loop_value == 1):
             todayDate = datetime.datetime.now().strftime("%m/%d/%Y")
             fileDate = time.strftime('%m/%d/%Y', time.gmtime(os.path.getmtime(path)))
             if todayDate == fileDate:
-                print "You already have today's Bing image"
+                print("You already have today's Bing image")
             else:
-                print ("Downloading Bing wallpaper to %s" % (path))
+                print("Downloading Bing wallpaper to %s" % (path))
                 f = open(path, 'w')
                 bingpic = urllib2.urlopen(url)
                 f.write(bingpic.read())
         else:
-            print ("Downloading Bing wallpaper to %s" % (path))
+            print("Downloading Bing wallpaper to %s" % (path))
             f = open(path, 'w')
             bingpic = urllib2.urlopen(url)
             f.write(bingpic.read())

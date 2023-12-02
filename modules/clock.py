@@ -33,7 +33,7 @@ class Clock(object):
     def hour(self):
         logging.info(self.modulename + ' Hour')
         hour = "Son las " + time.strftime("%H") + " horas y " + time.strftime("%M") + " minutos"
-        self.voicesynthetizer.speechit(hour)
+        self.voicesynthetizer.speech_it(hour)
         alive(modulename=self.modulename + 'Hour', modulemessage=hour)
 
 # End of File

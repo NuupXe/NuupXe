@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import commands
 import subprocess
 import time
 
@@ -19,7 +18,8 @@ class Voice(object):
     def recordstart(self):
         args = ['arecord','-t', 'wav', '-f', 'S16_LE', '-r', '48000', self.filename]
         proc = subprocess.Popen(args)
-        print "PID:", proc.pid
+        print("PID:", proc.pid)
+
         return proc
 
     def recordstop(self, proc):

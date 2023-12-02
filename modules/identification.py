@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import logging
-import ConfigParser
+import configparser
 
 from core.alive import alive
 from core.morse import Morse

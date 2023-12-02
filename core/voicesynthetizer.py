@@ -1,68 +1,46 @@
-#!/usr/bin/python
-
 import logging
-import sys
-import threading
-import unicodedata
-import time
-
-from pushtotalk import PushToTalk
+from core.pushtotalk import PushToTalk
 
 class VoiceSynthetizer(logging.Handler):
-
-    def __init__(self, synthetizer, language):
-        self.synthetizer = synthetizer
+    def __init__(self, synthesizer="espeak", language="spanish"):
+        self.synthesizer = synthesizer
         self.language = language
+        self.language_argument = self._set_language_argument()
+        self.text_to_speech_argument = self._set_text_to_speech_argument()
 
-    def setsynthetizer(self, synthetizer):
-        self.synthetizer = synthetizer
+    def set_synthesizer(self, synthesizer):
+        self.synthesizer = synthesizer
 
-    def getsynthetizer(self):
-        return self.synthetizer
-
-    def setlanguage(self, language):
+    def set_language(self, language):
         self.language = language
-        if self.synthetizer == "festival":
-            self.languageargument = "--language " + self.language
-        elif self.synthetizer == "espeak":
-            if self.language == "english":
-                self.languageargument = "-v en"
-            elif self.language == "spanish":
-                self.languageargument = "-v es-la"
-        elif self.synthetizer == "google":
-            if self.language == "english":
-                self.languageargument = "en"
-            elif self.language == "spanish":
-                self.languageargument = "es"
+        self.language_argument = self._set_language_argument()
+        self.text_to_speech_argument = self._set_text_to_speech_argument()
 
-    def getlanguage(self):
-        return self.language
+    def _set_language_argument(self):
+        if self.synthesizer == "festival":
+            return "--language " + self.language
+        elif self.synthesizer == "espeak":
+            return "-v en" if self.language == "english" else "-v es-la"
+        elif self.synthesizer == "google":
+            return "en" if self.language == "english" else "es"
 
-    def setarguments(self):
-        if self.synthetizer == "festival":
-            self.text2speechargument = "--tts"
-            self.arguments = self.synthetizer + " " + self.text2speechargument + " " + self.languageargument
-        elif self.synthetizer == "espeak":
-            self.text2speechargument = "--stdout"
-            self.arguments = self.synthetizer + " " + self.languageargument + " " + self.text2speechargument
-        elif self.synthetizer == "google":
-            self.arguments = self.languageargument
+    def _set_text_to_speech_argument(self):
+        if self.synthesizer == "festival":
+            return "--tts"
+        elif self.synthesizer == "espeak":
+            return "--stdout"
 
-    def speechit(self, text, language="spanish"):
+    def speech_it(self, text):
         logging.info(text)
+        text = "\"" + text + "\""
+        pushtotalk = PushToTalk()
 
-        self.pushtotalk = PushToTalk()
-        self.setlanguage(language)
-        self.setarguments()
+        if self.synthesizer == "festival":
+            command = f'echo {text} | {self.synthesizer} {self.text_to_speech_argument} {self.language_argument}'
+        elif self.synthesizer == "espeak":
+            command = f'{self.synthesizer} {self.language_argument} {self.text_to_speech_argument} {text} | aplay'
+        elif self.synthesizer == "google":
+            command = f'core/google.sh {self.language} {text}'
+            # Or use: command = f'core/voicerss.sh {self.language} {text}'
 
-        if self.synthetizer == "festival":
-            command = ['echo', text, '|', self.arguments]
-        elif self.synthetizer == "espeak":
-            command = [self.arguments, text, ' | aplay']
-        elif self.synthetizer == "google":
-            #command = ['core/GoogleTTS.py', '-l', self.arguments, '-s', text]
-            #command = ['core/google.sh', 'es', text]
-            command = ['core/voicerss.sh', 'es-mx', text]
-        self.pushtotalk.message(command)
-
-# End of File
+        pushtotalk.message(command)

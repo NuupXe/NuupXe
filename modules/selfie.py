@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import ConfigParser
+import configparser
 import logging
 import random
 
@@ -15,9 +15,9 @@ class Selfie(object):
     def __init__(self, voicesynthetizer):
 
         self.modulename = 'Selfie'
-	self.camera = Camera(voicesynthetizer)
+        self.camera = Camera(voicesynthetizer)
         self.phonetic = Phonetic()
-	self.twitterc = TwitterC('twython')
+        self.twitterc = TwitterC('twython')
         self.voicesynthetizer = voicesynthetizer
 
     def setup(self):

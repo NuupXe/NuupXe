@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-import commands
-import ConfigParser
+import subprocess
+import configparser
 import logging
 
 from core.alive import alive

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # =============================================================================
 # Scripts Variables General
@@ -12,15 +12,16 @@ export pipCommandUpgrade=--upgrade
 # Scripts Variables Local
 # =============================================================================
 
-export packageDistribute=distribute
+# export packageDistribute=distribute
 export packageFeedparser=feedparser
+export packageConfigParser=configparser
 export packagePywws=pywws
 export packageTweepy=tweepy
 export packageApscheduler=apscheduler==2.1.0
 export packagePyserial=pyserial
 export packageWolframalpha=wolframalpha
-export packagePywapi=pywapi
-export packageRequests=requests==2.6.0
+# export packagePywapi=pywapi
+export packageRequests=requests
 export packagePygeocoder=pygeocoder
 export packageDropbox=dropbox
 export packageTwython=twython
@@ -38,6 +39,9 @@ export packageTendo=tendo
 export packageWit=wit
 export packagePyowm=pyowm
 export packageDateutil=python-dateutil
+export packagePygame=python3-pygame
+export packagePytz=python3-pytz
+export packagePyaudio=PyAudio
 
 # =============================================================================
 # Script Functions
@@ -58,19 +62,20 @@ pipFunctionInstall() {
 
 $pipName install -U pip
 
-pipFunctionInstall $packageDistribute
+# pipFunctionInstall $packageDistribute
 pipFunctionInstall $packageFeedparser
+pipFunctionInstall $packageConfigParser
 pipFunctionInstall $packagePywws
 pipFunctionInstall $packageTweepy
 pipFunctionInstall $packageApscheduler
 pipFunctionInstall $packagePyserial
 pipFunctionInstall $packageWolframalpha
-$pipName install --allow-all-external $packagePywapi --allow-unverified $packagePywapi
+# $pipName install --allow-all-external $packagePywapi --allow-unverified $packagePywapi
 pipFunctionInstall $packageRequests
 pipFunctionInstall $packagePygeocoder
 pipFunctionInstall $packageDropbox
 pipFunctionInstall $packageTwython
-#pipFunctionInstall $packageYowsup2
+# pipFunctionInstall $packageYowsup2
 pipFunctionInstall $packagePsutil
 pipFunctionInstall $packageGitPython
 pipFunctionInstall $packageTropo
@@ -84,5 +89,8 @@ pipFunctionInstall $packageTendo
 pipFunctionInstall $packageWit
 pipFunctionInstall $packagePyowm
 pipFunctionInstall $packageDateutil
+pipFunctionInstall $packagePygame
+pipfunctionInstall $packagePytz
+pipFunctionInstall $packagePyaudio
 
 # End of file

@@ -74,7 +74,7 @@ def job_function():
 # Handles all sent documents and audio files
 @bot.message_handler(content_types=['document', 'audio'])
 def handle_docs_audio(message):
-    print 'audio file'
+    print('audio file')
     pass
 
 @bot.message_handler(commands=['ayuda'])
@@ -189,9 +189,9 @@ def process_dtmf(m):
         bot.send_message(chat_id, 'Listo! Enviaremos *' + dtmf + \
                                   '*', parse_mode="Markdown")
         repeater = 'python nuupxe.py -d \"' + dtmf + '\"'
-        print repeater
+        print(repeater)
         status, output = commands.getstatusoutput(repeater)
-        print status, output
+        print(status, output)
     except Exception as e:
         bot.reply_to(m, 'Algo no esta funcionando!')
 

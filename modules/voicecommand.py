@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import commands
+import subprocess
 import logging
 import re
 
@@ -66,12 +66,12 @@ class VoiceCommand(object):
     def background(self):
 
         logging.info('Voice Command Background')
-	while True:
-	        self.voicerecognition.record()
-        	output = self.voicerecognition.recognize('False')
+        while True:
+                self.voicerecognition.record()
+                output = self.voicerecognition.recognize('False')
                 if re.search(r'canc', output, re.M|re.I):
                     self.voicesynthetizer.speechit("Alguien me hablo?. Soy NuupXe... Hasta pronto!")
                     break
-                print output
+                print(output)
 
 # Enf of File

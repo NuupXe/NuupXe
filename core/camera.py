@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import commands
+import subprocess
 import logging
 import pygame
 import pygame.camera
@@ -29,7 +29,7 @@ class Camera(object):
             self.fswebcamarguments = ' -r 1280x720 -s brightness=65% -s Contrast=50% -s Gamma=100% --jpeg 100 --no-banner '
             self.fswebcamcommand = self.fswebcam + self.fswebcamarguments + self.picturefswebcam
         except:
-            print 'Camera Error'
+            print('Camera Error')
 
     def pictureCapture(self):
         logging.info('Camera Picture Capture')

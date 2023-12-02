@@ -69,7 +69,7 @@ class MorseTeacher(object):
             time.sleep(1)
 
     def learn(self):
-        print '[NuupXe] Morse Teacher Learning'
+        print('[NuupXe] Morse Teacher Learning')
         self.welcome()
         time.sleep(5)
         self.randomnumberplay(True, 20)
@@ -82,7 +82,7 @@ class MorseTeacher(object):
         self.randomletterplay(False, 20)
 
     def contest(self):
-        print '[NuupXe] Morse Teacher Contest'
+        print('[NuupXe] Morse Teacher Contest')
         self.message("Concurso Decodificando Texto")
         self.message("Envia tus resultados a " + " ".join(self.phonetic.decode('xe1gyq@gmail.com')))
         self.message("El primer correo con el texto correcto sera ganador de una tarjeta de 200 pesos para Star Bucks")
@@ -94,7 +94,7 @@ class MorseTeacher(object):
         return
 
     def ask(self):
-        print '[NuupXe] Morse Teacher Ask'
+        print('[NuupXe] Morse Teacher Ask')
         self.message("Aprendizaje de Codigo Morse")
         self.message("Quieres escuchar 2 letras para que las decodifiques?")
         self.message("Responde con las palabras afirmativo o negativo en los proximos 5 segundos")

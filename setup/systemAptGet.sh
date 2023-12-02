@@ -23,29 +23,31 @@ export packageAx25Xtools=ax25-xtools
 export packageAx25Apps=ax25-apps
 export packageLibAx25Dev=libax25-dev
 
-export packageFestival="festival festlex-cmu festlex-poslex festvox-kallpc16k libestools1.2 festvox-ellpc11k"
-export packagePyPi="python-pip"
-export packagePygame="python-pygame"
+export packageFestival="festival festlex-cmu festlex-poslex festvox-kallpc16k festvox-ellpc11k"
+export packagePyPi="python3-pip"
+export packagePygame="python3-pygame"
 export packageMpg123="mpg123"
 export packageSeveral="ffmpeg flac"
 export packageText2Speech="festival espeak"
 export packageCurl="curl"
 export packageFswebcam="fswebcam"
-export packagePythonDev="python-dev"
-export packagePythonPywapi="python-pywapi"
+export packagePythonDev="python3-dev"
 export packageFlac="flac"
-export packagePythonImage="python-image"
+export packagePythonPil="python-pil"
 export packageLibAsound2Dev="libasound2-dev"
 export packageLibJpegDev="libjpeg-dev"
-export packagePythonImaging="python-imaging"
-#export packageGnuRadio="gnuradio gnuradio-dev"
-#export packageSdr="rtl-sdr gr-osmosdr"
 export packageLibFfi="libffi-dev"
 export packageLibSsl="libssl-dev"
 export packageFlac="flac"
-export packagePythonPyAudio="python-pyaudio"
+export packagePythonFeedparser="python3-feedparser"
+export packagePythonPyAudio="python3-pyaudio"
+export packagePythonPsutil="python3-psutil"
+export packagePythonPyserial="python3-pyserial"
+export packagePythonTweepy="python3-tweepy"
+export packagePythonTwython="python3-twython"
 export packageLibSoxDev="libsox-dev"
 export packageImageMagick="imagemagick"
+export packagePortaudio19dev="portaudio19-dev"
 
 # =============================================================================
 # Script Functions
@@ -97,8 +99,13 @@ aptgetFunctionInstall $packageSdr
 aptgetFunctionInstall $packageLibFfi
 aptgetFunctionInstall $packageLibSsl
 aptgetFunctionInstall $packageFlac
+aptgetFunctionInstall $packagePythonFeedparser
 aptgetFunctionInstall $packagePythonPyAudio
+aptgetFunctionInstall $packagePythonPyserial
+aptgetFunctionInstall $packagePythonTweepy
+aptgetFunctionInstall $packagePythonTwython
 aptgetFunctionInstall $packageLibSoxDev
 aptgetFunctionInstall $packageImageMagick
+aptgetFunctionInstall $packagePortaudio19dev
 
 # End of file

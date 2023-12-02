@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-import commands
+import subprocess
 import logging
 import numpy
 import math
 import psutil
 
-from utilities import BytesToHuman
+from core.utilities import BytesToHuman
 
 class System(object):
 
@@ -23,7 +23,11 @@ class System(object):
 
     def kernelVersion(self):
         logging.info('System Uname')
-        status, output = commands.getstatusoutput("uname -a")
-        return output.split()[2]
+        result = subprocess.run(["uname", "-a"])
+        output = result.stdout
+        error_output = result.stderr
+        #print(f'{output error_output}')
+        #return output.split()[2]
+        return
 
 # End of File

@@ -15,11 +15,11 @@ class Seismology(object):
     def __init__(self, voicesynthetizer):
 
         self.modulename = 'Seismology'
-	self.twitterc = TwitterC('twython')
+        self.twitterc = TwitterC('twython')
         self.voicesynthetizer = voicesynthetizer
 
     def SismologicoMX(self):
-        print '[NuupXe] Seismology'
+        print('[NuupXe] Seismology')
         message = 'Servicio Sismologico '
 
         tstatus = self.twitterc.timeline_get('skyalertmx', 3)
@@ -40,7 +40,7 @@ class Seismology(object):
                 try:
                     message = message + status['text']
                 except:
-                    print 'Seismology Error'
+                    print('Seismology Error')
                 sismo = 'True'
         if sismo == 'False':
             self.voicesynthetizer.speechit("No se encontraron sismos en las ultimas horas")

@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
-import ConfigParser
+import configparser
 import feedparser
+import geocoder
 import logging
 import os
-import pywapi
 import string
 import sys
 import time
@@ -12,7 +12,6 @@ import unicodedata
 
 from core.alive import alive
 
-from pygeocoder import Geocoder
 from core.aprsfi import AprsFi
 from core.voicesynthetizer import VoiceSynthetizer
 from core.phonetic import Phonetic
@@ -74,7 +73,7 @@ class AprsTracker(object):
                     message =  message + ", Altitud " + str(entry['altitude']) + " metros"
                 except:
                     pass
-                results = Geocoder.reverse_geocode(float(entry['lat']), float(entry['lng']))
+                results = geocoder.osm(float(entry['lat']), float(entry['lng']))
                 logging.info(results)
                 try:
                     message = message + ", Calle " + results[0].route

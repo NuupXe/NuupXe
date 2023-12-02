@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import logging
-import sys, os, json, urllib2, urllib, time
-import commands
-import ConfigParser
+import sys, os, json, urllib, time
+import subprocess
+import configparser
 
 import requests
 
@@ -74,7 +74,7 @@ class SpeechRecognition(object):
         data = r.json()
         transcript = data['text']
         # Perform your magic here:
-        print "Transcript for " + filename + " = " + transcript
+        print("Transcript for " + filename + " = " + transcript)
         return transcript
 
 # End of File

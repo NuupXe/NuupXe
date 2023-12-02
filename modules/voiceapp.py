@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import commands
+import subprocess
 import logging
 import json
 import time

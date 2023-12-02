@@ -3,7 +3,7 @@
 import logging
 import tweepy
 import twython
-import ConfigParser
+import configparser
 
 from tweepy import OAuthHandler
 from twython import Twython
@@ -19,7 +19,7 @@ class TwitterC(logging.Handler):
 
     def configuration(self):
         logging.info('[NuupXe] Twitter Configuration')
-        self.configuration = ConfigParser.ConfigParser()
+        self.configuration = configparser.ConfigParser()
         self.configuration.read('configuration/services.config')
         self.consumer_key = self.configuration.get('twitter','consumer_key')
         self.consumer_secret = self.configuration.get('twitter','consumer_secret')
@@ -37,14 +37,14 @@ class TwitterC(logging.Handler):
 
     def timeline_get(self, user, items):
         logging.info('[NuupXe] Twitter TimelineGet')
-	try:
+        try:
             if self.agent == 'tweepy':
                 self.twitter.get_user(user)
                 return tweepy.Cursor(self.twitterapi.user_timeline, id=user).items(items)
             elif self.agent == 'twython':
                 return self.twitter.get_user_timeline(screen_name=user, include_rts=True, count=items)
-	except:
-	    logging.info('[NuupXe] Twitter | Timeline Get Error ...')
+        except:
+            logging.info('[NuupXe] Twitter | Timeline Get Error ...')
 
     def timeline_set(self, status, media):
         logging.info('[NuupXe] Twitter TimelineSet')

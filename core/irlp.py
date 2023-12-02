@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-import ConfigParser
-import commands
+import configparser
+import subprocess
 import logging
 import os
 import time
@@ -11,7 +11,7 @@ class Irlp(object):
 
     def __init__(self):
         logging.info('[Irlp]')
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.filepath = "configuration/general.config"
         self.conf.read(self.filepath)
         self.irlppath = self.conf.get("irlp", "path")
@@ -35,11 +35,14 @@ class Irlp(object):
 
     def cosenabled(self):
         logging.info('[Irlp] CosEnabled')
-        status, output = commands.getstatusoutput(self.cosstate)
+        result = subprocess.run(self.cosstate)
+        status = result.stdout
+        output = result.stderr
         return status
 
     def busy(self):
         logging.info('[Irlp] Busy')
+
         status, output = commands.getstatusoutput(self.cosstate)
         while status is 256:
             status, output = commands.getstatusoutput(self.coscheck)
@@ -58,6 +61,8 @@ class Irlp(object):
 
     def forceunptt(self):
         logging.info('[Irlp] Force UnPTT')
-        commands.getstatusoutput(self.forceunkey)
+        result = subprocess.run(self.forceunkey)
+        status = result.stdout
+        output = result.stderr
 
 # End of File
