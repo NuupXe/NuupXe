@@ -24,7 +24,7 @@ class VoiceMailer(object):
         self.voice = Voice()
         self.voicerecognition = VoiceRecognition(voicesynthetizer)
 
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.filepath = "configuration/voicemailer.config"
         self.conf.read(self.filepath)
 
@@ -39,7 +39,7 @@ class VoiceMailer(object):
         try:
             callsign = self.conf.get(user, "callsign")
             email = self.conf.get(user, "email")
-        except ConfigParser.NoSectionError:
+        except configparser.NoSectionError:
             return None, None
         return callsign, email
 
@@ -51,7 +51,7 @@ class VoiceMailer(object):
         if user:
             messagepresentation = "Mensaje para " + user + ', Cual es tu mensaje?'
             messagepresentationdecoded = "Mensaje para " + ' '.join(self.phonetic.decode(user)) + ', Cual es tu mensaje?'
-            self.voicesynthetizer.speechit(messagepresentationdecoded)
+            self.voicesynthetizer.speech_it(messagepresentationdecoded)
             self.voicerecognition.record()
             message = self.voicerecognition.recognize('False')
             self.voicesynthetizer.speechit(message)
@@ -63,7 +63,7 @@ class VoiceMailer(object):
             modulemessage = messagepresentation + ' ' + messageanswer
             alive(modulename=self.modulename, modulemessage=modulemessage)
         else:
-            self.voicesynthetizer.speechit('Usuario no asignado!')
+            self.voicesynthetizer.speech_it('Usuario no asignado!')
 
 # Enf of File
 

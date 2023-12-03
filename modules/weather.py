@@ -1,54 +1,34 @@
-#!/usr/bin/python
-
 import configparser
 import time
-import feedparser
-import os
-import string
-import json
-import urllib
-import pprint
-import pyowm
-import dateutil.parser
-import datetime
-from datetime import datetime
-from pytz import timezone
+from pyowm import OWM
 
 from core.alive import alive
-from core.aprsfi import AprsFi
 from core.aprsnet import AprsNet
-from core.voicesynthetizer import VoiceSynthetizer
+from core.aprsfi import AprsFi
+from core.voicesynthesizer import VoiceSynthesizer
 from core.phonetic import Phonetic
 
 class Weather(object):
 
-    def __init__(self, voicesynthetizer):
-
+    def __init__(self, voicesynthesizer):
         self.modulename = 'Weather'
         self.phonetic = Phonetic()
         self.aprsfi = AprsFi()
-        self.aprsnet = AprsNet()
 
-        self.services = ConfigParser.ConfigParser()
-        self.path = "configuration/services.config"
-        self.services.read(self.path)
-        self.owmkey = self.services.get("openweathermap", "key")
-
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.path = "configuration/general.config"
         self.conf.read(self.path)
-        self.agent = self.conf.get("weather", "agent")
 
-        self.speaker = voicesynthetizer
+        self.agent = self.conf.get("weather", "agent")
+        self.location = self.conf.get("weather", "location")
+        self.speaker = voicesynthesizer
 
     def aprspacket(self):
-
+        self.aprsnet = AprsNet()
         self.aprsnet.send_packet("XE1GYQ-13>APRS,TCPIP*,qAS,XE1GYQ-10:@232353z2036.96N/10324.58W_000/000g000t000r000p000P000h00b00000NuupXe Weather Station")
 
     def aprsfi_service(self):
-
         print('[NuupXe] Weather aprs.fi')
-
         callsign = self.conf.get("weather", "aprsficallsign")
         location = self.conf.get("weather", "aprsfilocation")
 
@@ -57,99 +37,76 @@ class Weather(object):
         data = self.aprsfi.query()
 
         for entry in data['entries']:
-
-            message = "Reporte del clima en la ciudad de " + location
-            message = message + ", Datos de a p r s punto fi"
-            message = message + ", Estacion meteorologica, " + ' '.join(self.phonetic.decode(callsign))
-            message = message + ", Temperatura " + entry['temp'] + " grados centigrados"
-            message = message + ", Humedad relativa " + entry['humidity'] + " por ciento"
-            message = message + ", Presion Atmosferica " + entry['pressure'] + " milibares"
-            message = message + ", Direccion del viento " + entry['wind_direction'] + " grados"
-            message = message + ", Velocidad del viento " + entry['wind_speed'] + " metros por segundo"
-            message = message + ", Rafagas de " + entry['wind_gust'] + " metros por segundo"
-            message = message + ", Precipitacion pluvial " + entry['rain_1h'] + " milimetros"
-            self.speaker.speechit(message)
+            message = f"Reporte del clima en la ciudad de {location}, Datos de aprs.fi, \
+                        Estacion meteorologica, {' '.join(self.phonetic.decode(callsign))}, \
+                        Temperatura {entry['temp']} grados centigrados, \
+                        Humedad relativa {entry['humidity']} por ciento, \
+                        Presion Atmosferica {entry['pressure']} milibares, \
+                        Direccion del viento {entry['wind_direction']} grados, \
+                        Velocidad del viento {entry['wind_speed']} metros por segundo, \
+                        Rafagas de {entry['wind_gust']} metros por segundo, \
+                        Precipitacion pluvial {entry['rain_1h']} milimetros"
+            self.speaker.speech_it(message)
             self.message = message
 
-    def yahoo(self):
-
-        print('[NuupXe] Weather Yahoo')
-        """
-        location = self.conf.get("weather", "location")
-        result = pywapi.get_weather_from_yahoo(location, 'metric')
-
-        message = "Reporte del Clima en " + result['location']['city']
-        message = message + ", Temperatura " + result['condition']['temp'] + " grados centigrados"
-        message = message + ", Presion Atmosferica " + result['atmosphere']['pressure'] + " milibares"
-        message = message + ", Visibilidad " + result['atmosphere']['visibility'] + " kilometros"
-        message = message + ", Humedad " + result['atmosphere']['humidity'] + " por ciento"
-        message = message + ", El Sol se oculta a las " + result['astronomy']['sunset']
-        self.speaker.speechit(message)
-        self.message = message
-        """
-
-    def noaa(self):
-
-        print('[NuupXe] Weather NOAA')
-        """
-        location = self.conf.get("weather", "location")
-        result = pywapi.get_weather_from_noaa(location)
-
-        message = "Reporte del Clima"
-        message = message + ", Temperatura " + result['temp_c'] + " grados centigrados"
-        message = message + ", Humedad " + result['relative_humidity'] + " por ciento"
-        self.speaker.speechit(message)
-        self.message = message
-        """
-
-    def owm(self):
-
+    def openweathermap(self):
         print('[NuupXe] Open Weather Map')
 
-        owm = pyowm.OWM(self.owmkey)
-        location = self.conf.get("weather", "location")
-        observation = owm.weather_at_place(location)
-        w = observation.get_weather()
-        x = observation.get_location()
+        services = configparser.ConfigParser()
+        path = "configuration/services.config"
+        services.read(path)
+        owmkey = services.get("openweathermap", "key")
 
+        owm = OWM(owmkey)
         city = self.conf.get("general", "location")
-        message = "Reporte del Clima promedio en " + city
-        message = message + ", Temperatura " + str(w.get_temperature('celsius')['temp']) + " grados centigrados"
-        message = message + ", Presion Atmosferica " + str(w.get_pressure()['press']) + " milibares"
-        message = message + ", Humedad " + str(w.get_humidity()) + " por ciento"
-        message = message + ", Nubosidad " + str(w.get_clouds()) + " por ciento"
-        #print(w.get_visibility_distance())
-        #message = message + ", Precipitacion Pluvial " + str(w.get_rain()) + " por ciento"
-        message = message + ", El Sol se oculta a las " + time.strftime("%H:%M", time.localtime(int(w.get_sunset_time('unix'))))
-        self.speaker.speechit(message)
+
+        try:
+            mgr = owm.weather_manager()
+            observation = mgr.weather_at_place("Tlaquepaque, Mexico")
+            w = observation.weather
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+        message = f"Reporte del Clima promedio en {city}, \
+                    Temperatura {w.temperature('celsius')['temp']} grados centigrados, \
+                    Presion Atmosferica {w.pressure['press']} milibares, \
+                    Humedad {w.humidity} por ciento, Nubosidad {w.clouds} por ciento, \
+                    El Sol se oculta a las {time.strftime('%H:%M', time.localtime(int(w.sunset_time('unix'))))}"
+        self.speaker.speech_it(message)
         self.message = message
 
-    def report(self):
+    def weather_report(self):
+        print(self.agent)
 
         if self.agent == "aprsfi":
-                self.aprsfi_service()
-        elif self.agent == "yahoo":
-                self.yahoo()
-        elif self.agent == "noaa":
-                self.noaa()
-        elif self.agent == "owm":
-                self.owm()
+            self.aprsfi_service()
+        elif self.agent == "openweathermap":
+            self.openweathermap()
 
         self.aprspacket()
-        alive(modulename=self.modulename + 'Report', modulemessage=self.message)
+        # alive(modulename=self.modulename + 'Report', modulemessage=self.message)
 
-    def temperature(self):
+    def weather_temperature(self):
+        services = configparser.ConfigParser()
+        path = "configuration/services.config"
+        services.read(path)
+        owmkey = services.get("openweathermap", "key")
 
-        owm = pyowm.OWM(self.owmkey)
-        location = self.conf.get("weather", "location")
-        observation = owm.weather_at_place(location)
-        w = observation.get_weather()
-        x = observation.get_location()
+        owm = OWM(owmkey)
+        idioma = 'es'
+        location = self.location
 
-        city = self.conf.get("general", "location")
-        message = "Temperatura promedio en " + city + " "
-        message = message + str(w.get_temperature('celsius')['temp']) + " grados centigrados"
-        self.speaker.speechit(message)
-        alive(self.modulename + 'Temperature')
+        try:
+            mgr = owm.weather_manager()
+            observation = mgr.weather_at_place(str(location))
+            w = observation.weather
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
-# End of File
+        _detailed_status = w.detailed_status
+        _temperature = str(w.temperature('celsius')['temp'])
+
+        message = f"Temperatura promedio en {location} {_temperature} grados centigrados, estado del clima {_detailed_status}"
+        self.speaker.speech_it(message)
+        # alive(self.modulename + 'Temperature')
+

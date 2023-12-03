@@ -9,7 +9,7 @@ import sys
 from serviceManager import ServiceManager
 
 from core.irlp import Irlp
-from core.voicesynthetizer import VoiceSynthetizer
+from core.voicesynthesizer import VoiceSynthesizer
 
 from tendo import singleton
 
@@ -51,13 +51,13 @@ if __name__ == "__main__":
         sys.exit(1)
 
     if args.server == 'stop' and not experimental.enabled():
-        voicesynthetizer.speechit("Proyecto NuupXe deshabilitado")
-        status, output = commands.getstatusoutput('./nuupxe.sh stop')
+        voicesynthetizer.speech_it("Proyecto Nuup X e deshabilitado")
+        subprocess.call('./nuupxe.sh stop', shell=True)
         sys.exit(1)
 
     if args.server == 'stop' and experimental.enabled():
-        voicesynthetizer.speechit("Deshabilitando Proyecto NuupXe, hasta pronto!")
-        status, output = commands.getstatusoutput('./nuupxe.sh stop')
+        voicesynthetizer.speech_it("Deshabilitando Proyecto NuupXe, hasta pronto!")
+        subprocess.call('./nuupxe.sh stop', shell=True)
         sys.exit(1)
 
     if args.bing:

@@ -18,7 +18,7 @@ from core.alive import alive
 from core.irlp import Irlp
 from core.observer import Subscriber, Publisher
 from core.phonetic import Phonetic
-from core.voicesynthetizer import VoiceSynthetizer
+from core.voicesynthesizer import VoiceSynthesizer
 
 # Production
 
@@ -58,7 +58,7 @@ class ServiceManager(object):
         pass
 
     def voicesynthetizer(self):
-        self.voicesynthetizer = VoiceSynthetizer("espeak", "spanish")
+        self.voicesynthetizer = VoiceSynthesizer("openai", "spanish")
 
     def voicesynthetizerget(self):
         return self.voicesynthetizer
@@ -152,7 +152,7 @@ class ServiceManager(object):
     def scheduler_mode(self):
 
         logging.info('Mode Scheduler')
-        self.voicesynthetizer.speechit("Modo Planificador")
+        self.voicesynthesizer.speech_it("Modo Planificador")
         """
         self.scheduler = Scheduler(misfire_grace_time=900, coalesce=True, threadpool=ThreadPool(max_threads=1))
         self.schedule()
@@ -165,7 +165,7 @@ class ServiceManager(object):
             if self.irlp.active():
                 time.sleep(5)
                 self.irlp.busy()
-                self.voicesynthetizer.speechit("Se ha activado el nodo, Proyecto NuupXe dice hasta pronto!")
+                self.voicesynthesizer.speech_it("Se ha activado el nodo, Proyecto NuupXe dice hasta pronto!")
                 break
 
         self.disable()
@@ -174,7 +174,7 @@ class ServiceManager(object):
     def writing_mode(self):
 
         logging.info('Mode Writing')
-        # self.voicesynthetizer.speechit("Modo Escritura")
+        # self.voicesynthesizer.speech_it("Modo Escritura")
 
         while True:
             print(" Type any text to make use of Text to Speech infraestructure")
@@ -183,7 +183,7 @@ class ServiceManager(object):
                 self.disable()
                 break;
             else:
-                self.voicesynthetizer.speechit(x)
+                self.voicesynthesizer.speech_it(x)
             time.sleep(1)
 
     def module_mode(self, module, dtmf=None):
@@ -203,10 +203,10 @@ class ServiceManager(object):
             self.clock.hour()
         elif module == 'temperature':
             self.weather = Weather(self.voicesynthetizer)
-            self.weather.temperature()
+            self.weather.weather_temperature()
         elif module == 'weather':
             self.weather = Weather(self.voicesynthetizer)
-            self.weather.report()
+            self.weather.weather_report()
 
         # PS Activated Modules
 
@@ -278,7 +278,7 @@ class ServiceManager(object):
             self.voicemailer = VoiceMailer(self.voicesynthetizer)
             self.voicemailer.attend(dtmf)
         else:
-            self.voicesynthetizer.speechit("No hemos implementado tu comando! Lo siento!")
+            self.voicesynthetizer.speech_it("No hemos implementado tu comando! Lo siento!")
 
         self.disable()
 

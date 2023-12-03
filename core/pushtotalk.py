@@ -1,13 +1,12 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
+
 import subprocess
 import configparser
 import logging
 import serial
-import subprocess
-import sys
-import time
-
+from pydub import AudioSegment
+from pydub.playback import play
 from core.irlp import Irlp
 
 class PushToTalk(object):
@@ -24,11 +23,10 @@ class PushToTalk(object):
         self.irlp = Irlp()
 
     def __del__(self):
-        if (self.port):
+        if self.port:
             self.port.close()
 
-    def openport(self):
-
+    def open_port(self):
         logging.info('Push To Talk Open Port')
         try:
             self.irlp.busy()
@@ -37,25 +35,28 @@ class PushToTalk(object):
             self.port.write("\r\nLet's push the PTT")
             self.port.write("Confirm PTT")
             self.port.flush()
-        except:
-            pass
+        except Exception as e:
+            logging.error(f'Error opening port: {e}')
 
-    def closeport(self):
-
-        logging.info('Push To Talk Open Port')
+    def close_port(self):
+        logging.info('Push To Talk Close Port')
         try:
             self.irlp.forceunptt()
             self.port.close()
-        except:
-            pass
+        except Exception as e:
+            logging.error(f'Error closing port: {e}')
 
-    def message(self, msg):
+    def play_audio(self, audio_path):
+        audio = AudioSegment.from_file(audio_path)
+        play(audio)
 
+    def message(self, resource_type, msg):
         logging.info('Push To Talk Message')
-        self.openport()
+        self.open_port()
         print(msg)
-        proc = subprocess.call(msg, shell=True)
+        if resource_type == "text":
+            subprocess.call(msg, shell=True)
+        elif resource_type == "audio":
+            self.play_audio(msg)
         logging.info(msg)
-        self.closeport()
-
-# End of File
+        self.close_port()
