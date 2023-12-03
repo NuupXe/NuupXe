@@ -22,7 +22,7 @@ class Aprstt(object):
         self.aprs = AprsNet()
         self.phonetic = Phonetic()
 
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.path = "configuration/aprstt.config"
         self.conf.read(self.path)
 

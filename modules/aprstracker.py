@@ -38,7 +38,7 @@ class AprsTracker(object):
         self.phonetic = Phonetic()
         self.aprsfi = AprsFi()
 
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.path = "configuration/general.config"
         self.conf.read(self.path)
 

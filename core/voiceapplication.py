@@ -10,7 +10,7 @@ class VoiceApplication(object):
 
     def __init__(self):
         self.irlp = Irlp()
-        conf = ConfigParser.ConfigParser()
+        conf = configparser.ConfigParser()
         conf.read("configuration/services.config")
         self.witaccesstoken = conf.get("wit", "accesstoken")
 

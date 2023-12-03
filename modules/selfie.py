@@ -23,7 +23,7 @@ class Selfie(object):
     def setup(self):
 
         logging.info('Selfie Setup')
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.path = "configuration/general.config"
         self.conf.read(self.path)
         self.hashtag = self.conf.get("system", "hashtag")

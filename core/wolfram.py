@@ -10,7 +10,7 @@ class Wolfram(object):
     def __init__(self):
 
         logging.info('Wolfram')
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.path = "configuration/services.config"
         self.conf.read(self.path)
         appid=self.conf.get("wolfram", "appid")
