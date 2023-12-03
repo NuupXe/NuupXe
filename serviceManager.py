@@ -19,6 +19,9 @@ from core.irlp import Irlp
 from core.observer import Subscriber, Publisher
 from core.phonetic import Phonetic
 from core.voicesynthesizer import VoiceSynthesizer
+from apscheduler.schedulers.background import BackgroundScheduler
+from concurrent.futures import ThreadPoolExecutor as ThreadPool
+from apscheduler.triggers.cron import CronTrigger
 
 # Production
 
@@ -76,7 +79,7 @@ class ServiceManager(object):
         self.voicecommand = VoiceCommand(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
-        self.wolframalpha = WolframAlpha(self.voicesynthetizer)
+        #self.wolframalpha = WolframAlpha(self.voicesynthetizer)
 
         # Experimental Modules
         self.assistant = Assistant(self.voicesynthetizer)
@@ -121,12 +124,6 @@ class ServiceManager(object):
         if self.scheduler_status:
             self.scheduler.shutdown()
 
-    def bing_mode(self):
-
-        logging.info('Mode Bing')
-        self.sstv = SSTV(self.voicesynthetizer)
-        self.sstv.download()
-
     def observer_mode(self):
 
         logging.info('Mode Observer')
@@ -152,9 +149,9 @@ class ServiceManager(object):
     def scheduler_mode(self):
 
         logging.info('Mode Scheduler')
-        self.voicesynthesizer.speech_it("Modo Planificador")
-        """
-        self.scheduler = Scheduler(misfire_grace_time=900, coalesce=True, threadpool=ThreadPool(max_threads=1))
+        self.voicesynthetizer.speech_it("Modo Planificador")
+
+        self.scheduler = BackgroundScheduler(misfire_grace_time=900, coalesce=True, threadpool=ThreadPool(max_workers=1))
         self.schedule()
         self.scheduler.start()
         self.schedule_print()
@@ -165,25 +162,25 @@ class ServiceManager(object):
             if self.irlp.active():
                 time.sleep(5)
                 self.irlp.busy()
-                self.voicesynthesizer.speech_it("Se ha activado el nodo, Proyecto NuupXe dice hasta pronto!")
+                self.voicesynthetizer.speech_it("Se ha activado el nodo, Proyecto NuupXe dice hasta pronto!")
                 break
 
         self.disable()
-        """
+
 
     def writing_mode(self):
 
         logging.info('Mode Writing')
-        # self.voicesynthesizer.speech_it("Modo Escritura")
+        # self.voicesynthetizer.speech_it("Modo Escritura")
 
         while True:
             print(" Type any text to make use of Text to Speech infraestructure")
-            x = raw_input(" Type 'e' for exit: ")
+            x = input(" Type 'e' for exit: ")
             if x.lower() == 'e':
                 self.disable()
                 break;
             else:
-                self.voicesynthesizer.speech_it(x)
+                self.voicesynthetizer.speech_it(x)
             time.sleep(1)
 
     def module_mode(self, module, dtmf=None):
@@ -217,7 +214,7 @@ class ServiceManager(object):
             self.aprstracker.localize()
         elif module == 'news':
             self.news = News(self.voicesynthetizer)
-            self.news.getitems()
+            self.news.get_items()
         elif module == 'meteorology':
             self.meteorology = Meteorology(self.voicesynthetizer)
             self.meteorology.conagua_clima()
@@ -285,7 +282,7 @@ class ServiceManager(object):
     def voice_mode(self, text):
         logging.info('Voice Mode')
         try:
-            self.voicesynthetizer.speechit(text)
+            self.voicesynthetizer.speech_it(text)
         except (StopIteration, KeyboardInterrupt, SystemExit):
             pass
 
@@ -294,7 +291,7 @@ class ServiceManager(object):
         phonetic = Phonetic()
         try:
             text = ' '.join(phonetic.decode(text))
-            self.voicesynthetizer.speechit(text)
+            self.voicesynthetizer.speech_it(text)
         except (StopIteration, KeyboardInterrupt, SystemExit):
             pass
 
@@ -304,31 +301,33 @@ class ServiceManager(object):
     def schedule(self):
 
         # Production Modules
-        self.scheduler.add_cron_job(self.clock.date, month='*', day_of_week='*', hour='06,12,22', minute ='00', second='00')
-        self.scheduler.add_cron_job(self.clock.hour, month='*', day_of_week='*', hour='*', minute ='*/15', second='00')
-        self.scheduler.add_cron_job(self.identification.identify, month='*', day_of_week='*', hour='*', minute ='*/30', second='00')
-        self.scheduler.add_cron_job(self.selfie.get, month='*', day_of_week='*', hour='00,04,08,14,19', minute ='00', second='00')
-        self.scheduler.add_cron_job(self.weather.report, month='*', day_of_week='*', hour='*/2', minute ='00', second='00')
+        self.scheduler.add_job(self.clock.date, trigger=CronTrigger(month='*', day_of_week='*', hour='6,12,22', minute='0', second='0'))
+        self.scheduler.add_job(self.clock.hour, trigger=CronTrigger(month='*', day_of_week='*', hour='*', minute='*/15', second='0'))
+        self.scheduler.add_job(self.identification.identify, trigger=CronTrigger(month='*', day_of_week='*', hour='*', minute='*/30', second='0'))
+        self.scheduler.add_job(self.selfie.get, trigger=CronTrigger(month='*', day_of_week='*', hour='0,4,8,14,19', minute='0', second='0'))
+        self.scheduler.add_job(self.weather.weather_report, trigger=CronTrigger(month='*', day_of_week='*', hour='*/2', minute='0', second='0'))
+        self.scheduler.add_job(self.sstv.decode, trigger=CronTrigger(month='*', day='*', hour='0,4,8,14,19', minute='0', second='0'))
 
         # Experimental Modules
-        self.scheduler.add_cron_job(self.seismology.SismologicoMX, month='*', day='*', hour='*/4', minute ='00', second='00')
-        self.scheduler.add_cron_job(self.news.getitems, month='*', day='*', hour='*/4', minute ='00', second='00')
-        self.scheduler.add_cron_job(self.meteorology.conagua_clima, month='*', day='*', hour='*', minute ='15', second='00')
-        self.scheduler.add_cron_job(self.messages.stations, month='*', day='*', hour='*/4', minute ='00', second='00')
-        self.scheduler.add_cron_job(self.sstv.decode, month='*', day='*', hour='00,04,08,14,19', minute ='00', second='00')
+        self.scheduler.add_job(self.seismology.SismologicoMX, trigger=CronTrigger(month='*', day='*', hour='*/4', minute='0', second='0'))
+        self.scheduler.add_job(self.news.getitems, trigger=CronTrigger(month='*', day='*', hour='*/4', minute='0', second='0'))
+        self.scheduler.add_job(self.meteorology.conagua_clima, trigger=CronTrigger(month='*', day='*', hour='*', minute='15', second='0'))
+        self.scheduler.add_job(self.messages.stations, trigger=CronTrigger(month='*', day='*', hour='*/4', minute='0', second='0'))
+        self.scheduler.add_job(self.sstv.decode, trigger=CronTrigger(month='*', day='*', hour='0,4,8,14,19', minute='0', second='0'))
+        self.scheduler.add_job(self.selfie.get, trigger=CronTrigger(month='*', day_of_week='*', hour='0,4,8,14,19', minute='0', second='0'))
 
-	# Learning Modules, AREJ
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/arej.radioclubs'],month='*',day_of_week='*',hour='7,12,17',minute ='00',second='00')
+        # Learning Modules, AREJ
+        self.scheduler.add_job(self.messages.readfile, args=['learning/arej.radioclubs'], trigger=CronTrigger(month='*', day_of_week='*', hour='7,12,17', minute='0', second='0'))
 
         # Learning Modules, Morse
-        self.scheduler.add_cron_job(self.morseteacher.learn, month='*', day='*', hour='07,12,17', minute ='30', second='00')
-        self.scheduler.add_cron_job(self.morseteacher.contest, month='*', day='*', hour='07,12,17', minute ='45', second='00')
+        self.scheduler.add_job(self.morseteacher.learn, trigger=CronTrigger(month='*', day='*', hour='7,12,17', minute='30', second='0'))
+        self.scheduler.add_job(self.morseteacher.contest, trigger=CronTrigger(month='*', day='*', hour='7,12,17', minute='45', second='0'))
 
         # Learning Modules, Reglamentos
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.1'], month='*', day_of_week='mon', hour='08,13,18', minute ='00', second='00')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.2'], month='*', day_of_week='tue', hour='08,13,18', minute ='00', second='00')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.3'], month='*', day_of_week='wed', hour='08,13,18', minute ='00', second='00')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.4'], month='*', day_of_week='thu', hour='08,13,18', minute ='00', second='00')
-        self.scheduler.add_cron_job(self.messages.readfile,args=['learning/reglamentos.5'], month='*', day_of_week='fri', hour='08,13,18', minute ='00', second='00')
+        self.scheduler.add_job(self.messages.readfile, args=['learning/reglamentos.1'], trigger=CronTrigger(month='*', day_of_week='mon', hour='8,13,18', minute='0', second='0'))
+        self.scheduler.add_job(self.messages.readfile, args=['learning/reglamentos.2'], trigger=CronTrigger(month='*', day_of_week='tue', hour='8,13,18', minute='0', second='0'))
+        self.scheduler.add_job(self.messages.readfile, args=['learning/reglamentos.3'], trigger=CronTrigger(month='*', day_of_week='wed', hour='8,13,18', minute='0', second='0'))
+        self.scheduler.add_job(self.messages.readfile, args=['learning/reglamentos.4'], trigger=CronTrigger(month='*', day_of_week='thu', hour='8,13,18', minute='0', second='0'))
+        self.scheduler.add_job(self.messages.readfile, args=['learning/reglamentos.5'], trigger=CronTrigger(month='*', day_of_week='fri', hour='8,13,18', minute='0', second='0'))
 
 # End of File
