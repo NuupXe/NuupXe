@@ -11,10 +11,10 @@ from core.xvoice import playAudio
 
 class xSpeechRecognition(object):
 
-    def __init__(self, engine='google', wavfile='voice.wav'):
+    def __init__(self, engine='google', wavfile='/tmp/voice.wav'):
         self.directorycurrent = os.path.dirname(os.path.realpath(__file__))
         self.engine = engine
-        self.wavfile = self.directorycurrent + '/files/' + wavfile
+        self.wavfile = wavfile
 
         self.r = sr.Recognizer()
         with sr.WavFile(self.wavfile) as self.source:

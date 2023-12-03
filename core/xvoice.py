@@ -10,7 +10,7 @@ import wave
 
 class xVoice(object):
 
-    def __init__(self, voicefile="voice.wav"):
+    def __init__(self, voicefile="/tmp/voice.wav"):
         self.directorycurrent = os.path.dirname(os.path.realpath(__file__))
         self.voicefile = self.directorycurrent + '/files/' + voicefile
         self.proc = None

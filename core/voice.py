@@ -8,7 +8,7 @@ from core.irlp import Irlp
 class Voice(object):
 
     def __init__(self):
-        self.filename = "voice.wav"
+        self.filename = "/tmp/voice.wav"
         self.proc = None
         self.irlp = Irlp()
 
