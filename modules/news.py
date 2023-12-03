@@ -1,81 +1,77 @@
 import logging
-import string
-import sys
 import feedparser
+import random
 import threading
-import unicodedata
 
 from core.alive import alive
+from bs4 import BeautifulSoup
 
-COMMON_CHANNEL_PROPERTIES = [
-    ('Channel title:', 'title', None),
-    ('Channel description:', 'description', 150),
-    ('Channel URL:', 'link', None),
-]
-
-COMMON_ITEM_PROPERTIES = [
-    ('Item title:', 'title', None),
-    ('Item description:', 'description', 150),
-    ('Item URL:', 'link', None),
-]
-
-INDENT = u' '*4
+INDENT = u' ' * 4
 
 class News(threading.Thread):
+    """
+    The News class fetches news items from RSS feeds and reads them using a voice synthesizer.
+    """
 
     def __init__(self, voicesynthetizer):
-
         self.modulename = 'News'
         self.url = None
         self.parsedurl = None
         self.channelname = None
-        self.itemsnumber =  None
+        self.itemsnumber = None
         threading.Thread.__init__(self)
         self.speak = voicesynthetizer
         self.initialize()
 
     def initialize(self):
-        self.seturl("http://www.eluniversal.com.mx/rss/universalmxm.xml")
-        self.seturl("http://www.eluniversal.com.mx/rss/notashome.xml")
-        self.seturl("http://www.eluniversal.com.mx/rss/computo.xml")
-        self.parseurl()
-        self.setchannel("national")
-        self.setitemsnumber("1")
-        self.gettitle()
+        rss_urls = [
+            #"http://www.reforma.com/rss/portada.xml",
+            #"https://wwww.vanguardia.com.mx/rss.xml",
+            "https://www.elsiglodetorreon.com.mx/index.xml"
+            # Add more RSS URLs here
+        ]
+        self.set_url(random.choice(rss_urls))
+        print(self.url)
+        self.parse_url()
+        self.parse_url()
+        self.set_channel("national")
+        self.set_items_number("1")
+        self.get_title()
 
-    def seturl(self, url):
+    def set_url(self, url):
         self.url = url
 
-    def geturl(self):
+    def get_url(self):
         return self.url
 
-    def parseurl(self):
+    def parse_url(self):
         self.parsedurl = feedparser.parse(self.url)
 
-    def setchannel(self, channelname):
+    def set_channel(self, channelname):
         self.channelname = channelname
 
-    def getchannel(self):
+    def get_channel(self):
         return self.channelname
 
-    def setitemsnumber(self, itemsnumber):
+    def set_items_number(self, itemsnumber):
         self.itemsnumber = itemsnumber
 
-    def channels(self):
-        pass
-
-    def getitemsnumber(self):
+    def get_items_number(self):
         return self.itemsnumber
 
-    def gettitle(self):
+    def get_title(self):
         newsdata = self.parsedurl
         channel = newsdata.feed
 
-    def getitems(self):
-
+    def get_items(self):
+        """
+        Fetch news items and read them using a voice synthesizer.
+        """
         logging.info('News Get Items')
         newsdata = self.parsedurl
+        #print(newsdata)
         items = newsdata.entries
+        #print(items)
 
         for item in items[0:2]:
             messagetitle = item['title'].replace("&quot;", "")
@@ -86,7 +82,10 @@ class News(threading.Thread):
                 message = messagetitle
             if not messagedescription.startswith("<img"):
                 message = message + ', ' + messagedescription
-            self.speak.speechit(message)
-            alive(modulename=self.modulename, modulemessage=message)
+            message = BeautifulSoup(message, 'html.parser')
+            message = message.get_text()
+            print(message)
+            self.speak.speech_it(message)
+            # alive(modulename=self.modulename, modulemessage=message)
 
 # End of File

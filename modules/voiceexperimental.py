@@ -28,13 +28,13 @@ class VoiceExperimental(object):
 
         logging.info('Voice Experimental Setup')
         self.voicerecognition.languageset('spanish')
-        self.voicesynthetizer.setlanguage("spanish")
+        self.voicesynthetizer._set_language_argument("spanish")
 
     def cleanup(self):
 
         logging.info('Voice Experimental Cleanup')
         self.voicerecognition.languageset('spanish')
-        self.voicesynthetizer.setlanguage("spanish")
+        self.voicesynthetizer._set_language_argument("spanish")
 
     def listen(self):
 

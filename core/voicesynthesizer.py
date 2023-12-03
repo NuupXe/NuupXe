@@ -7,7 +7,7 @@ class VoiceSynthesizer(logging.Handler):
     def __init__(self, synthesizer="openai", language="spanish"):
         self.synthesizer = synthesizer
         self.language = language
-        self.language_argument = self._set_language_argument()
+        self.language_argument = self._set_language_argument(language)
         self.text_to_speech_argument = self._set_text_to_speech_argument()
 
     def set_synthesizer(self, synthesizer):
@@ -18,7 +18,7 @@ class VoiceSynthesizer(logging.Handler):
         self.language_argument = self._set_language_argument()
         self.text_to_speech_argument = self._set_text_to_speech_argument()
 
-    def _set_language_argument(self):
+    def _set_language_argument(self, language):
         if self.synthesizer == "festival":
             return "--language " + self.language
         elif self.synthesizer == "espeak":

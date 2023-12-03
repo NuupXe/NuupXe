@@ -30,7 +30,6 @@ if __name__ == "__main__":
     irlp.forceunptt()
 
     parser = argparse.ArgumentParser(description='NuupXe Project, Voice Services Experimental Project')
-    parser.add_argument('-b', '--bing', help='Bing Mode')
     parser.add_argument('-m', '--module', help='Module Mode')
     parser.add_argument('-p', '--phonetic', help='Phonetic Mode')
     parser.add_argument('-s', '--server', help='Server Mode')
@@ -59,9 +58,6 @@ if __name__ == "__main__":
         voicesynthetizer.speech_it("Deshabilitando Proyecto NuupXe, hasta pronto!")
         subprocess.call('./nuupxe.sh stop', shell=True)
         sys.exit(1)
-
-    if args.bing:
-        experimental.bing_mode()
 
     elif args.module:
         experimental.module_mode(args.module, args.dtmf)
