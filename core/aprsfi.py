@@ -12,7 +12,7 @@ class AprsFi(object):
         logging.info('[AprsFi]')
         self.callsign = callsign
         self.data = data
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.services = "configuration/services.config"
         self.conf.read(self.services)
         self.api_key = self.conf.get("aprsfi", "api_key")

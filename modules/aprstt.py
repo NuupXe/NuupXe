@@ -8,7 +8,7 @@ import sys
 
 from core.alive import alive
 from core.aprsnet import AprsNet
-from core.voicesynthetizer import VoiceSynthetizer
+from core.voicesynthesizer import VoiceSynthesizer
 from core.phonetic import Phonetic
 
 from modules.aprstracker import AprsTracker

@@ -13,7 +13,7 @@ class SpeechRecognition(object):
 
         self.language = 'es-MX'
         self.flaccont = None
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.path = "configuration/services.config"
         self.conf.read(self.path)
 

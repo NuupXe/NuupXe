@@ -6,7 +6,7 @@ import re
 
 from core.twitterc import TwitterC
 from core.voicerecognition import VoiceRecognition
-from core.voicesynthetizer import VoiceSynthetizer
+from core.voicesynthesizer import VoiceSynthesizer
 
 from modules.voicemail import VoiceMail
 from modules.clock import Clock

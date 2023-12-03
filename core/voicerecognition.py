@@ -29,8 +29,10 @@ class VoiceRecognition(object):
 
     def __del__(self):
 
-        status, output = commands.getstatusoutput("rm " + self.audiofilewav)
-        status, output = commands.getstatusoutput("rm " + self.audiofileflac)
+        command = "rm " + self.audiofilewav
+        subprocess.call(command, shell=True)
+        command = "rm " + self.audiofileflac
+        subprocess.call(command, shell=True)
 
     def languageset(self, language):
 
@@ -50,10 +52,12 @@ class VoiceRecognition(object):
         logging.info('Voice Recognition Record')
 
         if self.agent == 'nexiwave':
-            status, output = commands.getstatusoutput("arecord -vv -f cd -d 5 " + self.audiofilewav)
+            command = 'arecord -vv -f cd -d 5 ' + self.audiofilewav
+            subprocess.call(command, shell=True)
         elif self.agent == 'google':
             self.voice.record()
-            commands.getstatusoutput("flac -f -o " + self.audiofileflac + " --channels=1 --sample-rate=48000 " + self.audiofilewav)
+            command = "flac -f -o " + self.audiofileflac + " --channels=1 --sample-rate=48000 " + self.audiofilewav
+            subprocess.call(command, shell=True)
 
     def recognize(self, speech):
 

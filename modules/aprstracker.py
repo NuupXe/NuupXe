@@ -13,7 +13,7 @@ import unicodedata
 from core.alive import alive
 
 from core.aprsfi import AprsFi
-from core.voicesynthetizer import VoiceSynthetizer
+from core.voicesynthesizer import VoiceSynthesizer
 from core.phonetic import Phonetic
 
 days = {'Monday': 'Lunes', 'Tuesday': 'Martes', 'Wednesday': 'Miercoles',

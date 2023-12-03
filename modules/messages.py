@@ -11,7 +11,7 @@ from datetime import date
 from core.alive import alive
 from core.morse import Morse
 from core.phonetic import Phonetic
-from core.voicesynthetizer import VoiceSynthetizer
+from core.voicesynthesizer import VoiceSynthesizer
 
 class Messages(object):
 

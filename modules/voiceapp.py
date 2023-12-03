@@ -7,7 +7,7 @@ import time
 
 from core.alive import alive
 from core.voiceapplication import VoiceApplication
-from core.voicesynthetizer import VoiceSynthetizer
+from core.voicesynthesizer import VoiceSynthesizer
 from pprint import pprint
 
 class VoiceApp(object):

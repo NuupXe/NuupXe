@@ -12,7 +12,7 @@ from random import randint
 from core.morse import Morse
 from core.phonetic import Phonetic
 from core.voicerecognition import VoiceRecognition
-from core.voicesynthetizer import VoiceSynthetizer
+from core.voicesynthesizer import VoiceSynthesizer
 
 class MorseTeacher(object):
 
