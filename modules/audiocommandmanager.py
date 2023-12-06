@@ -9,8 +9,9 @@ from core.voicerecognition import VoiceRecognition
 from modules.clock import Clock
 from modules.identification import Identification
 from modules.weather import Weather
+from modules.querymaster import QueryMaster
 
-class VoiceCommand(object):
+class AudioCommandManager(object):
 
     def __init__(self, voicesynthetizer):
 
@@ -22,11 +23,12 @@ class VoiceCommand(object):
         self.clock = Clock(voicesynthetizer)
         self.identification = Identification(voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
+        self.querymaster = QueryMaster(self.voicesynthetizer)
 
     def presentation(self):
 
         logging.info('Voice Command Presentation')
-        self.voicesynthetizer.speechit("Hola! Como puedo ayudarte?")
+        self.voicesynthetizer.speech_it("Hola! Como puedo ayudarte?")
 
     def decode(self, output):
 
@@ -34,7 +36,7 @@ class VoiceCommand(object):
 
         if re.search(r'coman', output, re.M|re.I) or re.search(r'disponi', output, re.M|re.I):
             logging.info('Voice Command Decode Available Commands')
-            self.voicesynthetizer.speechit("Comandos Disponibles? Identificacion, Hora, Fecha, Clima")
+            self.voicesynthetizer.speech_it("Comandos Disponibles? Identificacion, Hora, Fecha, Clima")
         elif re.search(r'identif', output, re.M|re.I):
             logging.info('Voice Command Decode Identification')
             self.identification.identify()
@@ -50,9 +52,12 @@ class VoiceCommand(object):
         elif re.search(r'tempe', output, re.M|re.I) or re.search(r'tura', output, re.M|re.I):
             logging.info('Voice Command Decode Temperature')
             self.weather.temperature()
+        elif re.search(r'pregun', output, re.M|re.I) or re.search(r'gunta', output, re.M|re.I):
+            logging.info('Voice Command Decode Query master')
+            self.querymaster.listen()
         else:
             logging.error('Voice Command Unknown!')
-            self.voicesynthetizer.speechit("No entendimos tu comando!")
+            self.voicesynthetizer.speech_it("No entendimos tu comando!")
 
     def listen(self):
 
@@ -70,7 +75,7 @@ class VoiceCommand(object):
                 self.voicerecognition.record()
                 output = self.voicerecognition.recognize('False')
                 if re.search(r'canc', output, re.M|re.I):
-                    self.voicesynthetizer.speechit("Alguien me hablo?. Soy NuupXe... Hasta pronto!")
+                    self.voicesynthetizer.speech_it("Alguien me hablo?. Soy NuupXe... Hasta pronto!")
                     break
                 print(output)
 

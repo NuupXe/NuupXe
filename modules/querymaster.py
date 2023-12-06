@@ -1,14 +1,17 @@
 #!/usr/bin/python
 
+import configparser
 import json
 import logging
+
+from openai import OpenAI
 
 from core.alive import alive
 from core.emailx import Emailx
 from core.twitterc import TwitterC
 from core.voicerecognition import VoiceRecognition
 
-class VoiceExperimental(object):
+class QueryMaster(object):
 
     def __init__(self, voicesynthetizer):
 
@@ -21,8 +24,7 @@ class VoiceExperimental(object):
         self.setup()
 
     def __del__(self):
-
-        self.cleanup()
+        pass
 
     def setup(self):
 
@@ -36,18 +38,32 @@ class VoiceExperimental(object):
         self.voicerecognition.languageset('spanish')
         self.voicesynthetizer._set_language_argument("spanish")
 
+    def query(self, message):
+
+        services = configparser.ConfigParser()
+        path = "configuration/services.config"
+        services.read(path)
+        api_key = services.get("openai", "api_key")
+        client = OpenAI(api_key=api_key)
+        response = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": message,
+                }
+            ],
+            model="gpt-3.5-turbo-1106",
+        )
+        return(response.model_dump()['choices'][0]['message']['content'])
+
+
     def listen(self):
 
         logging.info('Voice Experimental Listen')
-        self.voicesynthetizer.speechit('Hola! Dime tu frase!')
+        self.voicesynthetizer.speech_it('Hola! Cual es tu pregunta?')
         self.voicerecognition.record()
         question = self.voicerecognition.recognize('False')
-        logging.info('Phrase? ' + question)
-        self.voicesynthetizer.speechit(question)
-        question = '#VoiceRecognition ' + question.capitalize()
-        self.twitterc.timeline_set('#' + self.modulename + ' ' + question, media=None)
-        self.emailx.create('nuupxe@gmail.com', 'Voice Experimental Listen', question)
-        self.emailx.send()
-        alive(modulename=self.modulename, modulemessage=question)
+        answer = self.query(question)
+        self.voicesynthetizer.speech_it(answer)
 
 # End of File

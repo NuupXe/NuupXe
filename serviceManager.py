@@ -35,7 +35,7 @@ from modules.seismology import Seismology
 from modules.selfie import Selfie
 from modules.sstv import SSTV
 from modules.voiceapp import VoiceApp
-from modules.voicecommand import VoiceCommand
+from modules.audiocommandmanager import AudioCommandManager
 from modules.voicemail import VoiceMail
 from modules.weather import Weather
 from modules.wolframalpha import WolframAlpha
@@ -45,7 +45,7 @@ from modules.wolframalpha import WolframAlpha
 from modules.assistant import Assistant
 from modules.messages import Messages
 from learning.morseteacher import MorseTeacher
-from modules.voiceexperimental import VoiceExperimental
+from modules.querymaster import QueryMaster
 from modules.voicemailer import VoiceMailer
 
 class ServiceManager(object):
@@ -76,7 +76,7 @@ class ServiceManager(object):
         self.meteorology = Meteorology(self.voicesynthetizer)
         self.news = News(self.voicesynthetizer)
         self.selfie = Selfie(self.voicesynthetizer)
-        self.voicecommand = VoiceCommand(self.voicesynthetizer)
+        self.audiocommandmanager = AudioCommandManager(self.voicesynthetizer)
         self.voicemail = VoiceMail(self.voicesynthetizer)
         self.weather = Weather(self.voicesynthetizer)
         #self.wolframalpha = WolframAlpha(self.voicesynthetizer)
@@ -88,7 +88,7 @@ class ServiceManager(object):
         self.seismology = Seismology(self.voicesynthetizer)
         self.sstv = SSTV(self.voicesynthetizer)
         self.voiceapp = VoiceApp(self.voicesynthetizer)
-        self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
+        self.querymaster = QueryMaster(self.voicesynthetizer)
         self.voicemailer = VoiceMailer(self.voicesynthetizer)
 
     def dtmf_setup(self,dtmf):
@@ -99,8 +99,8 @@ class ServiceManager(object):
         'PS3'  : 'meteorology',
         'PS4'  : 'seismology',
         'PS5'  : 'selfie',
-        'PS6'  : 'voicecommand',
-        'PS7'  : 'voiceexperimental',
+        'PS6'  : 'audiocommandmanager',
+        'PS7'  : 'querymaster',
         'PS8'  : 'wolframalpha',
         'PS9'  : 'voicemail',
         'PS10' : 'sstv',
@@ -221,9 +221,9 @@ class ServiceManager(object):
         elif module == 'selfie':
             self.selfie = Selfie(self.voicesynthetizer)
             self.selfie.get()
-        elif module == 'voicecommand':
-            self.voicecommand = VoiceCommand(self.voicesynthetizer)
-            self.voicecommand.listen()
+        elif module == 'audiocommandmanager':
+            self.audiocommandmanager = AudioCommandManager(self.voicesynthetizer)
+            self.audiocommandmanager.listen()
         elif module == 'voiceapp':
             self.voiceapp = VoiceApp(self.voicesynthetizer)
             self.voiceapp.application()
@@ -265,12 +265,12 @@ class ServiceManager(object):
         elif module == 'assistant':
             self.assistant = Assistant(self.voicesynthetizer)
             self.assistant.demo1()
-        elif module == 'voicebackground':
-            self.voicecommand = VoiceCommand(self.voicesynthetizer)
-            self.voicecommand.background()
-        elif module == 'voiceexperimental':
-            self.voiceexperimental = VoiceExperimental(self.voicesynthetizer)
-            self.voiceexperimental.listen()
+        elif module == 'audiocommandmanager':
+            self.audiocommandmanager = AudioCommandManager(self.voicesynthetizer)
+            self.audiocommandmanager.background()
+        elif module == 'querymaster':
+            self.querymaster = QueryMaster(self.voicesynthetizer)
+            self.querymaster.listen()
         elif module == 'voicemailer':
             self.voicemailer = VoiceMailer(self.voicesynthetizer)
             self.voicemailer.attend(dtmf)

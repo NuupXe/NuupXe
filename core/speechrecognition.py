@@ -4,8 +4,9 @@ import logging
 import sys, os, json, urllib, time
 import subprocess
 import configparser
-
 import requests
+
+from openai import OpenAI
 
 class SpeechRecognition(object):
 
@@ -59,22 +60,33 @@ class SpeechRecognition(object):
 
     def nexiwave(self, audiofile):
 
-        # Copyright 2012 Nexiwave Canada. All rights reserved.
-        # Nexiwave Canada PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
         self.username = self.conf.get("nexiwave", "username")
         self.password = self.conf.get("nexiwave", "password")
         filename = audiofile
         """Transcribe an audio file using Nexiwave"""
         url = 'https://api.nexiwave.com/SpeechIndexing/file/storage/' + self.username +'/recording/?authData.passwd=' + self.password + '&auto-redirect=true&response=application/json'
-        # To receive transcript in plain text, instead of html format, comment this line out (for SMS, for example)
-        # url = url + '&transcriptFormat=html'
-        # Ready to send:
         sys.stderr.write("Send audio for transcript with " + url + "\n")
         r = requests.post(url, files={'mediaFileData': open(filename,'rb')})
         data = r.json()
         transcript = data['text']
-        # Perform your magic here:
         print("Transcript for " + filename + " = " + transcript)
         return transcript
+
+    def openai(self, audiofile):
+
+        logging.info('SpeechRecognition OpenAI')
+        services = configparser.ConfigParser()
+        path = "configuration/services.config"
+        services.read(path)
+        api_key = services.get("openai", "api_key")
+
+        client = OpenAI(api_key=api_key)
+        transcript = client.audio.transcriptions.create(
+            model="whisper-1",
+            file=open(audiofile, "rb"),
+            language="es"
+        )
+
+        return transcript.text
 
 # End of File
