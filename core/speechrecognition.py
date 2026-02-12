@@ -1,10 +1,14 @@
 #!/usr/bin/python
 
 import logging
-import sys, os, json, urllib, time
+import sys
+import os
+import json
+import time
 import subprocess
 import configparser
 import requests
+import urllib.request
 
 from openai import OpenAI
 
@@ -31,8 +35,8 @@ class SpeechRecognition(object):
         self.key = self.conf.get("google", "api_key")
         #command = "curl -X POST --data-binary @'" + audiofile + "' --header 'Content-Type: audio/l16; rate=16000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=es-es&key=" + self.key +"'"
         command = "curl -X POST --data-binary @'" + audiofile + "' --header 'Content-Type: audio/x-flac; rate=48000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=" + self.language + "&key=" + self.key +"'"
-        status, output = commands.getstatusoutput(command)
-        return output
+        result = subprocess.run(command, shell=True, capture_output=True, text=True)
+        return result.stdout
 
     def audioread(self, audiofile):
 
@@ -49,11 +53,11 @@ class SpeechRecognition(object):
         speechurl = 'https://www.google.com/speech-api/v2/recognize?output=json&lang=' + self.language + '&key=' + self.key
         hrs = {"User-Agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7",
                'Content-type': 'audio/x-flac; rate=48000'}
-        req = urllib2.Request(speechurl, data=self.flaccont, headers=hrs)
+        req = urllib.request.Request(speechurl, data=self.flaccont, headers=hrs)
         logging.info("Sending request to Google TTS")
-        p = urllib2.urlopen(req)
+        p = urllib.request.urlopen(req)
         response = p.read()
-        response = response.split('\n', 1)[1]
+        response = response.decode('utf-8').split('\n', 1)[1]
         result = json.loads(response)['result'][0]['alternative'][0]['transcript']
         logging.info('Result: %s', result)
         return result
