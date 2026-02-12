@@ -26,6 +26,10 @@ pip-log.txt
 .coverage
 .tox
 nosetests.xml
+htmlcov/
+.pytest_cache/
+coverage.xml
+*.cover
 
 # Translations
 *.mo
@@ -34,3 +38,132 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# ============================================================================
+# NuupXe Specific
+# ============================================================================
+
+# Configuration files with secrets
+configuration/services.config
+configuration/general.config
+*.config
+!*.config.example
+
+# PID files
+*.pid
+/tmp/nuupxe.pid
+
+# Log files
+*.log
+output/*.log
+output/*.txt
+
+# Audio files (generated)
+output/audio/*.mp3
+output/audio/*.wav
+output/audio/*.ogg
+/tmp/audio.*
+
+# Temporary files
+/tmp/nuupxe/*
+*.tmp
+*.temp
+
+# ============================================================================
+# Development & IDE
+# ============================================================================
+
+# Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+virtualenv/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================================================
+# OS Specific
+# ============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+.directory
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ============================================================================
+# Python & Tools
+# ============================================================================
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pylint
+.pylint.d/
+
+# Black
+.black/
+
+# IPython
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# ============================================================================
+# Project Specific Ignores
+# ============================================================================
+
+# Generated QSL cards
+output/qsl/*.png
+output/qsl/*.jpg
+
+# SSTV images
+output/sstv/*
+
+# Selfie images
+output/selfie/*
+
+# Voice recordings
+output/voicemail/*.wav
+
+# Morse files (generated)
+morsefiles/generated/*
+
+# Database files (if added)
+*.db
+*.sqlite
+*.sqlite3

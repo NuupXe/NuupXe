@@ -1,0 +1,73 @@
+# NuupXe Services Configuration Example
+# Copy this file to services.config and fill in your API keys
+# IMPORTANT: Never commit the actual services.config file with real keys!
+
+[openai]
+# OpenAI API Key - Get from https://platform.openai.com/api-keys
+api_key = sk-your-api-key-here
+
+# Model Configuration
+model_chat = gpt-4-turbo-preview
+model_tts = tts-1
+model_stt = whisper-1
+voice_tts = nova
+max_tokens = 150
+temperature = 0.7
+
+[google]
+# Google API Key for Maps, TTS, etc.
+api_key = your-google-api-key-here
+
+[telegram]
+# Telegram Bot Token - Get from @BotFather
+token = your-telegram-bot-token-here
+chat_id = your-chat-id-here
+
+[twitter]
+# Twitter API Credentials - Get from https://developer.twitter.com
+consumer_key = your-consumer-key-here
+consumer_secret = your-consumer-secret-here
+access_token = your-access-token-here
+access_token_secret = your-access-token-secret-here
+
+[wolframalpha]
+# WolframAlpha App ID - Get from https://products.wolframalpha.com/api/
+app_id = your-app-id-here
+
+[weather]
+# OpenWeatherMap API Key - Get from https://openweathermap.org/api
+api_key = your-weather-api-key-here
+city = Guadalajara
+country_code = MX
+units = metric
+
+[email]
+# Email Configuration for Notifications
+smtp_server = smtp.gmail.com
+smtp_port = 587
+username = your-email@gmail.com
+password = your-app-password-here
+from_address = your-email@gmail.com
+
+[dropbox]
+# Dropbox API Token - Get from https://www.dropbox.com/developers
+access_token = your-dropbox-token-here
+
+[nexiwave]
+# Nexiwave Speech Recognition (if used)
+username = your-nexiwave-username
+password = your-nexiwave-password
+
+[station]
+# Your Station Information
+callsign = XE1ABC
+location = Guadalajara, Jalisco, Mexico
+grid_square = DM13
+operator_name = Your Name
+email = operator@example.com
+
+[irlp]
+# IRLP Configuration
+node_path = /home/irlp
+node_number = 1234
+active_file = /home/irlp/active

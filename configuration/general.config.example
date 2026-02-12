@@ -1,0 +1,113 @@
+# NuupXe General Configuration Example
+# Copy this file to general.config and customize for your installation
+
+[general]
+# Application Settings
+app_name = NuupXe
+version = 2.0.0
+environment = production
+log_level = INFO
+
+[paths]
+# Directory Paths
+output_dir = output
+log_dir = output
+audio_dir = output/audio
+temp_dir = /tmp/nuupxe
+pid_file = /tmp/nuupxe.pid
+
+[audio]
+# Audio Settings
+default_volume = 80
+audio_format = mp3
+sample_rate = 48000
+channels = 1
+
+[voice]
+# Voice Synthesizer Settings
+# Options: openai, google, espeak, festival
+default_synthesizer = openai
+default_language = spanish
+voice_speed = 1.0
+
+# OpenAI Voice Options: alloy, echo, fable, onyx, nova, shimmer
+openai_voice = nova
+
+[llm]
+# LLM Feature Configuration
+enable_conversation_memory = true
+max_conversation_history = 10
+conversation_timeout_minutes = 30
+
+# LLM Response Settings
+max_response_tokens = 150
+temperature = 0.7
+enable_context_aware = true
+
+# Rate Limiting
+max_requests_per_minute = 20
+rate_limit_enabled = true
+
+[features]
+# Feature Flags
+enable_qsl_generator = true
+enable_band_analysis = true
+enable_emergency_mode = true
+enable_net_scripts = true
+enable_exam_prep = true
+
+[scheduler]
+# Scheduler Configuration
+max_concurrent_jobs = 3
+misfire_grace_time = 900
+coalesce_jobs = true
+
+[cache]
+# Caching Configuration
+enable_cache = true
+cache_ttl_seconds = 300
+cache_tts_audio = true
+cache_api_responses = true
+
+[performance]
+# Performance Settings
+async_operations = true
+connection_pool_size = 10
+request_timeout = 30
+
+[security]
+# Security Settings
+validate_inputs = true
+sanitize_tts_input = true
+api_key_rotation_days = 90
+
+[modules]
+# Module Configuration
+# Enable/disable specific modules
+enable_weather = true
+enable_news = true
+enable_seismology = true
+enable_aprs = true
+enable_morse = true
+enable_sstv = true
+enable_voicemail = true
+enable_assistant = true
+
+[dtmf]
+# DTMF Command Configuration
+command_prefix = PS
+enable_dtmf_control = true
+require_authentication = false
+
+[identification]
+# Station Identification
+id_interval_minutes = 30
+id_format = long
+include_grid_square = true
+
+[social]
+# Social Media Integration
+enable_twitter = false
+enable_telegram = true
+auto_post_weather = false
+auto_post_seismology = true
