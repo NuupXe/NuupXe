@@ -54,7 +54,7 @@ class Assistant(object):
         self.command()
 
     def introduction1(self):
-        self.voicesynthetizer.speechit("Hola! Dime como puedo ayudarte?")
+        self.voicesynthetizer.speech_it("Hola! Dime como puedo ayudarte?")
         self.introduced = True
 
     def introduction2(self):
@@ -62,7 +62,7 @@ class Assistant(object):
             self.voicerecognition.record('5')
             output = self.voicerecognition.recognize('False')
             if re.search(r'hola', output, re.M|re.I) or re.search(r'nu', output, re.M|re.I):
-                self.voicesynthetizer.speechit("Hola! Dime como puedo ayudarte?")
+                self.voicesynthetizer.speech_it("Hola! Dime como puedo ayudarte?")
                 self.introduced = True
                 break
 
@@ -91,9 +91,9 @@ class Assistant(object):
             elif re.search(r'mensaje', output, re.M|re.I) or re.search(r'avis', output, re.M|re.I):
                 print('[NuupXe] Assistant Message')
                 if self.voicemail.status:
-                    self.voicesynthetizer.speechit("Mensaje existente!")
+                    self.voicesynthetizer.speech_it("Mensaje existente!")
                     while True:
-                        self.voicesynthetizer.speechit("Quieres escucharlo, borrarlo o salir de esta opcion")
+                        self.voicesynthetizer.speech_it("Quieres escucharlo, borrarlo o salir de esta opcion")
                         self.voicerecognition.record()
                         output = self.voicerecognition.recognize('False')
                         if re.search(r'escuchar', output, re.M|re.I):
@@ -104,30 +104,30 @@ class Assistant(object):
                             self.voicemail.erase()
                         elif re.search(r'salir', output, re.M|re.I):
                             print('[NuupXe] Assistant Message Quit')
-                            self.voicesynthetizer.speechit("Saliendo de Opcion Mensaje")
+                            self.voicesynthetizer.speech_it("Saliendo de Opcion Mensaje")
                             break
                         else:
                             self.voicemail.record()
                             self.voicemail.play()
                 elif re.search(r'dormir', output, re.M|re.I):
                     print('[NuupXe] Assistant Sleep')
-                    self.voicesynthetizer.speechit("Perfecto! Gracias! Dormire por los proximos 30 segundos")
+                    self.voicesynthetizer.speech_it("Perfecto! Gracias! Dormire por los proximos 30 segundos")
                     sleep(30)
-                    self.voicesynthetizer.speechit("Ya desperte! Que rica siesta!")
+                    self.voicesynthetizer.speech_it("Ya desperte! Que rica siesta!")
                 elif re.search(r'eventos', output, re.M|re.I):
                     print('[NuupXe] Assistant Bye')
-                    self.voicesynthetizer.speechit("El radioclub tiene 2 eventos proximos")
-                    self.voicesynthetizer.speechit("Boletin Tecnologico, Miercoles, 8:00 pm")
-                    self.voicesynthetizer.speechit("Junta Mensual, Jueves 8:00 pm, recuerda traer galletas")
+                    self.voicesynthetizer.speech_it("El radioclub tiene 2 eventos proximos")
+                    self.voicesynthetizer.speech_it("Boletin Tecnologico, Miercoles, 8:00 pm")
+                    self.voicesynthetizer.speech_it("Junta Mensual, Jueves 8:00 pm, recuerda traer galletas")
                 elif re.search(r'nada', output, re.M|re.I) or re.search(r'dios', output, re.M|re.I) or re.search(r'ativo', output, re.M|re.I):
                     print('[NuupXe] Assistant Bye')
-                    self.voicesynthetizer.speechit("Hasta pronto!")
+                    self.voicesynthetizer.speech_it("Hasta pronto!")
                     self.running = False
                     break
                 else:
                     print('[NuupXe] Assistant? Unknown!')
 
-                self.voicesynthetizer.speechit("Se ofrece algo mas?")
+                self.voicesynthetizer.speech_it("Se ofrece algo mas?")
 
     def foo(self):
         while(self.running):
@@ -136,12 +136,12 @@ class Assistant(object):
 
     def get_user_input(self):
         while True:
-            x = raw_input("Tupe any text, Enter 'e' for exit: ")
+            x = input("Type any text, Enter 'e' for exit: ")
             if x.lower() == 'e':
                self.running = False
                break
             else:
-               self.voicesynthetizer.speechit(x)
+               self.voicesynthetizer.speech_it(x)
 
     def twitter(self):
         return
@@ -151,14 +151,14 @@ class Assistant(object):
 	
         while (self.running):
             print('[NuupXe] Assistante | Twitter Hello')
-	    #self.voicesynthetizer.speechit("Veamos")
+	    #self.voicesynthetizer.speech_it("Veamos")
             tstatus = self.twitterc.timeline_get('xe1gyq', 1)
             for status in tstatus:
                 self.newstatus = status['text']
                 if self.newstatus != self.oldstatus:
                     self.oldstatus = self.newstatus
-                    self.voicesynthetizer.speechit("Nuevo mensaje en cuenta de Twitter!")
-                    self.voicesynthetizer.speechit(self.newstatus)
+                    self.voicesynthetizer.speech_it("Nuevo mensaje en cuenta de Twitter!")
+                    self.voicesynthetizer.speech_it(self.newstatus)
             sleep(5)
 
     def go(self):

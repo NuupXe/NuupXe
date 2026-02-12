@@ -1,0 +1,95 @@
+# NuupXe Project Dependencies
+# Python 3.12+ Required
+
+# ============================================================================
+# Core AI/LLM Dependencies
+# ============================================================================
+openai>=1.10.0                    # OpenAI API for GPT, TTS, Whisper
+anthropic>=0.18.0                 # Optional: Claude API support
+
+# ============================================================================
+# Audio Processing
+# ============================================================================
+PyAudio>=0.2.13                   # Audio I/O
+pygame>=2.5.0                     # Audio playback
+SpeechRecognition>=3.10.0         # Speech recognition framework
+pySSTV>=0.5.0                     # Slow-scan television
+
+# ============================================================================
+# Scheduling & Task Management
+# ============================================================================
+APScheduler>=3.10.0               # Job scheduling
+python-dateutil>=2.8.2            # Date utilities
+pytz>=2023.3                      # Timezone support
+
+# ============================================================================
+# Communication & Messaging
+# ============================================================================
+telepot>=12.7                     # Telegram bot (legacy)
+pyTelegramBotAPI>=4.14.0          # Telegram bot API
+tweepy>=4.14.0                    # Twitter API
+twython>=3.9.1                    # Twitter API (alternative)
+dropbox>=11.36.2                  # Dropbox integration
+
+# ============================================================================
+# Weather & Location Services
+# ============================================================================
+pyowm>=3.3.0                      # OpenWeatherMap
+pygeocoder>=1.2.5                 # Geocoding services
+
+# ============================================================================
+# Data Processing & Parsing
+# ============================================================================
+feedparser>=6.0.10                # RSS/Atom feed parsing
+xmltodict>=0.13.0                 # XML to dict conversion
+numpy>=1.26.0                     # Numerical computing
+requests>=2.31.0                  # HTTP library
+beautifulsoup4>=4.12.0            # HTML/XML parsing
+lxml>=5.0.0                       # XML/HTML parser
+
+# ============================================================================
+# System & Utilities
+# ============================================================================
+psutil>=5.9.0                     # System and process utilities
+tendo>=0.3.0                      # Singleton instance control
+gitpython>=3.1.40                 # Git integration
+python-dotenv>=1.0.0              # Environment variable management
+
+# ============================================================================
+# Ham Radio Specific
+# ============================================================================
+wolframalpha>=5.0.0               # WolframAlpha API
+pyserial>=3.5                     # Serial communication (for radio hardware)
+
+# ============================================================================
+# Development & Code Quality
+# ============================================================================
+pylint>=3.0.0                     # Code linting
+black>=24.0.0                     # Code formatting
+mypy>=1.8.0                       # Type checking
+isort>=5.13.0                     # Import sorting
+flake8>=7.0.0                     # Style guide enforcement
+
+# ============================================================================
+# Testing
+# ============================================================================
+pytest>=7.4.0                     # Testing framework
+pytest-cov>=4.1.0                 # Coverage plugin
+pytest-asyncio>=0.21.0            # Async testing
+pytest-mock>=3.12.0               # Mocking support
+responses>=0.24.0                 # HTTP mocking
+
+# ============================================================================
+# Documentation
+# ============================================================================
+sphinx>=7.2.0                     # Documentation generator
+sphinx-rtd-theme>=2.0.0           # ReadTheDocs theme
+sphinx-autodoc-typehints>=1.25.0 # Type hints in docs
+
+# ============================================================================
+# Optional/Future Dependencies
+# ============================================================================
+# langchain>=0.1.0                # LLM framework (optional)
+# chromadb>=0.4.0                 # Vector database for memory (optional)
+# redis>=5.0.0                    # Caching backend (optional)
+# aiohttp>=3.9.0                  # Async HTTP client (optional)

@@ -5,7 +5,6 @@ import os
 import random
 import signal
 import sys
-import _thread
 import time
 import unicodedata
 
@@ -115,7 +114,8 @@ class ServiceManager(object):
 
         pid = str(os.getpid())
         logging.info('Process Id' + pid)
-        file(self.pidfile, 'w').write(pid)
+        with open(self.pidfile, 'w') as f:
+            f.write(pid)
 
     def disable(self):
 
