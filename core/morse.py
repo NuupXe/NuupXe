@@ -16,49 +16,48 @@ CODE = {
     '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.'
 }
 
+
 class Morse:
     def __init__(self):
-        self.configuration()
-
-    def configuration(self):
         self.message = ""
         self.oneunit = 0.3
         self.threeunits = 3 * self.oneunit
         self.sevenunits = 7 * self.oneunit
         self.morsefiles = 'morsefiles/'
 
-        self.conf = configparser.ConfigParser()
-        self.path = "configuration/general.config"
-        self.conf.read(self.path)
-        self.morseagent = self.conf.get("general", "morseagent")
+        conf = configparser.ConfigParser()
+        conf.read("configuration/general.config")
+        self.morseagent = conf.get("general", "morseagent")
 
         self.pushtotalk = PushToTalk()
 
+        if self.morseagent == 'pygame':
+            pygame.init()
+
     def verify(self, message):
-        keys = CODE.keys()
         for char in message:
-            if char.upper() not in keys and char != ' ':
-                sys.exit('Error: The character ' + char + ' cannot be translated to Morse Code')
+            if char.upper() not in CODE and char != ' ':
+                raise ValueError(f'Character {char!r} cannot be translated to Morse Code')
 
     def generate(self, message):
+        self.verify(message)
         self.pushtotalk.open_port()
 
         if self.morseagent == 'pygame':
-            pygame.init()
-            self.verify(message)
             for char in message:
                 if char == ' ':
-                    print(' ' * 7,)
                     time.sleep(self.sevenunits)
                 else:
-                    print(CODE[char.upper()],)
-                    print("")
-                    # Load and play Morse code audio using pygame (adjust file paths)
+                    print(CODE[char.upper()])
                     pygame.mixer.music.load(self.morsefiles + char.upper() + '_morse_code.ogg')
                     pygame.mixer.music.play()
+                    while pygame.mixer.music.get_busy():
+                        time.sleep(0.01)
                     time.sleep(self.threeunits)
+
         elif self.morseagent == 'cwpcm':
-            message = 'echo ' + message + ' | /home/irlp/bin/cwpcm -sm -l 007 -p 1000 > /dev/dsp'
-            result = subprocess.run(message, shell=True)
+            # Note: cwpcm pipes to /dev/dsp (OSS) — may not work on ALSA/PulseAudio systems
+            cmd = f'echo {message} | /home/irlp/bin/cwpcm -sm -l 007 -p 1000 > /dev/dsp'
+            subprocess.run(cmd, shell=True)
 
         self.pushtotalk.close_port()

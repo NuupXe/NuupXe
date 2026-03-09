@@ -3,37 +3,47 @@
 import logging
 import time
 
-from core.alive import alive
-from core.voicesynthesizer import VoiceSynthesizer
-
-days = {'Monday': 'Lunes',  'Tuesday': 'Martes',    'Wednesday': 'Miercoles',
+DAYS = {
+    'Monday': 'Lunes',      'Tuesday': 'Martes',    'Wednesday': 'Miercoles',
     'Thursday': 'Jueves',   'Friday': 'Viernes',    'Saturday': 'Sabado',
     'Sunday': 'Domingo',
-    }
+}
 
-months = {'January': 'Enero',   'February': 'Febrero',  'March': 'Marzo',
-    'April': 'Abril',   'May': 'Mayo',      'June': 'Junio',
-    'July': 'Julio',    'August': 'Agosto', 'September': 'Septiembre',
-    'October': 'Octubre',   'November' : 'Noviembre',   'December': 'Diciembre'
-    }
+MONTHS = {
+    'January': 'Enero',     'February': 'Febrero',  'March': 'Marzo',
+    'April': 'Abril',       'May': 'Mayo',           'June': 'Junio',
+    'July': 'Julio',        'August': 'Agosto',      'September': 'Septiembre',
+    'October': 'Octubre',   'November': 'Noviembre', 'December': 'Diciembre',
+}
+
 
 class Clock(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
         self.modulename = 'Clock'
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
 
     def date(self):
         logging.info(self.modulename + ' Date')
-        date = days[time.strftime("%A")] + " "  + time.strftime("%d").lstrip('0')
-        date = date + " de " + months[time.strftime("%B")] + " de " + time.strftime("%Y")
-        self.voicesynthetizer.speech_it(date)
-        alive(modulename=self.modulename + 'Date', modulemessage=date)
+        day_name = DAYS[time.strftime("%A")]
+        day_num = time.strftime("%d").lstrip('0')
+        month_name = MONTHS[time.strftime("%B")]
+        year = time.strftime("%Y")
+        text = f"{day_name} {day_num} de {month_name} de {year}"
+        self.voicesynthesizer.speech_it(text)
 
     def hour(self):
         logging.info(self.modulename + ' Hour')
-        hour = "Son las " + time.strftime("%H") + " horas y " + time.strftime("%M") + " minutos"
-        self.voicesynthetizer.speech_it(hour)
-        alive(modulename=self.modulename + 'Hour', modulemessage=hour)
+        h = int(time.strftime("%H"))
+        m = int(time.strftime("%M"))
+        prefix = "Es la" if h == 1 else "Son las"
+        hour_word = "hora" if h == 1 else "horas"
+        if m == 0:
+            text = f"{prefix} {h} {hour_word} en punto"
+        elif m == 1:
+            text = f"{prefix} {h} {hour_word} y 1 minuto"
+        else:
+            text = f"{prefix} {h} {hour_word} y {m} minutos"
+        self.voicesynthesizer.speech_it(text)
 
 # End of File
