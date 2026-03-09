@@ -46,18 +46,18 @@ Typical response length should be 2-3 sentences, maximum 150 words.
 Be friendly and use amateur radio terminology appropriately.
 Always sign off with "73" (best regards in ham radio)."""
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
         """
         Initialize QueryMaster with voice synthesizer.
         
         Args:
-            voicesynthetizer: Voice synthesizer instance for TTS output
+            voicesynthesizer: Voice synthesizer instance for TTS output
         """
         self.modulename = 'QueryMaster'
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
         self.emailx = Emailx()
         self.twitterc = TwitterC('twython')
-        self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
+        self.voicerecognition = VoiceRecognition(self.voicesynthesizer)
         
         # Conversation history
         self.conversation_history: List[Dict[str, str]] = []
@@ -118,13 +118,13 @@ Always sign off with "73" (best regards in ham radio)."""
         """Setup voice recognition and synthesizer."""
         logging.info('QueryMaster Setup')
         self.voicerecognition.languageset('spanish')
-        self.voicesynthetizer._set_language_argument("spanish")
+        self.voicesynthesizer._set_language_argument("spanish")
 
     def cleanup(self):
         """Cleanup voice recognition and synthesizer."""
         logging.info('QueryMaster Cleanup')
         self.voicerecognition.languageset('spanish')
-        self.voicesynthetizer._set_language_argument("spanish")
+        self.voicesynthesizer._set_language_argument("spanish")
 
     def query(self, message: str) -> Optional[str]:
         """
@@ -245,14 +245,14 @@ Always sign off with "73" (best regards in ham radio)."""
         
         try:
             # Announce
-            self.voicesynthetizer.speech_it('Hola! Cual es tu pregunta?')
+            self.voicesynthesizer.speech_it('Hola! Cual es tu pregunta?')
             
             # Record and recognize
             self.voicerecognition.record()
             question = self.voicerecognition.recognize('False')
             
             if not question:
-                self.voicesynthetizer.speech_it('No pude escuchar tu pregunta. Intenta de nuevo.')
+                self.voicesynthesizer.speech_it('No pude escuchar tu pregunta. Intenta de nuevo.')
                 return
             
             logging.info(f'QueryMaster question: {question}')
@@ -262,16 +262,16 @@ Always sign off with "73" (best regards in ham radio)."""
             
             if answer:
                 logging.info(f'QueryMaster answer: {answer}')
-                self.voicesynthetizer.speech_it(answer)
+                self.voicesynthesizer.speech_it(answer)
             else:
-                self.voicesynthetizer.speech_it(
+                self.voicesynthesizer.speech_it(
                     'Lo siento, tuve un problema al procesar tu pregunta. '
                     'Intenta de nuevo mas tarde.'
                 )
                 
         except Exception as e:
             logging.error(f'QueryMaster listen error: {e}')
-            self.voicesynthetizer.speech_it(
+            self.voicesynthesizer.speech_it(
                 'Error inesperado. Por favor intenta de nuevo.'
             )
 
@@ -284,7 +284,7 @@ Always sign off with "73" (best regards in ham radio)."""
         logging.info('QueryMaster: Starting interactive session')
         self.clear_context()
         
-        self.voicesynthetizer.speech_it(
+        self.voicesynthesizer.speech_it(
             'Hola! Soy tu asistente de radio aficionado. '
             'Puedes hacerme varias preguntas. '
             'Di "adios" cuando termines.'
@@ -302,19 +302,19 @@ Always sign off with "73" (best regards in ham radio)."""
                 # Check for exit commands
                 question_lower = question.lower()
                 if any(word in question_lower for word in ['adios', 'salir', 'terminar', 'hasta luego']):
-                    self.voicesynthetizer.speech_it('Hasta pronto! 73!')
+                    self.voicesynthesizer.speech_it('Hasta pronto! 73!')
                     break
                 
                 # Query and respond
                 answer = self.query_with_context(question)
                 if answer:
-                    self.voicesynthetizer.speech_it(answer)
+                    self.voicesynthesizer.speech_it(answer)
                 else:
-                    self.voicesynthetizer.speech_it('Lo siento, no pude procesar esa pregunta.')
+                    self.voicesynthesizer.speech_it('Lo siento, no pude procesar esa pregunta.')
                     
             except KeyboardInterrupt:
                 logging.info('QueryMaster: Interactive session interrupted')
-                self.voicesynthetizer.speech_it('Sesion terminada. 73!')
+                self.voicesynthesizer.speech_it('Sesion terminada. 73!')
                 break
             except Exception as e:
                 logging.error(f'QueryMaster interactive session error: {e}')

@@ -5,7 +5,6 @@ from pyowm import OWM
 from core.alive import alive
 from core.aprsnet import AprsNet
 from core.aprsfi import AprsFi
-from core.voicesynthesizer import VoiceSynthesizer
 from core.phonetic import Phonetic
 
 class Weather(object):
