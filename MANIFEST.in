@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include ROADMAP.md
+
+recursive-include configuration *.example *.config
+recursive-include morsefiles *
+recursive-include documentation *.md

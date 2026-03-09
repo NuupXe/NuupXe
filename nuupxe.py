@@ -5,6 +5,7 @@ import subprocess
 import logging
 import signal
 import sys
+from pathlib import Path
 
 from serviceManager import ServiceManager
 
@@ -20,14 +21,18 @@ def on_exit(sig, func=None):
     print("exit handler triggered")
     sys.exit(1)
 
-if __name__ == "__main__":
-
-    # this = singleton.SingleInstance()
-
-    logging.basicConfig(filename='output/nuupxe.log', level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+def main():
+    log_dir = Path.home() / '.nuupxe'
+    log_dir.mkdir(exist_ok=True)
+    logging.basicConfig(
+        filename=str(log_dir / 'nuupxe.log'),
+        level=logging.INFO,
+        format='%(asctime)s %(levelname)s %(message)s'
+    )
 
     irlp = Irlp()
-    irlp.forceunptt()
+    if irlp.exists():
+        irlp.forceunptt()
 
     parser = argparse.ArgumentParser(description='NuupXe Project, Voice Services Experimental Project')
     parser.add_argument('-m', '--module', help='Module Mode')
@@ -42,20 +47,20 @@ if __name__ == "__main__":
         sys.exit(0)
 
     experimental = ServiceManager(irlp)
-    experimental.voicesynthetizer()
-    voicesynthetizer = experimental.voicesynthetizerget()
+    experimental.setup_synthesizer()
+    voicesynthesizer = experimental.voicesynthesizerget()
 
     if (args.module or args.server) and experimental.enabled():
         logging.info("Proyecto NuupXe ya habilitado, no podemos iniciar otra instancia")
         sys.exit(1)
 
     if args.server == 'stop' and not experimental.enabled():
-        voicesynthetizer.speech_it("Proyecto Nuup X e deshabilitado")
+        voicesynthesizer.speech_it("Proyecto Nuup X e deshabilitado")
         subprocess.call('./nuupxe.sh stop', shell=True)
         sys.exit(1)
 
     if args.server == 'stop' and experimental.enabled():
-        voicesynthetizer.speech_it("Deshabilitando Proyecto NuupXe, hasta pronto!")
+        voicesynthesizer.speech_it("Deshabilitando Proyecto NuupXe, hasta pronto!")
         subprocess.call('./nuupxe.sh stop', shell=True)
         sys.exit(1)
 
@@ -91,5 +96,8 @@ if __name__ == "__main__":
         experimental.phonetic_mode(args.phonetic)
 
     experimental.disable()
+
+if __name__ == "__main__":
+    main()
 
 # End of File
