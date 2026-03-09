@@ -8,14 +8,13 @@ import sys
 
 from core.alive import alive
 from core.aprsnet import AprsNet
-from core.voicesynthesizer import VoiceSynthesizer
 from core.phonetic import Phonetic
 
 from modules.aprstracker import AprsTracker
 
 class Aprstt(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.modulename = "APRSTT"
 
@@ -26,8 +25,8 @@ class Aprstt(object):
         self.path = "configuration/aprstt.config"
         self.conf.read(self.path)
 
-        self.aprstracker =  AprsTracker(voicesynthetizer)
-        self.speaker = voicesynthetizer
+        self.aprstracker =  AprsTracker(voicesynthesizer)
+        self.speaker = voicesynthesizer
 
     def dtmf_replace(self, pair):
         d = {}
@@ -129,7 +128,7 @@ class Aprstt(object):
             else:
                 self.callsign_decoded = self.conf.get("short", string)
         except:
-            self.speaker.speechit("Indicativo no valido")
+            self.speaker.speech_it("Indicativo no valido")
             sys.exit(1)
 
         return self.callsign_decoded
@@ -164,7 +163,7 @@ class Aprstt(object):
         callsign = self.keytype_get_aprstt(string)
         if callsign:
             message = "Bienvenido " + callsign
-            self.speaker.speechit("Bienvenido " + ' '.join(self.phonetic.decode(callsign)))
+            self.speaker.speech_it("Bienvenido " + ' '.join(self.phonetic.decode(callsign)))
             callsignmobile = callsign + '-9'
             callsignexperimental = callsign + '-15'
             self.aprstracker.localize(callsignmobile)
@@ -173,30 +172,6 @@ class Aprstt(object):
             self.aprs.send_message("NuupXe APRS Touch Tone Basic Implementation, Random Position")
 
         alive(modulename=self.modulename, modulemessage=message)
-
-        return
-
-        if self.keytype_get(string) is 'callsign':
-            user, generic = self.user_get(string)
-            callsign = self.conf.get("users", user)
-            self.speaker.speechit("Estacion " + ' '.join(self.phonetic.decode(callsign)))
-
-        command = self.command_get(generic, string)
-        if generic:
-            user = 'generic'
-        else:
-            user = callsign
-
-        messagetype = self.keytype_translate(self.keytype_get(command[0:2]))
-        messagenumber = command[2:4]
-        message = messagetype + ' ' + messagenumber
-        message_file = self.conf.get(user, command)
-        message = message + ' ' + message_file
-        self.speaker.speechit(message)
-        aprs_message = callsign.upper() + " " + message
-        self.aprs.send_message(aprs_message)
-
-        return
 
 if __name__ == '__main__':
 

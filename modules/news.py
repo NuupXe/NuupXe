@@ -3,7 +3,6 @@ import feedparser
 import random
 import threading
 
-from core.alive import alive
 from bs4 import BeautifulSoup
 
 INDENT = u' ' * 4
@@ -13,14 +12,14 @@ class News(threading.Thread):
     The News class fetches news items from RSS feeds and reads them using a voice synthesizer.
     """
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
         self.modulename = 'News'
         self.url = None
         self.parsedurl = None
         self.channelname = None
         self.itemsnumber = None
         threading.Thread.__init__(self)
-        self.speak = voicesynthetizer
+        self.speak = voicesynthesizer
         self.initialize()
 
     def initialize(self):
@@ -33,10 +32,8 @@ class News(threading.Thread):
         self.set_url(random.choice(rss_urls))
         print(self.url)
         self.parse_url()
-        self.parse_url()
         self.set_channel("national")
         self.set_items_number("1")
-        self.get_title()
 
     def set_url(self, url):
         self.url = url
@@ -58,10 +55,6 @@ class News(threading.Thread):
 
     def get_items_number(self):
         return self.itemsnumber
-
-    def get_title(self):
-        newsdata = self.parsedurl
-        channel = newsdata.feed
 
     def get_items(self):
         """
