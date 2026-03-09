@@ -38,10 +38,12 @@ class VoiceSynthesizer(logging.Handler):
         self.language = language
         self.language_argument = self._set_language_argument(language)
         self.text_to_speech_argument = self._set_text_to_speech_argument()
-        
+
         # Fallback synthesizers in order of preference
-        self.fallback_order = ['espeak', 'festival']
-        
+        self.fallback_order = ['espeak-ng', 'festival']
+
+        self._warmup_audio()
+
         logging.info(
             f'VoiceSynthesizer initialized: {synthesizer} ({language})'
         )
@@ -75,7 +77,7 @@ class VoiceSynthesizer(logging.Handler):
         """
         if self.synthesizer == "festival":
             return "--language " + self.language
-        elif self.synthesizer == "espeak":
+        elif self.synthesizer == "espeak-ng":
             return "-v en" if language == "english" else "-v es-la"
         elif self.synthesizer == "google":
             return "en" if language == "english" else "es"
@@ -90,9 +92,28 @@ class VoiceSynthesizer(logging.Handler):
         """
         if self.synthesizer == "festival":
             return "--tts"
-        elif self.synthesizer == "espeak":
-            return "--stdout"
         return ""
+
+    def _warmup_audio(self):
+        """Play a silent sound to wake up the audio interface (e.g. USB-C DAC)."""
+        if self.synthesizer == 'espeak-ng':
+            lang = self.language_argument.split()
+            subprocess.run(
+                ['espeak-ng'] + lang + ['-a', '0', ' '],
+                capture_output=True,
+                timeout=5
+            )
+        else:
+            import wave, struct
+            silence_path = "/tmp/nuupxe_warmup.wav"
+            sample_rate = 24000
+            duration_secs = 1
+            with wave.open(silence_path, 'w') as wf:
+                wf.setnchannels(1)
+                wf.setsampwidth(2)
+                wf.setframerate(sample_rate)
+                wf.writeframes(struct.pack('<h', 0) * sample_rate * (duration_secs + 1))
+            subprocess.run(['aplay', silence_path], capture_output=True, timeout=5)
 
     def _load_openai_config(self) -> Optional[dict]:
         """
@@ -120,11 +141,11 @@ class VoiceSynthesizer(logging.Handler):
     def convert_to_audio(self, text: str, output_speech_file: str) -> bool:
         """
         Convert text to audio file using OpenAI TTS.
-        
+
         Args:
             text: Text to synthesize
             output_speech_file: Path to output audio file
-            
+
         Returns:
             True on success, False on error
         """
@@ -133,17 +154,18 @@ class VoiceSynthesizer(logging.Handler):
             if not config:
                 logging.error('OpenAI config not available')
                 return False
-            
+
             client = OpenAI(api_key=config['api_key'])
             response = client.audio.speech.create(
                 model=config['model'],
                 voice=config['voice'],
-                input=text
+                input=text,
+                response_format="wav",
             )
             response.stream_to_file(output_speech_file)
             logging.info(f'Audio generated: {output_speech_file}')
             return True
-            
+
         except Exception as e:
             logging.error(f'OpenAI TTS error: {e}')
             return False
@@ -204,21 +226,22 @@ class VoiceSynthesizer(logging.Handler):
         
         return False
 
-    def _synthesize_with_current(self, text: str) -> bool:
+    def _synthesize_with_current(self, text: str, raw_text: str = None) -> bool:
         """
         Synthesize with current synthesizer settings.
-        
+
         Args:
-            text: Text to synthesize
-            
+            text: Shell-quoted text for command-based synthesizers
+            raw_text: Unquoted text for API-based synthesizers (defaults to text)
+
         Returns:
             True on success, False on error
         """
         pushtotalk = PushToTalk()
-        
+
         if self.synthesizer == "openai":
-            output_speech_file = "/tmp/audio.mp3"
-            if self.convert_to_audio(text, output_speech_file):
+            output_speech_file = "/tmp/audio.wav"
+            if self.convert_to_audio(raw_text or text, output_speech_file):
                 pushtotalk.message("audio", output_speech_file)
                 return True
             return False
@@ -230,8 +253,8 @@ class VoiceSynthesizer(logging.Handler):
                 return True
             return False
             
-        elif self.synthesizer == "espeak":
-            command = f'{self.synthesizer} {self.language_argument} {self.text_to_speech_argument} {text} | aplay'
+        elif self.synthesizer == "espeak-ng":
+            command = f'espeak-ng {self.language_argument} {text}'
             if self._execute_command(command):
                 pushtotalk.message("text", "")
                 return True
@@ -260,12 +283,12 @@ class VoiceSynthesizer(logging.Handler):
         # Log the text
         logging.info(f'Speaking: {text}')
         
-        # Quote text for shell commands
+        # Quote text for shell commands (espeak-ng, festival, google)
         quoted_text = "\"" + text + "\""
-        
+
         # Try primary synthesizer
-        success = self._synthesize_with_current(quoted_text)
-        
+        success = self._synthesize_with_current(quoted_text, raw_text=text)
+
         # Try fallbacks if primary failed
         if not success:
             logging.warning(

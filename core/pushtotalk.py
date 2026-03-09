@@ -5,8 +5,6 @@ import subprocess
 import configparser
 import logging
 import serial
-from pydub import AudioSegment
-from pydub.playback import play
 from core.irlp import Irlp
 
 class PushToTalk(object):
@@ -47,8 +45,7 @@ class PushToTalk(object):
             logging.error(f'Error closing port: {e}')
 
     def play_audio(self, audio_path):
-        audio = AudioSegment.from_file(audio_path)
-        play(audio)
+        subprocess.run(['aplay', audio_path])
 
     def message(self, resource_type, msg):
         logging.info('Push To Talk Message')
