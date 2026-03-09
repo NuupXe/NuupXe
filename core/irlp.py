@@ -36,33 +36,29 @@ class Irlp(object):
     def cosenabled(self):
         logging.info('[Irlp] CosEnabled')
         result = subprocess.run(self.cosstate)
-        status = result.stdout
-        output = result.stderr
-        return status
+        return result.returncode
 
     def busy(self):
         logging.info('[Irlp] Busy')
 
-        status, output = commands.getstatusoutput(self.cosstate)
-        while status is 256:
-            status, output = commands.getstatusoutput(self.coscheck)
+        status = subprocess.run(self.cosstate).returncode
+        while status == 256:
+            subprocess.run(self.coscheck)
             time.sleep(int(self.irlpcostimer))
-            status, output = commands.getstatusoutput(self.cosstate)
+            status = subprocess.run(self.cosstate).returncode
 
     def idle(self):
         logging.info('[Irlp] Idle')
         self.busy()
-        commands.getstatusoutput(self.off)
+        subprocess.run(self.off)
 
     def forceptt(self):
         logging.info('[Irlp] Force PTT')
-        commands.getstatusoutput(self.forcekey)
+        subprocess.run(self.forcekey)
         time.sleep(1)
 
     def forceunptt(self):
         logging.info('[Irlp] Force UnPTT')
-        result = subprocess.run(self.forceunkey)
-        status = result.stdout
-        output = result.stderr
+        subprocess.run(self.forceunkey)
 
 # End of File

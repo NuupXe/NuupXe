@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
-import ConfigParser
-import commands
+import configparser
 import json
-import telebot
-from telebot import types
+import subprocess
 import time
 import unicodedata
 
-from apscheduler.scheduler import Scheduler
+import telebot
+from telebot import types
+from apscheduler.schedulers.background import BackgroundScheduler
 from collections import OrderedDict
 
 knownUsers = []
@@ -35,7 +35,7 @@ class User:
         self.announcement = None
         self.recurrence = None
 
-hideBoard = types.ReplyKeyboardHide()
+hideBoard = types.ReplyKeyboardRemove()
 
 def remove_accents(input_str):
     nfkd_form = unicodedata.normalize('NFKD', input_str)
@@ -44,11 +44,11 @@ def remove_accents(input_str):
 def listener(messages):
     for m in messages:
         if m.content_type == 'text':
-            print str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text
+            print(str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text)
 
-configuration = ConfigParser.ConfigParser()
+configuration = configparser.ConfigParser()
 configuration.read('configuration/services.config')
-token = configuration.get('telegram','token')
+token = configuration.get('telegram', 'token')
 bot = telebot.TeleBot(token)
 bot.set_update_listener(listener)
 
@@ -57,7 +57,7 @@ responses = None
 with open('configuration/messages.json') as f:
     responses = json.load(f, object_pairs_hook=OrderedDict)
 
-sched = Scheduler()
+sched = BackgroundScheduler()
 
 callsign = None
 announcement = None
@@ -66,10 +66,8 @@ schedinstance = None
 def job_function():
     global callsign
     global announcement
-    repeater = 'python nuupxe.py -p \"' + callsign + '\"'
-    status, output = commands.getstatusoutput(repeater)
-    repeater = 'python nuupxe.py -v \"' + announcement + '\"'
-    status, output = commands.getstatusoutput(repeater)
+    subprocess.run(['python', 'nuupxe.py', '-p', callsign])
+    subprocess.run(['python', 'nuupxe.py', '-v', announcement])
 
 # Handles all sent documents and audio files
 @bot.message_handler(content_types=['document', 'audio'])
@@ -91,8 +89,9 @@ def command_noannouncement(m):
     cid = m.chat.id
     global schedinstance
     try:
-        sched.unschedule_job(schedinstance)
-    except:
+        if schedinstance:
+            sched.remove_job(schedinstance)
+    except Exception:
         pass
     bot.send_message(cid, "Hemos cancelado cualquier anuncio")
 
@@ -109,7 +108,7 @@ def process_message(m):
         user_dict[chat_id] = user
         msg = bot.reply_to(m, 'Que anuncio quieres enviar?')
         bot.register_next_step_handler(msg, process_message_repeater)
-    except Exception as e:
+    except Exception:
         bot.reply_to(m, 'Algo no esta funcionando!')
 
 def process_message_repeater(m):
@@ -120,7 +119,7 @@ def process_message_repeater(m):
         user.announcement = announcement
         msg = bot.reply_to(m, 'Cada cuantos minutos quieres ejecutarlo?')
         bot.register_next_step_handler(msg, process_message_recurrence)
-    except Exception as e:
+    except Exception:
         bot.reply_to(m, 'Algo no esta funcionando!')
 
 def process_message_recurrence(m):
@@ -135,26 +134,26 @@ def process_message_recurrence(m):
         global sched
         global schedinstance
         try:
-            sched.unschedule_job(schedinstance)
-        except:
+            if schedinstance:
+                sched.remove_job(schedinstance)
+        except Exception:
             pass
         callsign = user.callsign
         announcement = user.announcement
         bot.send_chat_action(chat_id, 'typing')
         time.sleep(2)
-        bot.send_message(chat_id, 'Gracias *' + user.callsign + \
-                                  '*!\nRecurrence: ' + user.recurrence + \
-                                  '\nAnuncio: _' + user.announcement + '_', \
+        bot.send_message(chat_id, 'Gracias *' + user.callsign +
+                                  '*!\nRecurrence: ' + user.recurrence +
+                                  '\nAnuncio: _' + user.announcement + '_',
                                   parse_mode="Markdown")
-        repeater = 'python nuupxe.py -v \"Anuncio recibido desde Telegram\"'
-        status, output = commands.getstatusoutput(repeater)
-        repeater = 'python nuupxe.py -p \"' + user.callsign + '\"'
-        status, output = commands.getstatusoutput(repeater)
-        repeater = 'python nuupxe.py -v \"' + user.announcement + '\"'
-        status, output = commands.getstatusoutput(repeater)
-        schedinstance = sched.add_interval_job(job_function, minutes=recurrence)
-        sched.start()
-    except Exception as e:
+        subprocess.run(['python', 'nuupxe.py', '-v', 'Anuncio recibido desde Telegram'])
+        subprocess.run(['python', 'nuupxe.py', '-p', user.callsign])
+        subprocess.run(['python', 'nuupxe.py', '-v', user.announcement])
+        job = sched.add_job(job_function, 'interval', minutes=recurrence)
+        schedinstance = job.id
+        if not sched.running:
+            sched.start()
+    except Exception:
         bot.reply_to(m, 'Algo no esta funcionando!')
 
 @bot.message_handler(commands=["modulo"])
@@ -168,11 +167,10 @@ def process_module(m):
         module = m.text.lower()
         bot.send_chat_action(chat_id, 'typing')
         time.sleep(2)
-        bot.send_message(chat_id, 'Listo! Ejecutaremos *' + module + \
+        bot.send_message(chat_id, 'Listo! Ejecutaremos *' + module +
                                   '*', parse_mode="Markdown")
-        repeater = 'python nuupxe.py -m \"' + module + '\"'
-        status, output = commands.getstatusoutput(repeater)
-    except Exception as e:
+        subprocess.run(['python', 'nuupxe.py', '-m', module])
+    except Exception:
         bot.reply_to(m, 'Algo no esta funcionando!')
 
 @bot.message_handler(commands=["dtmf"])
@@ -186,33 +184,21 @@ def process_dtmf(m):
         dtmf = m.text.upper()
         bot.send_chat_action(chat_id, 'typing')
         time.sleep(2)
-        bot.send_message(chat_id, 'Listo! Enviaremos *' + dtmf + \
+        bot.send_message(chat_id, 'Listo! Enviaremos *' + dtmf +
                                   '*', parse_mode="Markdown")
-        repeater = 'python nuupxe.py -d \"' + dtmf + '\"'
-        print(repeater)
-        status, output = commands.getstatusoutput(repeater)
-        print(status, output)
-    except Exception as e:
+        subprocess.run(['python', 'nuupxe.py', '-d', dtmf])
+    except Exception:
         bot.reply_to(m, 'Algo no esta funcionando!')
 
 @bot.message_handler(commands=["sonido"])
 def command_sound(m):
-    cid =  m.chat.id
+    cid = m.chat.id
     audio = open('output/voicerss.mp3', 'rb')
     bot.send_audio(cid, audio)
 
 @bot.message_handler(commands=['sstv'])
 def command_sstv(m):
     cid = m.chat.id
-
-    markup = types.InlineKeyboardMarkup()
-    b1 = types.InlineKeyboardButton("Channel", url="https://telegram.me/league_of_legends_channel")
-    b2 = types.InlineKeyboardButton("Developer", url="https://telegram.me/edurolp")
-    b3 = types.InlineKeyboardButton("GitHub", url="https://github.com/i32ropie/lol")
-    markup.add(b1, b2, b3)
-    b4 = types.InlineKeyboardButton("PayPal", url="https://paypal.me/edurolp")
-    markup.add(b4)
-
     bot.send_photo(cid, open('output/bing.jpg', 'rb'),
                    reply_markup=hideBoard)
 
@@ -221,8 +207,7 @@ def command_sstv(m):
 @bot.message_handler(commands=['bing'])
 def command_bing(m):
     cid = m.chat.id
-    repeater = 'python nuupxe.py -b \"bing\"'
-    status, output = commands.getstatusoutput(repeater)
+    subprocess.run(['python', 'nuupxe.py', '-b', 'bing'])
     bot.send_photo(cid, open('output/bing.jpg', 'rb'),
                    reply_markup=hideBoard)
 
@@ -236,12 +221,8 @@ def command_status(m):
 @bot.message_handler(func=lambda m: m.content_type ==
                      'text' and m.text in ['ACERCA', 'Acerca', 'acerca'])
 @bot.message_handler(commands=["acerca"])
-def command_status(m):
+def command_acerca(m):
     global responses
     bot.reply_to(m, responses['acerca'])
-
-#@bot.message_handler(func=lambda message: True, content_types=['text'])
-#def command_default(m):
-#    bot.send_message(m.chat.id, "Hola! No creo conocer tu comando \"" + m.text + "\"\nQue tal si pides ayuda con /ayuda")
 
 bot.polling()

@@ -22,14 +22,14 @@ class Emailx(object):
 
     def setup(self):
 
-        self.configuration = ConfigParser.ConfigParser()
+        self.configuration = configparser.ConfigParser()
         self.configuration.read('configuration/services.config')
-        self.username = self.configuration.get('gmail','username')
-        self.password = self.configuration.get('gmail','password')
+        self.username = self.configuration.get('gmail', 'username')
+        self.password = self.configuration.get('gmail', 'password')
 
-        self.system = ConfigParser.ConfigParser()
+        self.system = configparser.ConfigParser()
         self.system.read('configuration/general.config')
-        self.me = self.system.get('system','email')
+        self.me = self.system.get('system', 'email')
         self.to = self.me
 
     def create(self, to, subject, body, attachment=None):
@@ -44,11 +44,11 @@ class Emailx(object):
         self.msg.attach(MIMEText(body.encode('utf-8'), 'html', 'UTF-8'))
 
         if attachment:
-            file = open(attachment, "rb")
-            self.msg.attach(MIMEApplication(
-                file.read(),
-                Content_Disposition='attachment; filename="%s"' % basename(attachment)
-            ))
+            with open(attachment, "rb") as f:
+                self.msg.attach(MIMEApplication(
+                    f.read(),
+                    Content_Disposition='attachment; filename="%s"' % basename(attachment)
+                ))
 
     def send(self):
 
