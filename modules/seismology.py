@@ -12,11 +12,11 @@ state = {'CHIS': 'Chiapas', 'NL': 'Nuevo Leon', 'VER': 'Veracruz',
 
 class Seismology(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.modulename = 'Seismology'
         self.twitterc = TwitterC('twython')
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
 
     def SismologicoMX(self):
         print('[NuupXe] Seismology')
@@ -43,9 +43,9 @@ class Seismology(object):
                     print('Seismology Error')
                 sismo = 'True'
         if sismo == 'False':
-            self.voicesynthetizer.speechit("No se encontraron sismos en las ultimas horas")
+            self.voicesynthesizer.speech_it("No se encontraron sismos en las ultimas horas")
         else:
-            self.voicesynthetizer.speechit(message)
+            self.voicesynthesizer.speech_it(message)
             alive(modulename=self.modulename, modulemessage=message)
 
 # End of File

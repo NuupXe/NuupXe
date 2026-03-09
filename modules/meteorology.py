@@ -20,12 +20,12 @@ state = {'CHIS': 'Chiapas', 'NL': 'Nuevo Leon', 'VER': 'Veracruz',
 
 class Meteorology(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.modulename = 'Meteorology'
         self.twitterc = TwitterC('twython')
 
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
 
     def conagua_clima(self):
 
@@ -53,7 +53,7 @@ class Meteorology(object):
             except:
                 logging.info('Meteorology Conagua Clima Error')
         message = message + 'Mas informacion en twitter.com/conagua_clima'
-        self.voicesynthetizer.speechit(message)
+        self.voicesynthesizer.speech_it(message)
 
         alive(modulename=self.modulename, modulemessage=message)
 

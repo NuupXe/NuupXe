@@ -12,13 +12,13 @@ from core.utilities import Randomizer
 
 class Selfie(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.modulename = 'Selfie'
-        self.camera = Camera(voicesynthetizer)
+        self.camera = Camera(voicesynthesizer)
         self.phonetic = Phonetic()
         self.twitterc = TwitterC('twython')
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
 
     def setup(self):
 
@@ -41,9 +41,9 @@ class Selfie(object):
             logging.info(message)
             self.twitterc.timeline_set(message, media)
             message = "Hola! Mi selfie en twitter.com/ " + 'nuup x e'
-            self.voicesynthetizer.speechit(message)
+            self.voicesynthesizer.speech_it(message)
             message = ' '.join(self.phonetic.decode("nuupxe"))
-            self.voicesynthetizer.speechit(message)
+            self.voicesynthesizer.speech_it(message)
         except:
             logging.error('Cannot open Camera device')
 

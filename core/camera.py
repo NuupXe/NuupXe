@@ -7,10 +7,10 @@ import pygame.camera
 
 class Camera(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.mycamera = None
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
         self.picturepygame = 'output/camerapygame.jpg'
         self.picturefswebcam = 'output/camerafswebcam.jpg'
 

@@ -10,27 +10,27 @@ from core.imagecreator import ImageCreator
 
 class SSTV(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
         self.modulename = 'SSTV'
         self.modulepicture = 'output/image.jpg'
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
         self.pushtotalk = PushToTalk()
 
     def setup(self):
         logging.info('SSTV Setup')
 
     def resize(self):
-        subprocess.call('convert -resize 320x256\! /tmp/image.jpg /tmp/iotd.jpg', shell=True)
+        subprocess.call('convert -resize 320x256! /tmp/image.jpg /tmp/iotd.jpg', shell=True)
 
     def decode(self):
         logging.info('SSTV Decode')
         self.setup()
-        self.voicesynthetizer.speech_it("Modulo Experimental de Television de Barrido Lento, Modo Martin Uno, Procesando la imagen!")
+        self.voicesynthesizer.speech_it("Modulo Experimental de Television de Barrido Lento, Modo Martin Uno, Procesando la imagen!")
         image_creator = ImageCreator(service='openai', market='en-US', resolution='1920x1080', output_directory='output/image.jpg')
         image_creator.create_image()
         self.resize()
         subprocess.call('python -m pysstv --mode MartinM1 --vox /tmp/iotd.jpg /tmp/sstv.wav', shell=True)
-        self.voicesynthetizer.speech_it("Imagen lista! Comenzamos con la transmision en Modo Martin Uno")
+        self.voicesynthesizer.speech_it("Imagen lista! Comenzamos con la transmision en Modo Martin Uno")
         self.pushtotalk.open_port()
         subprocess.call('aplay /tmp/sstv.wav', shell=True)
         self.pushtotalk.close_port()

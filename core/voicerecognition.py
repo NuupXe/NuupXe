@@ -15,14 +15,14 @@ from core.voice import Voice
 
 class VoiceRecognition(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.output = ""
         self.agent = "pyaudio"
         self.language = 'spanish'
         self.audiofilewav = "output/voicerecognition.wav"
         self.audiofileflac = "output/voicrecognition.flac"
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
 
         self.irlp = Irlp()
         self.pushtotalk = PushToTalk()
@@ -32,11 +32,7 @@ class VoiceRecognition(object):
         self.voice.filenameset(self.audiofilewav)
 
     def __del__(self):
-        pass
-        command = "rm " + self.audiofilewav
-        subprocess.call(command, shell=True)
-        command = "rm " + self.audiofileflac
-        subprocess.call(command, shell=True)
+        subprocess.run(["rm", "-f", self.audiofilewav, self.audiofileflac])
 
     def languageset(self, language):
 
@@ -116,9 +112,9 @@ class VoiceRecognition(object):
         logging.info('Voice Recognition Decode')
 
         if speech == 'True':
-            self.pushtotalk.openport()
+            self.pushtotalk.open_port()
             self.voice.play()
-            self.pushtotalk.closeport()
+            self.pushtotalk.close_port()
 
         if self.agent == 'nexiwave':
             self.output = self.speechrecognition.openai(self.audiofilewav)

@@ -10,19 +10,16 @@ from core.voice import Voice
 
 class VoiceMail(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.modulename = 'VoiceMail'
         self.irlp = Irlp()
         self.pushtotalk = PushToTalk()
         self.voice = Voice()
 
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
         self.audiofileuser = 'output/voicemailuser'
         self.audiofilemessage = 'output/voicemailmessage'
-
-    def __del__(self):
-        pass
 
     def record(self):
         print('[NuupXe] Voice Mail Record')
@@ -30,25 +27,25 @@ class VoiceMail(object):
 
     def play(self):
         print('[NuupXe] Voice Mail Play')
-        self.pushtotalk.openport()
+        self.pushtotalk.open_port()
         self.voice.play()
-        self.pushtotalk.closeport()
+        self.pushtotalk.close_port()
 
     def run(self, dtmf):
         print('[NuupXe] Voice Mail Run')
 
         if dtmf:
             message = "Codigo recibido " + dtmf
-            self.voicesynthetizer.speechit(message)
-        self.voicesynthetizer.speechit("Identificate por favor")
+            self.voicesynthesizer.speech_it(message)
+        self.voicesynthesizer.speech_it("Identificate por favor")
         self.voice.filenameset(self.audiofileuser)
         self.record()
 
-        self.voicesynthetizer.speechit("Deja tu mensaje")
+        self.voicesynthesizer.speech_it("Deja tu mensaje")
         self.voice.filenameset(self.audiofilemessage)
         self.record()
 
-        self.voicesynthetizer.speechit("Mensaje de")
+        self.voicesynthesizer.speech_it("Mensaje de")
         self.voice.filenameset(self.audiofileuser)
         self.play()
         self.voice.filenameset(self.audiofilemessage)
@@ -56,5 +53,4 @@ class VoiceMail(object):
 
         alive(modulename=self.modulename, modulemessage='VoiceMail')
 
-# Enf of File
-
+# End of File

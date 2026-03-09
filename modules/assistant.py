@@ -4,9 +4,7 @@ import threading
 from time import sleep
 import re
 
-from core.twitterc import TwitterC
 from core.voicerecognition import VoiceRecognition
-from core.voicesynthesizer import VoiceSynthesizer
 
 from modules.voicemail import VoiceMail
 from modules.clock import Clock
@@ -15,35 +13,33 @@ from modules.weather import Weather
 from modules.messages import Messages
 from modules.seismology import Seismology
 
-def main(voicesynthetizer):
 
-    voicesynthetizer = voicesynthetizer
-    t = Assistante(voicesynthetizer)
+def main(voicesynthesizer):
+    t = Assistant(voicesynthesizer)
     t.go()
     try:
         join_threads(t.threads)
     except KeyboardInterrupt:
         print("\nKeyboardInterrupt catched.")
         print("Terminate main thread.")
-        print("If only daemonic threads are left, terminate whole program.")
 
 class Assistant(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.modulename = 'Assistant'
         self.running = True
         self.introduced = False
         self.threads = []
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
 
-        self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
-        self.voicemail = VoiceMail(self.voicesynthetizer)
-        self.clock = Clock(voicesynthetizer)
-        self.identification = Identification(voicesynthetizer)
-        self.weather = Weather(self.voicesynthetizer)
-        self.messages = Messages(self.voicesynthetizer)
-        self.seismology = Seismology(self.voicesynthetizer)
+        self.voicerecognition = VoiceRecognition(self.voicesynthesizer)
+        self.voicemail = VoiceMail(self.voicesynthesizer)
+        self.clock = Clock(voicesynthesizer)
+        self.identification = Identification(voicesynthesizer)
+        self.weather = Weather(self.voicesynthesizer)
+        self.messages = Messages(self.voicesynthesizer)
+        self.seismology = Seismology(self.voicesynthesizer)
 
     def demo1(self):
         self.introduction1()
@@ -54,7 +50,7 @@ class Assistant(object):
         self.command()
 
     def introduction1(self):
-        self.voicesynthetizer.speech_it("Hola! Dime como puedo ayudarte?")
+        self.voicesynthesizer.speech_it("Hola! Dime como puedo ayudarte?")
         self.introduced = True
 
     def introduction2(self):
@@ -62,7 +58,7 @@ class Assistant(object):
             self.voicerecognition.record('5')
             output = self.voicerecognition.recognize('False')
             if re.search(r'hola', output, re.M|re.I) or re.search(r'nu', output, re.M|re.I):
-                self.voicesynthetizer.speech_it("Hola! Dime como puedo ayudarte?")
+                self.voicesynthesizer.speech_it("Hola! Dime como puedo ayudarte?")
                 self.introduced = True
                 break
 
@@ -73,7 +69,7 @@ class Assistant(object):
             if re.search(r'identif', output, re.M|re.I):
                 print('[NuupXe] Assistant Identification')
                 self.identification.identify()
-            elif re.search(r'hora', output, re.M|re.I) or re.search(r'ora', output, re.M|re.I) :
+            elif re.search(r'hora', output, re.M|re.I) or re.search(r'ora', output, re.M|re.I):
                 print('[NuupXe] Assistant Hour')
                 self.clock.hour()
             elif re.search(r'fecha', output, re.M|re.I):
@@ -81,7 +77,7 @@ class Assistant(object):
                 self.clock.date()
             elif re.search(r'reporte', output, re.M|re.I) or re.search(r'clima', output, re.M|re.I):
                 print('[NuupXe] Assistant Weather')
-                self.weather.report()
+                self.weather.weather_report()
             elif re.search(r'estaciones', output, re.M|re.I) or re.search(r'repetidores', output, re.M|re.I):
                 print('[NuupXe] Assistant Stations')
                 self.messages.stations()
@@ -90,105 +86,70 @@ class Assistant(object):
                 self.seismology.SismologicoMX()
             elif re.search(r'mensaje', output, re.M|re.I) or re.search(r'avis', output, re.M|re.I):
                 print('[NuupXe] Assistant Message')
-                if self.voicemail.status:
-                    self.voicesynthetizer.speech_it("Mensaje existente!")
-                    while True:
-                        self.voicesynthetizer.speech_it("Quieres escucharlo, borrarlo o salir de esta opcion")
-                        self.voicerecognition.record()
-                        output = self.voicerecognition.recognize('False')
-                        if re.search(r'escuchar', output, re.M|re.I):
-                            print('[NuupXe] Assistant Message Play')
-                            self.voicemail.play()
-                        elif re.search(r'borrar', output, re.M|re.I):
-                            print('[NuupXe] Assistant Message Erase')
-                            self.voicemail.erase()
-                        elif re.search(r'salir', output, re.M|re.I):
-                            print('[NuupXe] Assistant Message Quit')
-                            self.voicesynthetizer.speech_it("Saliendo de Opcion Mensaje")
-                            break
-                        else:
-                            self.voicemail.record()
-                            self.voicemail.play()
-                elif re.search(r'dormir', output, re.M|re.I):
-                    print('[NuupXe] Assistant Sleep')
-                    self.voicesynthetizer.speech_it("Perfecto! Gracias! Dormire por los proximos 30 segundos")
-                    sleep(30)
-                    self.voicesynthetizer.speech_it("Ya desperte! Que rica siesta!")
-                elif re.search(r'eventos', output, re.M|re.I):
-                    print('[NuupXe] Assistant Bye')
-                    self.voicesynthetizer.speech_it("El radioclub tiene 2 eventos proximos")
-                    self.voicesynthetizer.speech_it("Boletin Tecnologico, Miercoles, 8:00 pm")
-                    self.voicesynthetizer.speech_it("Junta Mensual, Jueves 8:00 pm, recuerda traer galletas")
-                elif re.search(r'nada', output, re.M|re.I) or re.search(r'dios', output, re.M|re.I) or re.search(r'ativo', output, re.M|re.I):
-                    print('[NuupXe] Assistant Bye')
-                    self.voicesynthetizer.speech_it("Hasta pronto!")
-                    self.running = False
-                    break
-                else:
-                    print('[NuupXe] Assistant? Unknown!')
+                self.voicesynthesizer.speech_it("Quieres grabar o escuchar un mensaje?")
+                self.voicerecognition.record()
+                output = self.voicerecognition.recognize('False')
+                if re.search(r'escuchar', output, re.M|re.I):
+                    print('[NuupXe] Assistant Message Play')
+                    self.voicemail.play()
+                elif re.search(r'grabar', output, re.M|re.I):
+                    print('[NuupXe] Assistant Message Record')
+                    self.voicemail.record()
+                    self.voicemail.play()
+                elif re.search(r'salir', output, re.M|re.I):
+                    self.voicesynthesizer.speech_it("Saliendo de Opcion Mensaje")
+            elif re.search(r'dormir', output, re.M|re.I):
+                print('[NuupXe] Assistant Sleep')
+                self.voicesynthesizer.speech_it("Perfecto! Gracias! Dormire por los proximos 30 segundos")
+                sleep(30)
+                self.voicesynthesizer.speech_it("Ya desperte! Que rica siesta!")
+            elif re.search(r'eventos', output, re.M|re.I):
+                print('[NuupXe] Assistant Events')
+                self.voicesynthesizer.speech_it("El radioclub tiene 2 eventos proximos")
+                self.voicesynthesizer.speech_it("Boletin Tecnologico, Miercoles, 8:00 pm")
+                self.voicesynthesizer.speech_it("Junta Mensual, Jueves 8:00 pm, recuerda traer galletas")
+            elif re.search(r'nada', output, re.M|re.I) or re.search(r'dios', output, re.M|re.I) or re.search(r'ativo', output, re.M|re.I):
+                print('[NuupXe] Assistant Bye')
+                self.voicesynthesizer.speech_it("Hasta pronto!")
+                self.running = False
+                break
+            else:
+                print('[NuupXe] Assistant? Unknown!')
 
-                self.voicesynthetizer.speech_it("Se ofrece algo mas?")
+            self.voicesynthesizer.speech_it("Se ofrece algo mas?")
 
     def foo(self):
-        while(self.running):
-            print('[NuupXe] Assistante | Foo Hello')
+        while self.running:
+            print('[NuupXe] Assistant | Foo Hello')
             sleep(5)
 
     def get_user_input(self):
         while True:
             x = input("Type any text, Enter 'e' for exit: ")
             if x.lower() == 'e':
-               self.running = False
-               break
+                self.running = False
+                break
             else:
-               self.voicesynthetizer.speech_it(x)
-
-    def twitter(self):
-        return
-        self.twitterc = TwitterC('twython')
-        self.oldstatus = ''
-        self.newstatus = ''
-	
-        while (self.running):
-            print('[NuupXe] Assistante | Twitter Hello')
-	    #self.voicesynthetizer.speech_it("Veamos")
-            tstatus = self.twitterc.timeline_get('xe1gyq', 1)
-            for status in tstatus:
-                self.newstatus = status['text']
-                if self.newstatus != self.oldstatus:
-                    self.oldstatus = self.newstatus
-                    self.voicesynthetizer.speech_it("Nuevo mensaje en cuenta de Twitter!")
-                    self.voicesynthetizer.speech_it(self.newstatus)
-            sleep(5)
+                self.voicesynthesizer.speech_it(x)
 
     def go(self):
         t1 = threading.Thread(target=self.foo)
         t2 = threading.Thread(target=self.get_user_input)
-        t3 = threading.Thread(target=self.twitter)
-        t4 = threading.Thread(target=self.demo1)
-        # Make threads daemonic, i.e. terminate them when main thread
-        # terminates. From: http://stackoverflow.com/a/3788243/145400
+        t3 = threading.Thread(target=self.demo1)
         t1.daemon = True
         t2.daemon = True
         t3.daemon = True
-        t4.daemon = True
         t1.start()
         t2.start()
         t3.start()
-        t4.start()
         self.threads.append(t1)
         self.threads.append(t2)
         self.threads.append(t3)
-        self.threads.append(t4)
 
 
 def join_threads(threads):
-    """
-    Join threads in interruptable fashion.
-    From http://stackoverflow.com/a/9790882/145400
-    """
     for t in threads:
-        while t.isAlive():
+        while t.is_alive():
             t.join(5)
 
-# Enf of File
+# End of File

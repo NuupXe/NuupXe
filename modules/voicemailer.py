@@ -14,7 +14,7 @@ from core.voicerecognition import VoiceRecognition
 
 class VoiceMailer(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.modulename = 'VoiceMailer'
         self.emailx = Emailx()
@@ -22,13 +22,13 @@ class VoiceMailer(object):
         self.phonetic = Phonetic()
         self.pushtotalk = PushToTalk()
         self.voice = Voice()
-        self.voicerecognition = VoiceRecognition(voicesynthetizer)
+        self.voicerecognition = VoiceRecognition(voicesynthesizer)
 
         self.conf = configparser.ConfigParser()
         self.filepath = "configuration/voicemailer.config"
         self.conf.read(self.filepath)
 
-        self.voicesynthetizer = voicesynthetizer
+        self.voicesynthesizer = voicesynthesizer
 
     def __del__(self):
         pass
@@ -51,10 +51,10 @@ class VoiceMailer(object):
         if user:
             messagepresentation = "Mensaje para " + user + ', Cual es tu mensaje?'
             messagepresentationdecoded = "Mensaje para " + ' '.join(self.phonetic.decode(user)) + ', Cual es tu mensaje?'
-            self.voicesynthetizer.speech_it(messagepresentationdecoded)
+            self.voicesynthesizer.speech_it(messagepresentationdecoded)
             self.voicerecognition.record()
             message = self.voicerecognition.recognize('False')
-            self.voicesynthetizer.speechit(message)
+            self.voicesynthesizer.speech_it(message)
             messageanswer = 'Mensaje! ' + message.capitalize()
             logging.info(messageanswer)
             filename = self.voicerecognition.filegetname()
@@ -63,7 +63,7 @@ class VoiceMailer(object):
             modulemessage = messagepresentation + ' ' + messageanswer
             alive(modulename=self.modulename, modulemessage=modulemessage)
         else:
-            self.voicesynthetizer.speech_it('Usuario no asignado!')
+            self.voicesynthesizer.speech_it('Usuario no asignado!')
 
 # Enf of File
 

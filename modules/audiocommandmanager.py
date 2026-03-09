@@ -13,22 +13,22 @@ from modules.querymaster import QueryMaster
 
 class AudioCommandManager(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.modulename = 'VoiceCommand'
         self.output = ""
-        self.voicesynthetizer = voicesynthetizer
-        self.voicerecognition = VoiceRecognition(self.voicesynthetizer)
+        self.voicesynthesizer = voicesynthesizer
+        self.voicerecognition = VoiceRecognition(self.voicesynthesizer)
 
-        self.clock = Clock(voicesynthetizer)
-        self.identification = Identification(voicesynthetizer)
-        self.weather = Weather(self.voicesynthetizer)
-        self.querymaster = QueryMaster(self.voicesynthetizer)
+        self.clock = Clock(voicesynthesizer)
+        self.identification = Identification(voicesynthesizer)
+        self.weather = Weather(self.voicesynthesizer)
+        self.querymaster = QueryMaster(self.voicesynthesizer)
 
     def presentation(self):
 
         logging.info('Voice Command Presentation')
-        self.voicesynthetizer.speech_it("Hola! Como puedo ayudarte?")
+        self.voicesynthesizer.speech_it("Hola! Como puedo ayudarte?")
 
     def decode(self, output):
 
@@ -36,7 +36,7 @@ class AudioCommandManager(object):
 
         if re.search(r'coman', output, re.M|re.I) or re.search(r'disponi', output, re.M|re.I):
             logging.info('Voice Command Decode Available Commands')
-            self.voicesynthetizer.speech_it("Comandos Disponibles? Identificacion, Hora, Fecha, Clima")
+            self.voicesynthesizer.speech_it("Comandos Disponibles? Identificacion, Hora, Fecha, Clima")
         elif re.search(r'identif', output, re.M|re.I):
             logging.info('Voice Command Decode Identification')
             self.identification.identify()
@@ -48,16 +48,16 @@ class AudioCommandManager(object):
             self.clock.date()
         elif re.search(r'clima', output, re.M|re.I):
             logging.info('Voice Command Decode Weather')
-            self.weather.report()
+            self.weather.weather_report()
         elif re.search(r'tempe', output, re.M|re.I) or re.search(r'tura', output, re.M|re.I):
             logging.info('Voice Command Decode Temperature')
-            self.weather.temperature()
+            self.weather.weather_temperature()
         elif re.search(r'pregun', output, re.M|re.I) or re.search(r'gunta', output, re.M|re.I):
             logging.info('Voice Command Decode Query master')
             self.querymaster.listen()
         else:
             logging.error('Voice Command Unknown!')
-            self.voicesynthetizer.speech_it("No entendimos tu comando!")
+            self.voicesynthesizer.speech_it("No entendimos tu comando!")
 
     def listen(self):
 
@@ -75,7 +75,7 @@ class AudioCommandManager(object):
                 self.voicerecognition.record()
                 output = self.voicerecognition.recognize('False')
                 if re.search(r'canc', output, re.M|re.I):
-                    self.voicesynthetizer.speech_it("Alguien me hablo?. Soy NuupXe... Hasta pronto!")
+                    self.voicesynthesizer.speech_it("Alguien me hablo?. Soy NuupXe... Hasta pronto!")
                     break
                 print(output)
 

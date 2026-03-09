@@ -13,7 +13,6 @@ import unicodedata
 from core.alive import alive
 
 from core.aprsfi import AprsFi
-from core.voicesynthesizer import VoiceSynthesizer
 from core.phonetic import Phonetic
 
 days = {'Monday': 'Lunes', 'Tuesday': 'Martes', 'Wednesday': 'Miercoles',
@@ -29,9 +28,9 @@ months = {'January': 'Enero', 'February': 'Febrero', 'March': 'Marzo',
 
 class AprsTracker(object):
 
-    def __init__(self, voicesynthetizer, callsign='XE1GYP-9'):
+    def __init__(self, voicesynthesizer, callsign='XE1GYP-9'):
         logging.info('[AprsTracker]')
-        self.speaker = voicesynthetizer
+        self.speaker = voicesynthesizer
         self.callsign = callsign
         self.modulename = 'AprsTracker'
 
@@ -52,7 +51,7 @@ class AprsTracker(object):
 
     def localize(self):
         logging.info('[AprsTracker] Localize')
-        self.speaker.speechit("Localizacion de estaciones a traves de a p r s punto f i")
+        self.speaker.speech_it("Localizacion de estaciones a traves de a p r s punto f i")
         self.aprsfi.callsignset(self.callsign)
         self.aprsfi.dataset('loc')
         data = self.aprsfi.query()
@@ -88,12 +87,12 @@ class AprsTracker(object):
                     pass
 
                 speechmessage = stationdecoded + message
-                self.speaker.speechit(speechmessage)
+                self.speaker.speech_it(speechmessage)
 
             modulemessage = station + message
             alive(modulename=self.modulename, modulemessage=modulemessage)
 
         else:
-            self.speaker.speechit(stationdecoded + " no ha reportado ubicacion!")
+            self.speaker.speech_it(stationdecoded + " no ha reportado ubicacion!")
 
 # End of File

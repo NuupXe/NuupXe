@@ -6,28 +6,21 @@ import string
 import sys
 import time
 
-
-from random import randint
-
 from core.morse import Morse
 from core.phonetic import Phonetic
 from core.voicerecognition import VoiceRecognition
-from core.voicesynthesizer import VoiceSynthesizer
 
 class MorseTeacher(object):
 
-    def __init__(self, voicesynthetizer):
-        
-        self.morse = Morse()
-        self.speaker = voicesynthetizer
-        self.phonetic = Phonetic()
-        self.voicerecognition = VoiceRecognition(voicesynthetizer)
+    def __init__(self, voicesynthesizer):
 
-    def __del__(self):
-        pass
+        self.morse = Morse()
+        self.speaker = voicesynthesizer
+        self.phonetic = Phonetic()
+        self.voicerecognition = VoiceRecognition(voicesynthesizer)
 
     def message(self, message):
-        self.speaker.speechit(message)
+        self.speaker.speech_it(message)
 
     def welcome(self):
         self.message("Modulo de Aprendizaje de Codigo Morse, sugerencias escribir a ")
@@ -36,7 +29,7 @@ class MorseTeacher(object):
     def randomnumber(self, n):
         range_start = 10**(n-1)
         range_end = (10**n)-1
-        return randint(range_start, range_end)
+        return random.randint(range_start, range_end)
 
     def randomletter(self, n):
         letters = []
@@ -45,9 +38,9 @@ class MorseTeacher(object):
         return "".join(letters)
 
     def randomnumberplay(self, help, iterations):
-        random = self.randomnumber(iterations)
+        number = self.randomnumber(iterations)
         self.message("Seccion de Prueba de Numeros Aleatorios")
-        for x in str(random):
+        for x in str(number):
             if not help:
                 self.morse.generate(x)
                 self.message("El numero codificado fue, " + x + ", " + " ".join(self.phonetic.decode(x)))
@@ -57,9 +50,9 @@ class MorseTeacher(object):
             time.sleep(1)
 
     def randomletterplay(self, help, iterations):
-        random = self.randomletter(iterations)
+        letters = self.randomletter(iterations)
         self.message("Seccion de Prueba de Letras Aleatorias")
-        for x in str(random):
+        for x in str(letters):
             if not help:
                 self.morse.generate(x)
                 self.message("La letra codificada fue, " + x + ", " + " ".join(self.phonetic.decode(x)))
@@ -78,7 +71,7 @@ class MorseTeacher(object):
         self.message("Hagamos una pausa de 5 segundos")
         time.sleep(5)
         self.randomletterplay(True, 20)
-        time.sleep(2) 
+        time.sleep(2)
         self.randomletterplay(False, 20)
 
     def contest(self):

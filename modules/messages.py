@@ -11,21 +11,18 @@ from datetime import date
 from core.alive import alive
 from core.morse import Morse
 from core.phonetic import Phonetic
-from core.voicesynthesizer import VoiceSynthesizer
 
 class Messages(object):
 
-    def __init__(self, voicesynthetizer):
+    def __init__(self, voicesynthesizer):
 
         self.modulename = 'Messages'
         self.morse = Morse()
-        self.speaker = voicesynthetizer
+        self.speaker = voicesynthesizer
         self.phonetic = Phonetic()
 
     def message(self, message):
-        if self.speaker.getsynthetizer() == "google":
-            message = "\"" + message + "\""
-        self.speaker.speechit(message)
+        self.speaker.speech_it(message)
         time.sleep(1)
 
     def readfile(self, textfile):
@@ -46,12 +43,12 @@ class Messages(object):
 
         print('[NuupXe] Messages: Stations')
 
-        self.conf = ConfigParser.ConfigParser()
+        self.conf = configparser.ConfigParser()
         self.path = "configuration/stations.config"
         self.conf.read(self.path)
 
         city = self.conf.get('general', 'city')
-        self.speaker.speechit("Lista de Repetidores y Estaciones en la ciudad de " + city)
+        self.speaker.speech_it("Lista de Repetidores y Estaciones en la ciudad de " + city)
         self.conf.remove_section('general')
 
         for section in self.conf.sections():
@@ -69,8 +66,8 @@ class Messages(object):
                 stationdecoded = type + ' ' + ' '.join(self.phonetic.decode(callsign))
                 message = ", Propietario " + owner
                 messagex = ", Propietario " + owner
-                message = message + ", Frecuencia " +  '.'.join(frequency.split('.'))
-                messagex = messagex + ", Frecuencia " +  frequency
+                message = message + ", Frecuencia " + '.'.join(frequency.split('.'))
+                messagex = messagex + ", Frecuencia " + frequency
                 message = message + ", Subtono " + ' '.join(self.phonetic.decode(subtone))
                 messagex = messagex + ", Subtono " + subtone
 
@@ -86,11 +83,10 @@ class Messages(object):
 
                 modulemessage = station + messagex
                 speechmessage = stationdecoded + message
-                self.speaker.speechit(speechmessage)
+                self.speaker.speech_it(speechmessage)
                 alive(modulename=self.modulename, modulemessage=modulemessage)
                 time.sleep(2)
 
-            except:
+            except Exception:
 
                 logging.error(self.modulename + 'Error Stations')
-
